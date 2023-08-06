@@ -82,10 +82,10 @@ An application in which the user can add various recipes, and then automatically
 
 Data model consists of four main entities:
 
+- **Users**: User profiles, including authentication data and preferences
 - **Recipes**: Contains information about each recipe, including title, description, and serving size. Can be linked to multiple Ingredients.
 - **Ingredients**: Details of ingredients for each recipe, including unit. Ingredients may be reusable across different recipes.
 - **Units**: Unit of measurement for given ingredient, such as "g", "cups", "ml", "l", "kg" or "teaspoons". Units may be reusable across different ingredients.
-- **Users**: User profiles, including authentication data and preferences
 - **Shopping Lists**: Aggregated lists of ingredients based on selected recipes, including user customizations
 
 1. `users` table - Information related to user profiles, including username, password hash and email:
@@ -170,19 +170,28 @@ Data model consists of four main entities:
 
 > List of the major tasks that have to be completed
 
-- [ ] [Initial server setup]()
-- [ ] [Initial client setup]()
-- [ ] [Database schema design]()
-- [ ] [GraphQL schema design]() - includes defining types, queries, mutations, and any subscriptions
-- [ ] [Resolvers implementation for GraphQL schema]() - handling the logic for each query/mutation
-- [ ] [API endpoints development]()
-- [ ] [Authentication system implementation]()
-- [ ] [UI Design]()
-- [ ] [Client - authentication]()
-- [ ] [Client - routing]()
-- [ ] [Client - UI components]()
-- [ ] [Client - API endpoints & interactivity]()
-- [ ] [Client - Websockets]()
+- [ ] Initial server setup
+- [ ] Initial client setup
+- [ ] Database schema design
+- [ ] GraphQL schema design - includes defining types, queries, mutations, and any subscriptions
+- [ ] Resolvers implementation for GraphQL schema - handling the logic for each query/mutation
+- [ ] API endpoints development
+- [ ] Authentication system implementation
+- [ ] UI Design
+- [ ] Client - authentication
+- [ ] Client - settings
+- [ ] Client - routing
+- [ ] Client - creating a new recipe
+- [ ] Client - list of recipes
+- [ ] Client - creating a new shopping list
+- [ ] Client - list of shopping lists
+- [ ] Client - marking items in shopping list as done
+- [ ] Client - sharing with other users
+- [ ] Client - Websockets
+- [ ] Client - collaboration on recipes and shopping lists
+- [ ] Server - deployment
+- [ ] Client - deployment (App Store and Google Play)
+- [ ] Server - logging & monitoring
 
 ### Potential additional features
 
