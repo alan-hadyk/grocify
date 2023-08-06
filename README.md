@@ -75,6 +75,9 @@ An application in which the user can add various recipes, and then automatically
 6. **Redis** - An in-memory data structure store used for caching and session storage. It will be used to store user session data, providing fast access and scalability.
 7. **rustfmt** - A tool for formatting Rust code according to style guidelines. It can be configured to match your project's specific style requirements.
 8. **Clippy** - A collection of lints to catch common mistakes and improve your Rust code. It's highly configurable and provides helpful warnings and suggestions.
+9. **PostgreSQL** - A powerful, open-source object-relational database system known for its robustness, scalability, and performance.
+10. **Lettermen** - A Rust library for sending emails, providing a simple and flexible way to handle email notifications such as account confirmation and recovery.
+11. **Docker** - A platform that enables developers to create, deploy, and run applications inside lightweight, portable containers. Containers package up the code and all its dependencies, ensuring that the application runs seamlessly and consistently across different environments. This isolation simplifies both development and deployment workflows, enhancing productivity and reliability. In the context of this project, Docker will be used to manage containers for the PostgreSQL and Redis services, providing a unified approach to managing dependencies and infrastructure.
 
 ### Data Model
 
@@ -94,6 +97,7 @@ Data model consists of four main entities:
    - `username` String (required, max. 100 characters) - Username for display
    - `password_hash` String (required) - Hashed password for authentication
    - `email` String (required) - Email address for login, communication and recovery
+   - `created_at` Timestamp (required) - The timestamp of when the user was created.
 
 2. `recipes` table - Details about recipes, including title, description, creator:
 
@@ -102,23 +106,27 @@ Data model consists of four main entities:
    - `description` String (optional, max. 500 characters) - A brief description of the recipe
    - `serving_size` Integer (required) - Standard serving size for the recipe (e.g., servings for 1 person)
    - `user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
+   - `created_at` Timestamp (required) - The timestamp of when the recipe was created.
 
 3. `ingredients` table - Basic information about individual ingredients, including name and unit of measurement:
 
    - `id` UUID (required) - Unique identifier for the ingredient
    - `name` String (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
+   - `created_at` Timestamp (required) - The timestamp of when the ingredient was created.
 
 4. `units` table - Standardized units of measurement for ingredients:
 
    - `id` UUID (required) - Unique identifier for the unit
    - `name` String (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
+   - `created_at` Timestamp (required) - The timestamp of when the unit was created.
 
 5. `shopping_lists` table - Information related to shopping lists, including name and creator:
 
    - `id` UUID (required) - Unique identifier for the shopping list
    - `name` String (optional) - Name or title of the shopping list
    - `user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
+   - `created_at` Timestamp (required) - The timestamp of when the shopping list was created.
 
 6. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
 
@@ -146,10 +154,19 @@ Data model consists of four main entities:
    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
 
 10. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
+
     - `id` (UUID, required): A unique identifier. This is the primary key.
     - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
     - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing `ingredients.id`.
     - `quantity` Float (required) - Quantity of the ingredient in the shopping list
+
+11. `notifications` table - Notifications for users:
+    - `id` UUID (required) - Unique identifier for the notification
+    - `user_id` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
+    - `type` Enum (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
+    - `content` JSON (required) - Detailed content of the notification, including relevant IDs and information.
+    - `read` Boolean (required) - Indicates whether the notification has been read by the user.
+    - `created_at` Timestamp (required) - The timestamp of when the notification was created.
 
 ### User Flow
 
