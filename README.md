@@ -70,29 +70,65 @@ An application in which the user can add various recipes, and then automatically
 Data model consists of four main entities:
 
 - **Recipes**: Contains information about each recipe, including title, description, and serving size. Can be linked to multiple Ingredients.
-- **Ingredients**: Details of ingredients for each recipe, including quantity and unit. Ingredients may be reusable across different recipes.
+- **Ingredients**: Details of ingredients for each recipe, including unit. Ingredients may be reusable across different recipes.
+- **Units**: Unit of measurement for given ingredient, such as "g", "cups", "ml", "l", "kg" or "teaspoons". Units may be reusable across different ingredients.
 - **Users**: User profiles, including authentication data and preferences
 - **Shopping Lists**: Aggregated lists of ingredients based on selected recipes, including user customizations
 
-1. `users` table:
+1. `users` table - Information related to user profiles, including username, password hash and email:
     - `id` UUID (required) - Unique identifier for the user
     - `username` String (required, max. 100 characters) - Username for display
     - `password_hash` String (required) - Hashed password for authentication
     - `email` String (required) - Email address for login, communication and recovery
-    - `recipes` Relation to `recipes` (optional) - Recipes created by the user
-    - `shopping_lists` Relation to `shopping_lists` (optional) - Shopping lists created or shared with the user
 
-2. `recipes` table:
+2. `recipes` table - Details about recipes, including title, description, creator:
     - `id` UUID (required) - Unique identifier for the recipe
     - `title` String (required, max. 100 characters) - Name or title of the recipe
     - `description` String (optional, max. 500 characters) - A brief description of the recipe
-    - `user_id` UUID (required) - Relation to the User who created the recipe
-    - `ingredients` Relation to `recipe_ingredients` (required) - Link to ingredients with quantity information
+    - `serving_size` Integer (required) - Standard serving size for the recipe (e.g., servings for 1 person)
+    - `user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
 
-3. `ingredients` table:
+3. `ingredients` table - Basic information about individual ingredients, including name and unit of measurement:
     - `id` UUID (required) - Unique identifier for the ingredient
     - `name` String (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
-    - `unit` String (required, max. 100 characters) - Unit of measurement for the ingredient.  (e.g., "g", "cups", "ml", "l", "kg", "teaspoons")
+    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
+
+4. `units` table - Standardized units of measurement for ingredients:
+    - `id` UUID (required) - Unique identifier for the unit
+    - `name` String (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
+
+5. `shopping_lists` table - Information related to shopping lists, including name and creator:
+    - `id` UUID (required) - Unique identifier for the shopping list
+    - `name` String (optional) - Name or title of the shopping list
+    - `user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
+
+6. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
+    - `id` (UUID, required): A unique identifier. This is the primary key.
+    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing  `recipes.id`.
+    - `user_id` UUID (required) - Given user. This is a foreign key referencing  `users.id`.
+
+7. `users_shopping_lists` `JOIN` table - JOIN table to associate users with shopping lists:
+    - `id` (UUID, required): A unique identifier. This is the primary key.
+    - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing  `shopping_lists.id`.
+    - `user_id` UUID (required) - Given user. This is a foreign key referencing  `users.id`.
+
+8. `recipes_ingredients` `JOIN` table - JOIN table to associate recipes with their individual ingredients and quantities:
+    - `id` (UUID, required): A unique identifier. This is the primary key.
+    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing  `recipes.id`.
+    - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing  `ingredients.id`.
+    - `quantity` Float (required) - Quantity of the ingredient for the recipe.
+
+9. `shopping_lists_recipes` `JOIN` table - JOIN table to associate shopping lists with recipes:
+    - `id` (UUID, required): A unique identifier. This is the primary key.
+    - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing  `shopping_lists.id`.
+    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing  `recipes.id`.
+
+10. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
+    - `id` (UUID, required): A unique identifier. This is the primary key.
+    - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing  `shopping_lists.id`.
+    - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing  `ingredients.id`.
+    - `quantity` Float (required) - Quantity of the ingredient in the shopping list
+
 
 ### User Flow
 
