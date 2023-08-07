@@ -162,6 +162,7 @@ Data model consists of the following main entities:
     - `quantity` Float (required) - Quantity of the ingredient in the shopping list
 
 11. `notifications` table - Notifications for users:
+
     - `id` UUID (required) - Unique identifier for the notification
     - `user_id` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
     - `type` Enum (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
@@ -183,6 +184,7 @@ Data model consists of the following main entities:
 8. The user can modify the list and add his own items to it.
 9. The user can also add more ingredients to the list based on another recipe.
 10. Having a ready list, the user can go to the store and mark off the next items on the list while shopping.
+11. Later on, user might share a recipe or shopping list with another user.
 
 ### Implementation Plan
 
@@ -215,13 +217,8 @@ Data model consists of the following main entities:
 
 ### Potential additional features
 
->
-
-**Proposed new features**
-
-- Sharing shopping lists with other users
 - Integration with local grocery stores for price comparison
-- Recipe recommendations based on dietary preferences
+- Recipe recommendations based on dietary preferences (could be monetized)
 
 ### Testing Strategy
 
