@@ -7,10 +7,10 @@
   - [The Frontend](#the-frontend)
   - [The Backend](#the-backend)
 - [System Architecture](#system-architecture)
-  - [Mobile Client:](#mobile-client)
-  - [Web Client:](#web-client)
-  - [Server:](#server)
-  - [Databases:](#databases)
+  - [Mobile Client](#mobile-client)
+  - [Web Client](#web-client)
+  - [Server](#server)
+  - [Databases](#databases)
 - [Technology Stack](#technology-stack)
   - [The Mobile App](#the-mobile-app)
   - [The Backend](#the-backend)
@@ -80,24 +80,24 @@ This diagram provides a high-level overview of how these components interact wit
 
 The system architecture is primarily divided into four parts: the mobile client, the web client, the server and databases.
 
-### Mobile Client:
+### Mobile Client
 
 There are two mobile clients represented in the diagram, both using React Native for their frontend:
 
 - **Mobile Client 1 (React Native)**: This client communicates with the server using GraphQL and WebSockets. The client sends requests to the server and receives responses.
 - **Mobile Client 2 (React Native)**: This client also communicates with the server using GraphQL and WebSockets.
 
-### Web Client:
+### Web Client
 
 There is one web client represented in the diagram, using Next.js for their frontend:
 
 - **Web Client (Next.js)**: This client doesn't communicate with any other component in the system. It's used mostly for a landing page.
 
-### Server:
+### Server
 
 Server utilizes Rust and Axum. It communicates with both mobile clients using GraphQL and WebSockets. It also interacts with the PostgreSQL database and the Redis Store.
 
-### Databases:
+### Databases
 
 There are two databases in the system:
 
