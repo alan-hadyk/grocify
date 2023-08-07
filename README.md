@@ -83,13 +83,14 @@ An application in which the user can add various recipes, and then automatically
 
 > Description of database schema
 
-Data model consists of four main entities:
+Data model consists of the following main entities:
 
 - **Users**: User profiles, including authentication data and preferences
 - **Recipes**: Contains information about each recipe, including title, description, and serving size. Can be linked to multiple Ingredients.
 - **Ingredients**: Details of ingredients for each recipe, including unit. Ingredients may be reusable across different recipes.
 - **Units**: Unit of measurement for given ingredient, such as "g", "cups", "ml", "l", "kg" or "teaspoons". Units may be reusable across different ingredients.
 - **Shopping Lists**: Aggregated lists of ingredients based on selected recipes, including user customizations
+- **Notifications**: Notifications for a given user. There might a notification that a recipe or shopping list was shared with the user.
 
 1. `users` table - Information related to user profiles, including username, password hash and email:
 
@@ -204,6 +205,8 @@ Data model consists of four main entities:
 - [ ] Client - list of shopping lists
 - [ ] Client - marking items in shopping list as done
 - [ ] Client - sharing with other users
+- [ ] Server - notifications
+- [ ] Client - notifications
 - [ ] Client - Websockets
 - [ ] Client - collaboration on recipes and shopping lists
 - [ ] Server - deployment
