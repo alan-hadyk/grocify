@@ -155,6 +155,7 @@ Data model consists of the following main entities:
    - `username` String (required, max. 100 characters) - Username for display
    - `password_hash` String (required) - Hashed password for authentication
    - `email` String (required) - Email address for login, communication and recovery
+   - `preferred_language` Enum (required) - Language preferred by the user. This is enumeration with ISO 639-1 codes (values such as "en", "pl", etc.). Defaults to the language of given mobile phone.
    - `created_at` Timestamp (required) - The timestamp of when the user was created.
 
 2. `recipes` table - Details about recipes, including title, description, creator:
@@ -288,6 +289,7 @@ Data model consists of the following main entities:
 
 - Integration with local grocery stores for price comparison
 - Recipe recommendations based on dietary preferences (could be monetized)
+- Dark themes
 
 ## Testing Strategy
 
@@ -304,6 +306,7 @@ Data model consists of the following main entities:
 - **Data Synchronization**: Ensuring that data between the client and server is synchronized in real-time
 - **Scalability**: Designing the system to handle a growing number of users
 - **Security**: Implementing secure authentication and protecting user data
+- **Performance**: Implementing API rate limiting
 - **UI/UX Design**: Creating an intuitive and responsive design that provides a smooth user experience
 - **Usage of GraphQL**: The use of GraphQL may lead to some specific benefits and challenges:
   - Pros:
