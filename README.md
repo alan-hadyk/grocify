@@ -32,20 +32,31 @@ An application in which the user can add various recipes, and then automatically
 
 > High-level diagram showing how the different components of the system will interact with each other
 
-#### Client-side:
+![System Architecture - High-level diagram](docs/system-architecture.drawio.svg?raw=true "System Architecture - High-level diagram")
 
-- **Mobile App**: React Native application for users to interact with recipes and shopping lists
-- **Authentication**: Handling user authentication and maintaining sessions
+Arrows between the components indicate the direction of communication. For instance, both clients send requests to the server and receive responses from it. The server, in turn, communicates with the databases to fetch, update, or delete data as per the client's requests.
 
-#### Server-side:
+This diagram provides a high-level overview of how these components interact within the system.
 
-- **API Layer**: Rust and Axum-based GraphQL API serving data to the mobile app, with support for queries, mutations, and possibly subscriptions
-- **Services**: Business logic and data transformation
-- **Data Access Layer**: Interaction with the database
+The system architecture is primarily divided into three parts: the client, the server and databases.
+
+#### Client:
+
+There are two clients represented in the diagram, both using React Native for their frontend:
+
+- **Client 1 (React Native)**: This client communicates with the server using GraphQL and WebSockets. The client sends requests to the server and receives responses.
+- **Client 2 (React Native)**: This client also communicates with the server using GraphQL and WebSockets.
+
+#### Server:
+
+Server utilizes Rust and Axum. It communicates with both clients using GraphQL and WebSockets. It also interacts with the PostgreSQL database and the Redis Store.
 
 #### Databases:
 
-- **PostgreSQL or MySQL**: Relational database to store recipes, ingredients, user profiles, and shopping lists
+There are two databases in the system:
+
+- **PostgreSQL Database**: This is a relational database used for storing structured data.
+- **Redis Store**: This is an in-memory data structure store, used as a session store and message broker.
 
 ### Technology Stack
 
