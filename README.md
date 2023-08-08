@@ -1,5 +1,3 @@
-# Grocify
-
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -12,8 +10,8 @@
   - [Server](#server)
   - [Databases](#databases)
 - [Technology Stack](#technology-stack)
-  - [The Mobile App](#the-mobile-app)
-  - [The Backend](#the-backend)
+  - [Mobile App](#mobile-app)
+  - [Backend](#backend)
 - [Data Model](#data-model)
 - [User Flow](#user-flow)
 - [Implementation Plan](#implementation-plan)
@@ -45,8 +43,6 @@
 ## Project Overview
 
 > Brief description of the project and its objectives.
-
-**Grocify**
 
 An application in which the user can add various recipes, and then automatically create a shopping list with the necessary ingredients.
 
@@ -108,7 +104,7 @@ There are two databases in the system:
 
 > List of technologies used in the project
 
-### The Mobile App
+### Mobile App
 
 1. **React Native** - For building the cross-platform mobile app that works on both Android and iOS.
 2. **TypeScript** - TypeScript is a strongly typed version of JavaScript, which allows developers to write safer, more scalable code and catch errors early. TypeScript's static typing can help prevent bugs that might be caused by unexpected data types.
@@ -123,7 +119,7 @@ There are two databases in the system:
 11. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
 12. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 
-### The Backend
+### Backend
 
 1. **Rust** - A modern system programming language that emphasizes safety, performance, and concurrency.
 2. **Axum** - A web application framework for Rust with a focus on simplicity, zero-cost abstractions, and modern async foundations.

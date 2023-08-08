@@ -6,8 +6,6 @@ use axum::{
 
 use crate::{handlers, schema};
 
-// use crate::{handlers, schema};
-
 #[non_exhaustive]
 pub struct Path;
 
@@ -21,10 +19,8 @@ pub fn create_router() -> Router {
     // Initialize schema
     let schema = schema::create_schema();
 
-    let router = Router::new()
+    Router::new()
         .route(Path::ROOT, get(handlers::graphiql))
         .route(Path::GRAPHQL, post(handlers::graphql_handler))
-        .layer(Extension(schema));
-
-    router
+        .layer(Extension(schema))
 }

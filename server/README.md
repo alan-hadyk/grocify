@@ -2,7 +2,7 @@
 
 ## CLI Scripts
 
-```
+```rust
 cargo watch -x run
 ```
 
