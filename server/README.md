@@ -25,6 +25,8 @@ rustup component add clippy
 cargo install --force cargo-make
 ```
 
+5.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
+
 ### Run the server in watch mode for development
 
 ```rust
