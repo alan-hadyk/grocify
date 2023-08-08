@@ -1,4 +1,3 @@
-// use async_graphql::{http::GraphiQLSource, EmptyMutation, EmptySubscription, Object, Schema};
 use async_graphql::{EmptyMutation, EmptySubscription, Object, Schema};
 
 pub struct Query;

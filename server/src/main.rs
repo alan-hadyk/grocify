@@ -1,22 +1,19 @@
-use std::net::SocketAddr;
-
 // Modules
-mod handlers;
-mod router;
+mod config;
+mod initializers;
+mod routing;
 mod schema;
+mod server;
 
 // Main function
 #[tokio::main]
 async fn main() {
-    tracing_subscriber::fmt::init();
+    // Initializers
+    initializers::run_initializers();
 
-    let router = router::create_router();
+    // Router
+    let router = routing::create_router();
 
-    let socket_address = SocketAddr::from(([127, 0, 0, 1], 3000));
-    tracing::info!("Server running at {}", socket_address);
-
-    axum::Server::bind(&socket_address)
-        .serve(router.into_make_service())
-        .await
-        .unwrap();
+    // Run the server
+    server::run_server(router).await;
 }
