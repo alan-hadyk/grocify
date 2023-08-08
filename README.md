@@ -1,3 +1,5 @@
+# Grocify - Architecture Implementation Plan
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -37,8 +39,6 @@
 - [Alignment with Business Goals](#alignment-with-business-goals)
 - [Collaboration Tools and Practices](#collaboration-tools-and-practices)
 - [Sustainability and Long-Term Maintenance](#sustainability-and-long-term-maintenance)
-
-# Architecture Implementation Plan
 
 ## Project Overview
 
