@@ -121,6 +121,7 @@ There are two databases in the system:
 9. **Socket.IO** - A library for real-time bidirectional event-based communication using WebSockets or other protocols.
 10. **GraphQL Code Generator** - A tool that generates code out of your GraphQL schema, allowing typed queries, mutations, subscriptions, and more.
 11. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
+12. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 
 ### The Backend
 
@@ -164,7 +165,8 @@ Data model consists of the following main entities:
    - `title` String (required, max. 100 characters) - Name or title of the recipe
    - `description` String (optional, max. 500 characters) - A brief description of the recipe
    - `serving_size` Integer (required) - Standard serving size for the recipe (e.g., servings for 1 person)
-   - `user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
+   - `amount_of_days` Integer (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
+   - `author_user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
    - `created_at` Timestamp (required) - The timestamp of when the recipe was created.
 
 3. `ingredients` table - Basic information about individual ingredients, including name and unit of measurement:
@@ -172,19 +174,21 @@ Data model consists of the following main entities:
    - `id` UUID (required) - Unique identifier for the ingredient
    - `name` String (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
+   - `author_user_id` UUID (required) - Relation to the User who created the ingredient. This is a foreign key referencing `users.id`
    - `created_at` Timestamp (required) - The timestamp of when the ingredient was created.
 
 4. `units` table - Standardized units of measurement for ingredients:
 
    - `id` UUID (required) - Unique identifier for the unit
    - `name` String (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
+   - `author_user_id` UUID (required) - Relation to the User who created the unit. This is a foreign key referencing `users.id`
    - `created_at` Timestamp (required) - The timestamp of when the unit was created.
 
 5. `shopping_lists` table - Information related to shopping lists, including name and creator:
 
    - `id` UUID (required) - Unique identifier for the shopping list
    - `name` String (optional) - Name or title of the shopping list
-   - `user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
+   - `author_user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
    - `created_at` Timestamp (required) - The timestamp of when the shopping list was created.
 
 6. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
@@ -233,11 +237,11 @@ Data model consists of the following main entities:
 > Step-by-step walkthrough of a typical user interaction with the application
 
 1. The user adds a recipe (e.g. "Spaghetti") to the app.
-2. The user adds ingredients to the recipe for 1 meal for 1 person (e.g. 1 onion, 1 can of tomatoes, 200 g of minced meat, 1 stock cube).
-3. The user adds another recipe to the application (e.g. "Chicken soup"), including ingredients for 1 meal for 1 person.
-4. The user can also add cleaning items to the app.
+2. The user specifies the number of people for a given meal, and for how many days the meal will last.
+3. The user adds ingredients to the recipe (e.g. 1 onion, 1 can of tomatoes, 200 g of minced meat, 1 stock cube).
+4. The user adds another recipe to the application (e.g. "Chicken soup").
 5. The user is going to go shopping, so he creates a shopping list.
-6. In this list, he selects the previously added recipe, specifying for how many people the meal is needed and for how many days.
+6. In this list, he selects the previously added recipe, specifying for how many days the meal is needed, and for how many people.
 7. Based on the information collected in the previous point, the application calculates the list of needed ingredients and adds it to the list.
 8. The user can modify the list and add his own items to it.
 9. The user can also add more ingredients to the list based on another recipe.
@@ -287,7 +291,7 @@ Data model consists of the following main entities:
 
 ## Potential additional features
 
-- Integration with local grocery stores for price comparison
+- Biometric authentication
 - Recipe recommendations based on dietary preferences (could be monetized)
 - Dark themes
 
