@@ -1,9 +1,11 @@
 use std::net::SocketAddr;
 
+// Modules
 mod handlers;
 mod router;
 mod schema;
 
+// Main function
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();

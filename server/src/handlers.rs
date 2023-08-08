@@ -5,12 +5,14 @@ use axum::{
     Extension,
 };
 
-use crate::schema::AppSchema;
+use crate::{router::Path, schema::AppSchema};
 
+// GraphQL handler for schema
 pub async fn graphql_handler(schema: Extension<AppSchema>, req: GraphQLRequest) -> GraphQLResponse {
     schema.execute(req.into_inner()).await.into()
 }
 
+//
 pub async fn graphiql() -> impl IntoResponse {
-    response::Html(GraphiQLSource::build().endpoint("/graphql").finish())
+    response::Html(GraphiQLSource::build().endpoint(Path::GRAPHQL).finish())
 }
