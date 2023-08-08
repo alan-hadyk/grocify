@@ -19,10 +19,16 @@ rustup update
 rustup component add clippy
 ```
 
+4.Install `cargo-make`
+
+```rust
+cargo install --force cargo-make
+```
+
 ### Run the server in watch mode for development
 
 ```rust
-cargo watch -x run
+cargo make dev
 ```
 
 ## CLI Scripts
@@ -30,7 +36,7 @@ cargo watch -x run
 ### Watch mode (development)
 
 ```rust
-cargo watch -x run
+cargo make dev
 ```
 
 ### Analyze and report errors
