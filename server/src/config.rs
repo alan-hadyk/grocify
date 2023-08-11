@@ -1,28 +1,28 @@
-use std::net::{SocketAddr, IpAddr};
+use config::Config;
 use lazy_static::lazy_static;
-use std::env;
-use dotenv::dotenv;
+use std::net::SocketAddr;
 
-pub struct Config {
+pub struct AppConfig {
     pub socket_address: SocketAddr,
 }
 
 lazy_static! {
-    static ref CONFIG: Config = {
-        // Load environment variables from .env file
-        dotenv().ok();
+    static ref CONFIG: AppConfig = {
+        // Initialize the configuration
+        let config = Config::builder()
+            .add_source(config::File::with_name("Settings"))
+            .build()
+            .unwrap();
 
-        let host = env::var("HOST").unwrap_or_else(|_| "127.0.0.1".to_string());
-        let ip: IpAddr = host.parse().expect("Invalid IP address in HOST");
-        let port_str = env::var("PORT").unwrap_or_else(|_| "3000".to_string());
-        let port: u16 = port_str.parse().expect("PORT must be a number");
+        let host: String = config.get("host").unwrap();
+        let port: u16 = config.get("port").unwrap();
 
-        Config {
-            socket_address: SocketAddr::new(ip, port),
+        AppConfig {
+            socket_address: format!("{}:{}", host, port).parse().expect("Invalid socket address")
         }
     };
 }
 
-pub fn get_config() -> &'static Config {
+pub fn get_config() -> &'static AppConfig {
     &CONFIG
 }

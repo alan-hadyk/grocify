@@ -27,10 +27,24 @@ cargo install --force cargo-make
 
 5.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
 
+6.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+7.Create `Settings.toml` file at `server`. Inside, paste the content from `Settings.example.toml`.
+
 ### Run the server in watch mode for development
+
+1.Run Docker Desktop
+
+2.Use the following command in terminal
 
 ```rust
 cargo make dev
+```
+
+3.If everything works, you should see the following log in the terminal:
+
+```bash
+INFO grocify_server::server: Server running at 127.0.0.1:3000
 ```
 
 ## CLI Scripts

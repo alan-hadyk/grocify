@@ -1,3 +1,5 @@
 [tasks.dev]
-command = "cargo"
-args = ["watch", "-x", "run"]
+script = [
+  "docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d",
+  "cargo watch -x run",
+]

@@ -1,5 +1,5 @@
 [package]
-name = "server"
+name = "grocify-server"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,7 +9,7 @@ edition = "2021"
 async-graphql = "6.0.1"
 async-graphql-axum = "6.0.1"
 axum = "0.6.20"
-dotenv = "0.15.0"
+config = "0.13.3"
 hyper = { version = "0.14.27", features = ["full"] }
 lazy_static = "1.4.0"
 tokio = { version = "1.29.1", features = ["full"] }

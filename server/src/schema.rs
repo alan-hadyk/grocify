@@ -1,10 +1,10 @@
 use async_graphql::{EmptyMutation, EmptySubscription, Object, Schema};
-use lazy_static::lazy_static;
 
 pub struct Query;
 
 #[Object]
 impl Query {
+    // Mock schema for now. TODO: Create real schema.
     async fn value(&self) -> i32 {
         100
     }
@@ -12,11 +12,7 @@ impl Query {
 
 pub type AppSchema = Schema<Query, EmptyMutation, EmptySubscription>;
 
-lazy_static! {
-    static ref SCHEMA: AppSchema = Schema::build(Query, EmptyMutation, EmptySubscription).finish();
-}
-
 // Create the schema
-pub fn get_schema() -> &'static AppSchema {
-    &SCHEMA
+pub fn create_schema() -> AppSchema {
+    Schema::build(Query, EmptyMutation, EmptySubscription).finish()
 }
