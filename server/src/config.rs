@@ -13,10 +13,9 @@ lazy_static! {
         dotenv().ok();
 
         let host = env::var("HOST").unwrap_or_else(|_| "127.0.0.1".to_string());
+        let ip: IpAddr = host.parse().expect("Invalid IP address in HOST");
         let port_str = env::var("PORT").unwrap_or_else(|_| "3000".to_string());
         let port: u16 = port_str.parse().expect("PORT must be a number");
-
-        let ip: IpAddr = host.parse().expect("Invalid IP address in HOST");
 
         Config {
             socket_address: SocketAddr::new(ip, port),

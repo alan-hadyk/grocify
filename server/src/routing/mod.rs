@@ -9,12 +9,12 @@ use crate::schema;
 mod handlers;
 mod paths;
 
-use paths::{Path};
+use paths::Path;
 
 // Create router with routes
 pub fn create_router() -> Router {
     // Schema
-    let schema = schema::create_schema();
+    let schema = schema::get_schema();
 
     Router::new()
         .route(Path::ROOT, get(handlers::get_root_handler))
