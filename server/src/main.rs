@@ -1,4 +1,5 @@
 // Modules
+mod clients;
 mod config;
 mod initializers;
 mod routing;
@@ -11,8 +12,11 @@ async fn main() {
     // Initializers
     initializers::run_initializers();
 
+    // Clients
+    let clients = clients::create_clients().await;
+
     // Router
-    let router = routing::create_router();
+    let router = routing::create_router(clients.db_pool, clients.redis_connection);
 
     // Run the server
     server::run_server(router).await;

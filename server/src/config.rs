@@ -4,6 +4,8 @@ use std::net::SocketAddr;
 
 pub struct AppConfig {
     pub socket_address: SocketAddr,
+    pub postgres_url: String,
+    pub redis_url: String,
 }
 
 lazy_static! {
@@ -16,9 +18,15 @@ lazy_static! {
 
         let host: String = config.get("host").unwrap();
         let port: u16 = config.get("port").unwrap();
+        let postgres_user: String = config.get("postgres_user").unwrap();
+        let postgres_password: String = config.get("postgres_password").unwrap();
+        let postgres_db: String = config.get("postgres_db").unwrap();
+        let redis_url: String = config.get("redis_url").unwrap();
 
         AppConfig {
-            socket_address: format!("{}:{}", host, port).parse().expect("Invalid socket address")
+            socket_address: format!("{}:{}", host, port).parse().expect("Invalid socket address"),
+            postgres_url: format!("postgresql://{}:{}@localhost:5432/{}", postgres_user, postgres_password, postgres_db).parse().expect("Invalid PostgreSQL url"),
+            redis_url: redis_url.to_string(),
         }
     };
 }

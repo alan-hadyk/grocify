@@ -224,7 +224,7 @@ Data model consists of the following main entities:
     - `id` UUID (required) - Unique identifier for the notification
     - `user_id` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
     - `type` Enum (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
-    - `content` JSON (required) - Detailed content of the notification, including relevant IDs and information.
+    - `content` String (required) - Detailed content of the notification, including relevant IDs and information.
     - `read` Boolean (required) - Indicates whether the notification has been read by the user.
     - `created_at` Timestamp (required) - The timestamp of when the notification was created.
 
