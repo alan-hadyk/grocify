@@ -1,32 +1,8 @@
 use async_graphql::Object;
 
-use crate::schema::schema_context::get_schema_context;
+use crate::schema::{schema_context::get_schema_context, session_user_id::get_session_user_id};
 
-pub struct FeatureA {
-    author: String,
-    content: String,
-    value: i32,
-    user_id: String,
-}
-
-#[Object]
-impl FeatureA {
-    async fn author(&self) -> String {
-        self.author.to_string()
-    }
-
-    async fn content(&self) -> String {
-        self.content.to_string()
-    }
-
-    async fn value(&self) -> i32 {
-        self.value
-    }
-
-    async fn user_id(&self) -> String {
-        self.user_id.to_string()
-    }
-}
+use super::schema::FeatureA;
 
 pub struct FeatureAResolver {}
 
@@ -37,11 +13,10 @@ impl FeatureAResolver {
         ctx: &async_graphql::Context<'_>,
     ) -> async_graphql::Result<FeatureA> {
         let schema_context = get_schema_context(ctx);
+        let session_user_id = get_session_user_id(ctx);
 
-        let user_id_result = ctx.data_opt::<String>();
-
-        if user_id_result.is_some() {
-            tracing::info!("user_id as ctx.data_opt: {:#?}", user_id_result);
+        if let Some(session_user_id) = session_user_id {
+            tracing::info!("session_user_id: {:#?}", session_user_id);
         } else {
             tracing::error!("No user_id in context");
         }

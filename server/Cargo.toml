@@ -14,7 +14,6 @@ axum-sessions = "0.5.0"
 config = "0.13.3"
 hyper = { version = "0.14.27", features = ["full"] }
 lazy_static = "1.4.0"
-redis = { version = "0.23.1", features = ["tokio-comp"] }
 serde_json = "1.0.104"
 sqlx = { version = "0.7.1", features = [
   "runtime-tokio",

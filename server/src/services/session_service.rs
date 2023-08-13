@@ -23,7 +23,7 @@ impl SessionService {
                     "Failed to make the Redis client available as session memory store: {}",
                     err
                 );
-                // Handle the error by returning a default value or exiting the program
+                // Handle the error by exiting the program
                 std::process::exit(1);
             }
         };

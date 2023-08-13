@@ -7,12 +7,13 @@ use axum::{
 use axum_sessions::SessionLayer;
 use sqlx::{Pool, Postgres};
 
-use crate::schema;
-
 mod handlers;
+mod helpers;
 mod paths;
 
 use paths::Path;
+
+use crate::schema;
 
 // Create router with routes
 pub fn create_router(
@@ -20,7 +21,7 @@ pub fn create_router(
     session_layer: SessionLayer<RedisSessionStore>,
 ) -> Router {
     // Schema
-    let schema = schema::create_schema(db_pool);
+    let schema = schema::create_schema::create_schema(db_pool);
 
     Router::new()
         .route(Path::ROOT, get(handlers::get_root_handler))

@@ -1,15 +1,18 @@
-use async_graphql::{http::GraphiQLSource, ServerError};
+use async_graphql::http::GraphiQLSource;
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 use axum::{
     response::{self, IntoResponse},
     Extension,
 };
 use axum_sessions::extractors::WritableSession;
-use serde_json::{json, Value};
 
 use crate::{
     routing,
     schema::{self},
+};
+
+use super::helpers::{
+    append_user_id_to_request_data, convert_schema_data_to_json, insert_user_id_into_session,
 };
 
 // Expose GraphQL IDE in browser - `GET /`
@@ -28,50 +31,19 @@ pub async fn post_graphql_handler(
     req: GraphQLRequest,
 ) -> GraphQLResponse {
     let user_id = session.get::<String>("user_id");
-
     let mut request = req.into_inner();
 
     // Append user_id to request data
-    if let Some(user_id) = user_id {
-        request.data.insert(user_id.clone());
-    }
+    append_user_id_to_request_data(&mut request, user_id);
 
     // Execute the query and get the result.
     let mut schema_result = schema.execute(request).await;
-    let schema_result_data = &schema_result.data;
 
     // Convert the response data to JSON.
-    let query_json = match schema_result_data.clone().into_json() {
-        Ok(query_json) => query_json,
-        Err(err) => {
-            // Log the error.
-            tracing::error!("Failed to convert response data to JSON: {:#?}", err);
+    let query_json = convert_schema_data_to_json(&mut schema_result);
 
-            // Construct a GraphQL error.
-            let error = ServerError::new(
-                format!("Failed to convert response data to JSON: {}", err),
-                None,
-            );
-
-            // Include the error in the response.
-            schema_result.errors.push(error);
-
-            // Continue processing with an empty JSON object.
-            json!({})
-        }
-    };
-
-    // Check if the query name is "featureA" and extract the corresponding object.
-    if let Some(feature_a_data) = query_json.get("featureA").and_then(Value::as_object) {
-        // Check if user_id is present inside the featureA object.
-        if let Some(user_id) = feature_a_data.get("userId").and_then(Value::as_str) {
-            tracing::info!("Adding user_id to session: {:#?}", &user_id);
-            // Perform actions with user_id, such as inserting it into the session.
-            session
-                .insert("user_id", user_id.to_string())
-                .expect("Could not store the user id");
-        }
-    }
+    // Insert user id into session if needed
+    insert_user_id_into_session(&query_json, &mut session);
 
     schema_result.into()
 }
