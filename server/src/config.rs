@@ -6,6 +6,7 @@ pub struct AppConfig {
     pub socket_address: SocketAddr,
     pub postgres_url: String,
     pub redis_url: String,
+    pub secret: Vec<u8>,
 }
 
 lazy_static! {
@@ -23,10 +24,18 @@ lazy_static! {
         let postgres_db: String = config.get("postgres_db").unwrap();
         let redis_url: String = config.get("redis_url").unwrap();
 
+        // Secret for sessions
+        let secret_str: String = config.get("secret").unwrap();
+        if secret_str.len() < 64 {
+            panic!("Secret must be at least 64 bytes long");
+        }
+        let secret: Vec<u8> = secret_str.as_bytes().to_vec();
+
         AppConfig {
             socket_address: format!("{}:{}", host, port).parse().expect("Invalid socket address"),
             postgres_url: format!("postgresql://{}:{}@localhost:5432/{}", postgres_user, postgres_password, postgres_db).parse().expect("Invalid PostgreSQL url"),
             redis_url: redis_url.to_string(),
+            secret
         }
     };
 }

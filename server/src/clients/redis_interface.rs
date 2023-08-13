@@ -3,7 +3,12 @@ use redis::Client;
 
 use crate::config;
 
-pub async fn create_redis_connection() -> Connection {
+pub struct RedisInterface {
+    pub redis_client: Client,
+    pub redis_connection: Connection,
+}
+
+pub async fn create_redis_interface() -> RedisInterface {
     // Grab config
     let config = config::get_config();
     let redis_url = config.redis_url.as_str();
@@ -17,7 +22,7 @@ pub async fn create_redis_connection() -> Connection {
         }
         Err(err) => {
             // Log the error
-            eprintln!("Failed to create the Redis client: {}", err);
+            tracing::error!("Failed to create the Redis client: {}", err);
             // Handle the error by returning a default value or exiting the program
             std::process::exit(1);
         }
@@ -32,11 +37,14 @@ pub async fn create_redis_connection() -> Connection {
         }
         Err(err) => {
             // Log the error
-            eprintln!("Failed to create the Redis client: {}", err);
+            tracing::error!("Failed to create the Redis client: {}", err);
             // Handle the error by returning a default value or exiting the program
             std::process::exit(1);
         }
     };
 
-    redis_connection
+    RedisInterface {
+        redis_client,
+        redis_connection,
+    }
 }

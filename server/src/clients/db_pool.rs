@@ -18,7 +18,7 @@ pub async fn create_db_pool() -> Pool<Postgres> {
         }
         Err(err) => {
             // Log the error
-            eprintln!("Failed to create the database pool: {}", err);
+            tracing::error!("Failed to create the database pool: {}", err);
             // Handle the error by returning a default value or exiting the program
             std::process::exit(1);
         }
