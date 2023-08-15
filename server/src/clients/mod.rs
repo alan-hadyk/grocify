@@ -1,3 +1,4 @@
+use self::db_pool::create_db_pool;
 use sqlx::{Pool, Postgres};
 
 mod db_pool;
@@ -8,7 +9,7 @@ pub struct Clients {
 
 pub async fn create_clients() -> Clients {
     // Database pool
-    let db_pool = db_pool::create_db_pool().await;
+    let db_pool = create_db_pool().await;
 
     Clients { db_pool }
 }

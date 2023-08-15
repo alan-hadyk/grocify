@@ -1,31 +1,27 @@
-use async_redis_session::RedisSessionStore;
+use self::handlers::{get_root_handler, post_graphql_handler};
+use crate::services::{schema_service::SchemaService, session_service::SessionService};
 use axum::{
     extract::Extension,
     routing::{get, post},
     Router,
 };
-use axum_sessions::SessionLayer;
+use paths::Path;
 use sqlx::{Pool, Postgres};
 
 mod handlers;
-mod helpers;
 mod paths;
 
-use paths::Path;
-
-use crate::schema;
-
 // Create router with routes
-pub fn create_router(
-    db_pool: Pool<Postgres>,
-    session_layer: SessionLayer<RedisSessionStore>,
-) -> Router {
+pub async fn create_router(db_pool: Pool<Postgres>) -> Router {
     // Schema
-    let schema = schema::create_schema::create_schema(db_pool);
+    let schema = SchemaService::create_schema(db_pool);
+
+    // Session layer
+    let session_layer = SessionService::create_session_layer().await;
 
     Router::new()
-        .route(Path::ROOT, get(handlers::get_root_handler))
-        .route(Path::GRAPHQL, post(handlers::post_graphql_handler))
+        .route(Path::ROOT, get(get_root_handler))
+        .route(Path::GRAPHQL, post(post_graphql_handler))
         .layer(session_layer)
         .layer(Extension(schema))
 }

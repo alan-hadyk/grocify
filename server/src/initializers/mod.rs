@@ -1,5 +1,7 @@
+use self::tracing_initializer::init_tracing;
+
 mod tracing_initializer;
 
 pub fn run_initializers() {
-    tracing_initializer::init_tracing();
+    init_tracing();
 }

@@ -1,3 +1,8 @@
+use clients::create_clients;
+use initializers::run_initializers;
+use routing::create_router;
+use server::run_server;
+
 // Modules
 mod clients;
 mod config;
@@ -12,17 +17,14 @@ mod services;
 #[tokio::main]
 async fn main() {
     // Initializers
-    initializers::run_initializers();
+    run_initializers();
 
     // Clients
-    let clients = clients::create_clients().await;
-
-    // Services
-    let session_service = services::session_service::SessionService::new().await;
+    let clients = create_clients().await;
 
     // Router
-    let router = routing::create_router(clients.db_pool, session_service.session_layer);
+    let router = create_router(clients.db_pool).await;
 
     // Run the server
-    server::run_server(router).await;
+    run_server(router).await;
 }

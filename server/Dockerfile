@@ -6,11 +6,8 @@ COPY . .
 
 RUN cargo install --path .
 
-# Use a non-root user
-RUN useradd -m myuser
-
-# Change ownership of the working directory
-RUN chown -R myuser:myuser /usr/src/app
+# Use a non-root user and Change ownership of the working directory
+RUN useradd -m myuser && chown -R myuser:myuser /usr/src/app
 
 # Switch to the non-root user
 USER myuser
@@ -18,9 +15,9 @@ USER myuser
 FROM debian:buster-slim
 
 # Copy the binary from the builder
-COPY --from=builder --chown=myuser:myuser /usr/local/cargo/bin/app /usr/local/bin/app
+COPY --from=builder /usr/local/cargo/bin/app /usr/local/bin/app
 
 # Health check (adjust the endpoint as needed)
-HEALTHCHECK CMD curl --fail http://localhost:3000/ || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:3000/graphql || exit 1
 
 CMD ["app"]
