@@ -48,7 +48,7 @@ lazy_static! {
             Err(err) => tracing::error!("Failed to load config: {}", err),
         });
 
-        config_opt.expect("Config must be initialized")
+        config_opt.expect("Config file (`Settings.toml`) must exist and config must be initialized")
     };
 }
 

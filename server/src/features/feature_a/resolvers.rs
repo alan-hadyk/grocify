@@ -13,7 +13,7 @@ impl FeatureAResolver {
         if let Some(session_user_id) = session_user_id {
             tracing::info!("session_user_id: {:#?}", session_user_id);
         } else {
-            tracing::error!("No user_id in context");
+            tracing::warn!("No user_id in context");
         }
 
         Ok(FeatureA {

@@ -25,11 +25,23 @@ rustup component add clippy
 cargo install --force cargo-make
 ```
 
-5.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
+5.Install `cargo-watch`
 
-6.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+```rust
+cargo install cargo-watch
+```
 
-7.Create `Settings.toml` file at `server`. Inside, paste the content from `Settings.example.toml`.
+6.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
+
+7.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+8.Create `Settings.toml` file at `server`. Inside, paste the content from `Settings.example.toml`.
+
+9.Build the project
+
+```rust
+cargo build
+```
 
 ### Run the server in watch mode for development
 
