@@ -149,43 +149,43 @@ Data model consists of the following main entities:
 1. `users` table - Information related to user profiles, including username, password hash and email:
 
    - `id` UUID (required) - Unique identifier for the user
-   - `username` String (required, max. 100 characters) - Username for display
-   - `password_hash` String (required) - Hashed password for authentication
-   - `email` String (required) - Email address for login, communication and recovery
-   - `preferred_language` Enum (required) - Language preferred by the user. This is enumeration with ISO 639-1 codes (values such as "en", "pl", etc.). Defaults to the language of given mobile phone.
-   - `created_at` Timestamp (required) - The timestamp of when the user was created.
+   - `username` STRING (required, max. 100 characters) - Username for display
+   - `password_hash` STRING (required) - Hashed password for authentication
+   - `email` STRING (required) - Email address for login, communication and recovery
+   - `preferred_language` ENUM (required) - Language preferred by the user. This is enumeration with ISO 639-1 codes (values such as "en", "pl", etc.). Defaults to the language of given mobile phone.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the user was created.
 
 2. `recipes` table - Details about recipes, including title, description, creator:
 
    - `id` UUID (required) - Unique identifier for the recipe
-   - `title` String (required, max. 100 characters) - Name or title of the recipe
-   - `description` String (optional, max. 500 characters) - A brief description of the recipe
-   - `serving_size` Integer (required) - Standard serving size for the recipe (e.g., servings for 1 person)
-   - `amount_of_days` Integer (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
+   - `title` STRING (required, max. 100 characters) - Name or title of the recipe
+   - `description` STRING (optional, max. 500 characters) - A brief description of the recipe
+   - `serving_size` INTEGER (required) - Standard serving size for the recipe (e.g., servings for 1 person)
+   - `amount_of_days` INTEGER (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
    - `author_user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
-   - `created_at` Timestamp (required) - The timestamp of when the recipe was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the recipe was created.
 
 3. `ingredients` table - Basic information about individual ingredients, including name and unit of measurement:
 
    - `id` UUID (required) - Unique identifier for the ingredient
-   - `name` String (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
+   - `name` STRING (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
    - `author_user_id` UUID (required) - Relation to the User who created the ingredient. This is a foreign key referencing `users.id`
-   - `created_at` Timestamp (required) - The timestamp of when the ingredient was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the ingredient was created.
 
 4. `units` table - Standardized units of measurement for ingredients:
 
    - `id` UUID (required) - Unique identifier for the unit
-   - `name` String (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
+   - `name` STRING (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
    - `author_user_id` UUID (required) - Relation to the User who created the unit. This is a foreign key referencing `users.id`
-   - `created_at` Timestamp (required) - The timestamp of when the unit was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the unit was created.
 
 5. `shopping_lists` table - Information related to shopping lists, including name and creator:
 
    - `id` UUID (required) - Unique identifier for the shopping list
-   - `name` String (optional) - Name or title of the shopping list
+   - `name` STRING (optional) - Name or title of the shopping list
    - `author_user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
-   - `created_at` Timestamp (required) - The timestamp of when the shopping list was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the shopping list was created.
 
 6. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
 
@@ -223,10 +223,10 @@ Data model consists of the following main entities:
 
     - `id` UUID (required) - Unique identifier for the notification
     - `user_id` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
-    - `type` Enum (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
-    - `content` String (required) - Detailed content of the notification, including relevant IDs and information.
+    - `type` ENUM (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
+    - `content` STRING (required) - Detailed content of the notification, including relevant IDs and information.
     - `read` Boolean (required) - Indicates whether the notification has been read by the user.
-    - `created_at` Timestamp (required) - The timestamp of when the notification was created.
+    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the notification was created.
 
 ## User Flow
 
