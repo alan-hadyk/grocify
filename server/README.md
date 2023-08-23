@@ -31,13 +31,19 @@ cargo install --force cargo-make
 cargo install cargo-watch
 ```
 
-6.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
+6.Install `sqlx-cli`
 
-7.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+```rust
+cargo install sqlx-cli
+```
 
-8.Create `Settings.toml` file at `server`. Inside, paste the content from `Settings.example.toml`.
+7.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
 
-9.Build the project
+8.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+9.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
+
+10.Build the project
 
 ```rust
 cargo build
@@ -65,6 +71,12 @@ INFO grocify_server::server: Server running at 127.0.0.1:3000
 
 ```rust
 cargo make dev
+```
+
+### Generate SQL query metadata
+
+```rust
+cargo make query-metadata
 ```
 
 ### Analyze and report errors

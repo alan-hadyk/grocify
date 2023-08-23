@@ -1,18 +1,20 @@
-use std::fmt;
+use async_graphql::Enum;
+use serde::{Deserialize, Serialize};
+use std::fmt::{Display, Formatter, Result};
 
-#[derive(sqlx::Type)]
-#[sqlx(type_name = "preferred_language", rename_all = "lowercase")]
-pub enum PreferredLanguage {
+#[derive(sqlx::Type, Debug, Deserialize, Serialize, Enum, Copy, Clone, Eq, PartialEq)]
+#[sqlx(type_name = "preferred_lang", rename_all = "lowercase")]
+pub enum PreferredLang {
     En,
     Pl,
 }
 
-impl fmt::Display for PreferredLanguage {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+impl Display for PreferredLang {
+    fn fmt(&self, f: &mut Formatter) -> Result {
         // Convert the enum variant to a string
         let variant_str = match *self {
-            PreferredLanguage::En => "En",
-            PreferredLanguage::Pl => "Pl",
+            PreferredLang::En => "en",
+            PreferredLang::Pl => "pl",
         };
 
         // Write out the variant name

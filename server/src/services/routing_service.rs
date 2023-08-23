@@ -1,7 +1,7 @@
 use async_graphql::{Request, Response, ServerError};
 use serde_json::{json, Value};
 
-pub struct RoutingService {}
+pub struct RoutingService;
 
 impl RoutingService {
     pub fn append_user_id_to_request_data(request: &mut Request, user_id: Option<String>) {

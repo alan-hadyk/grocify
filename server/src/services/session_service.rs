@@ -1,10 +1,10 @@
-use crate::config::get_config;
+use crate::{config::get_config, helpers::redis_keys::RedisKey};
 use async_graphql::ServerError;
 use async_redis_session::{self, RedisSessionStore};
 use axum_sessions::{extractors::WritableSession, SessionLayer};
 use serde_json::Value;
 
-pub struct SessionService {}
+pub struct SessionService;
 
 impl SessionService {
     pub async fn create_session_layer() -> SessionLayer<RedisSessionStore> {
@@ -40,10 +40,10 @@ impl SessionService {
         query_json: &Value,
         session: &mut WritableSession,
     ) -> Result<(), ServerError> {
-        if let Some(feature_a_data) = query_json.get("featureA").and_then(Value::as_object) {
-            if let Some(user_id) = feature_a_data.get("userId").and_then(Value::as_str) {
+        if let Some(create_user_data) = query_json.get("createUser").and_then(Value::as_object) {
+            if let Some(id) = create_user_data.get("id").and_then(Value::as_str) {
                 return session
-                    .insert("user_id", user_id.to_string())
+                    .insert(RedisKey::USER_ID, id.to_string())
                     .map_err(|err| {
                         tracing::error!("Failed to add user_id to session: {:#?}", err);
                         ServerError::new(format!("Internal Server Error"), None)

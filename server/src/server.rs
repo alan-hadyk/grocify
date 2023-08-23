@@ -1,6 +1,5 @@
-use axum::Router;
-
 use crate::config::get_config;
+use axum::{Router, Server};
 
 pub async fn run_server(router: Router) {
     // Grab config
@@ -9,7 +8,7 @@ pub async fn run_server(router: Router) {
     tracing::info!("Server running at {}", &config.socket_address); // Print the message here
 
     // Run the server
-    if let Err(err) = axum::Server::bind(&config.socket_address)
+    if let Err(err) = Server::bind(&config.socket_address)
         .serve(router.into_make_service())
         .await
     {

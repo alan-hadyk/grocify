@@ -1,15 +1,37 @@
-use async_graphql::{Context, EmptyMutation, EmptySubscription, Object, Result, Schema};
+use crate::features::users::{enums::PreferredLang, resolver::UserResolver, schema::User};
+use async_graphql::{Context, EmptySubscription, Object, Result, Schema};
+use sqlx::types::Uuid;
 
-use crate::features::users::{resolver::UserResolver, schema::User};
+pub struct Mutation;
+
+#[Object]
+impl Mutation {
+    async fn create_user(
+        &self,
+        ctx: &Context<'_>,
+        username: String,
+        password: String,
+        email: String,
+        preferred_language: PreferredLang,
+    ) -> Result<User> {
+        UserResolver {}
+            .create_user(ctx, username, password, email, preferred_language)
+            .await
+    }
+}
 
 pub struct Query;
 
 #[Object]
 impl Query {
-    // Mock schema for now. TODO: Create real schema.
-    async fn user(&self, ctx: &Context<'_>) -> Result<User> {
-        UserResolver {}.user(ctx).await
+    async fn user(
+        &self,
+        ctx: &Context<'_>,
+        id: Option<Uuid>,
+        username: Option<String>,
+    ) -> Result<User> {
+        UserResolver {}.user(ctx, id, username).await
     }
 }
 
-pub type AppSchema = Schema<Query, EmptyMutation, EmptySubscription>;
+pub type AppSchema = Schema<Query, Mutation, EmptySubscription>;

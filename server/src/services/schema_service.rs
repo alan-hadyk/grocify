@@ -1,8 +1,8 @@
-use crate::schema::{AppSchema, Query};
-use async_graphql::{Context, EmptyMutation, EmptySubscription, Schema, ServerError};
+use crate::schema::{AppSchema, Mutation, Query};
+use async_graphql::{Context, EmptySubscription, Schema, ServerError};
 use sqlx::{Pool, Postgres};
 
-pub struct SchemaService {}
+pub struct SchemaService;
 
 pub struct SchemaContext {
     pub db_pool: Pool<Postgres>,
@@ -26,7 +26,7 @@ impl SchemaService {
     pub fn create_schema(db_pool: Pool<Postgres>) -> AppSchema {
         let schema_context = SchemaContext { db_pool };
 
-        Schema::build(Query, EmptyMutation, EmptySubscription)
+        Schema::build(Query, Mutation, EmptySubscription)
             .data(schema_context)
             .finish()
     }

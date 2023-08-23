@@ -7,6 +7,7 @@ use server::run_server;
 mod clients;
 mod config;
 mod features;
+mod helpers;
 mod initializers;
 mod routing;
 mod schema;

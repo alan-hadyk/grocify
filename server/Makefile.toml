@@ -3,3 +3,9 @@ script = [
   "docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d",
   "cargo watch -x run",
 ]
+
+[tasks.query-metadata]
+script = [
+  "docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d",
+  "DATABASE_URL='postgresql://user:password@localhost:5432/grocify_database?sslmode=disable' cargo sqlx prepare",
+]
