@@ -63,10 +63,34 @@ async fn routing_service_convert_schema_data_to_json() {
     // Convert the response data to JSON.
     let query_json = RoutingService::convert_schema_data_to_json(&mut schema_result);
 
-    match query_json {
-        Some(query_json) => {}
+    let create_user_data = query_json.get("createUser");
+
+    match create_user_data {
+        Some(create_user_data) => {
+            let username = create_user_data.get("username");
+
+            match username {
+                Some(username) => {
+                    assert_eq!(username, "username");
+                }
+                None => {
+                    panic!("Failed to get username in mutation result");
+                }
+            }
+
+            let email = create_user_data.get("email");
+
+            match email {
+                Some(email) => {
+                    assert_eq!(email, "user@gmail.com");
+                }
+                None => {
+                    panic!("Failed to get email in mutation result");
+                }
+            }
+        }
         None => {
-            panic!("Failed to convert schema to json");
+            panic!("Failed to find createUser in mutation result");
         }
     }
 
