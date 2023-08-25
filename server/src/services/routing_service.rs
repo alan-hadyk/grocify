@@ -3,10 +3,13 @@ use serde_json::{json, Value};
 
 pub struct RoutingService;
 
+#[derive(Hash, Eq, PartialEq)]
+pub struct UserId(pub String);
+
 impl RoutingService {
     pub fn append_user_id_to_request_data(request: &mut Request, user_id: Option<String>) {
         if let Some(user_id) = user_id {
-            request.data.insert(user_id);
+            request.data.insert(UserId(user_id));
         }
     }
 

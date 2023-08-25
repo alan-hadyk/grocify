@@ -25,3 +25,6 @@ pub async fn create_router(db_pool: Pool<Postgres>) -> Router {
         .layer(session_layer)
         .layer(Extension(schema))
 }
+
+#[cfg(test)]
+mod tests;

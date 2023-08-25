@@ -4,13 +4,13 @@ cli:
 plugins:
   sources:
     - id: trunk
-      ref: v1.2.1
+      ref: v1.2.2
       uri: https://github.com/trunk-io/plugins
 lint:
   enabled:
     - hadolint@2.12.0
     - terrascan@1.18.3
-    - checkov@2.4.5
+    - checkov@2.4.9
     - yamllint@1.32.0
     - clippy@1.65.0
     - git-diff-check

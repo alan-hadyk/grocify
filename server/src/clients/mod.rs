@@ -26,3 +26,6 @@ pub async fn create_clients() -> Clients {
 
     Clients { db_pool }
 }
+
+#[cfg(test)]
+mod tests;

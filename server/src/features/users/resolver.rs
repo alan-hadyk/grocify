@@ -14,7 +14,7 @@ impl UserResolver {
         password: String,
         email: String,
         preferred_language: PreferredLang,
-    ) -> Result<User> {
+    ) -> Result<User, Error> {
         let schema_context = SchemaService::get_schema_context(ctx)?;
 
         let db_pool = &schema_context.db_pool;
@@ -42,12 +42,6 @@ impl UserResolver {
     ) -> Result<User, Error> {
         let schema_context = SchemaService::get_schema_context(ctx)?;
         let session_user_id = SchemaService::get_session_user_id(ctx);
-
-        if let Some(session_user_id) = session_user_id {
-            tracing::info!("session_user_id: {:#?}", session_user_id);
-        } else {
-            tracing::warn!("No user_id in context");
-        }
 
         if session_user_id.is_none() {
             return Err(Error::new("Not allowed"));

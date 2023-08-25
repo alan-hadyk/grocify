@@ -1,4 +1,7 @@
-use crate::schema::{AppSchema, Mutation, Query};
+use crate::{
+    features::users::resolver::UserResolver,
+    schema::{AppSchema, Mutation, Query},
+};
 use async_graphql::{Context, EmptySubscription, Schema, ServerError};
 use sqlx::{Pool, Postgres};
 
@@ -25,8 +28,14 @@ impl SchemaService {
 
     pub fn create_schema(db_pool: Pool<Postgres>) -> AppSchema {
         let schema_context = SchemaContext { db_pool };
+        let query = Query {
+            user_resolver: UserResolver {},
+        };
+        let mutation = Mutation {
+            user_resolver: UserResolver {},
+        };
 
-        Schema::build(Query, Mutation, EmptySubscription)
+        Schema::build(query, mutation, EmptySubscription)
             .data(schema_context)
             .finish()
     }

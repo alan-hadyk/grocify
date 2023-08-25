@@ -21,8 +21,16 @@ pub fn load_config() -> Result<AppConfig, Box<dyn std::error::Error>> {
     let port: u16 = config.get("port")?;
     let socket_address = format!("{}:{}", host, port).parse()?;
 
-    let postgres_url: String = config.get("postgres_url")?;
-    let redis_url: String = config.get("redis_url")?;
+    let postgres_url: String = if cfg!(test) {
+        config.get("test_postgres_url")?
+    } else {
+        config.get("postgres_url")?
+    };
+    let redis_url: String = if cfg!(test) {
+        config.get("test_redis_url")?
+    } else {
+        config.get("redis_url")?
+    };
 
     // Secret for sessions
     let secret_str: String = config.get("secret")?;

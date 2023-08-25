@@ -79,12 +79,6 @@ cargo make dev
 cargo make query-metadata
 ```
 
-### Analyze and report errors
-
-```rust
-cargo build
-```
-
 ### Compile for production
 
 ```rust
@@ -106,7 +100,7 @@ cargo run
 ### Run the tests
 
 ```rust
-cargo test
+cargo make test-app
 ```
 
 ### Update dependencies in `Cargo.lock`
