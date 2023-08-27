@@ -1,6 +1,7 @@
+use super::routing_service::UserId;
 use crate::{
     features::users::resolver::UserResolver,
-    schema::{AppSchema, Mutation, Query},
+    schema::{mutation::Mutation, query::Query, AppSchema},
 };
 use async_graphql::{Context, EmptySubscription, Schema, ServerError};
 use sqlx::{Pool, Postgres};
@@ -12,7 +13,9 @@ pub struct SchemaContext {
 }
 
 impl SchemaService {
-    pub fn get_schema_context<'a>(ctx: &'a Context<'_>) -> Result<&'a SchemaContext, ServerError> {
+    pub fn get_schema_context<'lifetime>(
+        ctx: &'lifetime Context<'_>,
+    ) -> Result<&'lifetime SchemaContext, ServerError> {
         // Access the custom context
         ctx.data::<SchemaContext>().map_err(|err| {
             tracing::error!("Failed to retrieve schema context: {:#?}", err);
@@ -20,8 +23,10 @@ impl SchemaService {
         })
     }
 
-    pub fn get_session_user_id<'a>(ctx: &'a Context<'_>) -> Option<&'a String> {
-        let session_user_id = ctx.data_opt::<String>();
+    pub fn get_session_user_id<'lifetime>(
+        ctx: &'lifetime Context<'_>,
+    ) -> Option<&'lifetime UserId> {
+        let session_user_id = ctx.data_opt::<UserId>();
 
         session_user_id
     }

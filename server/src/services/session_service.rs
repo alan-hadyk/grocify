@@ -31,7 +31,7 @@ impl SessionService {
             }
         };
 
-        let session_layer = SessionLayer::new(store, &config.secret);
+        let session_layer = SessionLayer::new(store, &config.secret).with_secure(false);
 
         session_layer
     }

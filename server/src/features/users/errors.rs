@@ -8,18 +8,18 @@ pub enum UserGetByError {
 }
 
 impl Display for UserGetByError {
-    fn fmt(&self, f: &mut Formatter) -> Result {
+    fn fmt(&self, formatter: &mut Formatter) -> Result {
         match self {
             UserGetByError::BothIdAndUsernameProvided => {
                 write!(
-                    f,
+                    formatter,
                     "Both ID and username cannot be provided at the same time"
                 )
             }
             UserGetByError::NeitherIdNorUsernameProvided => {
-                write!(f, "Either ID or username must be provided")
+                write!(formatter, "Either ID or username must be provided")
             }
-            UserGetByError::DatabaseError(err) => write!(f, "Database error: {}", err),
+            UserGetByError::DatabaseError(err) => write!(formatter, "Database error: {}", err),
         }
     }
 }
@@ -39,10 +39,10 @@ pub enum UserModelError {
 }
 
 impl Display for UserModelError {
-    fn fmt(&self, f: &mut Formatter) -> Result {
+    fn fmt(&self, formatter: &mut Formatter) -> Result {
         match self {
-            UserModelError::SqlxError(err) => write!(f, "Database error: {}", err),
-            UserModelError::UserGetByError(err) => err.fmt(f),
+            UserModelError::SqlxError(err) => write!(formatter, "Database error: {}", err),
+            UserModelError::UserGetByError(err) => err.fmt(formatter),
         }
     }
 }

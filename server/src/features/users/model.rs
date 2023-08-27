@@ -5,8 +5,8 @@ use super::{
 };
 use sqlx::{query_as, types::Uuid, Error, Pool, Postgres};
 
-pub struct UserModel<'a> {
-    pub db_pool: &'a Pool<Postgres>,
+pub struct UserModel<'lifetime> {
+    pub db_pool: &'lifetime Pool<Postgres>,
 }
 
 impl UserModel<'_> {
@@ -62,21 +62,21 @@ impl UserModel<'_> {
         let db_pool = self.db_pool;
 
         match (id, username) {
-            (Some(uid), None) => {
+            (Some(uuid), None) => {
                 // Fetch by ID
                 let query = "SELECT * FROM users WHERE id = $1";
                 let user = query_as::<_, User>(query)
-                    .bind(uid)
+                    .bind(uuid)
                     .fetch_one(&*db_pool)
                     .await?;
 
                 Ok(user)
             }
-            (None, Some(uname)) => {
+            (None, Some(user_name)) => {
                 // Fetch by username
                 let query = "SELECT * FROM users WHERE username = $1";
                 let user = query_as::<_, User>(query)
-                    .bind(uname)
+                    .bind(user_name)
                     .fetch_one(&*db_pool)
                     .await?;
 

@@ -3,7 +3,7 @@ use serde_json::{json, Value};
 
 pub struct RoutingService;
 
-#[derive(Hash, Eq, PartialEq)]
+#[derive(Hash, Eq, PartialEq, Debug)]
 pub struct UserId(pub String);
 
 impl RoutingService {

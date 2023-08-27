@@ -16,9 +16,7 @@ impl UserResolver {
         preferred_language: PreferredLang,
     ) -> Result<User, Error> {
         let schema_context = SchemaService::get_schema_context(ctx)?;
-
         let db_pool = &schema_context.db_pool;
-
         let user_model = UserModel { db_pool };
 
         let user = user_model
@@ -40,15 +38,14 @@ impl UserResolver {
         id: Option<Uuid>,
         username: Option<String>,
     ) -> Result<User, Error> {
-        let schema_context = SchemaService::get_schema_context(ctx)?;
         let session_user_id = SchemaService::get_session_user_id(ctx);
 
         if session_user_id.is_none() {
             return Err(Error::new("Not allowed"));
         };
 
+        let schema_context = SchemaService::get_schema_context(ctx)?;
         let db_pool = &schema_context.db_pool;
-
         let user_model = UserModel { db_pool };
 
         let user = user_model.get_by(id, username).await;
