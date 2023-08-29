@@ -13,13 +13,13 @@ impl RoutingService {
         }
     }
 
-    pub fn convert_schema_data_to_json(schema_result: &mut Response) -> Value {
-        match schema_result.data.clone().into_json() {
+    pub fn convert_response_data_to_json(response: &mut Response) -> Value {
+        match response.data.clone().into_json() {
             Ok(json) => json,
             Err(err) => {
                 tracing::error!("Failed to convert response data to JSON: {:#?}", err);
 
-                schema_result
+                response
                     .errors
                     .push(ServerError::new(format!("Internal Server Error"), None));
 

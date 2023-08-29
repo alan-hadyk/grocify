@@ -33,7 +33,7 @@ pub async fn post_graphql_handler(
     let mut schema_result = schema.execute(request).await;
 
     // Convert the response data to JSON.
-    let query_json = RoutingService::convert_schema_data_to_json(&mut schema_result);
+    let query_json = RoutingService::convert_response_data_to_json(&mut schema_result);
 
     // Insert user id into session if needed
     if let Err(err) = SessionService::insert_user_id_into_session(&query_json, &mut session) {

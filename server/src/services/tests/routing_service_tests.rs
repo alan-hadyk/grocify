@@ -31,7 +31,7 @@ fn routing_service_append_user_id_to_request_data() {
 }
 
 #[tokio::test]
-async fn routing_service_convert_schema_data_to_json() {
+async fn routing_service_convert_response_data_to_json() {
     let clients = create_clients().await;
     let clients_cleanup = create_clients().await;
 
@@ -61,7 +61,7 @@ async fn routing_service_convert_schema_data_to_json() {
     let mut schema_result = schema.execute(mutation).await;
 
     // Convert the response data to JSON.
-    let query_json = RoutingService::convert_schema_data_to_json(&mut schema_result);
+    let query_json = RoutingService::convert_response_data_to_json(&mut schema_result);
 
     let create_user_data = query_json.get("createUser");
 
