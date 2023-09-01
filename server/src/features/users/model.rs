@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use super::{
     enums::PreferredLang,
     errors::{UserGetByError, UserModelError},
@@ -5,11 +7,12 @@ use super::{
 };
 use sqlx::{query_as, types::Uuid, Error, Pool, Postgres};
 
-pub struct UserModel<'lifetime> {
-    pub db_pool: &'lifetime Pool<Postgres>,
+#[derive(Clone)]
+pub struct UserModel {
+    pub db_pool: Arc<Pool<Postgres>>,
 }
 
-impl UserModel<'_> {
+impl UserModel {
     // Create new user
     pub async fn create(
         &self,
@@ -18,7 +21,8 @@ impl UserModel<'_> {
         email: String,
         preferred_language: PreferredLang,
     ) -> Result<User, Error> {
-        let db_pool = self.db_pool;
+        let db_pool_arc = &self.db_pool;
+        let db_pool = Arc::clone(db_pool_arc);
 
         let user = query_as::<_, User>(
             // language=PostgreSQL
@@ -59,7 +63,8 @@ impl UserModel<'_> {
         id: Option<Uuid>,
         username: Option<String>,
     ) -> Result<User, UserModelError> {
-        let db_pool = self.db_pool;
+        let db_pool_arc = &self.db_pool;
+        let db_pool = Arc::clone(db_pool_arc);
 
         match (id, username) {
             (Some(uuid), None) => {

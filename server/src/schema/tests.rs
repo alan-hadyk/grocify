@@ -1,25 +1,48 @@
-use crate::{clients::create_clients, services::schema_service::SchemaService};
+use crate::{
+    clients::db_pool::get_db_pool,
+    features::users::{model::UserModel, resolver::UserResolver},
+    schema::{mutation::Mutation, query::Query},
+    services::schema_service::SchemaService,
+};
+use async_graphql::{EmptySubscription, Schema};
 use sqlx::query;
+use std::sync::Arc;
 
 #[tokio::test]
 async fn mutation_create_user() {
-    let clients = create_clients().await;
-    let clients_cleanup = create_clients().await;
+    let db_pool_arc = get_db_pool().await;
+    let db_pool = Arc::clone(&db_pool_arc);
 
-    query("DELETE FROM users")
-        .execute(&clients_cleanup.db_pool)
-        .await
-        .expect("Failed to clean users table")
-        .rows_affected();
+    let result = query("DELETE FROM users").execute(&*db_pool).await;
 
-    let schema = SchemaService::create_schema(clients.db_pool);
+    match result {
+        Ok(_) => {}
+        Err(err) => {
+            panic!("Failed to delete users: {}", err);
+        }
+    }
+
+    let user_resolver = UserResolver {
+        user_model: UserModel {
+            db_pool: db_pool_arc.clone(),
+        },
+    };
+
+    let graphql_query = Query {
+        user_resolver: user_resolver.clone(),
+    };
+    let mutation = Mutation {
+        user_resolver: user_resolver.clone(),
+    };
+
+    let schema = Schema::build(graphql_query, mutation, EmptySubscription).finish();
 
     let mutation = r#"
         mutation {
             createUser(
-                username: "username",
+                username: "example_username",
                 password: "password",
-                email: "user@gmail.com",
+                email: "example_user@gmail.com",
                 preferredLanguage: EN
             ) {
                 username
@@ -29,6 +52,7 @@ async fn mutation_create_user() {
     "#;
 
     let response = schema.execute(mutation).await;
+    println!("response!!!!!!: {:#?}", response);
 
     if response.errors.len() > 0 {
         panic!("Mutation failed: {:#?}", response.errors);
@@ -53,7 +77,13 @@ async fn mutation_create_user() {
                 .as_str()
                 .expect("username should be a string");
 
-            assert_eq!(username, "username");
+            tracing::info!(
+                "testing username with {} and {}",
+                username,
+                "example_username"
+            );
+
+            assert_eq!(username, "example_username",);
 
             let email = create_user
                 .get("email")
@@ -61,7 +91,13 @@ async fn mutation_create_user() {
                 .as_str()
                 .expect("email should be a string");
 
-            assert_eq!(email, "user@gmail.com");
+            tracing::info!(
+                "testing email with {} and {}",
+                email,
+                "example_user@gmail.com"
+            );
+
+            assert_eq!(email, "example_user@gmail.com",);
         }
         Err(err) => {
             panic!("Missing data: {:#?}", err);
@@ -69,7 +105,7 @@ async fn mutation_create_user() {
     }
 
     query("DELETE FROM users")
-        .execute(&clients_cleanup.db_pool)
+        .execute(&*db_pool)
         .await
         .expect("Failed to clean users table")
         .rows_affected();

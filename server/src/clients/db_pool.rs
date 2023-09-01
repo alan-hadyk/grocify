@@ -1,12 +1,13 @@
 use crate::config::get_config;
-use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
+use sqlx::postgres::{PgPoolOptions, Postgres};
+use sqlx::Pool;
+use std::sync::Arc;
 
-pub async fn create_db_pool() -> Pool<Postgres> {
-    // Grab config
+pub async fn get_db_pool<'lifetime>() -> Arc<Pool<Postgres>> {
     let config = get_config();
 
     let db_pool = match PgPoolOptions::new()
-        .max_connections(10)
+        .max_connections(100)
         .connect(&config.postgres_url)
         .await
     {
@@ -23,5 +24,5 @@ pub async fn create_db_pool() -> Pool<Postgres> {
         }
     };
 
-    db_pool
+    Arc::new(db_pool)
 }

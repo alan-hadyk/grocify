@@ -1,13 +1,12 @@
-use crate::{
-    clients::create_clients,
-    services::{
-        routing_service::{RoutingService, UserId},
-        schema_service::SchemaService,
-    },
+use crate::services::routing_service::{RoutingService, UserId};
+use async_graphql::{Name, Request, Response, Value as GqlValue};
+use indexmap::IndexMap;
+use serde_json::Map as JsonMap;
+use serde_json::Value as JsonValue;
+use std::{
+    any::{Any, TypeId},
+    collections::BTreeMap,
 };
-use async_graphql::Request;
-use sqlx::query;
-use std::any::{Any, TypeId};
 
 #[test]
 fn routing_service_append_user_id_to_request_data() {
@@ -30,73 +29,77 @@ fn routing_service_append_user_id_to_request_data() {
     assert_eq!(actual_user_id.0, user_id_string);
 }
 
+// Function to convert serde_json::Value to async_graphql::Value
+fn convert_to_gql_value(json_value: &JsonValue) -> GqlValue {
+    match json_value {
+        JsonValue::Null => GqlValue::Null,
+        JsonValue::Number(n) => GqlValue::Number(n.clone().into()),
+        JsonValue::String(s) => GqlValue::String(s.clone()),
+        JsonValue::Bool(b) => GqlValue::Boolean(*b),
+        JsonValue::Array(arr) => GqlValue::List(arr.iter().map(convert_to_gql_value).collect()),
+        JsonValue::Object(obj) => {
+            let mut map = IndexMap::new();
+            for (key, value) in obj.iter() {
+                map.insert(Name::new(key.clone()), convert_to_gql_value(value));
+            }
+            GqlValue::Object(map)
+        }
+    }
+}
+
 #[tokio::test]
 async fn routing_service_convert_response_data_to_json() {
-    let clients = create_clients().await;
-    let clients_cleanup = create_clients().await;
+    let mut fake_data = BTreeMap::new();
 
-    query("DELETE FROM users")
-        .execute(&clients_cleanup.db_pool)
-        .await
-        .expect("Failed to clean users table")
-        .rows_affected();
+    let mut user_data = BTreeMap::new();
+    user_data.insert(
+        "username".to_string(),
+        JsonValue::String("John".to_string()),
+    );
+    user_data.insert(
+        "email".to_string(),
+        JsonValue::String("john@gmail.com".to_string()),
+    );
+    let user_data: JsonMap<String, JsonValue> = user_data.into_iter().collect();
 
-    let schema = SchemaService::create_schema(clients.db_pool);
+    fake_data.insert("user".to_string(), JsonValue::Object(user_data));
+    let fake_data: JsonMap<String, JsonValue> = fake_data.into_iter().collect();
 
-    let mutation = r#"
-        mutation {
-            createUser(
-                username: "username",
-                password: "password",
-                email: "user@gmail.com",
-                preferredLanguage: EN
-            ) {
-                username
-                email
-            }
-        }
-    "#;
+    let gql_value = convert_to_gql_value(&JsonValue::Object(fake_data));
 
-    // Execute the query and get the result.
-    let mut schema_result = schema.execute(mutation).await;
+    let mut response = Response::new(gql_value);
 
     // Convert the response data to JSON.
-    let query_json = RoutingService::convert_response_data_to_json(&mut schema_result);
+    let query_json = RoutingService::convert_response_data_to_json(&mut response);
 
-    let create_user_data = query_json.get("createUser");
+    let user_data = query_json.get("user");
 
-    match create_user_data {
-        Some(create_user_data) => {
-            let username = create_user_data.get("username");
+    match user_data {
+        Some(user_data) => {
+            let username = user_data.get("username");
 
             match username {
                 Some(username) => {
-                    assert_eq!(username, "username");
+                    assert_eq!(username, "John");
                 }
                 None => {
-                    panic!("Failed to get username in mutation result");
+                    panic!("Failed to get username in transformed query_json");
                 }
             }
 
-            let email = create_user_data.get("email");
+            let email = user_data.get("email");
 
             match email {
                 Some(email) => {
-                    assert_eq!(email, "user@gmail.com");
+                    assert_eq!(email, "john@gmail.com");
                 }
                 None => {
-                    panic!("Failed to get email in mutation result");
+                    panic!("Failed to get email in transformed query_json");
                 }
             }
         }
         None => {
-            panic!("Failed to find createUser in mutation result");
+            panic!("Failed to find createUser in transformed query_json");
         }
     }
-
-    query("DELETE FROM users")
-        .execute(&clients_cleanup.db_pool)
-        .await
-        .expect("Failed to clean users table")
-        .rows_affected();
 }

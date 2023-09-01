@@ -21,10 +21,10 @@ async fn main() {
     run_initializers();
 
     // Clients
-    let clients = create_clients().await;
+    create_clients().await;
 
     // Router
-    let router = create_router(clients.db_pool).await;
+    let router = create_router().await;
 
     // Run the server
     run_server(router).await;

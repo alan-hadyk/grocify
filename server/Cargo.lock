@@ -1187,6 +1187,7 @@ dependencies = [
  "chrono",
  "config",
  "hyper",
+ "indexmap 2.0.0",
  "lazy_static",
  "serde",
  "serde_json",

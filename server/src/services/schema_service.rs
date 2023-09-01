@@ -1,28 +1,13 @@
 use super::routing_service::UserId;
 use crate::{
-    features::users::resolver::UserResolver,
+    features::users::resolver::create_user_resolver,
     schema::{mutation::Mutation, query::Query, AppSchema},
 };
-use async_graphql::{Context, EmptySubscription, Schema, ServerError};
-use sqlx::{Pool, Postgres};
+use async_graphql::{Context, EmptySubscription, Schema};
 
 pub struct SchemaService;
 
-pub struct SchemaContext {
-    pub db_pool: Pool<Postgres>,
-}
-
 impl SchemaService {
-    pub fn get_schema_context<'lifetime>(
-        ctx: &'lifetime Context<'_>,
-    ) -> Result<&'lifetime SchemaContext, ServerError> {
-        // Access the custom context
-        ctx.data::<SchemaContext>().map_err(|err| {
-            tracing::error!("Failed to retrieve schema context: {:#?}", err);
-            ServerError::new("Internal Server Error", None)
-        })
-    }
-
     pub fn get_session_user_id<'lifetime>(
         ctx: &'lifetime Context<'_>,
     ) -> Option<&'lifetime UserId> {
@@ -31,17 +16,16 @@ impl SchemaService {
         session_user_id
     }
 
-    pub fn create_schema(db_pool: Pool<Postgres>) -> AppSchema {
-        let schema_context = SchemaContext { db_pool };
+    pub async fn create_schema<'lifetime>() -> AppSchema<'lifetime> {
+        let user_resolver = create_user_resolver().await;
+
         let query = Query {
-            user_resolver: UserResolver {},
+            user_resolver: user_resolver.clone(),
         };
         let mutation = Mutation {
-            user_resolver: UserResolver {},
+            user_resolver: user_resolver.clone(),
         };
 
-        Schema::build(query, mutation, EmptySubscription)
-            .data(schema_context)
-            .finish()
+        Schema::build(query, mutation, EmptySubscription).finish()
     }
 }

@@ -1,25 +1,26 @@
 use super::{enums::PreferredLang, model::UserModel, schema::User};
-use crate::services::schema_service::SchemaService;
+use crate::{clients::db_pool::get_db_pool, services::schema_service::SchemaService};
 use async_graphql::{Context, Error, Object, Result};
+use lazy_static::lazy_static;
 use sqlx::types::Uuid;
+use tokio::sync::OnceCell;
 
-pub struct UserResolver;
+#[derive(Clone)]
+pub struct UserResolver {
+    pub user_model: UserModel,
+}
 
 #[Object]
 impl UserResolver {
     pub async fn create_user(
         &self,
-        ctx: &Context<'_>,
         username: String,
         password: String,
         email: String,
         preferred_language: PreferredLang,
     ) -> Result<User, Error> {
-        let schema_context = SchemaService::get_schema_context(ctx)?;
-        let db_pool = &schema_context.db_pool;
-        let user_model = UserModel { db_pool };
-
-        let user = user_model
+        let user = self
+            .user_model
             .create(username, password, email, preferred_language)
             .await;
 
@@ -44,11 +45,7 @@ impl UserResolver {
             return Err(Error::new("Not allowed"));
         };
 
-        let schema_context = SchemaService::get_schema_context(ctx)?;
-        let db_pool = &schema_context.db_pool;
-        let user_model = UserModel { db_pool };
-
-        let user = user_model.get_by(id, username).await;
+        let user = self.user_model.get_by(id, username).await;
 
         match user {
             Ok(user) => Ok(user),
@@ -57,5 +54,19 @@ impl UserResolver {
                 Err(Error::new(format!("{}", err)))
             }
         }
+    }
+}
+
+lazy_static! {
+    static ref USER_RESOLVER: OnceCell<UserResolver> = OnceCell::const_new();
+}
+
+pub async fn create_user_resolver() -> UserResolver {
+    let db_pool_arc = get_db_pool().await;
+
+    UserResolver {
+        user_model: UserModel {
+            db_pool: db_pool_arc.clone(),
+        },
     }
 }

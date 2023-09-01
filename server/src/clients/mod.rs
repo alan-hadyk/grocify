@@ -1,18 +1,21 @@
-use self::db_pool::create_db_pool;
+use std::sync::Arc;
+
+use self::db_pool::get_db_pool;
 use sqlx::{migrate, Pool, Postgres};
 
-mod db_pool;
+pub mod db_pool;
 
 pub struct Clients {
-    pub db_pool: Pool<Postgres>,
+    pub db_pool: Arc<Pool<Postgres>>,
 }
 
 pub async fn create_clients() -> Clients {
     // Database pool
-    let db_pool = create_db_pool().await;
+    let db_pool_arc = get_db_pool().await;
+    let db_pool = Arc::clone(&db_pool_arc);
 
     // Run migrations
-    match migrate!().run(&db_pool).await {
+    match migrate!().run(&*db_pool).await {
         Ok(_) => {
             tracing::info!("Migrations run successfully");
         }
@@ -24,7 +27,9 @@ pub async fn create_clients() -> Clients {
         }
     };
 
-    Clients { db_pool }
+    Clients {
+        db_pool: db_pool_arc,
+    }
 }
 
 #[cfg(test)]

@@ -6,15 +6,14 @@ use axum::{
     Router,
 };
 use paths::Path;
-use sqlx::{Pool, Postgres};
 
 mod handlers;
 mod paths;
 
 // Create router with routes
-pub async fn create_router(db_pool: Pool<Postgres>) -> Router {
+pub async fn create_router() -> Router {
     // Schema
-    let schema = SchemaService::create_schema(db_pool);
+    let schema = SchemaService::create_schema().await;
 
     // Session layer
     let session_layer = SessionService::create_session_layer().await;

@@ -1,7 +1,4 @@
-use crate::{
-    clients::create_clients,
-    routing::{create_router, paths::Path},
-};
+use crate::routing::{create_router, paths::Path};
 use axum::{
     body::Body,
     http::{Request, StatusCode},
@@ -16,10 +13,7 @@ fn path_contains_correct_paths() {
 
 #[tokio::test]
 async fn create_router_exposes_root_endpoint() {
-    let clients = create_clients().await;
-    let db_pool = clients.db_pool;
-
-    let router = create_router(db_pool).await;
+    let router = create_router().await;
 
     // `Router` implements `tower::Service<Request<Body>>` so we can
     // call it like any tower service, no need to run an HTTP server.
@@ -33,10 +27,7 @@ async fn create_router_exposes_root_endpoint() {
 
 #[tokio::test]
 async fn create_router_exposes_graphql_endpoint() {
-    let clients = create_clients().await;
-    let db_pool = clients.db_pool;
-
-    let router = create_router(db_pool).await;
+    let router = create_router().await;
 
     let request_body = Body::from(b"{}".to_vec());
 
