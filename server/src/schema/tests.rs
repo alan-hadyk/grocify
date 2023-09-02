@@ -1,8 +1,8 @@
 use crate::{
     clients::db_pool::get_db_pool,
+    clients::create_clients,
     features::users::{model::UserModel, resolver::UserResolver},
     schema::{mutation::Mutation, query::Query},
-    services::schema_service::SchemaService,
 };
 use async_graphql::{EmptySubscription, Schema};
 use sqlx::query;
@@ -10,6 +10,7 @@ use std::sync::Arc;
 
 #[tokio::test]
 async fn mutation_create_user() {
+    create_clients().await;
     let db_pool_arc = get_db_pool().await;
     let db_pool = Arc::clone(&db_pool_arc);
 
