@@ -1,9 +1,7 @@
 use super::{enums::PreferredLang, model::UserModel, schema::User};
 use crate::{clients::db_pool::get_db_pool, services::schema_service::SchemaService};
 use async_graphql::{Context, Error, Object, Result};
-use lazy_static::lazy_static;
 use sqlx::types::Uuid;
-use tokio::sync::OnceCell;
 
 #[derive(Clone)]
 pub struct UserResolver {
@@ -57,16 +55,11 @@ impl UserResolver {
     }
 }
 
-lazy_static! {
-    static ref USER_RESOLVER: OnceCell<UserResolver> = OnceCell::const_new();
-}
-
 pub async fn create_user_resolver() -> UserResolver {
     let db_pool_arc = get_db_pool().await;
+    let user_model = UserModel {
+        db_pool: db_pool_arc.clone(),
+    };
 
-    UserResolver {
-        user_model: UserModel {
-            db_pool: db_pool_arc.clone(),
-        },
-    }
+    UserResolver { user_model }
 }

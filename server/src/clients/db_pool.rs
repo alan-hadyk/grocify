@@ -3,7 +3,7 @@ use sqlx::postgres::{PgPoolOptions, Postgres};
 use sqlx::Pool;
 use std::sync::Arc;
 
-pub async fn get_db_pool<'lifetime>() -> Arc<Pool<Postgres>> {
+pub async fn get_db_pool() -> Arc<Pool<Postgres>> {
     let config = get_config();
 
     let db_pool = match PgPoolOptions::new()

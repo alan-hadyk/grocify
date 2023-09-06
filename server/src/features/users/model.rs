@@ -1,11 +1,10 @@
-use std::sync::Arc;
-
 use super::{
     enums::PreferredLang,
     errors::{UserGetByError, UserModelError},
     schema::User,
 };
 use sqlx::{query_as, types::Uuid, Error, Pool, Postgres};
+use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct UserModel {

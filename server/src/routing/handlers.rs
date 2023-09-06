@@ -19,7 +19,7 @@ pub async fn get_root_handler() -> impl IntoResponse {
 
 // GraphQL handler for schema - `POST /graphql`
 pub async fn post_graphql_handler(
-    schema: Extension<AppSchema<'static>>,
+    schema: Extension<AppSchema>,
     mut session: WritableSession,
     req: GraphQLRequest,
 ) -> GraphQLResponse {

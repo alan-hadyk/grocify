@@ -1,6 +1,6 @@
 use crate::{
-    clients::db_pool::get_db_pool,
     clients::create_clients,
+    clients::db_pool::get_db_pool,
     features::users::{model::UserModel, resolver::UserResolver},
     schema::{mutation::Mutation, query::Query},
 };
@@ -53,7 +53,6 @@ async fn mutation_create_user() {
     "#;
 
     let response = schema.execute(mutation).await;
-    println!("response!!!!!!: {:#?}", response);
 
     if response.errors.len() > 0 {
         panic!("Mutation failed: {:#?}", response.errors);

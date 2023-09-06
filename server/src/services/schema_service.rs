@@ -16,7 +16,7 @@ impl SchemaService {
         session_user_id
     }
 
-    pub async fn create_schema<'lifetime>() -> AppSchema<'lifetime> {
+    pub async fn create_schema() -> AppSchema {
         let user_resolver = create_user_resolver().await;
 
         let query = Query {
