@@ -82,7 +82,7 @@ cargo make query-metadata
 ### Compile for production
 
 ```rust
-cargo build
+cargo build --release
 ```
 
 ### Build this package's and its dependencies' documentation
@@ -91,7 +91,7 @@ cargo build
 cargo doc
 ```
 
-### Run a binary (requires build with `cargo build`)
+### Run a binary (requires build with `cargo build  --release`)
 
 ```rust
 cargo run
