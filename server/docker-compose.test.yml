@@ -1,0 +1,17 @@
+version: "3"
+services:
+  test_db:
+    container_name: test_db
+    image: postgres:13.3
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test_grocify_database
+
+  test_redis:
+    container_name: test_redis
+    image: redis
+    ports:
+      - 6380:6379

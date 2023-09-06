@@ -1,0 +1,51 @@
+name: Server tests
+
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      test_db:
+        image: postgres:13
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_grocify_database
+        ports:
+          - 5433:5432
+        options: >-
+            --health-cmd pg_isready 
+            --health-interval 10s 
+            --health-timeout 5s 
+            --health-retries 5
+      test_redis:
+        image: redis
+        ports:
+          - 6380:6379
+        options: --entrypoint redis-server
+
+    steps:
+      - uses: actions/checkout@v3.5.2
+      
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      
+      - name: Create Settings.toml
+        run: |
+          cat <<EOT >> ./server/Settings.toml
+          host = "127.0.0.1"
+          port = "3000"
+          postgres_url = "${{ secrets.CI_POSTGRES_URL }}"
+          test_postgres_url = "${{ secrets.CI_TEST_POSTGRES_URL }}"
+          redis_url = "${{ secrets.CI_REDIS_URL }}"
+          test_redis_url = "${{ secrets.CI_TEST_REDIS_URL }}"
+          secret = "${{ secrets.CI_SECRET }}"
+          EOT
+  
+      - name: Run Tests
+        run: cargo test
+        working-directory: ./server

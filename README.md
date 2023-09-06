@@ -1,4 +1,4 @@
-# Grocify
+# Grocify - Architecture Implementation Plan
 
 ## Table of Contents
 
@@ -12,8 +12,8 @@
   - [Server](#server)
   - [Databases](#databases)
 - [Technology Stack](#technology-stack)
-  - [The Mobile App](#the-mobile-app)
-  - [The Backend](#the-backend)
+  - [Mobile App](#mobile-app)
+  - [Backend](#backend)
 - [Data Model](#data-model)
 - [User Flow](#user-flow)
 - [Implementation Plan](#implementation-plan)
@@ -40,13 +40,9 @@
 - [Collaboration Tools and Practices](#collaboration-tools-and-practices)
 - [Sustainability and Long-Term Maintenance](#sustainability-and-long-term-maintenance)
 
-# Architecture Implementation Plan
-
 ## Project Overview
 
 > Brief description of the project and its objectives.
-
-**Grocify**
 
 An application in which the user can add various recipes, and then automatically create a shopping list with the necessary ingredients.
 
@@ -108,7 +104,7 @@ There are two databases in the system:
 
 > List of technologies used in the project
 
-### The Mobile App
+### Mobile App
 
 1. **React Native** - For building the cross-platform mobile app that works on both Android and iOS.
 2. **TypeScript** - TypeScript is a strongly typed version of JavaScript, which allows developers to write safer, more scalable code and catch errors early. TypeScript's static typing can help prevent bugs that might be caused by unexpected data types.
@@ -123,7 +119,7 @@ There are two databases in the system:
 11. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
 12. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 
-### The Backend
+### Backend
 
 1. **Rust** - A modern system programming language that emphasizes safety, performance, and concurrency.
 2. **Axum** - A web application framework for Rust with a focus on simplicity, zero-cost abstractions, and modern async foundations.
@@ -153,43 +149,43 @@ Data model consists of the following main entities:
 1. `users` table - Information related to user profiles, including username, password hash and email:
 
    - `id` UUID (required) - Unique identifier for the user
-   - `username` String (required, max. 100 characters) - Username for display
-   - `password_hash` String (required) - Hashed password for authentication
-   - `email` String (required) - Email address for login, communication and recovery
-   - `preferred_language` Enum (required) - Language preferred by the user. This is enumeration with ISO 639-1 codes (values such as "en", "pl", etc.). Defaults to the language of given mobile phone.
-   - `created_at` Timestamp (required) - The timestamp of when the user was created.
+   - `username` TEXT (required, max. 100 characters) - Username for display
+   - `password_hash` TEXT (required) - Hashed password for authentication
+   - `email` TEXT (required) - Email address for login, communication and recovery
+   - `preferred_language` ENUM (required) - Language preferred by the user. This is enumeration with ISO 639-1 codes (values such as "en", "pl", etc.). Defaults to the language of given mobile phone.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the user was created.
 
 2. `recipes` table - Details about recipes, including title, description, creator:
 
    - `id` UUID (required) - Unique identifier for the recipe
-   - `title` String (required, max. 100 characters) - Name or title of the recipe
-   - `description` String (optional, max. 500 characters) - A brief description of the recipe
-   - `serving_size` Integer (required) - Standard serving size for the recipe (e.g., servings for 1 person)
-   - `amount_of_days` Integer (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
+   - `title` TEXT (required, max. 100 characters) - Name or title of the recipe
+   - `description` TEXT (optional, max. 500 characters) - A brief description of the recipe
+   - `serving_size` INTEGER (required) - Standard serving size for the recipe (e.g., servings for 1 person)
+   - `amount_of_days` INTEGER (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
    - `author_user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
-   - `created_at` Timestamp (required) - The timestamp of when the recipe was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the recipe was created.
 
 3. `ingredients` table - Basic information about individual ingredients, including name and unit of measurement:
 
    - `id` UUID (required) - Unique identifier for the ingredient
-   - `name` String (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
+   - `name` TEXT (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
    - `author_user_id` UUID (required) - Relation to the User who created the ingredient. This is a foreign key referencing `users.id`
-   - `created_at` Timestamp (required) - The timestamp of when the ingredient was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the ingredient was created.
 
 4. `units` table - Standardized units of measurement for ingredients:
 
    - `id` UUID (required) - Unique identifier for the unit
-   - `name` String (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
+   - `name` TEXT (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
    - `author_user_id` UUID (required) - Relation to the User who created the unit. This is a foreign key referencing `users.id`
-   - `created_at` Timestamp (required) - The timestamp of when the unit was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the unit was created.
 
 5. `shopping_lists` table - Information related to shopping lists, including name and creator:
 
    - `id` UUID (required) - Unique identifier for the shopping list
-   - `name` String (optional) - Name or title of the shopping list
+   - `name` TEXT (optional) - Name or title of the shopping list
    - `author_user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
-   - `created_at` Timestamp (required) - The timestamp of when the shopping list was created.
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the shopping list was created.
 
 6. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
 
@@ -208,7 +204,7 @@ Data model consists of the following main entities:
    - `id` (UUID, required): A unique identifier. This is the primary key.
    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
    - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing `ingredients.id`.
-   - `quantity` Float (required) - Quantity of the ingredient for the recipe.
+   - `quantity` FLOAT (required) - Quantity of the ingredient for the recipe.
 
 9. `shopping_lists_recipes` `JOIN` table - JOIN table to associate shopping lists with recipes:
 
@@ -221,16 +217,16 @@ Data model consists of the following main entities:
     - `id` (UUID, required): A unique identifier. This is the primary key.
     - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
     - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing `ingredients.id`.
-    - `quantity` Float (required) - Quantity of the ingredient in the shopping list
+    - `quantity` FLOAT (required) - Quantity of the ingredient in the shopping list
 
 11. `notifications` table - Notifications for users:
 
     - `id` UUID (required) - Unique identifier for the notification
     - `user_id` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
-    - `type` Enum (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
-    - `content` JSON (required) - Detailed content of the notification, including relevant IDs and information.
+    - `type` ENUM (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
+    - `content` TEXT (required) - Detailed content of the notification, including relevant IDs and information.
     - `read` Boolean (required) - Indicates whether the notification has been read by the user.
-    - `created_at` Timestamp (required) - The timestamp of when the notification was created.
+    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the notification was created.
 
 ## User Flow
 
@@ -252,7 +248,7 @@ Data model consists of the following main entities:
 
 > List of the major tasks that have to be completed
 
-- [ ] Initial server setup
+- [x] [Initial server setup](https://github.com/alan-hadyk/grocify/pull/2)
 - [ ] Initial mobile client setup
 - [ ] Database schema design
 - [ ] GraphQL schema design - includes defining types, queries, mutations, and any subscriptions
