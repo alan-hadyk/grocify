@@ -9,6 +9,7 @@
     "web": "TAMAGUI_TARGET=web expo start --web -c"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.35.0",
     "expo": "~49.0.8",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@tamagui/babel-plugin": "^1.61.1",
+    "@tanstack/eslint-plugin-query": "^4.34.1",
     "@types/react": "~18.2.14",
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
