@@ -1,24 +1,32 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Suspense } from "react";
+import { TamaguiProvider, Text, View } from "tamagui";
+import tamaguiConfig from "./tamagui.config";
+import { Dimensions } from "react-native";
 
-const App: React.FC = () => (
-  <View style={styles.container}>
-    <Text style={styles.title}>Grocify</Text>
-    <StatusBar style="auto" />
-  </View>
-);
+const App: React.FC = () => {
+  const screenHeight = Dimensions.get("window").height;
+  const screenWidth = Dimensions.get("window").width;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingTop: 48,
-  },
-  title: {
-    fontSize: 48,
-  },
-});
+  return (
+    <TamaguiProvider config={tamaguiConfig}>
+      <Suspense>
+        <View
+          padding="$space.40"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height={screenHeight}
+          width={screenWidth}
+        >
+          <Text fontFamily="$heading" fontSize="$4">
+            Grocify
+          </Text>
+          <StatusBar style="auto" />
+        </View>
+      </Suspense>
+    </TamaguiProvider>
+  );
+};
 
 export default App;
