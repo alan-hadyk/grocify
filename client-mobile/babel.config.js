@@ -5,6 +5,16 @@ module.exports = function (api) {
 
   return {
     plugins: [
+      [
+        "module-resolver",
+        {
+          root: ["./src"],
+          alias: {
+            "@app/assets": "./src/assets",
+            "@app/components": "./src/components",
+          },
+        },
+      ],
       // NOTE: this is required to pass the right environment
       [
         "transform-inline-environment-variables",
