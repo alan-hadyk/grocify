@@ -1,14 +1,15 @@
 import { createTheme } from "@shopify/restyle";
 
-const palette = {
+const colorPalette = {
   black: "#0B0B0B",
+  green: "#36D399",
   white: "#F0F2F3",
 };
 
 export const theme = createTheme({
   colors: {
-    mainBackground: palette.white,
-    mainText: palette.black,
+    mainBackground: colorPalette.green,
+    mainText: colorPalette.black,
   },
   spacing: {
     "8": 8,
@@ -30,5 +31,14 @@ export const theme = createTheme({
     },
   },
 });
+
+export const darkTheme: Theme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    mainBackground: colorPalette.black,
+    mainText: colorPalette.green,
+  },
+};
 
 export type Theme = typeof theme;
