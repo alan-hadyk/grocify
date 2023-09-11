@@ -14,18 +14,21 @@ const onAppStateChange = (status: AppStateStatus) => {
  * @param {React.FC<Record<string, unknown>>} WrappedComponent - The component to wrap with QueryClientProvider.
  * @returns {React.FC<Record<string, unknown>>} - The component wrapped with QueryClientProvider.
  */
-export const withQueryClientProvider = (
-  WrappedComponent: React.FC<Record<string, unknown>>,
-) => {
-  useEffect(() => {
-    const subscription = AppState.addEventListener("change", onAppStateChange);
+export const withQueryClientProvider =
+  (WrappedComponent: React.FC<Record<string, unknown>>) =>
+  (props: Record<string, unknown>) => {
+    useEffect(() => {
+      const subscription = AppState.addEventListener(
+        "change",
+        onAppStateChange,
+      );
 
-    return () => subscription.remove();
-  }, []);
+      return () => subscription.remove();
+    }, []);
 
-  return (props: Record<string, unknown>) => (
-    <QueryClientProvider client={queryClient}>
-      <WrappedComponent {...props} />
-    </QueryClientProvider>
-  );
-};
+    return (
+      <QueryClientProvider client={queryClient}>
+        <WrappedComponent {...props} />
+      </QueryClientProvider>
+    );
+  };

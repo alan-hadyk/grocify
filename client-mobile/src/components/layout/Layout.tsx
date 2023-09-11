@@ -1,25 +1,29 @@
+import { Theme } from "@client/theme";
+import { createBox } from "@shopify/restyle";
 import { ReactNode } from "react";
 import { Dimensions } from "react-native";
-import { View as ViewComponent } from "tamagui";
 
 interface IViewProps {
   children: ReactNode | ReactNode[];
 }
 
-export const View: React.FC<IViewProps> = ({ children }) => {
+const Box = createBox<Theme>();
+
+// TODO - Dummy component: remove
+export const Layout: React.FC<IViewProps> = ({ children }) => {
   const screenHeight = Dimensions.get("window").height;
   const screenWidth = Dimensions.get("window").width;
 
   return (
-    <ViewComponent
-      padding="$space.40"
-      display="flex"
+    <Box
+      backgroundColor="mainBackground"
+      padding="40"
       alignItems="center"
       justifyContent="center"
       height={screenHeight}
       width={screenWidth}
     >
       {children}
-    </ViewComponent>
+    </Box>
   );
 };
