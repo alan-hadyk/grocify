@@ -1,10 +1,10 @@
-import { createTheme } from "@shopify/restyle";
+import { createTheme } from "@shopify/restyle"
 
 const colorPalette = {
   black: "#0B0B0B",
   green: "#36D399",
   white: "#F0F2F3",
-};
+}
 
 export const theme = createTheme({
   colors: {
@@ -18,10 +18,6 @@ export const theme = createTheme({
     "40": 40,
   },
   textVariants: {
-    header: {
-      fontWeight: "bold",
-      fontSize: 48,
-    },
     body: {
       fontSize: 16,
       lineHeight: 24,
@@ -29,8 +25,12 @@ export const theme = createTheme({
     defaults: {
       // We can define a default text variant here.
     },
+    header: {
+      fontSize: 48,
+      fontWeight: "bold",
+    },
   },
-});
+})
 
 export const darkTheme: Theme = {
   ...theme,
@@ -39,6 +39,6 @@ export const darkTheme: Theme = {
     mainBackground: colorPalette.black,
     mainText: colorPalette.green,
   },
-};
+}
 
-export type Theme = typeof theme;
+export type Theme = typeof theme

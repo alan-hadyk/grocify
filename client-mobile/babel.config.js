@@ -1,14 +1,13 @@
-process.env.TAMAGUI_TARGET = "native";
+process.env.TAMAGUI_TARGET = "native"
 
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(true)
 
   return {
     plugins: [
       [
         "module-resolver",
         {
-          root: ["./src"],
           alias: {
             "@client/assets": "./src/assets",
             "@client/clients": "./src/clients",
@@ -17,9 +16,10 @@ module.exports = function (api) {
             "@client/hoc": "./src/hoc",
             "@client/theme": "./src/theme",
           },
+          root: ["./src"],
         },
       ],
     ],
     presets: ["babel-preset-expo"],
-  };
-};
+  }
+}

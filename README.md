@@ -108,7 +108,7 @@ There are two databases in the system:
 
 1. **React Native** - For building the cross-platform mobile app that works on both Android and iOS.
 2. **TypeScript** - TypeScript is a strongly typed version of JavaScript, which allows developers to write safer, more scalable code and catch errors early. TypeScript's static typing can help prevent bugs that might be caused by unexpected data types.
-3. **Tamagui** - A unified UI kit for React Native and Web. It provides a light design system, style library, and optimizing compiler, enabling efficient cross-platform development.
+3. **restyle** - The Restyle library provides a type-enforced system for building UI components in React Native with TypeScript. It's a library for building UI libraries, with themability as the core focus.
 4. **TanStack Query** - A library for managing and caching asynchronous data.
 5. **graphql-request** - A minimal GraphQL client that supports all GraphQL specifications, providing a simple and flexible way to make GraphQL requests. It can be used with TanStack Query for handling GraphQL queries and mutations.
 6. **ESLint** - A static code analysis tool for identifying problematic patterns and enforcing coding standards in JavaScript and TypeScript.
