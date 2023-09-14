@@ -1,5 +1,3 @@
-process.env.TAMAGUI_TARGET = "native"
-
 module.exports = function (api) {
   api.cache(true)
 
@@ -9,11 +7,13 @@ module.exports = function (api) {
         "module-resolver",
         {
           alias: {
+            "@client/api": "./src/api",
             "@client/assets": "./src/assets",
             "@client/clients": "./src/clients",
             "@client/components": "./src/components",
             "@client/helpers": "./src/helpers",
             "@client/hoc": "./src/hoc",
+            "@client/lib": "./src/lib",
             "@client/theme": "./src/theme",
           },
           root: ["./src"],

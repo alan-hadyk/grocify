@@ -11,7 +11,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ["App.tsx"],
+      files: ["App.tsx", "codegen.ts"],
       rules: {
         "import/no-default-export": "off",
       },

@@ -20,6 +20,7 @@ export const Layout: React.FC<IViewProps> = ({ children }) => {
       padding="40"
       alignItems="center"
       justifyContent="center"
+      gap="16"
       height={screenHeight}
       width={screenWidth}>
       {children}

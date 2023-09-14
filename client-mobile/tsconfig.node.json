@@ -6,5 +6,5 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["babel.config.js", ".eslintrc.js"]
+  "include": ["babel.config.js", ".eslintrc.js", "codegen.ts"]
 }
