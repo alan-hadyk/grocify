@@ -1,30 +1,12 @@
-import { ContextOptions } from "@tanstack/react-query"
+import { graphQLClient } from "@client/clients/graphQLClient"
+import { Variables } from "graphql-request"
+import { GraphQLClientRequestHeaders } from "graphql-request/build/esm/types"
 
 export const fetcher =
-  <TData, TVariables>(
-    query: string,
+  <TData, TVariables extends Variables>(
+    document: string,
     variables?: TVariables,
-    options?: ContextOptions | RequestInit["headers"],
+    options?: GraphQLClientRequestHeaders,
   ) =>
-  async (): Promise<TData> => {
-    const apiUrl = process.env.EXPO_PUBLIC_API_URL
-
-    if (!apiUrl) {
-      throw new Error("EXPO_PUBLIC_API_URL is not defined")
-    }
-
-    const res = await fetch(apiUrl, {
-      body: JSON.stringify({ options, query, variables }),
-      method: "POST",
-    })
-
-    const json = await res.json()
-
-    if (json.errors) {
-      const { message } = json.errors[0]
-
-      throw new Error(message)
-    }
-
-    return json.data
-  }
+  async (): Promise<TData> =>
+    graphQLClient.request<TData, Variables>(document, variables, options)
