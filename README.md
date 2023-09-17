@@ -113,11 +113,10 @@ There are two databases in the system:
 5. **graphql-request** - A minimal GraphQL client that supports all GraphQL specifications, providing a simple and flexible way to make GraphQL requests. It can be used with TanStack Query for handling GraphQL queries and mutations.
 6. **ESLint** - A static code analysis tool for identifying problematic patterns and enforcing coding standards in JavaScript and TypeScript.
 7. **Prettier** - An opinionated code formatter that ensures consistent formatting across your codebase.
-8. **React Navigation** - A popular routing and navigation library for React Native, providing a straightforward way to manage navigation in your mobile app.
-9. **Socket.IO** - A library for real-time bidirectional event-based communication using WebSockets or other protocols.
-10. **GraphQL Code Generator** - A tool that generates code out of your GraphQL schema, allowing typed queries, mutations, subscriptions, and more.
-11. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
-12. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
+8. **Socket.IO** - A library for real-time bidirectional event-based communication using WebSockets or other protocols.
+9. **GraphQL Code Generator** - A tool that generates code out of your GraphQL schema, allowing typed queries, mutations, subscriptions, and more.
+10. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
+11. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 
 ### Backend
 

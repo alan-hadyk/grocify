@@ -13,6 +13,10 @@ const spacing = {
   "40": 40,
 }
 
+enum FontFamily {
+  Inter_500Medium = "Inter_500Medium",
+}
+
 export const theme = createTheme({
   buttonVariants: {
     defaults: {
@@ -39,10 +43,12 @@ export const theme = createTheme({
       // We can define a default text variant here.
     },
     header: {
+      fontFamily: FontFamily.Inter_500Medium,
       fontSize: 48,
       fontWeight: "bold",
     },
     paragraph: {
+      fontFamily: FontFamily.Inter_500Medium,
       fontSize: 16,
       lineHeight: 24,
     },
@@ -53,6 +59,9 @@ export const darkTheme: Theme = {
   ...theme,
   colors: {
     ...theme.colors,
+    buttonBackground: colorPalette.green,
+    buttonText: colorPalette.black,
+    footerBackground: colorPalette.white,
     mainBackground: colorPalette.black,
     mainText: colorPalette.green,
   },
