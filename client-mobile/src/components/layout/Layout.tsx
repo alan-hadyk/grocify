@@ -21,7 +21,7 @@ export const Layout: React.FC<IViewProps> = ({ children }) => {
       alignItems="center"
       justifyContent="center"
       gap="16"
-      height={screenHeight}
+      height={screenHeight - 80}
       width={screenWidth}>
       {children}
     </Box>

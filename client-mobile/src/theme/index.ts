@@ -29,6 +29,7 @@ export const theme = createTheme({
   colors: {
     buttonBackground: colorPalette.black,
     buttonText: colorPalette.white,
+    footerBackground: colorPalette.white,
     mainBackground: colorPalette.green,
     mainText: colorPalette.black,
   },

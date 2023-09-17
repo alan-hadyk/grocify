@@ -3,16 +3,13 @@ import { Button } from "@client/components/atoms/Button"
 import { Header } from "@client/components/atoms/Header"
 import { Paragraph } from "@client/components/atoms/Paragraph"
 import { Layout } from "@client/components/layout/Layout"
-import { composeFunctions } from "@client/helpers/functions/composeFunctions"
-import { withQueryClientProvider } from "@client/hoc/withQueryClientProvider"
-import { withThemeProvider } from "@client/hoc/withThemeProvider"
-import { StatusBar } from "expo-status-bar"
 import { useState } from "react"
 
 // TODO - Dummy code remove
 let randomUserName = String(Date.now())
 
-const _App: React.FC = () => {
+const IndexPage: React.FC = () => {
+  // TODO - Dummy code remove
   const { isLoading: isCreatingUser, mutateAsync, data: createUserData } = useCreateUserMutation()
 
   // TODO - Dummy code remove
@@ -27,8 +24,10 @@ const _App: React.FC = () => {
     })
   }
 
+  // TODO - Dummy code remove
   const [isQueryEnabled, setIsQueryEnabled] = useState<boolean>(false)
 
+  // TODO - Dummy code remove
   const enableQuery = () => {
     setIsQueryEnabled(true)
   }
@@ -57,18 +56,12 @@ const _App: React.FC = () => {
           {!data?.user && !isLoadingUser && (
             <Button onPress={enableQuery} title="Search for created user" />
           )}
-          {isLoadingUser && <Paragraph>Searching for created user...</Paragraph>}
-          {data?.user.username && <Paragraph>Search result: {data?.user.username}</Paragraph>}
         </>
       )}
-      <StatusBar style="auto" />
+      {isLoadingUser && <Paragraph>Searching for created user...</Paragraph>}
+      {data?.user.username && <Paragraph>Search result: {data?.user.username}</Paragraph>}
     </Layout>
   )
 }
 
-export const App = composeFunctions<Record<string, unknown>>(
-  withQueryClientProvider,
-  withThemeProvider,
-)(_App)
-
-export default App
+export default IndexPage
