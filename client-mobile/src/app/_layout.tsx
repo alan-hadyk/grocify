@@ -8,6 +8,7 @@ import { createBox } from "@shopify/restyle"
 import { Slot, SplashScreen } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { Dimensions } from "react-native"
+import "@client/lib/internationalization"
 
 SplashScreen.preventAutoHideAsync()
 

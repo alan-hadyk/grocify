@@ -1,9 +1,10 @@
 import { PreferredLang, useCreateUserMutation, useUserQuery } from "@client/api/schema"
 import { Button } from "@client/components/atoms/Button"
-import { Header } from "@client/components/atoms/Header"
 import { Paragraph } from "@client/components/atoms/Paragraph"
+import { Title } from "@client/components/atoms/Title"
 import { Layout } from "@client/components/layout/Layout"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 
 // TODO - Dummy code remove
 let randomUserName = String(Date.now())
@@ -42,24 +43,30 @@ const IndexPage: React.FC = () => {
     },
   )
 
+  const { t } = useTranslation()
+
   // TODO - Cleanup dummy JSX
   return (
     <Layout>
-      <Header>Grocify</Header>
+      <Title>Grocify</Title>
       {!isCreatingUser && !createUserData?.createUser && (
-        <Button onPress={onClick} title="Create user" />
+        <Button onPress={onClick} title={t("Create user")} />
       )}
-      {isCreatingUser && <Paragraph>Loading...</Paragraph>}
+      {isCreatingUser && <Paragraph>{t("Loading...")}</Paragraph>}
       {createUserData?.createUser.username && (
         <>
           <Paragraph>Created user: {createUserData?.createUser.username}</Paragraph>
           {!data?.user && !isLoadingUser && (
-            <Button onPress={enableQuery} title="Search for created user" />
+            <Button onPress={enableQuery} title={t("Search for created user")} />
           )}
         </>
       )}
-      {isLoadingUser && <Paragraph>Searching for created user...</Paragraph>}
-      {data?.user.username && <Paragraph>Search result: {data?.user.username}</Paragraph>}
+      {isLoadingUser && <Paragraph>{t("Searching for created user...")}</Paragraph>}
+      {data?.user.username && (
+        <Paragraph>
+          {t("Search result")}: {data?.user.username}
+        </Paragraph>
+      )}
     </Layout>
   )
 }

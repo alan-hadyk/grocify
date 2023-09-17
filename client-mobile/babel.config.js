@@ -17,6 +17,7 @@ module.exports = function (api) {
             "@client/hooks": "./src/hooks",
             "@client/lib": "./src/lib",
             "@client/theme": "./src/theme",
+            "@client/translations": "./src/translations",
           },
           root: ["./src"],
         },

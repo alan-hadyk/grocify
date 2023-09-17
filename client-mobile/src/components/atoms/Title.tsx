@@ -4,13 +4,13 @@ import { ReactNode } from "react"
 
 const Text = createText<Theme>()
 
-interface IHeaderProps {
+interface ITitleProps {
   children: ReactNode | ReactNode[]
 }
 
 // TODO - Dummy component: remove
-export const Header: React.FC<IHeaderProps> = ({ children }) => (
-  <Text variant="header" color="mainText">
+export const Title: React.FC<ITitleProps> = ({ children }) => (
+  <Text variant="title" color="mainText">
     {children}
   </Text>
 )

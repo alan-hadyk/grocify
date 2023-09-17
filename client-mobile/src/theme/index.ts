@@ -1,20 +1,26 @@
+/* eslint-disable import/exports-last */
+import { ColorPalette, FontFamily, TColors } from "@client/theme/@types"
 import { createTheme } from "@shopify/restyle"
-
-const colorPalette = {
-  black: "#0B0B0B",
-  green: "#36D399",
-  white: "#F0F2F3",
-}
 
 const spacing = {
   "8": 8,
   "16": 16,
   "24": 24,
   "40": 40,
+  "50%": "50%",
+  "80": 80,
+  "100%": "100%",
 }
 
-enum FontFamily {
-  Inter_500Medium = "Inter_500Medium",
+const lightThemeColors: TColors = {
+  buttonBackground: ColorPalette.Black,
+  buttonFooterActiveText: ColorPalette.Green,
+  buttonFooterBackground: ColorPalette.White,
+  buttonFooterDefaultText: ColorPalette.Black,
+  buttonText: ColorPalette.White,
+  footerBackground: ColorPalette.White,
+  mainBackground: ColorPalette.Green,
+  mainText: ColorPalette.Black,
 }
 
 export const theme = createTheme({
@@ -24,47 +30,51 @@ export const theme = createTheme({
       color: "buttonText",
       padding: "8",
     },
+    footer: {
+      alignContent: "center",
+      alignItems: "center",
+      alignSelf: "center",
+      backgroundColor: "buttonFooterBackground",
+      color: "buttonFooterDefaultText",
+      fontSize: 20,
+      height: "100%",
+      textAlign: "center",
+      width: "100%",
+    },
     primary: {
       backgroundColor: "buttonBackground",
       color: "buttonText",
       padding: "8",
     },
   },
-  colors: {
-    buttonBackground: colorPalette.black,
-    buttonText: colorPalette.white,
-    footerBackground: colorPalette.white,
-    mainBackground: colorPalette.green,
-    mainText: colorPalette.black,
-  },
+  colors: lightThemeColors,
   spacing,
   textVariants: {
-    defaults: {
-      // We can define a default text variant here.
-    },
-    header: {
-      fontFamily: FontFamily.Inter_500Medium,
-      fontSize: 48,
-      fontWeight: "bold",
-    },
     paragraph: {
       fontFamily: FontFamily.Inter_500Medium,
       fontSize: 16,
       lineHeight: 24,
     },
+    title: {
+      fontFamily: FontFamily.Inter_500Medium,
+      fontSize: 48,
+      fontWeight: "bold",
+    },
   },
 })
 
+const darkThemeColors: TColors = {
+  ...lightThemeColors,
+  buttonBackground: ColorPalette.Green,
+  buttonText: ColorPalette.Black,
+  footerBackground: ColorPalette.White,
+  mainBackground: ColorPalette.Black,
+  mainText: ColorPalette.Green,
+}
+
 export const darkTheme: Theme = {
   ...theme,
-  colors: {
-    ...theme.colors,
-    buttonBackground: colorPalette.green,
-    buttonText: colorPalette.black,
-    footerBackground: colorPalette.white,
-    mainBackground: colorPalette.black,
-    mainText: colorPalette.green,
-  },
+  colors: darkThemeColors,
 }
 
 export type Theme = typeof theme
