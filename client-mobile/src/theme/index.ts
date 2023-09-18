@@ -59,6 +59,7 @@ export const theme = createTheme({
       fontFamily: FontFamily.Inter_500Medium,
       fontSize: 48,
       fontWeight: "bold",
+      lineHeight: 56,
     },
   },
 })
