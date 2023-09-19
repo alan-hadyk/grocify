@@ -110,13 +110,13 @@ jobs:
           timeout=$((timeout - 5))
           done
 
+          # Output Expo logs for debugging
+          cat expo.log
+
           if [ $timeout -le 0 ]; then
           echo "Expo did not start within 10 minutes."
           exit 1
           fi
-
-          # Output Expo logs for debugging
-          cat expo.log
 
           # Run your e2e tests
           yarn test-e2e
