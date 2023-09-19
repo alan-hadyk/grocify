@@ -86,12 +86,6 @@ jobs:
           echo "Run simulator"
           xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
 
-      - name: Cache Yarn dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
       - name: Install React Native dependencies
         run: yarn install
         working-directory: ./client-mobile
