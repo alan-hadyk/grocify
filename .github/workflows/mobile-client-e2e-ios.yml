@@ -34,6 +34,12 @@ jobs:
         options: --entrypoint redis-server
 
     steps:
+      - uses: docker-practice/actions-setup-docker@master
+        timeout-minutes: 12
+      - run: |
+          set -x
+          docker version
+          docker run --rm hello-world
       - uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 1
