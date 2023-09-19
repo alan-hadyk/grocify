@@ -38,6 +38,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          export PATH="$PATH":"$HOME/.maestro/bin"
+          maestro -v
+
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -74,10 +80,6 @@ jobs:
           sleep 5
           done
         working-directory: ./server
-
-      - name: Install Maestro
-        run: |
-          curl -Ls "https://get.maestro.mobile.dev" | bash
 
       - name: Install IDB Companion via Homebrew
         run: |
