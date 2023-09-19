@@ -13,33 +13,18 @@ jobs:
   run_mobile_client_ios_e2e:
     runs-on: macos-12
 
-    services:
-      test_db:
-        image: postgres:13
-        env:
-          POSTGRES_USER: test_user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: test_grocify_database
-        ports:
-          - 5433:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-      test_redis:
-        image: redis
-        ports:
-          - 6380:6379
-        options: --entrypoint redis-server
-
     steps:
-      - uses: docker-practice/actions-setup-docker@master
-        timeout-minutes: 12
-      - run: |
-          set -x
-          docker version
-          docker run --rm hello-world
+      # Setup Docker if runner is macOS
+      - name: Setup docker and docker-compose (missing on MacOS)
+        run: |
+          brew install docker docker-compose
+
+          # Link the Docker Compose v2 plugin so it's understood by the docker CLI
+          mkdir -p ~/.docker/cli-plugins
+          ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+
+          colima start
+
       - uses: actions/checkout@v3.5.2
         with:
           fetch-depth: 1
@@ -69,7 +54,7 @@ jobs:
         working-directory: ./server
 
       - name: Run Server
-        run: cargo make dev
+        run: cargo make ci
         working-directory: ./server
 
       - name: Install Maestro
