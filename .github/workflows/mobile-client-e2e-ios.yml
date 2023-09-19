@@ -23,7 +23,7 @@ jobs:
           mkdir -p ~/.docker/cli-plugins
           ln -sfn /usr/local/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
 
-          colima start
+          colima start --mount-type 9p
 
       - uses: actions/checkout@v3.5.2
         with:
@@ -47,6 +47,16 @@ jobs:
           secret = "${{ secrets.CI_SECRET }}"
           EOT
 
+      - name: Cache Cargo dependencies
+        id: cache-cargo-dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ./target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
       - name: Install Server Dependencies
         run: |
           cargo install --force cargo-make
@@ -54,7 +64,7 @@ jobs:
         working-directory: ./server
 
       - name: Run Server
-        run: cargo make ci
+        run: cargo make dev
         working-directory: ./server
 
       - name: Install Maestro
@@ -76,6 +86,13 @@ jobs:
 
           echo "Run simulator"
           xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
+
+      - name: Cache Yarn dependencies
+        id: cache-yarn-dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install React Native dependencies
         run: yarn install
