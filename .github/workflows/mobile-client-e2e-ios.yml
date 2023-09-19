@@ -47,15 +47,7 @@ jobs:
           secret = "${{ secrets.CI_SECRET }}"
           EOT
 
-      - name: Cache Cargo dependencies
-        id: cache-cargo-dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ./target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: Swatinem/rust-cache@v2
 
       - name: Install Server Dependencies
         run: |
@@ -94,26 +86,34 @@ jobs:
           echo "Run simulator"
           xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
 
-      - name: Cache Yarn dependencies
-        id: cache-yarn-dependencies
-        uses: actions/cache@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          path: ~/.yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          node-version: "19"
+          cache: yarn
 
       - name: Install React Native dependencies
-        run: yarn install
+        run: yarn --prefer-offline
         working-directory: ./client-mobile
 
-      - name: Run Expo app
+      - name: Run Expo app and tests
         run: |
           EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
-          expo_pid=$!
 
           # Wait for Expo to be ready
-          while ! grep -q "Waiting on http://localhost:8081" expo.log; do
+          timeout=600  # 10 minutes max
+          while ! grep -q "Waiting on http://localhost:8081" expo.log && [ $timeout -gt 0 ]; do
           sleep 5
+          timeout=$((timeout - 5))
           done
+
+          if [ $timeout -le 0 ]; then
+          echo "Expo did not start within 10 minutes."
+          exit 1
+          fi
+
+          # Output Expo logs for debugging
+          cat expo.log
 
           # Run your e2e tests
           yarn test-e2e
