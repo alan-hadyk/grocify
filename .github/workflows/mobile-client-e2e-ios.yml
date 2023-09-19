@@ -65,7 +65,13 @@ jobs:
 
       - name: Run Server
         run: |
-          cargo make dev &
+          cargo make ci > server.log 2>&1 &
+          server_pid=$!
+
+          # Wait for server to be ready
+          while ! grep -q "Server running at 127.0.0.1:3000" server.log; do
+          sleep 5
+          done
         working-directory: ./server
 
       - name: Install Maestro
@@ -100,9 +106,14 @@ jobs:
         working-directory: ./client-mobile
 
       - name: Run Expo app
-        run: EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios
-        working-directory: ./client-mobile
+        run: |
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
+          expo_pid=$!
 
-      - name: Run mobile client tests
-        run: yarn test-e2e
-        working-directory: ./client-mobile
+          # Wait for Expo to be ready
+          while ! grep -q "Waiting on http://localhost:8081" expo.log; do
+          sleep 5
+          done
+
+          # Run your e2e tests
+          yarn test-e2e
