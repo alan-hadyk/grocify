@@ -64,7 +64,8 @@ jobs:
         working-directory: ./server
 
       - name: Run Server
-        run: cargo make dev
+        run: |
+          cargo make dev &
         working-directory: ./server
 
       - name: Install Maestro
