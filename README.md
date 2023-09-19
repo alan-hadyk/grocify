@@ -115,7 +115,7 @@ There are two databases in the system:
 7. **Prettier** - An opinionated code formatter that ensures consistent formatting across your codebase.
 8. **Socket.IO** - A library for real-time bidirectional event-based communication using WebSockets or other protocols.
 9. **GraphQL Code Generator** - A tool that generates code out of your GraphQL schema, allowing typed queries, mutations, subscriptions, and more.
-10. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
+10. **Maestro** - Maestro is the simplest and most effective mobile UI testing framework. Maestro is built on learnings from its predecessors (Appium, Espresso, UIAutomator, XCTest) and allows you to easily define and test your Flows.
 11. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 
 ### Backend

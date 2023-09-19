@@ -1,0 +1,105 @@
+name: Mobile client - E2E (iOS)
+
+on: [push]
+
+permissions: read-all
+
+env:
+  MAESTRO_VERSION: 1.32.0
+  XC_SIMULATOR_NAME: iPhone 14
+  SERVER_URL: http://127.0.0.1:3000/graphql
+
+jobs:
+  run_mobile_client_ios_e2e:
+    runs-on: macos-12
+
+    services:
+      test_db:
+        image: postgres:13
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_grocify_database
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      test_redis:
+        image: redis
+        ports:
+          - 6380:6379
+        options: --entrypoint redis-server
+
+    steps:
+      - uses: actions/checkout@v3.5.2
+        with:
+          fetch-depth: 1
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Create Settings.toml
+        run: |
+          cat <<EOT >> ./server/Settings.toml
+          host = "127.0.0.1"
+          port = "3000"
+          postgres_url = "${{ secrets.CI_POSTGRES_URL }}"
+          test_postgres_url = "${{ secrets.CI_TEST_POSTGRES_URL }}"
+          redis_url = "${{ secrets.CI_REDIS_URL }}"
+          test_redis_url = "${{ secrets.CI_TEST_REDIS_URL }}"
+          secret = "${{ secrets.CI_SECRET }}"
+          EOT
+
+      - name: Install Server Dependencies
+        run: |
+          cargo install --force cargo-make
+          cargo install cargo-watch
+        working-directory: ./server
+
+      - name: Run Server
+        run: cargo make dev
+        working-directory: ./server
+
+      - name: Install Maestro
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+
+      - name: Install IDB Companion via Homebrew
+        run: |
+          brew tap facebook/fb
+          brew install facebook/fb/idb-companion
+
+      - name: Run iOS Simulator
+        run: |
+          echo "All valid available device types"
+          xcrun simctl list devicetypes
+
+          echo "All valid and available runtimes"
+          xcrun simctl list runtimes
+
+          echo "Run simulator"
+          xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install React Native dependencies
+        run: yarn install
+        working-directory: ./client-mobile
+
+      - name: Run Expo app
+        run: EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios
+        working-directory: ./client-mobile
+
+      - name: Run mobile client tests
+        run: yarn test-e2e
+        working-directory: ./client-mobile
