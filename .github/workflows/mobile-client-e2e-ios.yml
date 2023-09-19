@@ -120,3 +120,4 @@ jobs:
 
           # Run your e2e tests
           yarn test-e2e
+        working-directory: ./client-mobile
