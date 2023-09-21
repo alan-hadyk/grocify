@@ -62,7 +62,13 @@ jobs:
           secret = "${{ secrets.CI_SECRET }}"
           EOT
 
-      - uses: Swatinem/rust-cache@v2
+      - name: Cache cargo registry
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
 
       - name: Install Server Dependencies
         run: |
@@ -97,6 +103,14 @@ jobs:
           echo "Run simulator"
           xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
 
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn/cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install React Native dependencies
         run: yarn
         working-directory: ./client-mobile
@@ -124,3 +138,10 @@ jobs:
           # Run your e2e tests
           yarn test-e2e
         working-directory: ./client-mobile
+
+      - name: Upload Maestro logs and screenshots
+        uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: maestro-logs-and-screenshots
+          path: /Users/runner/.maestro/tests/
