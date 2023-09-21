@@ -62,13 +62,16 @@ jobs:
           secret = "${{ secrets.CI_SECRET }}"
           EOT
 
-      - name: Cache cargo registry
-        uses: actions/cache@v2
+      - name: Cache cargo dependencies
+        uses: actions/cache@v3
         with:
-          path: ~/.cargo/registry
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
 
       - name: Install Server Dependencies
         run: |
@@ -103,13 +106,18 @@ jobs:
           echo "Run simulator"
           xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
 
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Yarn
+        uses: actions/cache@v3
+        id: yarn-cache
         with:
-          path: ~/.yarn/cache
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-yarn-
 
       - name: Install React Native dependencies
         run: yarn
@@ -119,6 +127,7 @@ jobs:
         run: |
           brew upgrade facebook/fb/idb-companion
           yarn upgrade
+        working-directory: ./client-mobile
 
       - name: Check network configuration
         run: |
