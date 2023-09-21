@@ -115,6 +115,20 @@ jobs:
         run: yarn
         working-directory: ./client-mobile
 
+      - name: Update dependencies
+        run: |
+          brew upgrade facebook/fb/idb-companion
+          yarn upgrade
+
+      - name: Check network configuration
+        run: |
+          ifconfig
+          netstat -rn
+
+      - name: Check XCUITest Server status
+        run: |
+          curl http://localhost:4723/wd/hub/status || true
+
       - name: Run Expo app and tests
         run: |
           export PATH="$PATH":"$HOME/.maestro/bin"
