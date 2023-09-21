@@ -103,6 +103,7 @@ jobs:
 
       - name: Run Expo app and tests
         run: |
+          export PATH="$PATH":"$HOME/.maestro/bin"
           EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
 
           # Wait for Expo to be ready
