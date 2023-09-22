@@ -94,18 +94,18 @@ jobs:
           brew tap facebook/fb
           brew install facebook/fb/idb-companion
 
-      # - name: Run iOS Simulator
-      #   run: |
-      #     echo "All valid available device types"
-      #     xcrun simctl list devicetypes
+      - name: Run iOS Simulator
+        run: |
+          echo "All valid available device types"
+          xcrun simctl list devicetypes
 
-      #     echo "All valid and available runtimes"
-      #     xcrun simctl list runtimes
+          echo "All valid and available runtimes"
+          xcrun simctl list runtimes
 
-      #     xcrun simctl shutdown all
+          xcrun simctl shutdown all
 
-      #     echo "Run simulator"
-      #     xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
+          echo "Run simulator"
+          xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
 
       - name: Get Yarn cache directory path
         id: yarn-cache-dir-path
@@ -135,9 +135,9 @@ jobs:
           ifconfig
           netstat -rn
 
-      # - name: Check XCUITest Server status
-      #   run: |
-      #     curl http://localhost:4723/wd/hub/status || true
+      - name: Check XCUITest Server status
+        run: |
+          curl http://localhost:4723/wd/hub/status || true
 
       - name: Run Expo app and tests
         run: |
