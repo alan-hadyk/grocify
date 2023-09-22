@@ -4,6 +4,12 @@ script = [
   "cargo watch -x run",
 ]
 
+[tasks.ci]
+script = [
+  "docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d",
+  "cargo run & echo $! > cargo_run.pid",
+]
+
 [tasks.query-metadata]
 script = [
   "docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d",

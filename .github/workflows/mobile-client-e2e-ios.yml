@@ -73,9 +73,14 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
+      - name: Install Server Dependencies
+        run: |
+          cargo install --force cargo-make
+        working-directory: ./server
+
       - name: Run Server
         run: |
-          docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d & cargo run > server.log 2>&1 &
+          cargo make ci > server.log 2>&1 &
           server_pid=$!
 
           # Wait for server to be ready
