@@ -75,8 +75,7 @@ jobs:
 
       - name: Run Server
         run: |
-          docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d
-          cargo run > server.log 2>&1 &
+          docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d & cargo run > server.log 2>&1 &
           server_pid=$!
 
           # Wait for server to be ready
