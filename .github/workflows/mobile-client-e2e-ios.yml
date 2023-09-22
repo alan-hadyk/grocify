@@ -147,14 +147,13 @@ jobs:
           # Output Simulator logs for debugging
           cat simulator.log
 
-          REACT_NATIVE_PACKAGER_HOSTNAME=127.0.0.1 EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
+          npm install --global @expo/ngrok
 
-          # Wait for Expo to be ready
-          timeout=600  # 10 minutes max
-          while ! grep -q "Waiting on http://localhost:8081" expo.log && [ $timeout -gt 0 ]; do
-          sleep 5
-          timeout=$((timeout - 5))
-          done
+          # Start Expo with tunneling and extract the tunnel URL
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios:ci > expo.log 2>&1 &
+          sleep 10  # Wait for Expo to start
+          expo_url=$(grep -o 'exp://[0-9a-z.-]*' expo.log)
+          echo "Expo is running at $expo_url"
 
           # Output Expo logs for debugging
           cat expo.log
@@ -164,8 +163,8 @@ jobs:
           exit 1
           fi
 
-          # Run your e2e tests
-          yarn test-e2e
+          # Run e2e tests
+          maestro test -e EXPO_URL=$expo_url e2e
         working-directory: ./client-mobile
 
       - name: Upload Maestro logs and screenshots

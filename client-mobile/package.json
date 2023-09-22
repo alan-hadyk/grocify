@@ -6,6 +6,7 @@
     "start": "expo start --reset-cache",
     "android": "expo start --android --reset-cache",
     "ios": "expo start --ios --reset-cache",
+    "ios:ci": "expo start --ios --tunnel --non-interactive",
     "web": "expo start --web --reset-cache",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
