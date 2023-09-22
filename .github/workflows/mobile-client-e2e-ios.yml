@@ -147,7 +147,7 @@ jobs:
           # Output Simulator logs for debugging
           cat simulator.log
 
-          npm install --global @expo/ngrok
+          yarn global add @expo/ngrok
 
           # Start Expo with tunneling and extract the tunnel URL
           EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios:ci > expo.log 2>&1 &
