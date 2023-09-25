@@ -1,7 +1,6 @@
 appId: com.alan.hadyk.Grocify
 ---
-- openLink: ${EXPO_URL}
-- tapOn: Open
+- launchApp
 - assertVisible: Grocify
 - assertVisible: Stwórz użytkownika
 - assertVisible: Home
