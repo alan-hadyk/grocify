@@ -128,12 +128,6 @@ jobs:
           yarn upgrade
         working-directory: ./client-mobile
 
-      # - name: Build the app
-      #   run: |
-      #     npx expo prebuild --platform ios
-      #     npx expo run:ios
-      #   working-directory: ./client-mobile
-
       - name: Run Expo app and tests
         run: |
           export PATH="$PATH":"$HOME/.maestro/bin"
@@ -142,10 +136,8 @@ jobs:
           # Output Simulator logs for debugging
           cat simulator.log
 
-          npx expo prebuild --platform ios
-
           # Start Expo and extract the Expo URL
-          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} npx expo run:ios > expo.log 2>&1 &
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} npx expo start > expo.log 2>&1 &
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max
@@ -168,15 +160,18 @@ jobs:
           # Output Expo logs for debugging
           cat expo.log
 
+          # Build the app
+          yarn prebuild:ios
+          cd ios/
+          pod install
+          xcodebuild -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build ARCHS=arm64
+
+          # Install the app
+          npx expo client:install:ios
+
           # Run e2e tests
           maestro test -e EXPO_URL=$expo_url e2e
         working-directory: ./client-mobile
-      # - name: Install .app
-      #   run: xcrun simctl install booted ./MyApp.app
-      #   working-directory: ./client-mobile
-
-      # - name: Run Maestro E2E tests
-      #   run: ./client-mobile/run_ios_e2e.sh
 
       - name: Upload report
         if: always()
