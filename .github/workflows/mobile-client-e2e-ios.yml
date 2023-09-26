@@ -164,7 +164,7 @@ jobs:
           yarn prebuild:ios
           cd ios/
           pod install
-          xcodebuild -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build ARCHS=arm64 CONFIGURATION_BUILD_DIR=./build
+          xcodebuild -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build ARCHS=arm64
 
           # Install the app
           app_path=$(find ~/Library/Developer/Xcode/DerivedData/ -name "Grocify.app")
