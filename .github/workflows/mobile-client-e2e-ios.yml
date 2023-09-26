@@ -137,7 +137,7 @@ jobs:
           cat simulator.log
 
           # Start Expo and extract the Expo URL
-          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} npx expo start > expo.log 2>&1 &
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max

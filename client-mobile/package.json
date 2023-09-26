@@ -5,7 +5,7 @@
   "scripts": {
     "start": "expo start --reset-cache",
     "android": "expo run:android",
-    "ios": "expo run:ios",
+    "ios": "expo start --ios",
     "web": "expo start --web --reset-cache",
     "prebuild:ios": "expo prebuild --platform ios",
     "lint": "eslint .",
