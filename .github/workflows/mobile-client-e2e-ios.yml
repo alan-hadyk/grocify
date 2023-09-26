@@ -166,7 +166,7 @@ jobs:
           cat expo.log
 
           # Build the app
-          yarn prebuild:ios
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn prebuild:ios
           cd ios/
           pod install
           xcodebuild clean -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build
@@ -180,13 +180,9 @@ jobs:
           yarn test:e2e
         working-directory: ./client-mobile
 
-      - name: Upload report
-        if: always()
+      - name: Upload Maestro logs and screenshots
         uses: actions/upload-artifact@v3
+        if: failure()
         with:
-          name: E2E Report (${{ env.XC_SIMULATOR_NAME }})
-          path: |
-            ${{ github.workspace }}/*.mp4
-            ${{ github.workspace }}/*.png
-            ${{ github.workspace }}/report*.xml
-            ~/.maestro/tests/**/*
+          name: maestro-logs-and-screenshots
+          path: /Users/runner/.maestro/tests/
