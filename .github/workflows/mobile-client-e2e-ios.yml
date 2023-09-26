@@ -7,7 +7,6 @@ permissions: read-all
 env:
   MAESTRO_VERSION: 1.32.0
   XC_SIMULATOR_NAME: iPhone 14
-  IOS_VERSION: 15
   SERVER_URL: http://127.0.0.1:3000/graphql
 
 jobs:
@@ -100,7 +99,7 @@ jobs:
           xcrun simctl shutdown all
 
           echo "Run simulator"
-          xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}" --os ${{ env.IOS_VERSION }}
+          xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}" --arch=arm64
 
       - name: Install Maestro
         run: |
