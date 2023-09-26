@@ -38,6 +38,8 @@ jobs:
         uses: sinoru/actions-setup-xcode@v2
         with:
           xcode-version: 15.0
+          apple-id: ${{ secrets.APPLE_ID }} # Apple ID to download from Apple Developer when Xcode not available in local
+          apple-id-password: ${{ secrets.APPLE_ID_PASSWORD }}
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3.6.0
