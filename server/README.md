@@ -1,4 +1,4 @@
-# Grocify server
+# Grocify - server
 
 ## Getting Started
 

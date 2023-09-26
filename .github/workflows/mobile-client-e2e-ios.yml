@@ -99,7 +99,7 @@ jobs:
           xcrun simctl shutdown all
 
           echo "Run simulator"
-          xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}" --arch=arm64
+          xcrun simctl boot "${{ env.XC_SIMULATOR_NAME }}"
 
       - name: Install Maestro
         run: |
@@ -169,7 +169,7 @@ jobs:
           yarn prebuild:ios
           cd ios/
           pod install
-          xcodebuild clean -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build ARCHS=arm64
+          xcodebuild clean -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build
 
           # Install the app
           app_path=$(find ~/Library/Developer/Xcode/DerivedData/ -name "Grocify.app")
