@@ -123,6 +123,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Create .env file
+        run: |
+          cat <<EOT >> ./client-mobile/.env
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }}
+          EOT
+
       - name: Install React Native dependencies
         run: yarn
         working-directory: ./client-mobile
@@ -137,9 +143,6 @@ jobs:
         run: |
           export PATH="$PATH":"$HOME/.maestro/bin"
           open -a Simulator > simulator.log 2>&1 &
-
-          # Output Simulator logs for debugging
-          cat simulator.log
 
           # Start Expo and extract the Expo URL
           EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
