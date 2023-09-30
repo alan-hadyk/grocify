@@ -18,6 +18,12 @@ jobs:
         node-version: [19.0.0]
 
     steps:
+      - name: Debug IP address
+        run: ifconfig
+
+      - name: Debug IP address 2
+        run: ip a
+
       # Setup Docker if runner is macOS
       - name: Setup docker and docker-compose (missing on MacOS)
         run: |
