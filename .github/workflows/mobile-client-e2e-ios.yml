@@ -21,9 +21,6 @@ jobs:
       - name: Debug IP address
         run: ifconfig
 
-      - name: Debug IP address 2
-        run: ip a
-
       # Setup Docker if runner is macOS
       - name: Setup docker and docker-compose (missing on MacOS)
         run: |
@@ -177,7 +174,9 @@ jobs:
           # Output Expo logs for debugging
           cat expo.log
 
-          INTERNAL_IP=$(ip route get 1 | awk '{print $NF;exit}')
+          INTERNAL_IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+
+          echo "Internal IP: $INTERNAL_IP"
 
           # Run e2e tests
           yarn test:e2e  -e MAESTRO_APP=exp://$INTERNAL_IP:8081
