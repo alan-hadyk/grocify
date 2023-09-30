@@ -171,7 +171,7 @@ jobs:
           # Output Expo logs for debugging
           cat expo.log
 
-          INTERNAL_IP=$(hostname -I | awk '{print $1}')
+          INTERNAL_IP=$(ip route get 1 | awk '{print $NF;exit}')
 
           # Run e2e tests
           yarn test:e2e  -e MAESTRO_APP=exp://$INTERNAL_IP:8081
