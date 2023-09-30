@@ -149,7 +149,7 @@ jobs:
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max
-          while ! grep -q 'exp://[0-9a-z.-]*' expo.log && [ $timeout -gt 0 ]; do
+          while ! grep -q 'iOS Bundling complete' expo.log && [ $timeout -gt 0 ]; do
             sleep 5
             timeout=$((timeout - 5))
           done
@@ -162,17 +162,19 @@ jobs:
           fi
 
           # Extract the Expo URL
-          expo_url=$(grep -o 'exp://[0-9a-z.-]*' expo.log)
-          echo "Expo is running at $expo_url"
+          EXPO_URL=$(grep -o 'exp://[0-9a-z.-]*' expo.log)
+          echo "Expo is running at $EXPO_URL"
 
           # Check if Expo URL is accessible
-          curl -I -f $expo_url || echo "Cannot reach Expo URL"
+          curl -I -f $EXPO_URL || echo "Cannot reach Expo URL"
 
           # Output Expo logs for debugging
           cat expo.log
 
+          INTERNAL_IP=$(hostname -I | awk '{print $1}')
+
           # Run e2e tests
-          yarn test:e2e  -e MAESTRO_APP=$expo_url
+          yarn test:e2e  -e MAESTRO_APP=exp://$INTERNAL_IP:8081
         working-directory: ./client-mobile
 
       - name: Upload Maestro logs and screenshots
