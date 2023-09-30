@@ -165,22 +165,14 @@ jobs:
           expo_url=$(grep -o 'exp://[0-9a-z.-]*' expo.log)
           echo "Expo is running at $expo_url"
 
+          # Check if Expo URL is accessible
+          curl -I -f $expo_url || echo "Cannot reach Expo URL"
+
           # Output Expo logs for debugging
           cat expo.log
 
-          # Build the app
-          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn prebuild:ios
-          cd ios/
-          pod install
-          xcodebuild clean -workspace Grocify.xcworkspace -scheme Grocify -sdk iphonesimulator -configuration Debug build
-
-          # Install the app
-          app_path=$(find ~/Library/Developer/Xcode/DerivedData/ -name "Grocify.app")
-          xcrun simctl install booted $app_path
-
           # Run e2e tests
-          cd ../
-          yarn test:e2e
+          yarn test:e2e  -e MAESTRO_APP=$expo_url
         working-directory: ./client-mobile
 
       - name: Upload Maestro logs and screenshots
