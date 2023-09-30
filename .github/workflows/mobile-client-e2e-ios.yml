@@ -149,7 +149,7 @@ jobs:
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max
-          while ! grep -q 'iOS Bundling complete' expo.log && [ $timeout -gt 0 ]; do
+          while ! grep -q 'exp://[0-9a-z.-]*' expo.log && [ $timeout -gt 0 ]; do
             sleep 5
             timeout=$((timeout - 5))
           done
