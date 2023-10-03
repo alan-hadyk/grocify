@@ -1,6 +1,8 @@
 appId: com.alan.hadyk.Grocify
 ---
 - openLink: ${MAESTRO_APP}
+- tapOn: Open
+- tapOn: Open
 - assertVisible: Grocify
 - assertVisible: Stwórz użytkownika
 - assertVisible: Home
