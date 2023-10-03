@@ -148,7 +148,7 @@ jobs:
           open -a Simulator > simulator.log 2>&1 &
 
           # Start Expo and extract the Expo URL
-          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} yarn ios > expo.log 2>&1 &
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios --host 0.0.0.0 > expo.log 2>&1 &
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max
@@ -168,9 +168,6 @@ jobs:
           EXPO_URL=$(grep -o 'exp://[0-9a-z.-]*' expo.log)
           echo "Expo is running at $EXPO_URL"
 
-          # Check if Expo URL is accessible
-          curl -I -f $EXPO_URL || echo "Cannot reach Expo URL"
-
           # Output Expo logs for debugging
           cat expo.log
 
@@ -178,8 +175,11 @@ jobs:
 
           echo "Internal IP: $INTERNAL_IP"
 
+          # Check if Internal IP is accessible
+          curl -I -f $INTERNAL_IP:8081 || echo "Cannot reach Internal IP"
+
           # Run e2e tests
-          yarn test:e2e  -e MAESTRO_APP=exp://$INTERNAL_IP:8081
+          yarn test:e2e -e MAESTRO_APP=exp://0.0.0.0:8081
         working-directory: ./client-mobile
 
       - name: Upload Maestro logs and screenshots
