@@ -142,6 +142,9 @@ jobs:
           yarn upgrade
         working-directory: ./client-mobile
 
+      - name: SSH into workflow
+        uses: mxschmitt/action-tmate@v3
+
       - name: Run Expo app and tests
         run: |
           export PATH="$PATH":"$HOME/.maestro/bin"
