@@ -148,7 +148,7 @@ jobs:
           open -a Simulator > simulator.log 2>&1 &
 
           # Start Expo and extract the Expo URL
-          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios --host 0.0.0.0 > expo.log 2>&1 &
+          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios > expo.log 2>&1 &
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max
