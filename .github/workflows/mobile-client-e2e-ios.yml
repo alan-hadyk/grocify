@@ -82,6 +82,9 @@ jobs:
           cargo install --force cargo-make
         working-directory: ./server
 
+      - name: SSH into workflow
+        uses: mxschmitt/action-tmate@v3
+
       - name: Run Server
         run: |
           cargo make ci > server.log 2>&1 &
@@ -137,9 +140,6 @@ jobs:
           brew upgrade facebook/fb/idb-companion
           yarn upgrade
         working-directory: ./client-mobile
-
-      # - name: SSH into workflow
-      #   uses: mxschmitt/action-tmate@v3
 
       - name: Run Expo app and tests
         run: |
