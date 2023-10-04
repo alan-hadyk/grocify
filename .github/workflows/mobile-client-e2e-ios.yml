@@ -7,7 +7,6 @@ permissions: read-all
 env:
   MAESTRO_VERSION: 1.32.0
   XC_SIMULATOR_NAME: iPhone 14
-  SERVER_URL: http://127.0.0.1:3000/graphql
 
 jobs:
   run_mobile_client_ios_e2e:
@@ -21,7 +20,6 @@ jobs:
       - name: Debug IP address
         run: ifconfig
 
-      # Setup Docker if runner is macOS
       - name: Setup docker and docker-compose (missing on MacOS)
         run: |
           brew install docker docker-compose
@@ -54,8 +52,12 @@ jobs:
 
       - name: Create Settings.toml
         run: |
+          INTERNAL_IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+
+          echo "Internal IP: $INTERNAL_IP"
+
           cat <<EOT >> ./server/Settings.toml
-          host = "0.0.0.0"
+          host = "$INTERNAL_IP"
           port = "3000"
           postgres_url = "${{ secrets.CI_POSTGRES_URL }}"
           test_postgres_url = "${{ secrets.CI_TEST_POSTGRES_URL }}"
@@ -125,12 +127,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
-      - name: Create .env file
-        run: |
-          cat <<EOT >> ./client-mobile/.env
-          EXPO_PUBLIC_API_URL=${{ env.SERVER_URL }}
-          EOT
 
       - name: Install React Native dependencies
         run: yarn
