@@ -91,7 +91,7 @@ jobs:
           server_pid=$!
 
           # Wait for server to be ready
-          while ! grep -q "Server running at 127.0.0.1:3000" server.log; do
+          while ! grep -q "Server running at" server.log; do
           sleep 5
           done
         working-directory: ./server
