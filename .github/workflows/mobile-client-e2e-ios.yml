@@ -52,7 +52,7 @@ jobs:
 
       - name: Create Settings.toml
         run: |
-          INTERNAL_IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+          export INTERNAL_IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
 
           echo "Internal IP: $INTERNAL_IP"
 
