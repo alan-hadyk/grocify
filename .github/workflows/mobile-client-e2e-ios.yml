@@ -82,8 +82,8 @@ jobs:
           cargo install --force cargo-make
         working-directory: ./server
 
-      - name: SSH into workflow
-        uses: mxschmitt/action-tmate@v3
+      # - name: SSH into workflow
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: Run Server
         run: |
