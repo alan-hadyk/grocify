@@ -52,12 +52,8 @@ jobs:
 
       - name: Create Settings.toml
         run: |
-          export INTERNAL_IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
-
-          echo "Internal IP: $INTERNAL_IP"
-
           cat <<EOT >> ./server/Settings.toml
-          host = "$INTERNAL_IP"
+          host = "0.0.0.0"
           port = "3000"
           postgres_url = "${{ secrets.CI_POSTGRES_URL }}"
           test_postgres_url = "${{ secrets.CI_TEST_POSTGRES_URL }}"
