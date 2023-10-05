@@ -6,7 +6,7 @@ permissions: read-all
 
 env:
   MAESTRO_VERSION: 1.32.0
-  XC_SIMULATOR_NAME: iPhone 14
+  XC_SIMULATOR_NAME: iPhone 14 Pro Max
 
 jobs:
   run_mobile_client_ios_e2e:
@@ -136,8 +136,8 @@ jobs:
           yarn upgrade
         working-directory: ./client-mobile
 
-      - name: SSH into workflow
-        uses: mxschmitt/action-tmate@v3
+      # - name: SSH into workflow
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: Run Expo app and tests
         run: |
@@ -147,7 +147,7 @@ jobs:
           open -a Simulator > simulator.log 2>&1 &
 
           # Start Expo and extract the Expo URL
-          EXPO_PUBLIC_API_URL=http://127.0.0.1:3000 EXPO_TOKEN=${{ secrets.EXPO_TOKEN }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios > expo.log 2>&1 &
+          CI=1 EXPO_PUBLIC_API_URL=http://127.0.0.1:3000 EXPO_TOKEN=${{ secrets.EXPO_TOKEN }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios > expo.log 2>&1 &
 
           # Wait for Expo to be ready
           timeout=1200  # 20 minutes max
