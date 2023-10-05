@@ -1,6 +1,8 @@
 appId: com.alan.hadyk.Grocify
 ---
 - openLink: ${MAESTRO_APP}
+- tapOn: Open
+- tapOn: Open
 - tapOn:
     point: 93%,52%
 - assertVisible: Grocify
