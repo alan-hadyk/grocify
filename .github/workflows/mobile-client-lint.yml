@@ -41,7 +41,6 @@ jobs:
 
       - name: Update dependencies
         run: |
-          brew upgrade facebook/fb/idb-companion
           yarn upgrade
         working-directory: ./client-mobile
 
