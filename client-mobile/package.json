@@ -4,7 +4,7 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start --reset-cache",
-    "android": "expo start --android --localhost  --reset-cache",
+    "android": "expo start --android --reset-cache",
     "ios": "expo start --ios --reset-cache",
     "web": "expo start --web --reset-cache",
     "prebuild:ios": "expo prebuild --platform ios",

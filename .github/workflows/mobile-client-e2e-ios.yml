@@ -170,6 +170,9 @@ jobs:
           # Output Expo logs for debugging
           cat expo.log
 
+          # Open Expo manually
+          xcrun simctl launch booted host.exp.Exponent
+
           device_id=$(xcrun simctl list devices booted | grep -o -E '\([A-F0-9\-]+\)' | grep -o -E '[A-F0-9\-]+')
 
           # Run e2e tests
