@@ -4,8 +4,8 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start --reset-cache",
-    "android": "expo start --android --reset-cache",
-    "ios": "expo start --ios --reset-cache",
+    "android": "expo run:android --configuration Release",
+    "ios": "expo run:ios --configuration Release",
     "web": "expo start --web --reset-cache",
     "prebuild:ios": "expo prebuild --platform ios",
     "lint": "eslint .",

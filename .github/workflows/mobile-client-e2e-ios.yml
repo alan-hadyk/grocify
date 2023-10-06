@@ -146,7 +146,7 @@ jobs:
 
           open -a Simulator > simulator.log 2>&1 &
 
-          # Start Expo and extract the Expo URL
+          # Run the app on simulator
           CI=1 EXPO_PUBLIC_API_URL=http://127.0.0.1:3000 EXPO_TOKEN=${{ secrets.EXPO_TOKEN }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios > expo.log 2>&1 &
 
           # Wait for Expo to be ready
@@ -163,20 +163,11 @@ jobs:
             exit 1
           fi
 
-          # Extract the Expo URL
-          EXPO_URL=$(grep -o 'exp://[0-9a-z.-]*' expo.log)
-          echo "Expo is running at $EXPO_URL"
-
           # Output Expo logs for debugging
           cat expo.log
 
-          # Open Expo manually
-          xcrun simctl launch booted host.exp.Exponent
-
-          device_id=$(xcrun simctl list devices booted | grep -o -E '\([A-F0-9\-]+\)' | grep -o -E '[A-F0-9\-]+')
-
           # Run e2e tests
-          maestro --device $device_id test e2e -e MAESTRO_APP=exp://0.0.0.0:8081
+          yarn test:e2e
         working-directory: ./client-mobile
 
       - name: Upload Maestro logs and screenshots
