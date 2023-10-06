@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup docker and docker-compose (missing on MacOS)
         run: |
-          brew install docker docker-compose
+          brew install docker docker-compose colima
 
           # Link the Docker Compose v2 plugin so it's understood by the docker CLI
           mkdir -p ~/.docker/cli-plugins
@@ -136,8 +136,8 @@ jobs:
           yarn upgrade
         working-directory: ./client-mobile
 
-      - name: SSH into workflow
-        uses: mxschmitt/action-tmate@v3
+      # - name: SSH into workflow
+      #   uses: mxschmitt/action-tmate@v3
 
       - name: Run Expo app and tests
         run: |
