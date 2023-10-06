@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Check for React Native package updates in the client-mobile folder weekly
+  - package-ecosystem: npm
+    directory: /client-mobile
+    schedule:
+      interval: weekly
+
+  # Check for Rust package updates in the server folder weekly
+  - package-ecosystem: cargo
+    directory: /server
+    schedule:
+      interval: weekly
+
+  # Check for GitHub Actions updates in the .github/workflows folder weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

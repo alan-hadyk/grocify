@@ -8,6 +8,7 @@ plugins:
       uri: https://github.com/trunk-io/plugins
 lint:
   enabled:
+    - dotenv-linter@3.3.0
     - oxipng@8.0.0
     - actionlint@1.6.26
     - hadolint@2.12.0
