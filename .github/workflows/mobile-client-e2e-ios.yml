@@ -150,21 +150,21 @@ jobs:
           CI=1 EXPO_PUBLIC_API_URL=http://127.0.0.1:3000 EXPO_TOKEN=${{ secrets.EXPO_TOKEN }} EXPO_PACKAGER_PROXY_URL=http://0.0.0.0:8081 yarn ios > expo.log 2>&1 &
 
           # Wait for Expo to be ready
-          timeout=1200  # 20 minutes max
+          timeout=2400  # 40 minutes max
           while ! grep -q 'Logs for your project will appear below\.' expo.log && [ $timeout -gt 0 ]; do
             sleep 5
             timeout=$((timeout - 5))
           done
 
+          # Output Expo logs for debugging
+          cat expo.log
+
           # Check if Expo started successfully
           if [ $timeout -le 0 ]; then
-            echo "Expo did not start within 10 minutes."
+            echo "Expo did not build and start within 40 minutes."
             cat expo.log
             exit 1
           fi
-
-          # Output Expo logs for debugging
-          cat expo.log
 
           # Run e2e tests
           yarn test:e2e
