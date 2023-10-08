@@ -23,6 +23,9 @@ const lightThemeColors: TColors = {
   mainText: ColorPalette.Black,
 }
 
+/**
+ * Default (light) theme
+ */
 export const theme = createTheme({
   buttonVariants: {
     defaults: {
@@ -73,6 +76,9 @@ const darkThemeColors: TColors = {
   mainText: ColorPalette.Green,
 }
 
+/**
+ * Dark theme
+ */
 export const darkTheme: Theme = {
   ...theme,
   colors: darkThemeColors,

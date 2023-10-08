@@ -14,6 +14,9 @@ const resources = {
   },
 }
 
+/**
+ * Init translations with `react-i18next`
+ */
 // eslint-disable-next-line import/no-named-as-default-member
 i18n.use(initReactI18next).init({
   fallbackLng: PreferredLang.Pl,

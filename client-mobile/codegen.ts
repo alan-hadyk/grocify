@@ -1,5 +1,8 @@
 import type { CodegenConfig } from "@graphql-codegen/cli"
 
+/**
+ * GraphQL code generator config
+ */
 const config: CodegenConfig = {
   documents: ["src/api/graphql/**/*.graphql"],
   generates: {
@@ -11,7 +14,7 @@ const config: CodegenConfig = {
         exposeQueryKeys: true,
         fetcher: {
           func: "@client/lib/fetcher#fetcher",
-          isReactHook: false, // optional, defaults to false, controls the function's signature. Read below
+          isReactHook: false, // optional, defaults to false, controls the function's signature.
         },
         skipTypename: true,
       },
