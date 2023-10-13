@@ -1,3 +1,3 @@
-export interface ComponentEnhancer<TInner, TOutter> {
-  (component: React.FC<TInner>): React.FC<TOutter>
+export interface ComponentEnhancer<TInner, TOuter> {
+  (component: React.FC<TInner>): React.FC<TOuter>
 }

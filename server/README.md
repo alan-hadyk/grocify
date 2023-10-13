@@ -1,8 +1,22 @@
 # Grocify - server
 
+## Table of Contents
+
+1. [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Run the server in watch mode for development](#run-the-server-in-watch-mode-for-development)
+2. [CLI Scripts](#cli-scripts)
+    - [Watch mode (development)](#watch-mode-development)
+    - [Generate SQL query metadata](#generate-sql-query-metadata)
+    - [Compile for production](#compile-for-production)
+    - [Build this package's and its dependencies' documentation](#build-this-packages-and-its-dependencies-documentation)
+    - [Run a binary (requires build with `cargo build  --release`)](#run-a-binary-requires-build-with-cargo-build---release)
+    - [Run the tests](#run-the-tests)
+    - [Update dependencies in `Cargo.lock`](#update-dependencies-in-cargolock)
+
 ## Getting Started
 
-### Prerequisites
+### **Prerequisites**
 
 1.[Install Rust, Rustup and Cargo](https://www.rust-lang.org/tools/install)
 
@@ -49,7 +63,7 @@ cargo install sqlx-cli
 cargo build
 ```
 
-### Run the server in watch mode for development
+### **Run the server in watch mode for development**
 
 1.Run Docker Desktop
 
@@ -67,43 +81,43 @@ INFO grocify_server::server: Server running at 127.0.0.1:3000
 
 ## CLI Scripts
 
-### Watch mode (development)
+### **Watch mode (development)**
 
 ```rust
 cargo make dev
 ```
 
-### Generate SQL query metadata
+### **Generate SQL query metadata**
 
 ```rust
 cargo make query-metadata
 ```
 
-### Compile for production
+### **Compile for production**
 
 ```rust
 cargo build --release
 ```
 
-### Build this package's and its dependencies' documentation
+### **Build this package's and its dependencies' documentation**
 
 ```rust
 cargo doc
 ```
 
-### Run a binary (requires build with `cargo build  --release`)
+### **Run a binary (requires build with `cargo build  --release`)**
 
 ```rust
 cargo run
 ```
 
-### Run the tests
+### **Run the tests**
 
 ```rust
 cargo make test-app
 ```
 
-### Update dependencies in `Cargo.lock`
+### **Update dependencies in `Cargo.lock`**
 
 ```rust
 cargo update
