@@ -45,7 +45,7 @@
     "@graphql-codegen/client-preset": "4.1.0",
     "@graphql-codegen/introspection": "4.0.0",
     "@graphql-codegen/typescript-react-query": "^4.1.0",
-    "@tanstack/eslint-plugin-query": "^4.34.1",
+    "@tanstack/eslint-plugin-query": "^4.36.1",
     "@types/react": "~18.2.14",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "@typescript-eslint/parser": "^6.6.0",
