@@ -1,0 +1,49 @@
+name: Mobile client - Lint
+
+on: [push]
+
+permissions: read-all
+
+jobs:
+  run_mobile_client_lint:
+    runs-on: macos-13
+
+    strategy:
+      matrix:
+        node-version: [19.0.0]
+
+    steps:
+      - uses: actions/checkout@v3.5.2
+        with:
+          fetch-depth: 1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get Yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Yarn
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install React Native dependencies
+        run: yarn
+        working-directory: ./client-mobile
+
+      - name: Update dependencies
+        run: |
+          yarn upgrade
+        working-directory: ./client-mobile
+
+      - name: Lint the app
+        run: yarn lint
+        working-directory: ./client-mobile

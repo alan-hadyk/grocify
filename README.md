@@ -108,16 +108,15 @@ There are two databases in the system:
 
 1. **React Native** - For building the cross-platform mobile app that works on both Android and iOS.
 2. **TypeScript** - TypeScript is a strongly typed version of JavaScript, which allows developers to write safer, more scalable code and catch errors early. TypeScript's static typing can help prevent bugs that might be caused by unexpected data types.
-3. **Tamagui** - A unified UI kit for React Native and Web. It provides a light design system, style library, and optimizing compiler, enabling efficient cross-platform development.
+3. **restyle** - The Restyle library provides a type-enforced system for building UI components in React Native with TypeScript. It's a library for building UI libraries, with themability as the core focus.
 4. **TanStack Query** - A library for managing and caching asynchronous data.
 5. **graphql-request** - A minimal GraphQL client that supports all GraphQL specifications, providing a simple and flexible way to make GraphQL requests. It can be used with TanStack Query for handling GraphQL queries and mutations.
 6. **ESLint** - A static code analysis tool for identifying problematic patterns and enforcing coding standards in JavaScript and TypeScript.
 7. **Prettier** - An opinionated code formatter that ensures consistent formatting across your codebase.
-8. **React Navigation** - A popular routing and navigation library for React Native, providing a straightforward way to manage navigation in your mobile app.
-9. **Socket.IO** - A library for real-time bidirectional event-based communication using WebSockets or other protocols.
-10. **GraphQL Code Generator** - A tool that generates code out of your GraphQL schema, allowing typed queries, mutations, subscriptions, and more.
-11. **Playwright** - An end-to-end testing tool for web browsers, allowing cross-browser testing and automation.
-12. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
+8. **Socket.IO** - A library for real-time bidirectional event-based communication using WebSockets or other protocols.
+9. **GraphQL Code Generator** - A tool that generates code out of your GraphQL schema, allowing typed queries, mutations, subscriptions, and more.
+10. **Maestro** - Maestro is the simplest and most effective mobile UI testing framework. Maestro is built on learnings from its predecessors (Appium, Espresso, UIAutomator, XCTest) and allows you to easily define and test your Flows.
+11. **react-i18next** - react-i18next is a powerful internationalization framework for React / React Native which is based on i18next.
 
 ### Backend
 
@@ -249,7 +248,7 @@ Data model consists of the following main entities:
 > List of the major tasks that have to be completed
 
 - [x] [Initial server setup](https://github.com/alan-hadyk/grocify/pull/2)
-- [ ] Initial mobile client setup
+- [x] [Initial mobile client setup](https://github.com/alan-hadyk/grocify/pull/3)
 - [ ] Database schema design
 - [ ] GraphQL schema design - includes defining types, queries, mutations, and any subscriptions
 - [ ] Resolvers implementation for GraphQL schema - handling the logic for each query/mutation

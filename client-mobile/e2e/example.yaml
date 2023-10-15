@@ -1,0 +1,14 @@
+appId: com.alan.hadyk.Grocify
+---
+- launchApp
+- assertVisible: Grocify
+- assertVisible: Stwórz użytkownika
+- assertVisible: Home
+- assertVisible: O nas
+- tapOn: Stwórz użytkownika
+- assertVisible: "Created user: (\\d+)"
+- assertVisible: Wyszukaj stworzonego użytkownika
+- tapOn: Wyszukaj stworzonego użytkownika
+- assertVisible: "Rezultat wyszukiwania: (\\d+)"
+- tapOn: O nas
+- assertVisible: O nas
