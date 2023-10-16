@@ -23,11 +23,11 @@ jobs:
           cat <<EOT >> ./server/Settings.toml
           host = "127.0.0.1"
           port = "3000"
-          postgres_url = "${{ secrets.CI_POSTGRES_URL }}"
-          test_postgres_url = "${{ secrets.CI_TEST_POSTGRES_URL }}"
-          redis_url = "${{ secrets.CI_REDIS_URL }}"
-          test_redis_url = "${{ secrets.CI_TEST_REDIS_URL }}"
-          secret = "${{ secrets.CI_SECRET }}"
+          postgres_url = "postgresql://user:password@localhost:5432/grocify_database?sslmode=disable"
+          test_postgres_url = "postgresql://test_user:password@localhost:5433/test_grocify_database?sslmode=disable"
+          redis_url = "redis://:password@localhost:6379"
+          test_redis_url = "redis://localhost:6380"
+          secret = "4378927893459802458565678578578578567858675675786785756789072347890234"
           EOT
 
       - name: Cache cargo dependencies
