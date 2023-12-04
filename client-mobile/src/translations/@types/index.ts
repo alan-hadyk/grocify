@@ -4,5 +4,5 @@ export interface ITranslation {
   "Search for created user": string
   "Searching for created user...": string
   "Search result": string
-  "About page": string
+  "Recipes page": string
 }

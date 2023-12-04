@@ -11,7 +11,12 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ["codegen.ts", "src/app/**/*.tsx", "src/lib/internationalization.ts"],
+      files: [
+        "codegen.ts",
+        "src/app/**/*.tsx",
+        "src/lib/internationalization.ts",
+        "src/@types/declarations.d.ts",
+      ],
       rules: {
         "import/no-default-export": "off",
       },

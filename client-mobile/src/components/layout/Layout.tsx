@@ -16,7 +16,6 @@ export const Layout: React.FC<ILayoutProps> = ({ children }) => {
 
   return (
     <Box
-      backgroundColor="mainBackground"
       padding="40"
       alignItems="center"
       justifyContent="center"

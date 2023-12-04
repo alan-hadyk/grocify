@@ -1,4 +1,9 @@
-import { Inter_500Medium, useFonts } from "@expo-google-fonts/inter"
+import {
+  Nunito_300Light,
+  Nunito_400Regular,
+  Nunito_700Bold,
+  useFonts,
+} from "@expo-google-fonts/nunito"
 import { SplashScreen } from "expo-router"
 import { useEffect } from "react"
 
@@ -9,7 +14,9 @@ import { useEffect } from "react"
  */
 export const useLoadFonts = () => {
   const [fontsLoaded, fontError] = useFonts({
-    Inter_500Medium,
+    Nunito_300Light,
+    Nunito_400Regular,
+    Nunito_700Bold,
   })
 
   useEffect(() => {

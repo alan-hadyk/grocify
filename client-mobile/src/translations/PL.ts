@@ -7,5 +7,5 @@ export const PL: ITranslation = {
   "Search for created user": "Wyszukaj stworzonego użytkownika",
   "Searching for created user...": "Szukanie stworzonego użytkownika...",
   "Search result": "Rezultat wyszukiwania",
-  "About page": "O nas",
+  "Recipes page": "Przepisy",
 }

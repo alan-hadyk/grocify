@@ -1,9 +1,12 @@
 /* eslint-disable import/exports-last */
-import { ColorPalette, FontFamily, TColors } from "@client/theme/@types"
+// import { ColorPalette, FontFamily, TColors } from "@client/theme/@types"
+import { ColorPalette, TColors } from "@client/theme/@types"
 import { createTheme } from "@shopify/restyle"
 
 const spacing = {
   "8": 8,
+  "10": 10,
+  "12": 12,
   "16": 16,
   "24": 24,
   "40": 40,
@@ -13,14 +16,11 @@ const spacing = {
 }
 
 const lightThemeColors: TColors = {
-  buttonBackground: ColorPalette.Black,
-  buttonFooterActiveText: ColorPalette.Green,
-  buttonFooterBackground: ColorPalette.White,
-  buttonFooterDefaultText: ColorPalette.Black,
-  buttonText: ColorPalette.White,
-  footerBackground: ColorPalette.White,
-  mainBackground: ColorPalette.Green,
-  mainText: ColorPalette.Black,
+  black400: ColorPalette.Black400,
+  gray100: ColorPalette.Gray100,
+  green400: ColorPalette.Green400,
+  red400: ColorPalette.Red400,
+  white: ColorPalette.White,
 }
 
 /**
@@ -29,51 +29,54 @@ const lightThemeColors: TColors = {
 export const theme = createTheme({
   buttonVariants: {
     defaults: {
-      backgroundColor: "buttonBackground",
-      color: "buttonText",
-      padding: "8",
+      borderColor: "gray100",
     },
     footer: {
-      alignContent: "center",
-      alignItems: "center",
-      alignSelf: "center",
-      backgroundColor: "buttonFooterBackground",
-      color: "buttonFooterDefaultText",
-      fontSize: 20,
-      height: "100%",
-      textAlign: "center",
-      width: "100%",
+      backgroundColor: "green400",
     },
     primary: {
-      backgroundColor: "buttonBackground",
-      color: "buttonText",
-      padding: "8",
+      backgroundColor: "green400",
     },
   },
   colors: lightThemeColors,
-  spacing,
-  textVariants: {
-    paragraph: {
-      fontFamily: FontFamily.Inter_500Medium,
-      fontSize: 16,
-      lineHeight: 24,
+  iconButtonVariants: {
+    defaults: {
+      backgroundColor: "green400",
     },
-    title: {
-      fontFamily: FontFamily.Inter_500Medium,
-      fontSize: 48,
-      fontWeight: "bold",
-      lineHeight: 56,
+    graySecondary: {
+      backgroundColor: "white",
+      borderColor: "gray100",
+      borderWidth: 1,
+    },
+    greenPrimary: {
+      backgroundColor: "green400",
+    },
+    greenSecondary: {
+      borderColor: "green400",
+    },
+    redSecondary: {
+      borderColor: "red400",
     },
   },
+
+  spacing,
+  // textVariants: {
+  //   paragraph: {
+  //     fontFamily: FontFamily.Inter_500Medium,
+  //     fontSize: 16,
+  //     lineHeight: 24,
+  //   },
+  //   title: {
+  //     fontFamily: FontFamily.Inter_500Medium,
+  //     fontSize: 48,
+  //     fontWeight: "bold",
+  //     lineHeight: 56,
+  //   },
+  // },
 })
 
 const darkThemeColors: TColors = {
   ...lightThemeColors,
-  buttonBackground: ColorPalette.Green,
-  buttonText: ColorPalette.Black,
-  footerBackground: ColorPalette.White,
-  mainBackground: ColorPalette.Black,
-  mainText: ColorPalette.Green,
 }
 
 /**

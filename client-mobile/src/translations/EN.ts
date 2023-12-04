@@ -7,5 +7,5 @@ export const EN: ITranslation = {
   "Search for created user": "Search for created user",
   "Searching for created user...": "Searching for created user...",
   "Search result": "Search result",
-  "About page": "About page",
+  "Recipes page": "Recipes page",
 }
