@@ -1,7 +1,6 @@
-// import { Layout } from "@client/components/layout/Layout"
 // import { useTranslation } from "react-i18next"
 import { Layout } from "@client/components/layout/Layout"
-import { Text } from "react-native"
+import { H1 } from "dripsy"
 
 const IndexPage: React.FC = () => {
   // Add translation
@@ -9,7 +8,12 @@ const IndexPage: React.FC = () => {
 
   return (
     <Layout>
-      <Text>Main page</Text>
+      <H1
+        sx={{
+          fontWeight: "bold",
+        }}>
+        Main page
+      </H1>
     </Layout>
   )
 }

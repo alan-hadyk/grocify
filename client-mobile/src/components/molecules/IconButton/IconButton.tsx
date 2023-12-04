@@ -2,38 +2,46 @@ import { Icon } from "@client/components/atoms/Icon/Icon"
 import {
   IIconButtonProps,
   IconButtonSize,
+  IconButtonVariant,
 } from "@client/components/molecules/IconButton/@types/IconButton"
 import {
   iconButtonDefaultStyles,
-  iconButtonStylesFunctions,
   mapSizeToIconButtonStyles,
+  mapVariantToIconButtonStyles,
 } from "@client/components/molecules/IconButton/styles"
-import { Theme } from "@client/theme"
-import { createBox, useRestyle } from "@shopify/restyle"
+import { Sx, View } from "dripsy"
 import React from "react"
-import { View, Pressable } from "react-native"
+import { View as RnView, Pressable } from "react-native"
 
-const Box = createBox<Theme>()
-
-export const IconButton: React.ForwardRefRenderFunction<View, IIconButtonProps> = ({
+export const IconButton: React.ForwardRefRenderFunction<RnView, IIconButtonProps> = ({
   onPress,
   iconName: name,
   size = IconButtonSize.Small,
-  ...styleProps
+  sx,
+  variant = IconButtonVariant.GreenPrimary,
 }) => {
-  const externalStyles = useRestyle(iconButtonStylesFunctions, styleProps)
-
-  const wrapperStyles = {
+  const wrapperStyles: Sx = {
     ...iconButtonDefaultStyles.wrapper,
     ...mapSizeToIconButtonStyles[size].wrapper,
-    ...externalStyles,
+    ...mapVariantToIconButtonStyles[variant].wrapper,
+    ...sx,
   }
+
+  /*
+    TODO
+    Figure out a way to determine the size of the icon.
+    Some icons have longer width than height, and some icons
+    have longer height than width. For example:
+    For `IconButtonSize.Medium`, icon should have a SIZE of 20.
+    If the icon's height is longer than width, then height should be 20,
+    if the width is longer - then width should be 20
+  */
 
   return (
     <Pressable onPress={onPress}>
-      <Box alignItems="center" {...wrapperStyles}>
-        <Icon name={name} width={24} />
-      </Box>
+      <View sx={wrapperStyles}>
+        <Icon name={name} svgProps={mapVariantToIconButtonStyles[variant].icon} />
+      </View>
     </Pressable>
   )
 }

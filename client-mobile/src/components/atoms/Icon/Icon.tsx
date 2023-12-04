@@ -1,29 +1,33 @@
 import { IIconProps } from "@client/components/atoms/Icon/@types/Icon"
 import { icons } from "@client/components/atoms/Icon/config"
-import { iconStylesFunctions } from "@client/components/atoms/Icon/styles"
-import { useRestyle } from "@shopify/restyle"
 import React, { forwardRef } from "react"
 import { View, Pressable } from "react-native"
 
 const _Icon: React.ForwardRefRenderFunction<View, IIconProps> = (
-  { name, onPress, ...styleProps },
+  { name, onPress, svgProps },
   ref,
 ) => {
-  const styles = useRestyle(iconStylesFunctions, styleProps)
   const IconComponent = icons[name]
 
-  const iconStyles = {
-    ...styles,
-    fill: styles.color,
-    height: typeof styles.height === "number" ? styles.height : 20,
-    width: typeof styles.width === "number" ? styles.width : 20,
-  }
+  /*
+    TODO
+    Figure out a way to determine the size of the icon.
+    Some icons have longer width than height, and some icons
+    have longer height than width.
+    There should be a way to set the LONGER dimension of the icon,
+    via an external prop. Maybe this could be calculated via `ref`?
+  */
 
-  console.log("iconStyles", iconStyles)
+  const iconProps = {
+    ...svgProps,
+    color: svgProps.color,
+    height: svgProps.height || 20,
+    width: svgProps.width || 20,
+  }
 
   return (
     <Pressable onPress={onPress} ref={ref}>
-      <IconComponent {...iconStyles} />
+      <IconComponent {...iconProps} />
     </Pressable>
   )
 }

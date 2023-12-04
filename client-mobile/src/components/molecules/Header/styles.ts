@@ -1,12 +1,14 @@
-import { IHeaderStyles } from "@client/components/molecules/Header/@types/Header"
+import { Sx } from "dripsy"
 
-export const headerDefaultStyles: IHeaderStyles = {
-  alignItems: "center",
-  flexDirection: "row",
-  flexWrap: "nowrap",
-  height: 40,
-  justifyContent: "space-between",
-  paddingLeft: "16",
-  paddingRight: "16",
-  paddingTop: "16",
+export const headerDefaultStyles: Record<"wrapper", Sx> = {
+  wrapper: {
+    alignItems: "stretch",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    height: 40,
+    justifyContent: "space-between",
+    paddingLeft: "$16",
+    paddingRight: "$16",
+    paddingTop: "$16",
+  },
 }

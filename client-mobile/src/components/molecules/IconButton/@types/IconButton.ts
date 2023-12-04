@@ -1,24 +1,23 @@
 import { IconName } from "@client/components/atoms/Icon/@types/Icon"
-import { Theme } from "@client/theme"
-import { SpacingProps, VariantProps, ColorProps, LayoutProps, BorderProps } from "@shopify/restyle"
+import { Sx } from "dripsy"
 import { GestureResponderEvent } from "react-native"
 
-export type IIconButtonProps = IIconButtonStyleProps & {
+export interface IIconButtonProps {
   iconName: IconName
-  onPress?: ((event: GestureResponderEvent) => void) | undefined
+  onPress?: (event: GestureResponderEvent) => void
   size?: IconButtonSize
+  sx?: Sx
+  variant?: IconButtonVariant
 }
-
-export type IIconButtonStyleProps = SpacingProps<Theme> &
-  VariantProps<Theme, "iconButtonVariants"> &
-  ColorProps<Theme> &
-  LayoutProps<Theme>
 
 export enum IconButtonSize {
   Small,
   Medium,
 }
 
-export interface IIconButtonDefaultStyles {
-  wrapper: LayoutProps<Theme> & BorderProps<Theme>
+export enum IconButtonVariant {
+  GraySecondary,
+  GreenPrimary,
+  GreenSecondary,
+  RedSecondary,
 }

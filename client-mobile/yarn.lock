@@ -1621,6 +1621,11 @@
     dotenv-expand "~10.0.0"
     getenv "^1.0.0"
 
+"@expo/html-elements@^0.2.0":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo/html-elements/-/html-elements-0.2.2.tgz#d4d361df6c4089d67cc2fd98d34a5347ac4c1a5d"
+  integrity sha512-hMS/5UfBgusKo5K0kpXdrddkxBg9LaJ8Dnijxats+7Uj0Mrk+NaRx3jOUsHTzd7pAroeqx5WGwzJ7wppsksBVA==
+
 "@expo/image-utils@0.3.22":
   version "0.3.22"
   resolved "https://registry.yarnpkg.com/@expo/image-utils/-/image-utils-0.3.22.tgz#3a45fb2e268d20fcc761c87bca3aca7fd8e24260"
@@ -2818,11 +2823,6 @@
     component-type "^1.2.1"
     join-component "^1.1.0"
 
-"@shopify/restyle@^2.4.2":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@shopify/restyle/-/restyle-2.4.2.tgz#bffb5cec619d6ea61e1fab1ec40dec9482946460"
-  integrity sha512-r01j9bbXkhZZkGkLnE6jsJvSCkcjwXBySfe8bQCB7duEfQn36mU6WumNc2pndzXpZhPSevppyXzFZ2jY3XUakw==
-
 "@sideway/address@^4.1.3":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"
@@ -2968,6 +2968,13 @@
   dependencies:
     "@tanstack/query-core" "4.36.1"
     use-sync-external-store "^1.2.0"
+
+"@theme-ui/css@^0.4.0-rc.1":
+  version "0.4.0-rc.13"
+  resolved "https://registry.yarnpkg.com/@theme-ui/css/-/css-0.4.0-rc.13.tgz#ffe585bebe4fc91fea2935bb6beb40f50c6a7cf0"
+  integrity sha512-YEO462Ia26T+i/6p/B4EJt/p3qJanPsSYpRP7MK4GchF/LbuHi0MS+zc4TpctIuIqpXgQR3w75b6xJZG1Oqn1Q==
+  dependencies:
+    csstype "^2.5.7"
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
@@ -4499,6 +4506,11 @@ csso@5.0.5:
   dependencies:
     css-tree "~2.2.0"
 
+csstype@^2.5.7:
+  version "2.6.21"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.21.tgz#2efb85b7cc55c80017c66a5ad7cbd931fda3a90e"
+  integrity sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==
+
 csstype@^3.0.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
@@ -4757,6 +4769,16 @@ dotenv@~16.0.3:
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.3.tgz#115aec42bac5053db3c456db30cc243a5a836a07"
   integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
+
+dripsy@^4.3.4:
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/dripsy/-/dripsy-4.3.4.tgz#a6b35c364e3092478bc822503e116efccff0316a"
+  integrity sha512-b/SjIpdwZHQJdJ51LdnxzTM/sCU8g34PcJ0EkKQzy0MfbbmlO6VqpAmuQL4HtHfBG44w8gdv5Gm918PMyRMXWQ==
+  dependencies:
+    "@expo/html-elements" "^0.2.0"
+    "@theme-ui/css" "^0.4.0-rc.1"
+    stable-hash "^0.0.2"
+    ts-toolbelt "^9.6.0"
 
 dset@^3.1.2:
   version "3.1.2"
@@ -9217,6 +9239,11 @@ ssri@^8.0.1:
   dependencies:
     minipass "^3.1.1"
 
+stable-hash@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/stable-hash/-/stable-hash-0.0.2.tgz#a909deaa5b9d430b100ca0a10132a533f2665e94"
+  integrity sha512-tPwQ3c1rLIwbJpq59duoznegEbmgfV630C2n4R4G96LKBFljgK8j+O9AxjqB6cAzu4gE7s4pByrLWtZel8E+Mg==
+
 stack-utils@^2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-2.0.6.tgz#aaf0748169c02fc33c8232abccf933f54a1cc34f"
@@ -9667,6 +9694,11 @@ ts-node@^10.9.1:
     make-error "^1.1.1"
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
+
+ts-toolbelt@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-9.6.0.tgz#50a25426cfed500d4a09bd1b3afb6f28879edfd5"
+  integrity sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==
 
 tsconfig-paths@^3.14.2:
   version "3.14.2"

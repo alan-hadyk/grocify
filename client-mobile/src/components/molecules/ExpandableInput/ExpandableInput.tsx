@@ -1,16 +1,20 @@
 import { IconName } from "@client/components/atoms/Icon/@types/Icon"
 import { Icon } from "@client/components/atoms/Icon/Icon"
 import { IExpandableInputProps } from "@client/components/molecules/ExpandableInput/@types/ExpandableInput"
-import { useExpandableInputStyles } from "@client/hooks/useExpandableInputStyles"
+import { useExpandableInputStyles } from "@client/components/molecules/ExpandableInput/hooks/useExpandableInputStyles"
+import { View, styled } from "dripsy"
 import React, { useRef, useState } from "react"
-import { TextInput, View, Animated } from "react-native"
+// import { TextInput as RnTextInput, Animated } from "react-native"
+import { Pressable, TextInput as RnTextInput, View as RnView } from "react-native"
 import { useClickOutside } from "react-native-click-outside"
+
+const TextInput = styled(RnTextInput)()
 
 export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChangeText }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   // const animation = useRef(new Animated.Value(0)).current
-  const inputRef = useRef<TextInput>(null)
-  const ref = useClickOutside<View>(() => {
+  const inputRef = useRef<RnTextInput>(null)
+  const ref = useClickOutside<RnView>(() => {
     if (value.trim() === "") {
       setIsOpen(false)
     }
@@ -21,7 +25,7 @@ export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChan
   }
 
   const { closeIconStyles, searchIconStyles, inputStyles, mainContainerStyles } =
-    useExpandableInputStyles({ isOpen })
+    useExpandableInputStyles({ isOpen, value })
 
   // useEffect(() => {
   //   // Animate the opening and closing of the search input
@@ -38,40 +42,39 @@ export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChan
   //   outputRange: ["40px", "80%"], // Change '100%' to the full width of your input
   // })
 
+  const openInput = () => {
+    if (!isOpen) {
+      onChangeText("")
+      setIsOpen(true)
+    }
+  }
+
   return (
-    <View {...mainContainerStyles} ref={ref}>
-      {!isOpen && (
-        <Icon
-          name={IconName.Search}
-          onPress={() => {
-            onChangeText("")
-            setIsOpen(true)
-          }}
-          {...searchIconStyles}
-        />
-      )}
-      {isOpen && (
-        <>
-          <Icon name={IconName.Search} width={40} height={40} />
-          <TextInput
-            placeholder="Search"
-            value={value}
-            onChangeText={onChangeText}
-            onPressIn={focusInput}
-            ref={inputRef}
-            onFocus={focusInput}
-            autoFocus
-            {...inputStyles}
-          />
-          <Icon
-            name={IconName.Clear}
-            onPress={() => {
-              onChangeText("")
-            }}
-            {...closeIconStyles}
-          />
-        </>
-      )}
-    </View>
+    <Pressable onPress={openInput} ref={ref}>
+      <View sx={mainContainerStyles}>
+        <Icon name={IconName.Search} onPress={openInput} svgProps={searchIconStyles} />
+        {isOpen && (
+          <>
+            <TextInput
+              placeholder="Search"
+              value={value}
+              onChangeText={onChangeText}
+              onPressIn={focusInput}
+              ref={inputRef}
+              onFocus={focusInput}
+              autoFocus
+              sx={inputStyles}
+            />
+            <Icon
+              name={IconName.Clear}
+              onPress={() => {
+                onChangeText("")
+              }}
+              svgProps={closeIconStyles}
+            />
+          </>
+        )}
+      </View>
+    </Pressable>
   )
 }

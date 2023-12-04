@@ -1,3 +1,4 @@
+import { FontFamily } from "@client/theme/@types"
 import {
   Nunito_300Light,
   Nunito_400Regular,
@@ -14,9 +15,9 @@ import { useEffect } from "react"
  */
 export const useLoadFonts = () => {
   const [fontsLoaded, fontError] = useFonts({
-    Nunito_300Light,
-    Nunito_400Regular,
-    Nunito_700Bold,
+    [FontFamily.Nunito_300Light]: Nunito_300Light,
+    [FontFamily.Nunito_400Regular]: Nunito_400Regular,
+    [FontFamily.Nunito_700Bold]: Nunito_700Bold,
   })
 
   useEffect(() => {

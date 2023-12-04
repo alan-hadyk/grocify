@@ -1,53 +1,21 @@
-import { Theme } from "@client/theme"
-import {
-  useRestyle,
-  composeRestyleFunctions,
-  createVariant,
-  VariantProps,
-  SpacingProps,
-  spacing,
-  ColorProps,
-  color,
-  LayoutProps,
-  layout,
-} from "@shopify/restyle"
+import { Sx, Text } from "dripsy"
 import { forwardRef } from "react"
-import { GestureResponderEvent, Pressable, Text, View } from "react-native"
+import { GestureResponderEvent, Pressable, View } from "react-native"
 
-type IRestyleProps = SpacingProps<Theme> &
-  VariantProps<Theme, "buttonVariants"> &
-  ColorProps<Theme> &
-  LayoutProps<Theme>
-
-const variant = createVariant<Theme, "buttonVariants">({
-  themeKey: "buttonVariants",
-})
-
-const restyleFunctions = composeRestyleFunctions<Theme, IRestyleProps>([
-  spacing,
-  variant,
-  color,
-  layout,
-])
-
-type IButtonProps = IRestyleProps & {
-  onClick?: () => void
+type IButtonProps = {
   onPress?: ((event: GestureResponderEvent) => void) | undefined
+  sx?: Sx
   title: string
 }
 
 // TODO - Dummy component: remove or refactor
 const _Button: React.ForwardRefRenderFunction<View, IButtonProps> = (
-  { onClick, onPress, title, ...rest },
+  { onPress, title, sx },
   ref,
-) => {
-  const props = useRestyle(restyleFunctions, rest)
-
-  return (
-    <Pressable onPress={onPress} {...props} ref={ref}>
-      <Text {...props}>{title}</Text>
-    </Pressable>
-  )
-}
+) => (
+  <Pressable onPress={onPress} ref={ref}>
+    <Text sx={sx}>{title}</Text>
+  </Pressable>
+)
 
 export const Button = forwardRef(_Button)

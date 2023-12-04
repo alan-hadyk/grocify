@@ -1,6 +1,5 @@
-import { Theme } from "@client/theme"
-import { SpacingProps, ColorProps, LayoutProps } from "@shopify/restyle"
 import { GestureResponderEvent } from "react-native"
+import { SvgProps } from "react-native-svg"
 
 export enum IconName {
   Clear,
@@ -8,9 +7,8 @@ export enum IconName {
   Bell,
 }
 
-export type IIconProps = IIconStyleProps & {
+export interface IIconProps {
   name: IconName
   onPress?: ((event: GestureResponderEvent) => void) | undefined
+  svgProps: Required<Pick<SvgProps, "color">> & Partial<Omit<SvgProps, "color">>
 }
-
-export type IIconStyleProps = SpacingProps<Theme> & ColorProps<Theme> & LayoutProps<Theme>
