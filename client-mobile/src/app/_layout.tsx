@@ -1,3 +1,5 @@
+import "react-native-reanimated"
+import "react-native-gesture-handler"
 import { AppTemplate } from "@client/components/templates/AppTemplate/AppTemplate"
 import { FooterContainer } from "@client/containers/Footer/FooterContainer"
 import { HeaderContainer } from "@client/containers/Header/HeaderContainer"

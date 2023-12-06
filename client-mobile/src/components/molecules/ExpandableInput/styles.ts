@@ -16,18 +16,18 @@ export const expandableInputDefaultStyles: {
   input: {
     color: "$black400",
     fontSize: "$14",
-    marginLeft: "$10",
-    width: "80%",
   },
   mainContainer: {
     alignItems: "center",
     backgroundColor: "$white",
-    borderRadius: "$100%",
     borderWidth: "$1",
+    display: "flex",
     flexDirection: "row",
+    gap: "$10",
     height: 40,
-    justifyContent: "center",
-    transition: "all 300ms ease-in-out", // Needed?
+    justifyContent: "flex-start",
+    paddingLeft: "$10",
+    paddingRight: "$0",
   },
   searchIcon: {
     color: ColorPalette.Black400,

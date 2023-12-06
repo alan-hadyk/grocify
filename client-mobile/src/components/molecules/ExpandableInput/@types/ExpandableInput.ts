@@ -5,6 +5,6 @@ export interface IExpandableInputProps {
   onChangeText: Dispatch<SetStateAction<string>>
 }
 
-export type IUseExpandableInputStyles = {
-  isOpen?: boolean
-} & Pick<IExpandableInputProps, "value">
+export type IUseExpandableInputStyles = Pick<IExpandableInputProps, "value">
+export type IUseExpandableInputState = Pick<IExpandableInputProps, "value"> &
+  Pick<IExpandableInputProps, "onChangeText">
