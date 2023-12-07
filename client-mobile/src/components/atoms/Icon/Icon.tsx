@@ -1,35 +1,33 @@
 import { IIconProps } from "@client/components/atoms/Icon/@types/Icon"
 import { icons } from "@client/components/atoms/Icon/config"
-import React, { forwardRef } from "react"
-import { View, Pressable } from "react-native"
+import React, { useLayoutEffect, useState } from "react"
+import { Pressable } from "react-native"
 
-const _Icon: React.ForwardRefRenderFunction<View, IIconProps> = (
-  { name, onPress, svgProps },
-  ref,
-) => {
-  const IconComponent = icons[name]
+export const Icon: React.FC<IIconProps> = ({ size, name, onPress, ...svgProps }) => {
+  const { Component, height, width } = icons[name]
+  const [iconWidth, setIconWidth] = useState<number>(0)
+  const [iconHeight, setIconHeight] = useState<number>(0)
 
-  /*
-    TODO
-    Figure out a way to determine the size of the icon.
-    Some icons have longer width than height, and some icons
-    have longer height than width.
-    There should be a way to set the LONGER dimension of the icon,
-    via an external prop. Maybe this could be calculated via `ref`?
-  */
+  useLayoutEffect(() => {
+    const _iconHeight = (height * size) / width
+    const _iconWidth = (width * size) / height
 
-  const iconProps = {
-    ...svgProps,
-    color: svgProps.color,
-    height: svgProps.height || 20,
-    width: svgProps.width || 20,
-  }
+    if (height > 0 && width > 0) {
+      if (width > height) {
+        setIconWidth(size)
+        setIconHeight(_iconHeight)
+      }
+
+      if (height > width) {
+        setIconWidth(_iconWidth)
+        setIconHeight(size)
+      }
+    }
+  }, [height, width])
 
   return (
-    <Pressable onPress={onPress} ref={ref}>
-      <IconComponent {...iconProps} />
+    <Pressable onPress={onPress}>
+      <Component {...svgProps} width={iconWidth} height={iconHeight} />
     </Pressable>
   )
 }
-
-export const Icon = forwardRef(_Icon)

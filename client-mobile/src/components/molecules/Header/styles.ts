@@ -7,8 +7,8 @@ export const headerDefaultStyles: Record<"wrapper", Sx> = {
     flexWrap: "nowrap",
     height: 40,
     justifyContent: "space-between",
-    paddingLeft: "$16",
-    paddingRight: "$16",
-    paddingTop: "$16",
+    marginLeft: "$16",
+    marginRight: "$16",
+    marginTop: "$16",
   },
 }

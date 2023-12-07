@@ -1,9 +1,18 @@
 import { IUseExpandableInputStyles } from "@client/components/molecules/ExpandableInput/@types/ExpandableInput"
 import { expandableInputDefaultStyles } from "@client/components/molecules/ExpandableInput/styles"
-import { Dimensions } from "react-native"
+import { useScreenDimensions } from "@client/hooks/useScreenDimensions"
 
-export const useExpandableInputStyles = ({ value }: IUseExpandableInputStyles) => {
-  const inputStyles = expandableInputDefaultStyles.input
+export const useExpandableInputStyles = ({
+  value,
+  animatedContainerWidth,
+}: IUseExpandableInputStyles) => {
+  const { screenWidth } = useScreenDimensions()
+
+  const inputStyles = {
+    ...expandableInputDefaultStyles.input,
+    minWidth: animatedContainerWidth - 80,
+    width: "100%",
+  }
 
   const closeIconStyles = {
     ...expandableInputDefaultStyles.closeIcon,
@@ -20,16 +29,9 @@ export const useExpandableInputStyles = ({ value }: IUseExpandableInputStyles) =
         }),
   }
 
-  const searchIconStyles = expandableInputDefaultStyles.searchIcon
-
-  const mainContainerStyles = expandableInputDefaultStyles.mainContainer
-  const screenWidth = Dimensions.get("window").width
-
   return {
     closeIconStyles,
     inputStyles,
-    mainContainerStyles,
     screenWidth,
-    searchIconStyles,
   }
 }

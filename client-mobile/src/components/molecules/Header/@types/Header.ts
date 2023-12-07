@@ -1,1 +1,4 @@
-export interface IHeaderProps {}
+export interface IHeaderProps {
+  searchInputValue: string
+  onSearchInputValueChange: (searchInputValue: string) => void
+}

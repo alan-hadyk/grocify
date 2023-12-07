@@ -17,3 +17,8 @@ export type TColors = Record<
   "$white" | "$gray100" | "$black400" | "$green400" | "$green500" | "$red400",
   ColorPalette
 >
+
+export enum Duration {
+  Fast = 150,
+  Default = 300,
+}

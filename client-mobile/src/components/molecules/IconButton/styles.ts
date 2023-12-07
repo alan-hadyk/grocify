@@ -5,6 +5,7 @@ import {
 } from "@client/components/molecules/IconButton/@types/IconButton"
 import { ColorPalette } from "@client/theme/@types"
 import { Sx } from "dripsy"
+
 export const iconButtonDefaultStyles: Record<"wrapper", Sx> = {
   wrapper: {
     alignItems: "center",
@@ -15,12 +16,18 @@ export const iconButtonDefaultStyles: Record<"wrapper", Sx> = {
 
 export const mapSizeToIconButtonStyles = {
   [IconButtonSize.Small]: {
+    icon: {
+      size: 14,
+    },
     wrapper: {
       height: 24,
       width: 24,
     },
   },
   [IconButtonSize.Medium]: {
+    icon: {
+      size: 20,
+    },
     wrapper: {
       height: 40,
       width: 40,
@@ -31,7 +38,7 @@ export const mapSizeToIconButtonStyles = {
 export const mapVariantToIconButtonStyles: Record<
   IconButtonVariant,
   {
-    icon: IIconProps["svgProps"]
+    icon: Pick<IIconProps, "color">
     wrapper: Sx
   }
 > = {

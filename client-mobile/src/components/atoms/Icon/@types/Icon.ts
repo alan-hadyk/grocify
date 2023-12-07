@@ -7,8 +7,9 @@ export enum IconName {
   Bell,
 }
 
-export interface IIconProps {
-  name: IconName
-  onPress?: ((event: GestureResponderEvent) => void) | undefined
-  svgProps: Required<Pick<SvgProps, "color">> & Partial<Omit<SvgProps, "color">>
-}
+export type IIconProps = Required<Pick<SvgProps, "color">> &
+  Partial<Omit<SvgProps, "color">> & {
+    name: IconName
+    onPress?: (event: GestureResponderEvent) => void
+    size: number
+  }

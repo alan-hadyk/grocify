@@ -1,11 +1,6 @@
 import { ColorPalette, FontFamily, TColors } from "@client/theme/@types"
 import { makeTheme } from "dripsy"
 
-declare module "dripsy" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DripsyCustomTheme extends Theme {}
-}
-
 export const colors: TColors = {
   $black400: ColorPalette.Black400,
   $gray100: ColorPalette.Gray100,
@@ -19,11 +14,13 @@ export const space = {
   $0: 0,
   $1: 1,
   $8: 8,
+  $9: 9,
   $10: 10,
   $12: 12,
   $16: 16,
   $20: 20,
   $24: 24,
+  $32: 32,
   $40: 40,
   "$50%": "50%",
   $80: 80,

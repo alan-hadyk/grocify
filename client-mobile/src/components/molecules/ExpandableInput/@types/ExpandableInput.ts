@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from "react"
-
 export interface IExpandableInputProps {
   value: string
-  onChangeText: Dispatch<SetStateAction<string>>
+  onChangeText: (value: string) => void
 }
 
-export type IUseExpandableInputStyles = Pick<IExpandableInputProps, "value">
+export type IUseExpandableInputStyles = Pick<IExpandableInputProps, "value"> & {
+  animatedContainerWidth: number
+}
 export type IUseExpandableInputState = Pick<IExpandableInputProps, "value"> &
   Pick<IExpandableInputProps, "onChangeText">

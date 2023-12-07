@@ -8,6 +8,7 @@ module.exports = {
     "plugin:import/recommended",
     "plugin:import/typescript",
     "plugin:@tanstack/eslint-plugin-query/recommended",
+    "plugin:react-hooks/recommended",
   ],
   overrides: [
     {
@@ -15,7 +16,7 @@ module.exports = {
         "codegen.ts",
         "src/app/**/*.tsx",
         "src/lib/internationalization.ts",
-        "src/@types/declarations.d.ts",
+        "src/@types/react-native-svg.d.ts",
       ],
       rules: {
         "import/no-default-export": "off",
@@ -31,7 +32,7 @@ module.exports = {
     ],
     sourceType: "module",
   },
-  plugins: ["typescript-sort-keys", "import", "@tanstack/query"],
+  plugins: ["typescript-sort-keys", "import", "@tanstack/query", "react-hooks"],
   root: true,
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
@@ -66,5 +67,7 @@ module.exports = {
     "@typescript-eslint/no-misused-promises": [0],
     "require-await": "off",
     "@typescript-eslint/require-await": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
   },
 }
