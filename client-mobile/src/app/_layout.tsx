@@ -1,6 +1,6 @@
 import "react-native-reanimated"
 import "react-native-gesture-handler"
-import { AppTemplate } from "@client/components/templates/AppTemplate/AppTemplate"
+import { AppTemplate } from "@client/components/templates/AppTemplate"
 import { FooterContainer } from "@client/containers/FooterContainer"
 import { HeaderContainer } from "@client/containers/HeaderContainer"
 import { composeFunctions } from "@client/helpers/functions/composeFunctions"

@@ -1,11 +1,11 @@
-import { IUseExpandableInputState } from "@client/components/molecules/ExpandableInput/@types/ExpandableInput"
+import { IUseExpandableInputState } from "@client/components/molecules/ExpandableInput/@types"
+import { useMeasureElement } from "@client/hooks/useMeasureElement"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { TextInput as RnTextInput, View as RnView } from "react-native"
 import { useClickOutside } from "react-native-click-outside"
 
 export const useExpandableInputState = ({ value, onChangeText }: IUseExpandableInputState) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [animatedContainerWidth, setAnimatedContainerWidth] = useState<number>(0)
 
   const inputRef = useRef<RnTextInput>(null)
 
@@ -30,10 +30,7 @@ export const useExpandableInputState = ({ value, onChangeText }: IUseExpandableI
   }
 
   const animatedViewRef = useClickOutside<RnView>(closeInput)
-
-  animatedViewRef.current?.measure((_x, _y, width) => {
-    setAnimatedContainerWidth(width)
-  })
+  const { width: animatedContainerWidth } = useMeasureElement(animatedViewRef)
 
   useEffect(() => {
     if (value) {

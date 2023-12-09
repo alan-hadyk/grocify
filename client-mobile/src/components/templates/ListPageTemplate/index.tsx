@@ -1,4 +1,4 @@
-import { IListPageTemplateProps } from "@client/components/templates/ListPageTemplate/@types/ListPageTemplate"
+import { IListPageTemplateProps } from "@client/components/templates/ListPageTemplate/@types"
 import { getlistPageTemplateDefaultStyles } from "@client/components/templates/ListPageTemplate/styles"
 import { useScreenDimensions } from "@client/hooks/useScreenDimensions"
 import { View } from "dripsy"

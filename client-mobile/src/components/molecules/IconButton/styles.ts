@@ -1,8 +1,5 @@
-import { IIconProps } from "@client/components/atoms/Icon/@types/Icon"
-import {
-  IconButtonSize,
-  IconButtonVariant,
-} from "@client/components/molecules/IconButton/@types/IconButton"
+import { IIconProps } from "@client/components/atoms/Icon/@types"
+import { IconButtonSize, IconButtonVariant } from "@client/components/molecules/IconButton/@types"
 import { ColorPalette } from "@client/theme/@types"
 import { Sx } from "dripsy"
 

@@ -1,4 +1,4 @@
-import { ListPageTemplate } from "@client/components/templates/ListPageTemplate/ListPageTemplate"
+import { ListPageTemplate } from "@client/components/templates/ListPageTemplate"
 import { H1 } from "dripsy"
 
 const IndexPage: React.FC = () => (

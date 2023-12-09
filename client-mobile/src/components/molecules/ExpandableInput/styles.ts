@@ -1,5 +1,5 @@
 import { IAnimatedViewProps } from "@client/components/animations/AnimatedView/@types"
-import { IIconProps } from "@client/components/atoms/Icon/@types/Icon"
+import { IIconProps } from "@client/components/atoms/Icon/@types"
 import { ColorPalette, Duration } from "@client/theme/@types"
 import { Sx } from "dripsy"
 
@@ -46,7 +46,7 @@ export const getAnimatedViewProps = ({
     borderColor: isOpen ? ColorPalette.Black400 : ColorPalette.Gray100,
     borderRadius: isOpen ? 20 : 50,
     width: isOpen ? screenWidth - 88 : 40,
-  },
+  } as IAnimatedViewProps["animate"],
   exitTransition: {
     duration: Duration.Fast,
     type: "timing",
@@ -55,7 +55,7 @@ export const getAnimatedViewProps = ({
     borderColor: ColorPalette.Gray100,
     borderRadius: 50,
     width: 40,
-  },
+  } as IAnimatedViewProps["from"],
   transition: {
     duration: Duration.Fast,
     type: "timing",

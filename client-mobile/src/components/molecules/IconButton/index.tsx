@@ -1,9 +1,9 @@
-import { Icon } from "@client/components/atoms/Icon/Icon"
+import { Icon } from "@client/components/atoms/Icon"
 import {
   IIconButtonProps,
   IconButtonSize,
   IconButtonVariant,
-} from "@client/components/molecules/IconButton/@types/IconButton"
+} from "@client/components/molecules/IconButton/@types"
 import {
   iconButtonDefaultStyles,
   mapSizeToIconButtonStyles,

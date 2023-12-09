@@ -1,7 +1,7 @@
 import Bell from "@client/assets/icons/bell.svg"
 import Clear from "@client/assets/icons/clear.svg"
 import Search from "@client/assets/icons/search.svg"
-import { IconName } from "@client/components/atoms/Icon/@types/Icon"
+import { IconName } from "@client/components/atoms/Icon/@types"
 import { SvgProps } from "react-native-svg"
 
 export const icons: Record<

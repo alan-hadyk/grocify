@@ -1,13 +1,14 @@
 import { AnimatedView } from "@client/components/animations/AnimatedView"
-import { IconName } from "@client/components/atoms/Icon/@types/Icon"
-import { Icon } from "@client/components/atoms/Icon/Icon"
-import { IExpandableInputProps } from "@client/components/molecules/ExpandableInput/@types/ExpandableInput"
+import { Icon } from "@client/components/atoms/Icon"
+import { IconName } from "@client/components/atoms/Icon/@types"
+import { IExpandableInputProps } from "@client/components/molecules/ExpandableInput/@types"
 import { useExpandableInputState } from "@client/components/molecules/ExpandableInput/hooks/useExpandableInputState"
 import { useExpandableInputStyles } from "@client/components/molecules/ExpandableInput/hooks/useExpandableInputStyles"
 import {
   expandableInputDefaultStyles,
   getAnimatedViewProps,
 } from "@client/components/molecules/ExpandableInput/styles"
+import { ColorPalette } from "@client/theme/@types"
 import { TextInput } from "dripsy"
 import React, { Fragment } from "react"
 import { useTranslation } from "react-i18next"
@@ -48,6 +49,7 @@ export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChan
         <Fragment key="input">
           <TextInput
             placeholder={t("Search...")}
+            placeholderTextColor={ColorPalette.Gray400}
             value={value}
             onChangeText={onChangeText}
             onPressIn={focusInput}

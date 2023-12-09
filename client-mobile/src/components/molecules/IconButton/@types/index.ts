@@ -1,4 +1,4 @@
-import { IconName } from "@client/components/atoms/Icon/@types/Icon"
+import { IconName } from "@client/components/atoms/Icon/@types"
 import { Sx } from "dripsy"
 import { GestureResponderEvent } from "react-native"
 

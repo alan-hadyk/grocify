@@ -7,6 +7,7 @@ export enum FontFamily {
 export enum ColorPalette {
   White = "#FFFFFF",
   Gray100 = "#E0E0E0",
+  Gray400 = "#999999",
   Green400 = "#14E195",
   Green500 = "#10B276",
   Black400 = "#1B2728",

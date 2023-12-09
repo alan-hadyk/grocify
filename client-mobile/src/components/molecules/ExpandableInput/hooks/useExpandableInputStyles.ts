@@ -1,4 +1,4 @@
-import { IUseExpandableInputStyles } from "@client/components/molecules/ExpandableInput/@types/ExpandableInput"
+import { IUseExpandableInputStyles } from "@client/components/molecules/ExpandableInput/@types"
 import { expandableInputDefaultStyles } from "@client/components/molecules/ExpandableInput/styles"
 import { useScreenDimensions } from "@client/hooks/useScreenDimensions"
 
@@ -11,7 +11,7 @@ export const useExpandableInputStyles = ({
   const inputStyles = {
     ...expandableInputDefaultStyles.input,
     minWidth: animatedContainerWidth - 80,
-    width: "100%",
+    width: "72.125%",
   }
 
   const closeIconStyles = {
