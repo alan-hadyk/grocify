@@ -9,11 +9,11 @@ type TWithBorderRadius<T> = Omit<T, "borderBottomLeftRadius"> & {
 
 export interface IAnimatedViewProps {
   children: ReactNode | ReactNode[]
-  onPress: () => void
+  onPress?: () => void
   onLayout?: (event: LayoutChangeEvent) => void
   animate?: TWithBorderRadius<MotiProps["animate"]>
-  exitTransition: MotiProps["exitTransition"]
+  exitTransition?: MotiProps["exitTransition"]
   from?: TWithBorderRadius<MotiProps["from"]>
-  transition: MotiProps["transition"]
-  sx: Sx
+  transition?: MotiProps["transition"]
+  sx?: Sx
 }

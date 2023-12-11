@@ -6,7 +6,7 @@ import { Sx } from "dripsy"
 export const iconButtonDefaultStyles: Record<"wrapper", Sx> = {
   wrapper: {
     alignItems: "center",
-    borderRadius: "$50%",
+    borderRadius: "$50",
     justifyContent: "center",
   },
 }
