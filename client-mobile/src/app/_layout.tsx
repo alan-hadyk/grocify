@@ -1,25 +1,20 @@
-import { FooterContainer } from "@client/containers/footer/Footer"
+import "react-native-reanimated"
+import "react-native-gesture-handler"
+import { AppTemplate } from "@client/components/templates/AppTemplate"
+import { FooterContainer } from "@client/containers/FooterContainer"
+import { HeaderContainer } from "@client/containers/HeaderContainer"
 import { composeFunctions } from "@client/helpers/functions/composeFunctions"
+import { withClickOutsideProvider } from "@client/hoc/withClickOutsideProvider"
 import { withQueryClientProvider } from "@client/hoc/withQueryClientProvider"
 import { withThemeProvider } from "@client/hoc/withThemeProvider"
 import { useLoadFonts } from "@client/hooks/useLoadFonts"
-import { Theme } from "@client/theme"
-import { createBox } from "@shopify/restyle"
 import { Slot, SplashScreen } from "expo-router"
 import { StatusBar } from "expo-status-bar"
-import { Dimensions } from "react-native"
 import "@client/lib/internationalization"
 
 SplashScreen.preventAutoHideAsync()
 
-// TODO - Remove dummy component
-const Box = createBox<Theme>()
-
 const _IndexLayout: React.FC = () => {
-  // TODO - Remove dummy code
-  const screenHeight = Dimensions.get("window").height
-  const screenWidth = Dimensions.get("window").width
-
   const { fontError, fontsLoaded } = useLoadFonts()
 
   // Prevent rendering until the font has loaded or an error was returned
@@ -28,17 +23,19 @@ const _IndexLayout: React.FC = () => {
   }
 
   return (
-    <Box flexWrap="nowrap" height={screenHeight} width={screenWidth}>
+    <AppTemplate>
+      <HeaderContainer />
       <Slot />
       <FooterContainer />
       <StatusBar style="auto" />
-    </Box>
+    </AppTemplate>
   )
 }
 
 const IndexLayout = composeFunctions<Record<string, unknown>>(
   withQueryClientProvider,
   withThemeProvider,
+  withClickOutsideProvider,
 )(_IndexLayout)
 
 export default IndexLayout
