@@ -7,7 +7,7 @@ export const expandableInputDefaultStyles: {
   closeIcon: Pick<IIconProps, "color" | "size">
   input: Sx
   mainContainer: Sx
-  searchIcon: Pick<IIconProps, "color" | "size">
+  mainIcon: Pick<IIconProps, "color" | "size">
 } = {
   closeIcon: {
     color: ColorPalette.Black400,
@@ -29,7 +29,7 @@ export const expandableInputDefaultStyles: {
     paddingLeft: "$9",
     paddingRight: "$9",
   },
-  searchIcon: {
+  mainIcon: {
     color: ColorPalette.Black400,
     size: 20,
   },

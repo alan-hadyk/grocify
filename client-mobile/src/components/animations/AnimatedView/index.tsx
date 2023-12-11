@@ -5,7 +5,7 @@ import React, { forwardRef } from "react"
 import { Pressable, View } from "react-native"
 
 const _AnimatedView: React.ForwardRefRenderFunction<View, IAnimatedViewProps> = (
-  { children, onPress, animate, exitTransition, from, transition, sx },
+  { children, onPress, animate, exitTransition, from, transition, sx, onLayout },
   ref,
 ) => (
   <Pressable onPress={onPress} ref={ref}>
@@ -15,7 +15,8 @@ const _AnimatedView: React.ForwardRefRenderFunction<View, IAnimatedViewProps> = 
         exitTransition={exitTransition}
         from={from}
         transition={transition}
-        sx={sx}>
+        sx={sx}
+        onLayout={onLayout}>
         {children}
       </StyledMotiView>
     </AnimatePresence>

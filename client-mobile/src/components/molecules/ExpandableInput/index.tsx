@@ -13,7 +13,12 @@ import { TextInput } from "dripsy"
 import React, { Fragment } from "react"
 import { useTranslation } from "react-i18next"
 
-export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChangeText }) => {
+export const ExpandableInput: React.FC<IExpandableInputProps> = ({
+  iconName = IconName.Search,
+  value,
+  onChangeText,
+  placeholder = "Search...",
+}) => {
   const {
     clearInput,
     animatedContainerWidth,
@@ -22,6 +27,7 @@ export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChan
     openInput,
     inputRef,
     animatedViewRef,
+    onLayout,
   } = useExpandableInputState({
     onChangeText,
     value,
@@ -38,17 +44,18 @@ export const ExpandableInput: React.FC<IExpandableInputProps> = ({ value, onChan
       {...getAnimatedViewProps({ isOpen, screenWidth })}
       sx={expandableInputDefaultStyles.mainContainer}
       onPress={openInput}
-      ref={animatedViewRef}>
+      ref={animatedViewRef}
+      onLayout={onLayout}>
       <Icon
-        name={IconName.Search}
+        name={iconName}
         onPress={openInput}
-        {...expandableInputDefaultStyles.searchIcon}
-        key="searchIcon"
+        {...expandableInputDefaultStyles.mainIcon}
+        key="mainIcon"
       />
       {isOpen && (
         <Fragment key="input">
           <TextInput
-            placeholder={t("Search...")}
+            placeholder={t(placeholder)}
             placeholderTextColor={ColorPalette.Gray400}
             value={value}
             onChangeText={onChangeText}

@@ -4,13 +4,13 @@ import { AppTemplate } from "@client/components/templates/AppTemplate"
 import { FooterContainer } from "@client/containers/FooterContainer"
 import { HeaderContainer } from "@client/containers/HeaderContainer"
 import { composeFunctions } from "@client/helpers/functions/composeFunctions"
+import { withClickOutsideProvider } from "@client/hoc/withClickOutsideProvider"
 import { withQueryClientProvider } from "@client/hoc/withQueryClientProvider"
 import { withThemeProvider } from "@client/hoc/withThemeProvider"
 import { useLoadFonts } from "@client/hooks/useLoadFonts"
 import { Slot, SplashScreen } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import "@client/lib/internationalization"
-import { ClickOutsideProvider } from "react-native-click-outside"
 
 SplashScreen.preventAutoHideAsync()
 
@@ -23,20 +23,19 @@ const _IndexLayout: React.FC = () => {
   }
 
   return (
-    <ClickOutsideProvider>
-      <AppTemplate>
-        <HeaderContainer />
-        <Slot />
-        <FooterContainer />
-        <StatusBar style="auto" />
-      </AppTemplate>
-    </ClickOutsideProvider>
+    <AppTemplate>
+      <HeaderContainer />
+      <Slot />
+      <FooterContainer />
+      <StatusBar style="auto" />
+    </AppTemplate>
   )
 }
 
 const IndexLayout = composeFunctions<Record<string, unknown>>(
   withQueryClientProvider,
   withThemeProvider,
+  withClickOutsideProvider,
 )(_IndexLayout)
 
 export default IndexLayout
