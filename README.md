@@ -249,12 +249,12 @@ Data model consists of the following main entities:
 
 - [x] [Initial server setup](https://github.com/alan-hadyk/grocify/pull/2)
 - [x] [Initial mobile client setup](https://github.com/alan-hadyk/grocify/pull/3)
+- [x] UI and UX Design
 - [ ] Database schema design
 - [ ] GraphQL schema design - includes defining types, queries, mutations, and any subscriptions
 - [ ] Resolvers implementation for GraphQL schema - handling the logic for each query/mutation
 - [ ] API endpoints development
 - [ ] Authentication system implementation
-- [ ] UI and UX Design
 - [ ] Mobile Client - authentication
 - [ ] Mobile Client - settings
 - [ ] Mobile Client - routing
