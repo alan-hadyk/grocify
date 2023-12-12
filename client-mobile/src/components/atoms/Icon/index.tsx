@@ -13,9 +13,11 @@ export const Icon: React.FC<IIconProps> = ({ size, name, onPress, ...svgProps })
     width,
   })
 
-  return (
+  return onPress ? (
     <Pressable onPress={onPress}>
       <Component {...svgProps} width={iconDimensions.width} height={iconDimensions.height} />
     </Pressable>
+  ) : (
+    <Component {...svgProps} width={iconDimensions.width} height={iconDimensions.height} />
   )
 }

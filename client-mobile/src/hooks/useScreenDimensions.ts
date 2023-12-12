@@ -1,8 +1,11 @@
-import { Dimensions } from "react-native"
+import { Dimensions, StatusBar } from "react-native"
 
 export const useScreenDimensions = () => {
   const screenWidth = Dimensions.get("window").width
-  const screenHeight = Dimensions.get("window").height
+  const windowHeight = Dimensions.get("window").height
+  const screenHeight = StatusBar.currentHeight
+    ? windowHeight - StatusBar.currentHeight
+    : windowHeight
 
   return {
     screenHeight,

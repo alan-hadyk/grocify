@@ -1,14 +1,9 @@
 import { ListPageTemplate } from "@client/components/templates/ListPageTemplate"
-import { H1 } from "dripsy"
+import { ShoppingListContainer } from "@client/containers/ShoppingListContainer"
 
 const IndexPage: React.FC = () => (
   <ListPageTemplate>
-    <H1
-      sx={{
-        fontWeight: "bold",
-      }}>
-      Main page
-    </H1>
+    <ShoppingListContainer />
   </ListPageTemplate>
 )
 
