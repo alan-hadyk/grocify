@@ -22,4 +22,6 @@ export type TColors = Record<
 export enum Duration {
   Fast = 150,
   Default = 300,
+  Slow = 600,
+  VerySlow = 2000,
 }

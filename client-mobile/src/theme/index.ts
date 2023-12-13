@@ -18,6 +18,7 @@ export const space = {
   $16: 16,
   $32: 32,
   $50: 50,
+  "12.5%": "12.5%",
 }
 
 /**
@@ -38,6 +39,7 @@ export const theme = makeTheme({
   },
   fontSizes: {
     $14: 14,
+    $28: 28,
   },
   fontWeights: {
     bold: "700",
