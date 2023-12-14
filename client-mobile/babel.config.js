@@ -15,6 +15,7 @@ module.exports = function (api) {
             "@client/helpers": "./src/helpers",
             "@client/hoc": "./src/hoc",
             "@client/hooks": "./src/hooks",
+            "@client/icons": "./src/icons",
             "@client/lib": "./src/lib",
             "@client/theme": "./src/theme",
             "@client/translations": "./src/translations",

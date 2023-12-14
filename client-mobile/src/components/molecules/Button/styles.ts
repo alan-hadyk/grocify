@@ -1,6 +1,7 @@
 import { IIconProps } from "@client/components/atoms/Icon/@types"
 import { TypographyVariant } from "@client/components/atoms/Typography/@types"
 import { ButtonSize, ButtonVariant } from "@client/components/molecules/Button/@types"
+import { ColorPalette } from "@client/theme/@types"
 import { Sx } from "dripsy"
 
 export const buttonDefaultStyles: Sx = {
@@ -96,12 +97,12 @@ export const mapButtonVariantToIconStyles = ({
 }: {
   isDisabled: boolean
 }): Record<ButtonVariant, IIconProps["color"]> => ({
-  [ButtonVariant.GreenPrimary]: isDisabled ? "$gray400" : "$black400",
-  [ButtonVariant.GreenSecondary]: isDisabled ? "$gray400" : "$black400",
-  [ButtonVariant.RedPrimary]: isDisabled ? "$gray400" : "$white",
-  [ButtonVariant.RedSecondary]: isDisabled ? "$gray400" : "$red400",
-  [ButtonVariant.BlueSecondary]: isDisabled ? "$gray400" : "$blue400",
-  [ButtonVariant.BlackSecondary]: isDisabled ? "$gray400" : "$black400",
+  [ButtonVariant.GreenPrimary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+  [ButtonVariant.GreenSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+  [ButtonVariant.RedPrimary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.White,
+  [ButtonVariant.RedSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Red400,
+  [ButtonVariant.BlueSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Blue400,
+  [ButtonVariant.BlackSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Black400,
 })
 
 export const mapSizeToButtonStyles: Record<ButtonSize, Sx> = {

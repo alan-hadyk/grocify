@@ -1,6 +1,6 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
 
-export const bottomMenuItems = [
+export const items = [
   {
     href: "/",
     iconName: IconName.List,
@@ -13,7 +13,7 @@ export const bottomMenuItems = [
   },
   {
     href: "/account",
-    iconName: IconName.Account,
+    iconName: IconName.User,
     text: "Account",
   },
 ]

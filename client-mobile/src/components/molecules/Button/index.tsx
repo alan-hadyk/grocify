@@ -1,4 +1,5 @@
 import { Icon } from "@client/components/atoms/Icon"
+import { SizeType } from "@client/components/atoms/Icon/@types"
 import { Typography } from "@client/components/atoms/Typography"
 import {
   ButtonIconPlacement,
@@ -44,6 +45,11 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
         name={iconName}
         color={mapButtonVariantToIconStyles({ isDisabled })[variant]}
         size={mapSizeToButtonIconStyles[size]}
+        sizeType={
+          [ButtonSize.LargeFlexible, ButtonSize.LargeFixed].includes(size)
+            ? SizeType.Height
+            : SizeType.Auto
+        }
       />
     ) : null
 
