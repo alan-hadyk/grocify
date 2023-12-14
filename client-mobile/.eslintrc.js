@@ -16,7 +16,6 @@ module.exports = {
         "codegen.ts",
         "src/app/**/*.tsx",
         "src/lib/internationalization.ts",
-        "src/@types/react-native-animated-splash-screen.d.ts",
         "src/@types/react-native-svg.d.ts",
       ],
       rules: {

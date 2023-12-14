@@ -39,7 +39,6 @@ export const theme = makeTheme({
   },
   fontSizes: {
     $14: 14,
-    $28: 28,
   },
   fontWeights: {
     bold: "700",
