@@ -1,4 +1,3 @@
-// import { Icon } from "@client/components/atoms/Icon"
 import { Icon } from "@client/components/atoms/Icon"
 import { SizeType } from "@client/components/atoms/Icon/@types"
 import { Typography } from "@client/components/atoms/Typography"

@@ -1,6 +1,6 @@
 import { Sx } from "dripsy"
 
-export const shippingListContainerDefaultStyles: {
+export const shoppingListContainerDefaultStyles: {
   button: Sx
   mainWrapper: Sx
   textWrapper: Sx

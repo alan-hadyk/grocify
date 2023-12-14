@@ -8,7 +8,7 @@ export const items = [
   },
   {
     href: "/recipes",
-    iconName: IconName.Recipes,
+    iconName: IconName.Recipe,
     text: "Recipes",
   },
   {

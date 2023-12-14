@@ -3,14 +3,14 @@ import { Typography } from "@client/components/atoms/Typography"
 import { TypographyVariant } from "@client/components/atoms/Typography/@types"
 import { Button } from "@client/components/molecules/Button"
 import { EmptyResult } from "@client/components/molecules/EmptyResult"
-import { shippingListContainerDefaultStyles } from "@client/containers/ShoppingListContainer/styles"
+import { shoppingListContainerDefaultStyles } from "@client/containers/ShoppingListContainer/styles"
 import { View } from "dripsy"
 import { useTranslation } from "react-i18next"
 
 export const ShoppingListContainer: React.FC = () => {
   const { t } = useTranslation()
 
-  const { mainWrapper, textWrapper, button } = shippingListContainerDefaultStyles
+  const { mainWrapper, textWrapper, button } = shoppingListContainerDefaultStyles
 
   return (
     <View sx={mainWrapper}>

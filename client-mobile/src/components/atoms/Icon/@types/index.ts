@@ -9,7 +9,7 @@ export enum IconName {
   Bell,
   List,
   Plus,
-  Recipes,
+  Recipe,
 }
 
 export enum SizeType {
