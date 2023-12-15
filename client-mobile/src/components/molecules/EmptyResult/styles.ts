@@ -6,10 +6,10 @@ export const emptyResultDefaultStyles: {
 } = {
   text: {
     color: "$gray400",
-    paddingTop: "$12",
   },
   wrapper: {
     alignItems: "center",
+    gap: "$12",
     marginBottom: "$28",
     marginTop: "$28",
   },
