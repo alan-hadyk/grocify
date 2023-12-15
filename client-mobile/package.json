@@ -27,7 +27,7 @@
     "expo-router": "^2.0.14",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
-    "graphql": "^16.8.0",
+    "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "i18next": "^23.5.1",
     "intl-pluralrules": "^2.0.1",
