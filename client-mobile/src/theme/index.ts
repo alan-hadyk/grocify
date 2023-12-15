@@ -1,87 +1,68 @@
-/* eslint-disable import/exports-last */
 import { ColorPalette, FontFamily, TColors } from "@client/theme/@types"
-import { createTheme } from "@shopify/restyle"
+import { makeTheme } from "dripsy"
 
-const spacing = {
-  "8": 8,
-  "16": 16,
-  "24": 24,
-  "40": 40,
-  "50%": "50%",
-  "80": 80,
-  "100%": "100%",
+export const colors: TColors = {
+  $black400: ColorPalette.Black400,
+  $gray100: ColorPalette.Gray100,
+  $green400: ColorPalette.Green400,
+  $green500: ColorPalette.Green500,
+  $red400: ColorPalette.Red400,
+  $white: ColorPalette.White,
 }
 
-const lightThemeColors: TColors = {
-  buttonBackground: ColorPalette.Black,
-  buttonFooterActiveText: ColorPalette.Green,
-  buttonFooterBackground: ColorPalette.White,
-  buttonFooterDefaultText: ColorPalette.Black,
-  buttonText: ColorPalette.White,
-  footerBackground: ColorPalette.White,
-  mainBackground: ColorPalette.Green,
-  mainText: ColorPalette.Black,
+export const space = {
+  $0: 0,
+  $1: 1,
+  $9: 9,
+  $10: 10,
+  $16: 16,
+  $32: 32,
+  $50: 50,
+  "12.5%": "12.5%",
 }
 
 /**
  * Default (light) theme
  */
-export const theme = createTheme({
-  buttonVariants: {
-    defaults: {
-      backgroundColor: "buttonBackground",
-      color: "buttonText",
-      padding: "8",
-    },
-    footer: {
-      alignContent: "center",
-      alignItems: "center",
-      alignSelf: "center",
-      backgroundColor: "buttonFooterBackground",
-      color: "buttonFooterDefaultText",
-      fontSize: 20,
-      height: "100%",
-      textAlign: "center",
-      width: "100%",
-    },
-    primary: {
-      backgroundColor: "buttonBackground",
-      color: "buttonText",
-      padding: "8",
+export const theme = makeTheme({
+  borderWidths: {
+    $1: 1,
+  },
+  colors,
+  customFonts: {
+    [FontFamily.Nunito_400Regular]: {
+      "300": FontFamily.Nunito_300Light,
+      "400": FontFamily.Nunito_400Regular,
+      "700": FontFamily.Nunito_700Bold,
+      default: FontFamily.Nunito_400Regular,
     },
   },
-  colors: lightThemeColors,
-  spacing,
-  textVariants: {
-    paragraph: {
-      fontFamily: FontFamily.Inter_500Medium,
-      fontSize: 16,
-      lineHeight: 24,
-    },
-    title: {
-      fontFamily: FontFamily.Inter_500Medium,
-      fontSize: 48,
-      fontWeight: "bold",
-      lineHeight: 56,
+  fontSizes: {
+    $14: 14,
+  },
+  fontWeights: {
+    bold: "700",
+    light: "300",
+    regular: "400",
+  },
+  fonts: {
+    root: FontFamily.Nunito_400Regular,
+  },
+  radii: space,
+  space,
+  types: {
+    onlyAllowThemeValues: {
+      borderStyles: "always",
+      borderWidths: "always",
+      borders: "always",
+      colors: "always",
+      fontSizes: "always",
+      radii: "always",
+      space: "always",
     },
   },
 })
 
-const darkThemeColors: TColors = {
-  ...lightThemeColors,
-  buttonBackground: ColorPalette.Green,
-  buttonText: ColorPalette.Black,
-  footerBackground: ColorPalette.White,
-  mainBackground: ColorPalette.Black,
-  mainText: ColorPalette.Green,
-}
-
-/**
- * Dark theme
- */
-export const darkTheme: Theme = {
-  ...theme,
-  colors: darkThemeColors,
-}
+export const darkTheme = theme
 
 export type Theme = typeof theme

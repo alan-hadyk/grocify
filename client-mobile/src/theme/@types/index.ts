@@ -1,21 +1,27 @@
 export enum FontFamily {
-  Inter_500Medium = "Inter_500Medium",
+  Nunito_300Light = "Nunito_300Light",
+  Nunito_400Regular = "Nunito_400Regular",
+  Nunito_700Bold = "Nunito_700Bold",
 }
 
 export enum ColorPalette {
-  Black = "#0B0B0B",
-  Green = "#36D399",
-  White = "#FFF",
+  White = "#FFFFFF",
+  Gray100 = "#E0E0E0",
+  Gray400 = "#999999",
+  Green400 = "#14E195",
+  Green500 = "#10B276",
+  Black400 = "#1B2728",
+  Red400 = "#F41F1F",
 }
 
 export type TColors = Record<
-  | "buttonBackground"
-  | "buttonFooterActiveText"
-  | "buttonFooterBackground"
-  | "buttonFooterDefaultText"
-  | "buttonText"
-  | "footerBackground"
-  | "mainBackground"
-  | "mainText",
+  "$white" | "$gray100" | "$black400" | "$green400" | "$green500" | "$red400",
   ColorPalette
 >
+
+export enum Duration {
+  Fast = 150,
+  Default = 300,
+  Slow = 600,
+  VerySlow = 2000,
+}
