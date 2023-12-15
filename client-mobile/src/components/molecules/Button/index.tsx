@@ -21,8 +21,8 @@ import { View as RnView } from "react-native"
 
 const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
   {
-    buttonText,
-    isDisabled = false,
+    children,
+    disabled = false,
     iconName,
     onPress,
     size = ButtonSize.LargeFlexible,
@@ -34,7 +34,7 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
 ) => {
   const buttonStyles = {
     ...buttonDefaultStyles,
-    ...mapVariantToButtonStyles({ isDisabled })[variant],
+    ...mapVariantToButtonStyles({ disabled })[variant],
     ...mapSizeToButtonStyles[size],
     ...sx,
   }
@@ -43,7 +43,7 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
     iconName ? (
       <Icon
         name={iconName}
-        color={mapButtonVariantToIconStyles({ isDisabled })[variant]}
+        color={mapButtonVariantToIconStyles({ disabled })[variant]}
         size={mapSizeToButtonIconStyles[size]}
         sizeType={
           [ButtonSize.LargeFlexible, ButtonSize.LargeFixed].includes(size)
@@ -57,9 +57,9 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
     size === ButtonSize.LargeRectangular ? ButtonIconPlacement.Left : iconPlacement
 
   return (
-    <Pressable onPress={onPress} ref={ref} disabled={isDisabled} sx={buttonStyles}>
+    <Pressable onPress={onPress} ref={ref} disabled={disabled} sx={buttonStyles}>
       {_iconPlacement === ButtonIconPlacement.Left && renderIcon()}
-      <Typography variant={mapButtonSizeTextVariant[size]}>{buttonText}</Typography>
+      <Typography variant={mapButtonSizeTextVariant[size]}>{children}</Typography>
       {_iconPlacement === ButtonIconPlacement.Right && renderIcon()}
     </Pressable>
   )

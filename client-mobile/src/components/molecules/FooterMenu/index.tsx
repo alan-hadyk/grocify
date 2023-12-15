@@ -1,12 +1,26 @@
 import { IFooterMenuProps } from "@client/components/molecules/FooterMenu/@types"
-import { bottomMenuDefaultStyles } from "@client/components/molecules/FooterMenu/styles"
+import { footerMenuDefaultStyles } from "@client/components/molecules/FooterMenu/styles"
 import { FooterMenuItem } from "@client/components/molecules/FooterMenuItem"
 import { View } from "dripsy"
+import { useTranslation } from "react-i18next"
+import { DimensionValue } from "react-native"
 
-export const FooterMenu: React.FC<IFooterMenuProps> = ({ items }) => (
-  <View sx={bottomMenuDefaultStyles}>
-    {items.map(({ href, iconName, text, isActive }) => (
-      <FooterMenuItem key={text} href={href} iconName={iconName} text={text} isActive={isActive} />
-    ))}
-  </View>
-)
+export const FooterMenu: React.FC<IFooterMenuProps> = ({ items }) => {
+  const { t } = useTranslation()
+  const style = 100 / items.length + "%"
+
+  return (
+    <View sx={footerMenuDefaultStyles}>
+      {items.map(({ href, iconName, label, isActive }) => (
+        <FooterMenuItem
+          key={label}
+          href={href}
+          iconName={iconName}
+          label={t(label)}
+          isActive={isActive}
+          style={{ flexBasis: style as DimensionValue }}
+        />
+      ))}
+    </View>
+  )
+}

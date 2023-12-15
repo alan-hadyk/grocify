@@ -37,6 +37,7 @@ export const theme = makeTheme({
   borderWidths: {
     $1: 1,
   },
+
   colors,
   customFonts: {
     [FontFamily.Nunito_400Regular]: {
@@ -68,6 +69,7 @@ export const theme = makeTheme({
   lineHeights: {
     $14: 14,
     $16: 16.8,
+    $17: 17,
     $20: 20,
     $23: 23,
     $24: 24,
@@ -79,6 +81,18 @@ export const theme = makeTheme({
     $46: 46,
   },
   radii: space,
+  shadows: {
+    md: {
+      elevation: 6,
+      shadowColor: "$black400",
+      shadowOffset: {
+        height: 2,
+        width: 0,
+      },
+      shadowOpacity: 0.16,
+      shadowRadius: 6,
+    },
+  },
   space,
   types: {
     onlyAllowThemeValues: {

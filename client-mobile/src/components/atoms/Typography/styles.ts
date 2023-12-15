@@ -22,17 +22,17 @@ export const mapVariantToTypographyStyles: Record<TypographyVariant, Sx> = {
   [TypographyVariant.Banner]: {
     fontSize: "$20",
     fontWeight: "regular",
-    lineHeight: "$27",
+    lineHeight: "$28",
   },
   [TypographyVariant.FooterMenu]: {
     fontSize: "$14",
     fontWeight: "semibold",
-    lineHeight: "$16",
+    lineHeight: "$17",
   },
   [TypographyVariant.FooterMenuInactive]: {
     fontSize: "$14",
     fontWeight: "regular",
-    lineHeight: "$16",
+    lineHeight: "$17",
   },
   [TypographyVariant.InputLabel]: {
     fontSize: "$14",
@@ -68,11 +68,6 @@ export const mapVariantToTypographyStyles: Record<TypographyVariant, Sx> = {
     fontSize: "$12",
     fontWeight: "medium",
     lineHeight: "$24",
-  },
-  [TypographyVariant.InputOpen]: {
-    fontSize: "$12",
-    fontWeight: "regular",
-    lineHeight: "$32",
   },
   [TypographyVariant.Text]: {
     fontSize: "$14",

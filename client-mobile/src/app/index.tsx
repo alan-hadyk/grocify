@@ -1,9 +1,9 @@
 import { ListPageTemplate } from "@client/components/templates/ListPageTemplate"
-import { ShoppingListContainer } from "@client/containers/ShoppingListContainer"
+import { ShoppingListsContainer } from "@client/containers/ShoppingListsContainer"
 
 const IndexPage: React.FC = () => (
   <ListPageTemplate>
-    <ShoppingListContainer />
+    <ShoppingListsContainer />
   </ListPageTemplate>
 )
 

@@ -4,14 +4,16 @@ import {
   mapVariantToTypographyStyles,
   typographyDefaultStyles,
 } from "@client/components/atoms/Typography/styles"
-import { Sx, Text } from "dripsy"
+import { Sx } from "dripsy"
+import { useTranslation } from "react-i18next"
 
-export const Typography = ({
+export const Typography: React.FC<ITypographyProps> = ({
   variant = TypographyVariant.Text,
   sx,
   children,
-}: ITypographyProps) => {
-  const Component = variantComponents[variant] || Text
+}) => {
+  const Component = variantComponents[variant]
+  const { t } = useTranslation()
 
   const typographyStyles: Sx = {
     ...typographyDefaultStyles,
@@ -19,5 +21,5 @@ export const Typography = ({
     ...sx,
   }
 
-  return <Component sx={typographyStyles}>{children}</Component>
+  return <Component sx={typographyStyles}>{t(children)}</Component>
 }

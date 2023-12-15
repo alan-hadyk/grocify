@@ -42,8 +42,6 @@ export const useIconState = ({ size, height, width, sizeType = SizeType.Auto }: 
           width: size,
         })
         break
-      default:
-        break
     }
   }, [height, size, sizeType, width])
 

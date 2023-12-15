@@ -1,8 +1,14 @@
 import { IIconProps } from "@client/icons/@types"
 import Svg, { Path } from "react-native-svg"
 
-export const ListIcon: React.FC<IIconProps> = ({ backgroundColor, color, height, width }) => (
-  <Svg width={width} height={height} fill="none" viewBox="0 0 27 33">
+export const ListIcon: React.FC<IIconProps> = ({
+  backgroundColor,
+  color,
+  height,
+  width,
+  style,
+}) => (
+  <Svg width={width} height={height} fill="none" viewBox="0 0 27 33" style={style}>
     <Path
       fill={backgroundColor}
       d="M26.713 18.932c.022 2.532.056 5.064.06 7.596 0 1.099-.084 2.198-.087 3.297-.004 1.547-1.163 2.513-2.588 2.544-3.382.075-6.765.14-10.148.13-2.864-.009-5.729-.114-8.592-.207a20.7 20.7 0 0 1-2.35-.255c-.916-.136-1.83-1.221-1.89-2.216a48.484 48.484 0 0 1-.097-2.3C.966 23.475.917 19.427.873 15.379.83 11.58.787 7.781.746 3.982a4.39 4.39 0 0 1 .551-2.146A1.96 1.96 0 0 1 3.06.746C4.158.706 5.259.703 6.356.63 10.341.371 14.326.57 18.311.6c.822.007 1.438.283 2.04.852 1.266 1.197 2.618 2.303 3.928 3.454.498.439.958.922 1.468 1.345.514.426.676.971.687 1.598.038 2.158.078 4.316.118 6.475.03 1.536.066 3.072.1 4.608l.061-.001Z"

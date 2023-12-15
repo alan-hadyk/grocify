@@ -44,7 +44,7 @@ export const icons: Record<
   [IconName.Plus]: {
     Component: PlusIcon,
     height: 20,
-    width: 22,
+    width: 23,
   },
   [IconName.Recipe]: {
     Component: RecipeIcon,

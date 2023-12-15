@@ -13,7 +13,6 @@ export enum TypographyVariant {
   TabInactive,
   ButtonSM,
   Subtitle,
-  InputOpen,
   Text,
   TextSemibold,
   DatePickerMonth,
@@ -22,5 +21,5 @@ export enum TypographyVariant {
 export interface ITypographyProps {
   sx?: Sx
   variant?: TypographyVariant
-  children: React.ReactNode | React.ReactNode[]
+  children: string
 }

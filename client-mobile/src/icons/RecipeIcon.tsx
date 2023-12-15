@@ -1,8 +1,14 @@
 import { IIconProps } from "@client/icons/@types"
 import Svg, { Path } from "react-native-svg"
 
-export const RecipeIcon: React.FC<IIconProps> = ({ backgroundColor, color, height, width }) => (
-  <Svg width={width} height={height} fill="none" viewBox="0 0 27 33">
+export const RecipeIcon: React.FC<IIconProps> = ({
+  backgroundColor,
+  color,
+  height,
+  width,
+  style,
+}) => (
+  <Svg width={width} height={height} fill="none" viewBox="0 0 27 33" style={style}>
     <Path
       fill={backgroundColor}
       d="M26.67 17.478c.034 3.052.078 6.103.094 9.155.006 1.079-.078 2.158-.085 3.236-.01 1.545-1.209 2.486-2.618 2.516-2.864.06-5.729.127-8.593.113-3.364-.017-6.727-.105-10.09-.192a20.995 20.995 0 0 1-2.35-.252c-.95-.132-1.887-1.22-1.922-2.254-.087-2.613-.186-5.227-.214-7.842C.828 16.206.816 10.454.755 4.702c-.01-.883.01-1.74.376-2.558.273-.611.661-1.109 1.34-1.293.24-.062.486-.098.734-.106C4.263.702 5.322.699 6.379.636 10.033.42 13.686.498 17.34.621c.498.016.997.043 1.494.028a1.472 1.472 0 0 1 1.069.417c1.877 1.668 3.743 3.35 5.643 4.994.656.568.882 1.229.89 2.077.033 3.114.119 6.228.184 9.342h.05Z"

@@ -3,6 +3,7 @@ import { ITranslation } from "@client/translations/@types"
 
 export const EN: ITranslation = {
   "Search...": "Search...",
+  "Shop lists": "Shop lists",
   "Shopping lists": "Shopping lists",
   "Shopping lists will appear here": "Shopping lists will appear here",
   "Add new shopping list": "Add new shopping list",

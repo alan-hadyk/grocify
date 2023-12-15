@@ -1,5 +1,6 @@
 export interface ITranslation {
   "Search...": string
+  "Shop lists": string
   "Shopping lists": string
   "Shopping lists will appear here": string
   "Add new shopping list": string

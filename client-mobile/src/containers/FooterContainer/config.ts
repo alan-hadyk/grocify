@@ -1,19 +1,26 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
+import { IFooterMenuItemProps } from "@client/components/molecules/FooterMenuItem/@types"
 
-export const items = [
+export enum Path {
+  ShoppingLists = "/",
+  Recipes = "/recipes",
+  Account = "/account",
+}
+
+export const items: IFooterMenuItemProps[] = [
   {
-    href: "/",
+    href: Path.ShoppingLists,
     iconName: IconName.List,
-    text: "Shopping lists",
+    label: "Shop lists",
   },
   {
-    href: "/recipes",
+    href: Path.Recipes,
     iconName: IconName.Recipe,
-    text: "Recipes",
+    label: "Recipes",
   },
   {
-    href: "/account",
+    href: Path.Account,
     iconName: IconName.User,
-    text: "Account",
+    label: "Account",
   },
 ]

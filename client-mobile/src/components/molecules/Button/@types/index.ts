@@ -25,10 +25,10 @@ export enum ButtonSize {
 }
 
 export interface IButtonProps {
-  buttonText: string
-  isDisabled?: boolean
+  children: string
+  disabled?: boolean
   iconName?: IconName
-  onPress?: ((event: GestureResponderEvent) => void) | undefined
+  onPress?: (event: GestureResponderEvent) => void
   iconPlacement?: ButtonIconPlacement
   size?: ButtonSize
   variant?: ButtonVariant

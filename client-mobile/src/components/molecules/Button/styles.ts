@@ -12,25 +12,23 @@ export const buttonDefaultStyles: Sx = {
 }
 
 export const mapVariantToButtonStyles = ({
-  isDisabled,
+  disabled,
 }: {
-  isDisabled: boolean
+  disabled: boolean
 }): Record<ButtonVariant, Sx> => ({
-  [ButtonVariant.GreenPrimary]: {
-    ...(isDisabled
-      ? {
-          backgroundColor: "$gray100",
-          color: "$gray400",
-        }
-      : {
-          backgroundColor: "$green400",
-          color: "$black400",
-        }),
-  },
+  [ButtonVariant.GreenPrimary]: disabled
+    ? {
+        backgroundColor: "$gray100",
+        color: "$gray400",
+      }
+    : {
+        backgroundColor: "$green400",
+        color: "$black400",
+      },
   [ButtonVariant.GreenSecondary]: {
     backgroundColor: "$white",
     borderWidth: "$1",
-    ...(isDisabled
+    ...(disabled
       ? {
           borderColor: "$gray300",
           color: "$gray400",
@@ -40,21 +38,19 @@ export const mapVariantToButtonStyles = ({
           color: "$black400",
         }),
   },
-  [ButtonVariant.RedPrimary]: {
-    ...(isDisabled
-      ? {
-          backgroundColor: "$gray100",
-          color: "$gray400",
-        }
-      : {
-          backgroundColor: "$red400",
-          color: "$white",
-        }),
-  },
+  [ButtonVariant.RedPrimary]: disabled
+    ? {
+        backgroundColor: "$gray100",
+        color: "$gray400",
+      }
+    : {
+        backgroundColor: "$red400",
+        color: "$white",
+      },
   [ButtonVariant.RedSecondary]: {
     backgroundColor: "$white",
     borderWidth: "$1",
-    ...(isDisabled
+    ...(disabled
       ? {
           borderColor: "$gray300",
           color: "$gray400",
@@ -67,7 +63,7 @@ export const mapVariantToButtonStyles = ({
   [ButtonVariant.BlueSecondary]: {
     backgroundColor: "$white",
     borderWidth: "$1",
-    ...(isDisabled
+    ...(disabled
       ? {
           borderColor: "$gray300",
           color: "$gray400",
@@ -80,7 +76,7 @@ export const mapVariantToButtonStyles = ({
   [ButtonVariant.BlackSecondary]: {
     backgroundColor: "$white",
     borderWidth: "$1",
-    ...(isDisabled
+    ...(disabled
       ? {
           borderColor: "$gray300",
           color: "$gray400",
@@ -93,16 +89,16 @@ export const mapVariantToButtonStyles = ({
 })
 
 export const mapButtonVariantToIconStyles = ({
-  isDisabled,
+  disabled,
 }: {
-  isDisabled: boolean
+  disabled: boolean
 }): Record<ButtonVariant, IIconProps["color"]> => ({
-  [ButtonVariant.GreenPrimary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Black400,
-  [ButtonVariant.GreenSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Black400,
-  [ButtonVariant.RedPrimary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.White,
-  [ButtonVariant.RedSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Red400,
-  [ButtonVariant.BlueSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Blue400,
-  [ButtonVariant.BlackSecondary]: isDisabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+  [ButtonVariant.GreenPrimary]: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+  [ButtonVariant.GreenSecondary]: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+  [ButtonVariant.RedPrimary]: disabled ? ColorPalette.Gray400 : ColorPalette.White,
+  [ButtonVariant.RedSecondary]: disabled ? ColorPalette.Gray400 : ColorPalette.Red400,
+  [ButtonVariant.BlueSecondary]: disabled ? ColorPalette.Gray400 : ColorPalette.Blue400,
+  [ButtonVariant.BlackSecondary]: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
 })
 
 export const mapSizeToButtonStyles: Record<ButtonSize, Sx> = {
@@ -125,24 +121,24 @@ export const mapSizeToButtonStyles: Record<ButtonSize, Sx> = {
     borderRadius: "$16",
     flexDirection: "column",
     gap: "$4",
-    height: 56,
-    paddingHorizontal: "$0",
-    paddingVertical: "$8",
+    minHeight: 56,
+    paddingHorizontal: "$8",
+    paddingVertical: "$0",
   },
   [ButtonSize.SmallFlexible]: {
     borderRadius: "$20",
     gap: "$6",
     height: 24,
-    paddingHorizontal: "$0",
-    paddingVertical: "$12",
+    paddingHorizontal: "$12",
+    paddingVertical: "$0",
     width: "100%",
   },
   [ButtonSize.SmallFixed]: {
     borderRadius: "$20",
     gap: "$6",
     height: 24,
-    paddingHorizontal: "$0",
-    paddingVertical: "$12",
+    paddingHorizontal: "$12",
+    paddingVertical: "$0",
   },
 }
 

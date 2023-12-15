@@ -1,8 +1,12 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
+import { Path } from "@client/containers/FooterContainer/config"
+import { ITranslation } from "@client/translations/@types"
+import { StyleProps } from "react-native-reanimated"
 
 export interface IFooterMenuItemProps {
-  href: string
+  href: Path
   iconName: IconName
   isActive?: boolean
-  text: string
+  label: keyof ITranslation
+  style?: StyleProps
 }
