@@ -21,7 +21,7 @@ import { View as RnView } from "react-native"
 
 const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
   {
-    children,
+    text,
     disabled = false,
     iconName,
     onPress,
@@ -59,7 +59,7 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
   return (
     <Pressable onPress={onPress} ref={ref} disabled={disabled} sx={buttonStyles}>
       {_iconPlacement === ButtonIconPlacement.Left && renderIcon()}
-      <Typography variant={mapButtonSizeTextVariant[size]}>{children}</Typography>
+      <Typography variant={mapButtonSizeTextVariant[size]} text={text} />
       {_iconPlacement === ButtonIconPlacement.Right && renderIcon()}
     </Pressable>
   )

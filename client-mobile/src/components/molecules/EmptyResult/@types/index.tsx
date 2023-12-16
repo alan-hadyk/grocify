@@ -3,5 +3,5 @@ import { ITranslation } from "@client/translations/@types"
 
 export interface IEmptyResultProps {
   iconName: IconName
-  children: keyof ITranslation
+  description: keyof ITranslation
 }

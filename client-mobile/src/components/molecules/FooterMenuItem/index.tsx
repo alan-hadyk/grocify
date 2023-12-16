@@ -26,9 +26,9 @@ export const FooterMenuItem: React.FC<IFooterMenuItemProps> = ({
       />
       <Typography
         variant={isActive ? TypographyVariant.FooterMenu : TypographyVariant.FooterMenuInactive}
-        sx={footerMenuItemStyles({ isActive }).label}>
-        {label}
-      </Typography>
+        sx={footerMenuItemStyles({ isActive }).label}
+        text={label}
+      />
     </Pressable>
   </Link>
 )

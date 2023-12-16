@@ -26,7 +26,7 @@ export enum ButtonSize {
 }
 
 export interface IButtonProps {
-  children: keyof ITranslation
+  text: keyof ITranslation
   disabled?: boolean
   iconName?: IconName
   onPress?: (event: GestureResponderEvent) => void

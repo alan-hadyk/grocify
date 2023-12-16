@@ -1,6 +1,6 @@
 import { Sx } from "dripsy"
 
-export const shoppingListsDefaultStyles: {
+export const tilesListDefaultStyles: {
   mainWrapper: Sx
   textWrapper: Sx
 } = {

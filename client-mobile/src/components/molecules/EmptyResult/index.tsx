@@ -6,11 +6,13 @@ import { emptyResultDefaultStyles } from "@client/components/molecules/EmptyResu
 import { ColorPalette } from "@client/theme/@types"
 import { View } from "dripsy"
 
-export const EmptyResult: React.FC<IEmptyResultProps> = ({ iconName, children }) => (
+export const EmptyResult: React.FC<IEmptyResultProps> = ({ iconName, description }) => (
   <View sx={emptyResultDefaultStyles.wrapper}>
     <Icon name={iconName} color={ColorPalette.Gray300} size={64} />
-    <Typography variant={TypographyVariant.Banner} sx={emptyResultDefaultStyles.text}>
-      {children}
-    </Typography>
+    <Typography
+      variant={TypographyVariant.Banner}
+      sx={emptyResultDefaultStyles.text}
+      text={description}
+    />
   </View>
 )

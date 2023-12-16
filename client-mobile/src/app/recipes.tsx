@@ -3,7 +3,7 @@ import { Text } from "react-native"
 
 const RecipesPage: React.FC = () => (
   <ListPageTemplate>
-    <Text>Recipies</Text>
+    <Text>Recipes</Text>
   </ListPageTemplate>
 )
 

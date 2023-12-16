@@ -22,5 +22,5 @@ export enum TypographyVariant {
 export interface ITypographyProps {
   sx?: Sx
   variant?: TypographyVariant
-  children: keyof ITranslation
+  text: keyof ITranslation
 }
