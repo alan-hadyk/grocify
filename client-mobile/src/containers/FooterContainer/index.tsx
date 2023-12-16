@@ -1,31 +1,14 @@
-import { View } from "dripsy"
-import { Link } from "expo-router"
-import { Text } from "react-native"
+import { FooterMenu } from "@client/components/molecules/FooterMenu"
+import { items } from "@client/containers/FooterContainer/config"
+import { usePathname } from "expo-router"
 
-export const FooterContainer: React.FC = () => (
-  <View
-    sx={{
-      alignItems: "center",
-      flexDirection: "row",
-      flexWrap: "nowrap",
-      height: 80,
-      justifyContent: "center",
-    }}>
-    <Link
-      href="/"
-      style={{
-        flexBasis: "50%",
-        height: 80,
-      }}>
-      <Text>Shop lists</Text>
-    </Link>
-    <Link
-      href="/recipes"
-      style={{
-        flexBasis: "50%",
-        height: 80,
-      }}>
-      <Text>Recipes</Text>
-    </Link>
-  </View>
-)
+export const FooterContainer: React.FC = () => {
+  const pathname = usePathname()
+
+  const footerItems = items.map((item) => ({
+    ...item,
+    isActive: pathname === item.href,
+  }))
+
+  return <FooterMenu items={footerItems} />
+}

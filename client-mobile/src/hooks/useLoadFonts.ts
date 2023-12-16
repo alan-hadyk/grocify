@@ -1,7 +1,8 @@
 import { FontFamily } from "@client/theme/@types"
 import {
-  Nunito_300Light,
   Nunito_400Regular,
+  Nunito_500Medium,
+  Nunito_600SemiBold,
   Nunito_700Bold,
   useFonts,
 } from "@expo-google-fonts/nunito"
@@ -13,8 +14,9 @@ import {
  */
 export const useLoadFonts = () => {
   const [fontsLoaded, fontError] = useFonts({
-    [FontFamily.Nunito_300Light]: Nunito_300Light,
     [FontFamily.Nunito_400Regular]: Nunito_400Regular,
+    [FontFamily.Nunito_500Medium]: Nunito_500Medium,
+    [FontFamily.Nunito_600SemiBold]: Nunito_600SemiBold,
     [FontFamily.Nunito_700Bold]: Nunito_700Bold,
   })
 

@@ -8,7 +8,7 @@ export const getlistPageTemplateDefaultStyles = ({
   screenWidth: number
 }): Sx => ({
   alignItems: "center",
-  height: screenHeight - 120,
+  height: screenHeight - 160,
   paddingBottom: "$16",
   paddingTop: "$32",
   paddingX: "$16",

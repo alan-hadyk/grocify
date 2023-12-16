@@ -2,5 +2,10 @@ import { IAppTemplateProps } from "@client/components/templates/AppTemplate/@typ
 import { SafeAreaView } from "react-native"
 
 export const AppTemplate: React.FC<IAppTemplateProps> = ({ children }) => (
-  <SafeAreaView>{children}</SafeAreaView>
+  <SafeAreaView
+    style={{
+      flex: 1,
+    }}>
+    {children}
+  </SafeAreaView>
 )

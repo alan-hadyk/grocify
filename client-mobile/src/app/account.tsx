@@ -1,10 +1,10 @@
 import { ListPageTemplate } from "@client/components/templates/ListPageTemplate"
 import { Text } from "react-native"
 
-const RecipesPage: React.FC = () => (
+const AccountPage: React.FC = () => (
   <ListPageTemplate>
-    <Text>Recipes</Text>
+    <Text>Account</Text>
   </ListPageTemplate>
 )
 
-export default RecipesPage
+export default AccountPage

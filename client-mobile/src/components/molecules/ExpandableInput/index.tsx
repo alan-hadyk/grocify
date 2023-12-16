@@ -65,7 +65,7 @@ export const ExpandableInput: React.FC<IExpandableInputProps> = ({
             autoFocus
             sx={inputStyles}
           />
-          <Icon name={IconName.Clear} onPress={clearInput} {...closeIconStyles} />
+          <Icon name={IconName.Close} onPress={clearInput} {...closeIconStyles} />
         </Fragment>
       )}
     </AnimatedView>
