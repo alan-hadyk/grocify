@@ -1,11 +1,6 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
 import { IFooterMenuItemProps } from "@client/components/molecules/FooterMenuItem/@types"
-
-export enum Path {
-  ShoppingLists = "/",
-  Recipes = "/recipes",
-  Account = "/account",
-}
+import { Path } from "@client/routing/paths"
 
 export const items: IFooterMenuItemProps[] = [
   {

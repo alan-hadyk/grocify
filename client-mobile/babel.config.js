@@ -17,6 +17,7 @@ module.exports = function (api) {
             "@client/hooks": "./src/hooks",
             "@client/icons": "./src/icons",
             "@client/lib": "./src/lib",
+            "@client/routing": "./src/routing",
             "@client/theme": "./src/theme",
             "@client/translations": "./src/translations",
           },

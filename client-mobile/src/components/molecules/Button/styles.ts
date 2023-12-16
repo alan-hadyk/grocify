@@ -123,7 +123,7 @@ export const mapSizeToButtonStyles: Record<ButtonSize, Sx> = {
     gap: "$4",
     minHeight: 56,
     paddingHorizontal: "$8",
-    paddingVertical: "$0",
+    paddingVertical: "$8",
   },
   [ButtonSize.SmallFlexible]: {
     borderRadius: "$20",

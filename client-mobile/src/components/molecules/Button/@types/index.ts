@@ -1,4 +1,5 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
+import { ITranslation } from "@client/translations/@types"
 import { Sx } from "dripsy"
 import { GestureResponderEvent } from "react-native"
 
@@ -25,7 +26,7 @@ export enum ButtonSize {
 }
 
 export interface IButtonProps {
-  children: string
+  children: keyof ITranslation
   disabled?: boolean
   iconName?: IconName
   onPress?: (event: GestureResponderEvent) => void

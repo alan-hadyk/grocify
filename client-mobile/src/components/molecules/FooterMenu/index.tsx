@@ -7,7 +7,7 @@ import { DimensionValue } from "react-native"
 
 export const FooterMenu: React.FC<IFooterMenuProps> = ({ items }) => {
   const { t } = useTranslation()
-  const style = 100 / items.length + "%"
+  const flexBasis = 100 / items.length + "%"
 
   return (
     <View sx={footerMenuDefaultStyles}>
@@ -18,7 +18,7 @@ export const FooterMenu: React.FC<IFooterMenuProps> = ({ items }) => {
           iconName={iconName}
           label={t(label)}
           isActive={isActive}
-          style={{ flexBasis: style as DimensionValue }}
+          style={{ flexBasis: flexBasis as DimensionValue }}
         />
       ))}
     </View>
