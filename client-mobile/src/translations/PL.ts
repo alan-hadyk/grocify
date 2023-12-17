@@ -9,4 +9,6 @@ export const PL: ITranslation = {
   "Add new shopping list": "Dodaj nową listę zakupów",
   Recipes: "Przepisy",
   Account: "Konto",
+  "Recipes will appear here": "Przepisy pojawią się tutaj",
+  "Add new recipe": "Dodaj nowy przepis",
 }

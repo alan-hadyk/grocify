@@ -1,9 +1,9 @@
 import { ListPageTemplate } from "@client/components/templates/ListPageTemplate"
-import { Text } from "react-native"
+import { RecipeListsContainer } from "@client/containers/RecipeListContainer"
 
 const RecipesPage: React.FC = () => (
   <ListPageTemplate>
-    <Text>Recipes</Text>
+    <RecipeListsContainer />
   </ListPageTemplate>
 )
 
