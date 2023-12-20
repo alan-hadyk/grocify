@@ -3,16 +3,17 @@
 ## Table of Contents
 
 1. [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Run the server in watch mode for development](#run-the-server-in-watch-mode-for-development)
+   - [Prerequisites](#prerequisites)
+   - [Run the server in watch mode for development](#run-the-server-in-watch-mode-for-development)
 2. [CLI Scripts](#cli-scripts)
-    - [Watch mode (development)](#watch-mode-development)
-    - [Generate SQL query metadata](#generate-sql-query-metadata)
-    - [Compile for production](#compile-for-production)
-    - [Build this package's and its dependencies' documentation](#build-this-packages-and-its-dependencies-documentation)
-    - [Run a binary (requires build with `cargo build  --release`)](#run-a-binary-requires-build-with-cargo-build---release)
-    - [Run the tests](#run-the-tests)
-    - [Update dependencies in `Cargo.lock`](#update-dependencies-in-cargolock)
+   - [Watch mode (development)](#watch-mode-development)
+   - [Generate SQL query metadata](#generate-sql-query-metadata)
+   - [Compile for production](#compile-for-production)
+   - [Build this package's and its dependencies' documentation](#build-this-packages-and-its-dependencies-documentation)
+   <!-- trunk-ignore(markdownlint/MD051) -->
+   - [Run a binary (requires build with `cargo build  --release`)](#run-a-binary-requires-build-with-cargo-build---release)
+   - [Run the tests](#run-the-tests)
+   - [Update dependencies in `Cargo.lock`](#update-dependencies-in-cargolock)
 
 ## Getting Started
 
