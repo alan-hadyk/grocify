@@ -2,7 +2,7 @@ import { IconName } from "@client/components/atoms/Icon/@types"
 import { Button } from "@client/components/molecules/Button"
 import { TilesList } from "@client/components/molecules/TilesList"
 
-export const RecipeListsContainer: React.FC = () => (
+export const RecipesListsContainer: React.FC = () => (
   <>
     <TilesList
       emptyResultDescription="Recipes will appear here"
