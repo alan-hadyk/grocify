@@ -6,20 +6,16 @@ import { tilesListDefaultStyles } from "@client/components/molecules/TilesList/s
 import { View } from "dripsy"
 
 export const TilesList: React.FC<ITilesList> = ({
-  children,
   emptyResultDescription,
   emptyResultIcon,
   title,
 }) => {
-  const { mainWrapper, textWrapper } = tilesListDefaultStyles
+  const { mainWrapper } = tilesListDefaultStyles
 
   return (
     <View sx={mainWrapper}>
-      <View sx={textWrapper}>
-        <Typography variant={TypographyVariant.Title} text={title} />
-        <EmptyResult iconName={emptyResultIcon} description={emptyResultDescription} />
-      </View>
-      {children}
+      <Typography variant={TypographyVariant.Title} text={title} />
+      <EmptyResult iconName={emptyResultIcon} description={emptyResultDescription} />
     </View>
   )
 }
