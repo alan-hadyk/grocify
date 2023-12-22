@@ -182,7 +182,7 @@ Data model consists of the following main entities:
 5. `shopping_lists` table - Information related to shopping lists, including name and creator:
 
    - `id` UUID (required) - Unique identifier for the shopping list
-   - `name` TEXT (optional) - Name or title of the shopping list
+   - `date` TIMESTAMPTZ (required) - The day on which shopping is scheduled
    - `author_user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the shopping list was created.
 

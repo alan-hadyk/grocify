@@ -8,6 +8,7 @@ import { composeFunctions } from "@client/helpers/functions/composeFunctions"
 import { withAnimatedSplashScreen } from "@client/hoc/withAnimatedSplashScreen"
 import { withClickOutsideProvider } from "@client/hoc/withClickOutsideProvider"
 import { withFonts } from "@client/hoc/withFonts"
+import { withLocalDbInit } from "@client/hoc/withLocalDbInit"
 import { withQueryClientProvider } from "@client/hoc/withQueryClientProvider"
 import { withThemeProvider } from "@client/hoc/withThemeProvider"
 import { Slot, SplashScreen } from "expo-router"
@@ -27,6 +28,7 @@ const _IndexLayout: React.FC = () => (
 
 const IndexLayout = composeFunctions<IAppProps>(
   withQueryClientProvider,
+  withLocalDbInit,
   withThemeProvider,
   withFonts,
   withAnimatedSplashScreen,
