@@ -9,6 +9,7 @@ export const listPageDefaultStyles: {
     height: "100%",
   },
   mainWrapper: {
+    backgroundColor: "$white",
     paddingTop: "$32",
     paddingX: "$16",
   },

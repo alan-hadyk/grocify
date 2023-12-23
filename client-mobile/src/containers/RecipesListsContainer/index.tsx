@@ -9,6 +9,6 @@ export const RecipesListsContainer: React.FC = () => (
       emptyResultIcon={IconName.Recipe}
       title="Recipes"
     />
-    <Button iconName={IconName.Plus} text="Add new recipe" />
+    <Button disabled iconName={IconName.Plus} text="Add new recipe" />
   </>
 )
