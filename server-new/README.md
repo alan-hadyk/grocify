@@ -6,13 +6,7 @@
    - [Prerequisites](#prerequisites)
    - [Run the server in watch mode for development](#run-the-server-in-watch-mode-for-development)
 2. [CLI Scripts](#cli-scripts)
-   - [Watch mode (development)](#watch-mode-development)
-   - [Generate SQL query metadata](#generate-sql-query-metadata)
-   - [Compile for production](#compile-for-production)
-   - [Build this package's and its dependencies' documentation](#build-this-packages-and-its-dependencies-documentation)
-   - [Run a binary (requires build with `cargo build  --release`)](#run-a-binary-requires-build-with-cargo-build---release)
-   - [Run the tests](#run-the-tests)
-   - [Update dependencies in `Cargo.lock`](#update-dependencies-in-cargolock)
+   - [Regenerate code (run this command each time you want to regenerate code)](#regenerate-code-run-this-command-each-time-you-want-to-regenerate code)
 
 ## Getting Started
 
@@ -20,47 +14,22 @@
 
 1.[Install Go](https://go.dev/doc/install)
 
-2.Install `rustfmt`:
+2.Install `Air` for live reloading:
 
-```rust
-rustup component add rustfmt
+```bash
+go install github.com/cosmtrek/air@latest
 ```
 
-3.Install `clippy`
+3.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
 
-```rust
-rustup update
-rustup component add clippy
-```
-
-4.Install `cargo-make`
-
-```rust
-cargo install --force cargo-make
-```
-
-5.Install `cargo-watch`
-
-```rust
-cargo install cargo-watch
-```
-
-6.Install `sqlx-cli`
-
-```rust
-cargo install sqlx-cli
-```
-
-7.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
-
-8.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+4.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 9.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
 
-10.Build the project
+10.Install dependencies
 
-```rust
-cargo build
+```bash
+go mod tidy
 ```
 
 ### **Run the server in watch mode for development**
@@ -69,20 +38,26 @@ cargo build
 
 2.Use the following command in terminal
 
-```rust
-cargo make dev
+```bash
+make dev
 ```
 
 3.If everything works, you should see the following log in the terminal:
 
 ```bash
-INFO grocify_server::server: Server running at 127.0.0.1:3000
+connect to http://localhost:8080/ for GraphQL playground
 ```
 
 ## CLI Scripts
 
-### **Regenerate code (run each time anything changes)**
+### **Regenerate code (run this command each time you want to regenerate code)**
 
-```go
+```bash
 go generate ./...
+```
+
+### **Run Docker containers and server (Unix systems only)**
+
+```bash
+make dev
 ```
