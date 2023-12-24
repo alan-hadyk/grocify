@@ -34,4 +34,5 @@ export interface IButtonProps {
   size?: ButtonSize
   variant?: ButtonVariant
   sx?: Sx
+  isLoading?: boolean
 }

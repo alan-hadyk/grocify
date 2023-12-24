@@ -1,3 +1,5 @@
+import loader from "@client/assets/animations/loader.json"
+import { StyledLottieView } from "@client/components/animations/StyledLottieView"
 import { Icon } from "@client/components/atoms/Icon"
 import { SizeType } from "@client/components/atoms/Icon/@types"
 import { Typography } from "@client/components/atoms/Typography"
@@ -29,6 +31,7 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
     variant = ButtonVariant.GreenPrimary,
     iconPlacement = ButtonIconPlacement.Right,
     sx,
+    isLoading = false,
   },
   ref,
 ) => {
@@ -58,9 +61,23 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
 
   return (
     <Pressable onPress={onPress} ref={ref} disabled={disabled} sx={buttonStyles}>
-      {_iconPlacement === ButtonIconPlacement.Left && renderIcon()}
-      <Typography variant={mapButtonSizeTextVariant[size]} text={text} />
-      {_iconPlacement === ButtonIconPlacement.Right && renderIcon()}
+      {isLoading ? (
+        <StyledLottieView
+          source={loader}
+          autoPlay
+          loop
+          sx={{
+            height: 20,
+            width: 20,
+          }}
+        />
+      ) : (
+        <>
+          {_iconPlacement === ButtonIconPlacement.Left && renderIcon()}
+          <Typography variant={mapButtonSizeTextVariant[size]} text={text} />
+          {_iconPlacement === ButtonIconPlacement.Right && renderIcon()}
+        </>
+      )}
     </Pressable>
   )
 }

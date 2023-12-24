@@ -12,7 +12,9 @@ export const PL: ITranslation = {
   "Recipes will appear here": "Przepisy pojawią się tutaj",
   "Add new recipe": "Dodaj nowy przepis",
   Delete: "Usuń",
-  Collaborate: "Udostępnij",
+  Collab: "Współpracuj",
   Reuse: "Ponów",
   "Grocery items will appear here": "Artykuły spoywcze pojawią się tutaj",
+  Recipe: "Przepis",
+  "Add grocery item": "Dodaj produkt",
 }

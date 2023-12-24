@@ -29,28 +29,24 @@ export const DetailsHeader: React.FC = () => {
         onPress={onBackButtonClick}
       />
       <View sx={buttonWrapper}>
-        <Button
+        <IconButton
           iconName={IconName.Remove}
-          text="Delete"
-          variant={ButtonVariant.RedSecondary}
-          size={ButtonSize.SmallFixed}
-          iconPlacement={ButtonIconPlacement.Left}
+          size={IconButtonSize.Medium}
+          variant={IconButtonVariant.RedSecondary}
           disabled
         />
         <Button
           iconName={IconName.Copy}
-          text="Collaborate"
+          text="Collab"
           variant={ButtonVariant.BlueSecondary}
-          size={ButtonSize.SmallFixed}
+          size={ButtonSize.LargeFixed}
           iconPlacement={ButtonIconPlacement.Left}
           disabled
         />
-        <Button
+        <IconButton
           iconName={IconName.Reuse}
-          text="Reuse"
-          variant={ButtonVariant.GreenSecondary}
-          size={ButtonSize.SmallFixed}
-          iconPlacement={ButtonIconPlacement.Left}
+          size={IconButtonSize.Medium}
+          variant={IconButtonVariant.GreenSecondary}
           disabled
         />
       </View>
