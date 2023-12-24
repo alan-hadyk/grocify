@@ -1,0 +1,88 @@
+# Grocify - server
+
+## Table of Contents
+
+1. [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Run the server in watch mode for development](#run-the-server-in-watch-mode-for-development)
+2. [CLI Scripts](#cli-scripts)
+   - [Watch mode (development)](#watch-mode-development)
+   - [Generate SQL query metadata](#generate-sql-query-metadata)
+   - [Compile for production](#compile-for-production)
+   - [Build this package's and its dependencies' documentation](#build-this-packages-and-its-dependencies-documentation)
+   - [Run a binary (requires build with `cargo build  --release`)](#run-a-binary-requires-build-with-cargo-build---release)
+   - [Run the tests](#run-the-tests)
+   - [Update dependencies in `Cargo.lock`](#update-dependencies-in-cargolock)
+
+## Getting Started
+
+### **Prerequisites**
+
+1.[Install Go](https://go.dev/doc/install)
+
+2.Install `rustfmt`:
+
+```rust
+rustup component add rustfmt
+```
+
+3.Install `clippy`
+
+```rust
+rustup update
+rustup component add clippy
+```
+
+4.Install `cargo-make`
+
+```rust
+cargo install --force cargo-make
+```
+
+5.Install `cargo-watch`
+
+```rust
+cargo install cargo-watch
+```
+
+6.Install `sqlx-cli`
+
+```rust
+cargo install sqlx-cli
+```
+
+7.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
+
+8.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+
+9.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
+
+10.Build the project
+
+```rust
+cargo build
+```
+
+### **Run the server in watch mode for development**
+
+1.Run Docker Desktop
+
+2.Use the following command in terminal
+
+```rust
+cargo make dev
+```
+
+3.If everything works, you should see the following log in the terminal:
+
+```bash
+INFO grocify_server::server: Server running at 127.0.0.1:3000
+```
+
+## CLI Scripts
+
+### **Regenerate code (run each time anything changes)**
+
+```go
+go generate ./...
+```

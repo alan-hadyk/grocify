@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db:
+    container_name: db
+    image: postgres:13.3
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: grocify_database
+    command: postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
+    volumes:
+      - ./certs:/var/lib/postgresql
+
+  redis:
+    container_name: redis
+    image: redis
+    command: redis-server --requirepass password
+    ports:
+      - 6379:6379
