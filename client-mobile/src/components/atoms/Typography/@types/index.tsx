@@ -1,4 +1,5 @@
 import { ITranslation } from "@client/translations/@types"
+import dayjs from "dayjs"
 import { Sx } from "dripsy"
 
 export enum TypographyVariant {
@@ -19,8 +20,16 @@ export enum TypographyVariant {
   DatePickerMonth,
 }
 
-export interface ITypographyProps {
+export type ITypographyProps = {
   sx?: Sx
   variant?: TypographyVariant
-  text: keyof ITranslation
-}
+} & (
+  | {
+      dateFormat: string
+      text: dayjs.Dayjs
+    }
+  | {
+      dateFormat?: string
+      text: keyof ITranslation
+    }
+)

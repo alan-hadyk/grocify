@@ -32,49 +32,92 @@ export const mapSizeToIconButtonStyles = {
   },
 }
 
-export const mapVariantToIconButtonStyles: Record<
+export const mapVariantToIconButtonStyles = ({
+  disabled,
+}: {
+  disabled: boolean
+}): Record<
   IconButtonVariant,
   {
     icon: Pick<IIconProps, "color">
     wrapper: Sx
   }
-> = {
+> => ({
   [IconButtonVariant.GraySecondary]: {
-    icon: {
-      color: ColorPalette.Black400,
-    },
+    icon: disabled
+      ? {
+          color: ColorPalette.Gray400,
+        }
+      : {
+          color: ColorPalette.Black400,
+        },
     wrapper: {
       backgroundColor: "$white",
-      borderColor: "$gray100",
       borderWidth: "$1",
+      ...(disabled
+        ? {
+            borderColor: "$gray300",
+          }
+        : {
+            borderColor: "$gray100",
+          }),
     },
   },
   [IconButtonVariant.GreenPrimary]: {
-    icon: {
-      color: ColorPalette.Black400,
-    },
-    wrapper: {
-      backgroundColor: "$green400",
-    },
+    icon: disabled
+      ? {
+          color: ColorPalette.Gray400,
+        }
+      : {
+          color: ColorPalette.Black400,
+        },
+    wrapper: disabled
+      ? {
+          backgroundColor: "$gray100",
+        }
+      : {
+          backgroundColor: "$green400",
+        },
   },
   [IconButtonVariant.GreenSecondary]: {
-    icon: {
-      color: ColorPalette.Black400,
-    },
+    icon: disabled
+      ? {
+          color: ColorPalette.Gray400,
+        }
+      : {
+          color: ColorPalette.Black400,
+        },
     wrapper: {
       backgroundColor: "$white",
-      borderColor: "$green500",
       borderWidth: "$1",
+      ...(disabled
+        ? {
+            borderColor: "$gray300",
+          }
+        : {
+            borderColor: "$green500",
+          }),
     },
   },
   [IconButtonVariant.RedSecondary]: {
-    icon: {
-      color: ColorPalette.Red400,
-    },
+    icon: disabled
+      ? {
+          color: ColorPalette.Gray400,
+        }
+      : {
+          color: ColorPalette.Red400,
+        },
     wrapper: {
       backgroundColor: "$white",
-      borderColor: "$red400",
       borderWidth: "$1",
+      ...(disabled
+        ? {
+            borderColor: "$gray300",
+            color: "$gray400",
+          }
+        : {
+            borderColor: "$red400",
+          }),
     },
   },
-}
+})

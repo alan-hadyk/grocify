@@ -10,6 +10,12 @@ export enum IconName {
   List,
   Plus,
   Recipe,
+  ArrowLeft,
+  Remove,
+  Copy,
+  Reuse,
+  Calendar,
+  Burger,
 }
 
 export enum SizeType {

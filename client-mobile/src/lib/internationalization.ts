@@ -6,10 +6,10 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 
 const resources = {
-  EN: {
+  "en-US": {
     translation: EN,
   },
-  PL: {
+  pl_PL: {
     translation: PL,
   },
 }
@@ -19,7 +19,7 @@ const resources = {
  */
 // eslint-disable-next-line import/no-named-as-default-member
 i18n.use(initReactI18next).init({
-  fallbackLng: PreferredLang.Pl,
+  fallbackLng: PreferredLang.En,
   interpolation: {
     escapeValue: false, // Not needed for React
   },
