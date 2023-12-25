@@ -24,9 +24,9 @@ go install github.com/cosmtrek/air@latest
 
 4.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-9.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
+5.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
 
-10.Install dependencies
+6.Install dependencies
 
 ```bash
 go mod tidy
