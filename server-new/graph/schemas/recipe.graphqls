@@ -1,0 +1,31 @@
+type Recipe {
+  id: ID!
+  title: String!
+  description: String
+  servingSize: Int!
+  author: User!
+  ingredients: [Ingredient!]!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  recipes: [Recipe!]!
+  recipe(id: ID!): Recipe
+}
+
+extend type Mutation {
+  createRecipe(input: CreateRecipeInput!): Recipe!
+  updateRecipe(id: ID!, input: UpdateRecipeInput!): Recipe!
+}
+
+input CreateRecipeInput {
+  title: String!
+  description: String
+  servingSize: Int!
+}
+
+input UpdateRecipeInput {
+  title: String
+  description: String
+  servingSize: Int
+}

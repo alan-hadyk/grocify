@@ -1,28 +1,18 @@
-# GraphQL schema example
+# GraphQL schema
 #
 # https://gqlgen.com/getting-started/
 
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
-}
+# import * from "schemas/user.graphqls"
+# import * from "schemas/recipe.graphqls"
+# import * from "schemas/ingredient.graphqls"
+# import * from "schemas/unit.graphqls"
+# import * from "schemas/shoppingList.graphqls"
+# import * from "schemas/notification.graphqls"
 
-type User {
-  id: ID!
-  name: String!
-}
+type Query {}
 
-type Query {
-  todos: [Todo!]!
-}
+type Mutation {}
 
-input NewTodo {
-  text: String!
-  userId: String!
-}
+# Global scalars
 
-type Mutation {
-  createTodo(input: NewTodo!): Todo!
-}
+scalar DateTime

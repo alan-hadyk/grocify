@@ -1,0 +1,27 @@
+type Ingredient {
+  id: ID!
+  name: String!
+  unit: Unit!
+  author: User!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  ingredients: [Ingredient!]!
+  ingredient(id: ID!): Ingredient
+}
+
+extend type Mutation {
+  createIngredient(input: CreateIngredientInput!): Ingredient!
+  updateIngredient(id: ID!, input: UpdateIngredientInput!): Ingredient!
+}
+
+input CreateIngredientInput {
+  name: String!
+  unit: ID!
+}
+
+input UpdateIngredientInput {
+  name: String
+  unit: ID
+}

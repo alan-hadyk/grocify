@@ -1,0 +1,33 @@
+enum Language {
+  En
+  Pl
+}
+
+type User {
+  id: ID!
+  email: String!
+  preferredLanguage: Language!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  users: [User!]!
+  user(id: ID!): User
+}
+
+extend type Mutation {
+  createUser(input: CreateUserInput!): User!
+  updateUser(input: UpdateUserInput!): User!
+}
+
+input CreateUserInput {
+  password: String!
+  email: String!
+  preferredLanguage: Language!
+}
+
+input UpdateUserInput {
+  password: String
+  email: String
+  preferredLanguage: String
+}
