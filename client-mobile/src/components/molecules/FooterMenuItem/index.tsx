@@ -1,5 +1,5 @@
 import { Icon } from "@client/components/atoms/Icon"
-import { SizeType } from "@client/components/atoms/Icon/@types"
+import { IconSizeType } from "@client/components/atoms/Icon/@types"
 import { Typography } from "@client/components/atoms/Typography"
 import { TypographyVariant } from "@client/components/atoms/Typography/@types"
 import { IFooterMenuItemProps } from "@client/components/molecules/FooterMenuItem/@types"
@@ -21,7 +21,7 @@ export const FooterMenuItem: React.FC<IFooterMenuItemProps> = ({
         name={iconName}
         color={isActive ? ColorPalette.Black400 : ColorPalette.Gray300}
         size={32}
-        sizeType={SizeType.Height}
+        sizeType={IconSizeType.Height}
         backgroundColor={isActive ? ColorPalette.Green400 : ColorPalette.White}
       />
       <Typography

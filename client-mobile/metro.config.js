@@ -15,7 +15,5 @@ module.exports = (() => {
     sourceExts: [...resolver.sourceExts, "svg"],
   }
 
-  config.resolver.assetExts.push("db")
-
   return config
 })()

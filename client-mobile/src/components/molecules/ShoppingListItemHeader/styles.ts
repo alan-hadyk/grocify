@@ -1,6 +1,6 @@
 import { Sx } from "dripsy"
 
-export const detailsHeaderDefaultStyles: {
+export const shoppingListItemHeaderDefaultStyles: {
   buttonWrapper: Sx
   wrapper: Sx
 } = {
@@ -8,14 +8,14 @@ export const detailsHeaderDefaultStyles: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
-    gap: "$8",
+    gap: "$12",
   },
   wrapper: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
-    gap: "$8",
+    gap: "$12",
     justifyContent: "space-between",
   },
 }

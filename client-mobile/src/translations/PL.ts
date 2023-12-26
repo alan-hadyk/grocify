@@ -11,10 +11,9 @@ export const PL: ITranslation = {
   Account: "Konto",
   "Recipes will appear here": "Przepisy pojawią się tutaj",
   "Add new recipe": "Dodaj nowy przepis",
-  Delete: "Usuń",
   Collab: "Współpracuj",
-  Reuse: "Ponów",
-  "Grocery items will appear here": "Artykuły spoywcze pojawią się tutaj",
+  "Grocery items will appear here": "Produkty pojawią się tutaj",
   Recipe: "Przepis",
   "Add grocery item": "Dodaj produkt",
+  "Adding new shopping list...": "Dodawanie nowej listy zakupów...",
 }

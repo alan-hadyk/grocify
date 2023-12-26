@@ -6,11 +6,11 @@ import { Path } from "@client/routing/paths"
 import { router } from "expo-router"
 
 export const ShoppingListsContainer: React.FC = () => {
-  const { isLoading, mutateAsync: createShoppingList } = useCreateShoppingList({
+  const { isLoading, mutate: createShoppingList } = useCreateShoppingList({
     onSuccess: (data) => {
       router.push({
         params: { id: data.id },
-        pathname: Path.ShoppingList,
+        pathname: Path.ShoppingListItem,
       })
     },
   })
@@ -25,7 +25,7 @@ export const ShoppingListsContainer: React.FC = () => {
 
       <Button
         iconName={IconName.Plus}
-        text="Add new shopping list"
+        text={isLoading ? "Adding new shopping list..." : "Add new shopping list"}
         isLoading={isLoading}
         onPress={() => createShoppingList()}
       />

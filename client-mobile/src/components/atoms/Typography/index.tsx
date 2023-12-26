@@ -16,7 +16,6 @@ export const Typography: React.FC<ITypographyProps> = ({
   const Component = variantComponents[variant]
   const { t } = useTranslation()
 
-  // const content = text instanceof dayjs.Dayjs ? text.format(dateFormat) : t(text)
   const content = typeof text === "string" ? t(text) : text.format(dateFormat)
 
   const typographyStyles: Sx = {

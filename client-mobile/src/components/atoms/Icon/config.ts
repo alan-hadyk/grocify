@@ -25,7 +25,7 @@ export const icons: Record<
   [IconName.ArrowLeft]: {
     Component: ArrowLeftIcon,
     height: 8,
-    width: 14,
+    width: 15,
   },
   [IconName.User]: {
     Component: UserIcon,
@@ -65,26 +65,26 @@ export const icons: Record<
   [IconName.Remove]: {
     Component: RemoveIcon,
     height: 12,
-    width: 10,
+    width: 11,
   },
   [IconName.Reuse]: {
     Component: ReuseIcon,
-    height: 10,
-    width: 12,
+    height: 12,
+    width: 13,
   },
   [IconName.Copy]: {
     Component: CopyIcon,
     height: 12,
-    width: 10,
+    width: 12,
   },
   [IconName.Calendar]: {
     Component: CalendarIcon,
-    height: 13,
-    width: 14,
+    height: 14,
+    width: 15,
   },
   [IconName.Burger]: {
     Component: BurgerIcon,
     height: 64,
-    width: 72,
+    width: 74,
   },
 }

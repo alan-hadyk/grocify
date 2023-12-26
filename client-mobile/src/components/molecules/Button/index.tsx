@@ -1,7 +1,7 @@
 import loader from "@client/assets/animations/loader.json"
 import { StyledLottieView } from "@client/components/animations/StyledLottieView"
 import { Icon } from "@client/components/atoms/Icon"
-import { SizeType } from "@client/components/atoms/Icon/@types"
+import { IconSizeType } from "@client/components/atoms/Icon/@types"
 import { Typography } from "@client/components/atoms/Typography"
 import {
   ButtonIconPlacement,
@@ -35,9 +35,10 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
   },
   ref,
 ) => {
+  const { loader: loaderStyles, wrapper } = buttonDefaultStyles
   const buttonStyles = {
-    ...buttonDefaultStyles,
-    ...mapVariantToButtonStyles({ disabled })[variant],
+    ...wrapper,
+    ...mapVariantToButtonStyles({ disabled: disabled || isLoading })[variant],
     ...mapSizeToButtonStyles[size],
     ...sx,
   }
@@ -46,38 +47,26 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
     iconName ? (
       <Icon
         name={iconName}
-        color={mapButtonVariantToIconStyles({ disabled })[variant]}
+        color={mapButtonVariantToIconStyles({ disabled: disabled || isLoading })[variant]}
         size={mapSizeToButtonIconStyles[size]}
         sizeType={
           [ButtonSize.LargeFlexible, ButtonSize.LargeFixed].includes(size)
-            ? SizeType.Height
-            : SizeType.Auto
+            ? IconSizeType.Height
+            : IconSizeType.Auto
         }
       />
     ) : null
+
+  const renderLoader = () => <StyledLottieView source={loader} autoPlay loop sx={loaderStyles} />
 
   const _iconPlacement =
     size === ButtonSize.LargeRectangular ? ButtonIconPlacement.Left : iconPlacement
 
   return (
-    <Pressable onPress={onPress} ref={ref} disabled={disabled} sx={buttonStyles}>
-      {isLoading ? (
-        <StyledLottieView
-          source={loader}
-          autoPlay
-          loop
-          sx={{
-            height: 20,
-            width: 20,
-          }}
-        />
-      ) : (
-        <>
-          {_iconPlacement === ButtonIconPlacement.Left && renderIcon()}
-          <Typography variant={mapButtonSizeTextVariant[size]} text={text} />
-          {_iconPlacement === ButtonIconPlacement.Right && renderIcon()}
-        </>
-      )}
+    <Pressable onPress={onPress} ref={ref} disabled={disabled || isLoading} sx={buttonStyles}>
+      {_iconPlacement === ButtonIconPlacement.Left && (isLoading ? renderLoader() : renderIcon())}
+      <Typography variant={mapButtonSizeTextVariant[size]} text={text} />
+      {_iconPlacement === ButtonIconPlacement.Right && (isLoading ? renderLoader() : renderIcon())}
     </Pressable>
   )
 }

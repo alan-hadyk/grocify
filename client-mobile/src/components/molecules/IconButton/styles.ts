@@ -44,80 +44,41 @@ export const mapVariantToIconButtonStyles = ({
   }
 > => ({
   [IconButtonVariant.GraySecondary]: {
-    icon: disabled
-      ? {
-          color: ColorPalette.Gray400,
-        }
-      : {
-          color: ColorPalette.Black400,
-        },
+    icon: {
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+    },
     wrapper: {
       backgroundColor: "$white",
+      borderColor: disabled ? "$gray300" : "$gray100",
       borderWidth: "$1",
-      ...(disabled
-        ? {
-            borderColor: "$gray300",
-          }
-        : {
-            borderColor: "$gray100",
-          }),
     },
   },
   [IconButtonVariant.GreenPrimary]: {
-    icon: disabled
-      ? {
-          color: ColorPalette.Gray400,
-        }
-      : {
-          color: ColorPalette.Black400,
-        },
-    wrapper: disabled
-      ? {
-          backgroundColor: "$gray100",
-        }
-      : {
-          backgroundColor: "$green400",
-        },
+    icon: {
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+    },
+    wrapper: {
+      backgroundColor: disabled ? "$gray100" : "$green400",
+    },
   },
   [IconButtonVariant.GreenSecondary]: {
-    icon: disabled
-      ? {
-          color: ColorPalette.Gray400,
-        }
-      : {
-          color: ColorPalette.Black400,
-        },
+    icon: {
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
+    },
     wrapper: {
       backgroundColor: "$white",
+      borderColor: disabled ? "$gray300" : "$green500",
       borderWidth: "$1",
-      ...(disabled
-        ? {
-            borderColor: "$gray300",
-          }
-        : {
-            borderColor: "$green500",
-          }),
     },
   },
   [IconButtonVariant.RedSecondary]: {
-    icon: disabled
-      ? {
-          color: ColorPalette.Gray400,
-        }
-      : {
-          color: ColorPalette.Red400,
-        },
+    icon: {
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Red400,
+    },
     wrapper: {
       backgroundColor: "$white",
+      borderColor: disabled ? "$gray300" : "$red400",
       borderWidth: "$1",
-      ...(disabled
-        ? {
-            borderColor: "$gray300",
-            color: "$gray400",
-          }
-        : {
-            borderColor: "$red400",
-          }),
     },
   },
 })

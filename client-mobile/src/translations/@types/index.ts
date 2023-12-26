@@ -8,10 +8,9 @@ export interface ITranslation {
   Account: string
   "Recipes will appear here": string
   "Add new recipe": string
-  Delete: string
   Collab: string
-  Reuse: string
   "Grocery items will appear here": string
   Recipe: string
   "Add grocery item": string
+  "Adding new shopping list...": string
 }

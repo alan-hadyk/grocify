@@ -10,12 +10,12 @@ export class ShoppingListModel {
   static initSchema = async () =>
     databaseClient.transactionAsync(async (tx) => {
       await tx.executeSqlAsync(`
-                CREATE TABLE IF NOT EXISTS shopping_lists (
-                    id TEXT PRIMARY KEY,
-                    date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-                );
-          `)
+        CREATE TABLE IF NOT EXISTS shopping_lists (
+          id TEXT PRIMARY KEY,
+          date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+          created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        );
+      `)
 
       console.log("shopping_lists table initialized")
     })

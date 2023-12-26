@@ -18,7 +18,7 @@ export enum IconName {
   Burger,
 }
 
-export enum SizeType {
+export enum IconSizeType {
   Height,
   Width,
   Auto,
@@ -30,12 +30,12 @@ export type IIconProps = Partial<Omit<SvgProps, "color" | "height" | "width">> &
   name: IconName
   onPress?: (event: GestureResponderEvent) => void
   size: number
-  sizeType?: SizeType
+  sizeType?: IconSizeType
 }
 
 export interface IIconState {
   size: number
   height: number
   width: number
-  sizeType?: SizeType
+  sizeType?: IconSizeType
 }

@@ -4,11 +4,20 @@ import { ButtonSize, ButtonVariant } from "@client/components/molecules/Button/@
 import { ColorPalette } from "@client/theme/@types"
 import { Sx } from "dripsy"
 
-export const buttonDefaultStyles: Sx = {
-  alignItems: "center",
-  flexDirection: "row",
-  flexWrap: "nowrap",
-  justifyContent: "center",
+export const buttonDefaultStyles: {
+  loader: Sx
+  wrapper: Sx
+} = {
+  loader: {
+    height: 20,
+    width: 20,
+  },
+  wrapper: {
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "center",
+  },
 }
 
 export const mapVariantToButtonStyles = ({

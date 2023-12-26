@@ -28,7 +28,7 @@ const _IndexLayout: React.FC = () => (
         headerShown: false,
       }}>
       <Stack.Screen
-        name={Path.ShoppingList.replace("/shopping-lists", "shopping-lists")}
+        name={Path.ShoppingListItem.replace("/shopping-lists", "shopping-lists")}
         // options={{
         //   animation: "slide_from_bottom",
         //   presentation: "modal",

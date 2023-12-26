@@ -1,3 +1,4 @@
+import { IUseAsyncEffect } from "@client/hooks/@types/useAsyncEffect"
 import { useEffect, useState, useMemo, useRef } from "react"
 
 /**
@@ -7,7 +8,7 @@ export const useAsyncEffect = (
   mountCallback: () => Promise<any>,
   unmountCallback: () => Promise<any>,
   deps: any[] = [],
-): UseAsyncEffectResult => {
+): IUseAsyncEffect => {
   const isMounted = useRef(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<unknown>(undefined)
@@ -68,10 +69,4 @@ export const useAsyncEffect = (
   }, deps)
 
   return useMemo(() => ({ error, isLoading, result }), [result, error, isLoading])
-}
-
-export interface UseAsyncEffectResult {
-  result: any
-  error: any
-  isLoading: boolean
 }

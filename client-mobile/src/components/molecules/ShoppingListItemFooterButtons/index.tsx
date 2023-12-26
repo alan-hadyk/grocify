@@ -1,11 +1,11 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
 import { Button } from "@client/components/molecules/Button"
 import { ButtonSize, ButtonVariant } from "@client/components/molecules/Button/@types"
-import { shoppingListButtonsDefaultStyles } from "@client/components/molecules/ShoppingListButtons/styles"
+import { shoppingListItemFooterButtonsDefaultStyle } from "@client/components/molecules/ShoppingListItemFooterButtons/styles"
 import { View } from "dripsy"
 
-export const ShoppingListButtons: React.FC = () => {
-  const { button, recipeButton, wrapper } = shoppingListButtonsDefaultStyles
+export const ShoppingListItemFooterButtons: React.FC = () => {
+  const { button, recipeButton, wrapper } = shoppingListItemFooterButtonsDefaultStyle
 
   return (
     <View sx={wrapper}>

@@ -18,8 +18,6 @@ export const withTranslations = (Component: React.FC<IAppProps>) => (props: IApp
       NativeModules.SettingsManager.settings.AppleLanguages[0] ||
       NativeModules.I18nManager.localeIdentifier
 
-    console.log({ locale })
-
     i18n.changeLanguage(locale)
   }, [i18n])
 
