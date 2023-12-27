@@ -2,4 +2,4 @@
 
 dev:
 	docker-compose -p grocify-server -f docker-compose.dev.yml up --build -d
-	air -c .air.toml
+	go run github.com/cosmtrek/air -c .air.toml

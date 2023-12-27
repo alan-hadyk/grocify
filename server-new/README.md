@@ -6,7 +6,6 @@
    - [Prerequisites](#prerequisites)
    - [Run the server in watch mode for development](#run-the-server-in-watch-mode-for-development)
 2. [CLI Scripts](#cli-scripts)
-   - [Regenerate code (run this command each time you want to regenerate code)](#regenerate-code-run-this-command-each-time-you-want-to-regenerate code)
 
 ## Getting Started
 
@@ -14,19 +13,13 @@
 
 1.[Install Go](https://go.dev/doc/install)
 
-2.Install `Air` for live reloading:
+2.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
 
-```bash
-go install github.com/cosmtrek/air@latest
-```
+3.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-3.Install [Trunk Check](https://marketplace.visualstudio.com/items?itemName=Trunk.io) VS Code extension
+4.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
 
-4.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-
-5.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
-
-6.Install dependencies
+5.Install dependencies
 
 ```bash
 go mod tidy
