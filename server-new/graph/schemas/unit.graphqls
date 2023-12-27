@@ -12,6 +12,7 @@ extend type Query {
 
 extend type Mutation {
   createUnit(input: CreateUnitInput!): Unit!
+  deleteUnit(id: ID!): Boolean
   updateUnit(id: ID!, input: UpdateUnitInput!): Unit!
 }
 

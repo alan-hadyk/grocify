@@ -13,6 +13,7 @@ extend type Query {
 
 extend type Mutation {
   createIngredient(input: CreateIngredientInput!): Ingredient!
+  deleteIngredient(id: ID!): Boolean
   updateIngredient(id: ID!, input: UpdateIngredientInput!): Ingredient!
 }
 

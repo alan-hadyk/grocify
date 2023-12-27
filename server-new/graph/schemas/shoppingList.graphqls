@@ -12,7 +12,7 @@ type ShoppingListRecipe {
   description: String
   servingSize: Int!
   amountOfDays: Int!
-  ingredients: [Ingredient!]!
+  ingredients: [RecipeIngredient!]!
   createdAt: DateTime!
 }
 
@@ -32,51 +32,28 @@ extend type Query {
 
 extend type Mutation {
   createShoppingList(input: CreateShoppingListInput!): ShoppingList!
+  deleteShoppingList(id: ID!): Boolean
   updateShoppingList(id: ID!, input: UpdateShoppingListInput!): ShoppingList!
-  
-  addIngredientsToShoppingList(input: AddIngredientsToShoppingListInput!): ShoppingList!
-  updateIngredientsInShoppingList(input: UpdateIngredientsInShoppingListInput!): ShoppingList!
-  removeIngredientsFromShoppingList(input: RemoveIngredientsFromShoppingListInput!): ShoppingList!
-  
-  addRecipeToShoppingList(input: AddRecipeToShoppingListInput!): ShoppingList!
-  removeRecipeFromShoppingList(input: RemoveRecipeFromShoppingListInput!): ShoppingList!
+}
+
+type ShoppingListIngredientCreateUpdate {
+  id: ID!
+  quantity: Float!
+}
+
+type ShoppingListRecipeCreateUpdate {
+  id: ID!
+  amountOfDays: Int!
 }
 
 input CreateShoppingListInput {
   date: DateTime!
+  ingredients: [ShoppingListIngredientCreateUpdate!]
+  recipes: [ShoppingListRecipeCreateUpdate!]
 }
 
 input UpdateShoppingListInput {
   date: DateTime
-}
-
-input AddIngredientsToShoppingListInput {
-  shoppingListId: ID!
-  ingredients: [IngredientQuantityInput!]!
-}
-
-input UpdateIngredientsInShoppingListInput {
-  shoppingListId: ID!
-  ingredients: [IngredientQuantityInput!]!
-}
-
-input RemoveIngredientsFromShoppingListInput {
-  shoppingListId: ID!
-  ingredientIds: [ID!]!
-}
-
-input IngredientQuantityInput {
-  ingredientId: ID!
-  quantity: Float!
-}
-
-input AddRecipeToShoppingListInput {
-  amountOfDays: Int!
-  shoppingListId: ID!
-  recipeId: ID!
-}
-
-input RemoveRecipeFromShoppingListInput {
-  shoppingListId: ID!
-  recipeId: ID!
+  ingredients: [ShoppingListIngredientCreateUpdate!]
+  recipes: [ShoppingListRecipeCreateUpdate!]
 }
