@@ -1,6 +1,6 @@
 export enum Path {
-  ShoppingLists = "/",
+  ShoppingLists = "/home",
   ShoppingListItem = "/shopping-lists/[id]",
-  Recipes = "/recipes",
-  Account = "/account",
+  Recipes = "/home/recipes",
+  Account = "/home/account",
 }

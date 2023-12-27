@@ -19,5 +19,3 @@ export const items: IFooterMenuItemProps[] = [
     label: "Account",
   },
 ]
-
-export const itemPaths = items.map(({ href }) => href)
