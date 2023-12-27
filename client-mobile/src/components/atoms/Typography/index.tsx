@@ -8,6 +8,7 @@ import { Sx } from "dripsy"
 import { useTranslation } from "react-i18next"
 
 export const Typography: React.FC<ITypographyProps> = ({
+  dateFormat,
   variant = TypographyVariant.Text,
   sx,
   text,
@@ -15,11 +16,13 @@ export const Typography: React.FC<ITypographyProps> = ({
   const Component = variantComponents[variant]
   const { t } = useTranslation()
 
+  const content = typeof text === "string" ? t(text) : text.format(dateFormat)
+
   const typographyStyles: Sx = {
     ...typographyDefaultStyles,
     ...mapVariantToTypographyStyles[variant],
     ...sx,
   }
 
-  return <Component sx={typographyStyles}>{t(text)}</Component>
+  return <Component sx={typographyStyles}>{content}</Component>
 }

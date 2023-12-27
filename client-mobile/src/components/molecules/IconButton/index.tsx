@@ -14,6 +14,7 @@ import React from "react"
 import { View as RnView, Pressable } from "react-native"
 
 export const IconButton: React.ForwardRefRenderFunction<RnView, IIconButtonProps> = ({
+  disabled = false,
   onPress,
   iconName,
   size = IconButtonSize.Small,
@@ -23,13 +24,13 @@ export const IconButton: React.ForwardRefRenderFunction<RnView, IIconButtonProps
   const wrapperStyles: Sx = {
     ...iconButtonDefaultStyles.wrapper,
     ...mapSizeToIconButtonStyles[size].wrapper,
-    ...mapVariantToIconButtonStyles[variant].wrapper,
+    ...mapVariantToIconButtonStyles({ disabled })[variant].wrapper,
     ...sx,
   }
 
   const iconProps = {
     ...mapSizeToIconButtonStyles[size].icon,
-    ...mapVariantToIconButtonStyles[variant].icon,
+    ...mapVariantToIconButtonStyles({ disabled })[variant].icon,
   }
 
   return (

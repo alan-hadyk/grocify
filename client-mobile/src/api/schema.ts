@@ -34,8 +34,8 @@ export type MutationCreateUserArgs = {
 }
 
 export enum PreferredLang {
-  En = "EN",
-  Pl = "PL",
+  En = "en-US",
+  Pl = "pl_PL",
 }
 
 export type Query = {

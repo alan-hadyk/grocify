@@ -4,11 +4,20 @@ import { ButtonSize, ButtonVariant } from "@client/components/molecules/Button/@
 import { ColorPalette } from "@client/theme/@types"
 import { Sx } from "dripsy"
 
-export const buttonDefaultStyles: Sx = {
-  alignItems: "center",
-  flexDirection: "row",
-  flexWrap: "nowrap",
-  justifyContent: "center",
+export const buttonDefaultStyles: {
+  loader: Sx
+  wrapper: Sx
+} = {
+  loader: {
+    height: 20,
+    width: 20,
+  },
+  wrapper: {
+    alignItems: "center",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "center",
+  },
 }
 
 export const mapVariantToButtonStyles = ({
@@ -16,75 +25,27 @@ export const mapVariantToButtonStyles = ({
 }: {
   disabled: boolean
 }): Record<ButtonVariant, Sx> => ({
-  [ButtonVariant.GreenPrimary]: disabled
-    ? {
-        backgroundColor: "$gray100",
-        color: "$gray400",
-      }
-    : {
-        backgroundColor: "$green400",
-        color: "$black400",
-      },
+  [ButtonVariant.GreenPrimary]: { backgroundColor: disabled ? "$gray100" : "$green400" },
   [ButtonVariant.GreenSecondary]: {
     backgroundColor: "$white",
+    borderColor: disabled ? "$gray300" : "$green500",
     borderWidth: "$1",
-    ...(disabled
-      ? {
-          borderColor: "$gray300",
-          color: "$gray400",
-        }
-      : {
-          borderColor: "$green500",
-          color: "$black400",
-        }),
   },
-  [ButtonVariant.RedPrimary]: disabled
-    ? {
-        backgroundColor: "$gray100",
-        color: "$gray400",
-      }
-    : {
-        backgroundColor: "$red400",
-        color: "$white",
-      },
+  [ButtonVariant.RedPrimary]: { backgroundColor: disabled ? "$gray100" : "$red400" },
   [ButtonVariant.RedSecondary]: {
     backgroundColor: "$white",
+    borderColor: disabled ? "$gray300" : "$red400",
     borderWidth: "$1",
-    ...(disabled
-      ? {
-          borderColor: "$gray300",
-          color: "$gray400",
-        }
-      : {
-          borderColor: "$red400",
-          color: "$red400",
-        }),
   },
   [ButtonVariant.BlueSecondary]: {
     backgroundColor: "$white",
+    borderColor: disabled ? "$gray300" : "$blue400",
     borderWidth: "$1",
-    ...(disabled
-      ? {
-          borderColor: "$gray300",
-          color: "$gray400",
-        }
-      : {
-          borderColor: "$blue400",
-          color: "$black400",
-        }),
   },
   [ButtonVariant.BlackSecondary]: {
     backgroundColor: "$white",
+    borderColor: disabled ? "$gray300" : "$black400",
     borderWidth: "$1",
-    ...(disabled
-      ? {
-          borderColor: "$gray300",
-          color: "$gray400",
-        }
-      : {
-          borderColor: "$black400",
-          color: "$black400",
-        }),
   },
 })
 
@@ -150,10 +111,23 @@ export const mapSizeToButtonIconStyles: Record<ButtonSize, IIconProps["size"]> =
   [ButtonSize.SmallFixed]: 12,
 }
 
-export const mapButtonSizeTextVariant: Record<ButtonSize, TypographyVariant> = {
+export const mapButtonSizeToTextVariant: Record<ButtonSize, TypographyVariant> = {
   [ButtonSize.LargeFlexible]: TypographyVariant.ButtonLG,
   [ButtonSize.LargeFixed]: TypographyVariant.ButtonLG,
   [ButtonSize.LargeRectangular]: TypographyVariant.ButtonMD,
   [ButtonSize.SmallFlexible]: TypographyVariant.ButtonSM,
   [ButtonSize.SmallFixed]: TypographyVariant.ButtonSM,
 }
+
+export const mapButtonVariantToTextStyles = ({
+  disabled,
+}: {
+  disabled: boolean
+}): Record<ButtonVariant, Sx> => ({
+  [ButtonVariant.GreenPrimary]: { color: disabled ? "$gray400" : "$black400" },
+  [ButtonVariant.GreenSecondary]: { color: disabled ? "$gray400" : "$black400" },
+  [ButtonVariant.RedPrimary]: { color: disabled ? "$gray400" : "$white" },
+  [ButtonVariant.RedSecondary]: { color: disabled ? "$gray400" : "$red400" },
+  [ButtonVariant.BlueSecondary]: { color: disabled ? "$gray400" : "$black400" },
+  [ButtonVariant.BlackSecondary]: { color: disabled ? "$gray400" : "$black400" },
+})
