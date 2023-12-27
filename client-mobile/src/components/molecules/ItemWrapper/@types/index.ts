@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
 
-export interface IItemWrapper {
+export interface IItemWrapperProps {
   children: ReactNode | ReactNode[]
 }

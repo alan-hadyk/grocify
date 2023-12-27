@@ -7,13 +7,13 @@ import {
 } from "@client/components/molecules/Button/@types"
 import { IconButton } from "@client/components/molecules/IconButton"
 import { IconButtonSize, IconButtonVariant } from "@client/components/molecules/IconButton/@types"
-import { IShoppingListItemHeader } from "@client/components/molecules/ShoppingListItemHeader/@types"
+import { IShoppingListItemHeaderProps } from "@client/components/molecules/ShoppingListItemHeader/@types"
 import { shoppingListItemHeaderDefaultStyles } from "@client/components/molecules/ShoppingListItemHeader/styles"
 import { Path } from "@client/routing/paths"
 import { View } from "dripsy"
 import { router } from "expo-router"
 
-export const ShoppingListItemHeader: React.FC<IShoppingListItemHeader> = ({
+export const ShoppingListItemHeader: React.FC<IShoppingListItemHeaderProps> = ({
   onDelete,
   onCollab,
   onReuse,

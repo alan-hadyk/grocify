@@ -8,7 +8,7 @@ import { SubtitleWithIcon } from "@client/components/molecules/SubtitleWithIcon"
 import dayjs from "dayjs"
 import { useLocalSearchParams } from "expo-router"
 
-export const ShoppingItemContainer: React.FC = () => {
+export const ShoppingListItemContainer: React.FC = () => {
   const { id } = useLocalSearchParams()
   const { data } = useShoppingList({ id: id as string | undefined })
 
@@ -23,9 +23,6 @@ export const ShoppingItemContainer: React.FC = () => {
               iconName={IconName.Calendar}
               onIconButtonPress={() => {}}
               iconButtonDisabled
-              sx={{
-                marginTop: "$16",
-              }}
             />
             <EmptyResult iconName={IconName.Burger} description="Grocery items will appear here" />
           </ItemWrapper>

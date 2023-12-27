@@ -17,5 +17,6 @@ export const shoppingListItemHeaderDefaultStyles: {
     flexWrap: "nowrap",
     gap: "$12",
     justifyContent: "space-between",
+    marginBottom: "$16",
   },
 }

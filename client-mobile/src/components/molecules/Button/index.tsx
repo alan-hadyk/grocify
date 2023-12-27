@@ -11,8 +11,9 @@ import {
 } from "@client/components/molecules/Button/@types"
 import {
   buttonDefaultStyles,
-  mapButtonSizeTextVariant,
+  mapButtonSizeToTextVariant,
   mapButtonVariantToIconStyles,
+  mapButtonVariantToTextStyles,
   mapSizeToButtonIconStyles,
   mapSizeToButtonStyles,
   mapVariantToButtonStyles,
@@ -43,6 +44,10 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
     ...sx,
   }
 
+  const typographyStyles = mapButtonVariantToTextStyles({ disabled: disabled || isLoading })[
+    variant
+  ]
+
   const renderIcon = () =>
     iconName ? (
       <Icon
@@ -65,7 +70,7 @@ const _Button: React.ForwardRefRenderFunction<RnView, IButtonProps> = (
   return (
     <Pressable onPress={onPress} ref={ref} disabled={disabled || isLoading} sx={buttonStyles}>
       {_iconPlacement === ButtonIconPlacement.Left && (isLoading ? renderLoader() : renderIcon())}
-      <Typography variant={mapButtonSizeTextVariant[size]} text={text} />
+      <Typography variant={mapButtonSizeToTextVariant[size]} text={text} sx={typographyStyles} />
       {_iconPlacement === ButtonIconPlacement.Right && (isLoading ? renderLoader() : renderIcon())}
     </Pressable>
   )

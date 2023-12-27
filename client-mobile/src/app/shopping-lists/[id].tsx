@@ -1,10 +1,10 @@
 import { ItemPageTemplate } from "@client/components/templates/ItemPageTemplate"
-import { ShoppingItemContainer } from "@client/containers/ShoppingItemContainer"
+import { ShoppingListItemContainer } from "@client/containers/ShoppingListItemContainer"
 
-const ShoppingListPage: React.FC = () => (
+const ShoppingListItemPage: React.FC = () => (
   <ItemPageTemplate>
-    <ShoppingItemContainer />
+    <ShoppingListItemContainer />
   </ItemPageTemplate>
 )
 
-export default ShoppingListPage
+export default ShoppingListItemPage

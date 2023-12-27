@@ -1,6 +1,6 @@
 import { Sx } from "dripsy"
 
-export const ItemWrapperDefaultStyles: {
+export const itemWrapperDefaultStyles: {
   wrapper: Sx
 } = {
   wrapper: {
