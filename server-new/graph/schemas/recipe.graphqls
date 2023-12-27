@@ -27,10 +27,10 @@ extend type Mutation {
   updateRecipe(id: ID!, input: UpdateRecipeInput!): Recipe!
 }
 
-type RecipeIngredientCreateInput {
+input RecipeIngredientCreateInput {
   id: ID!
   name: String!
-  unit: Unit!
+  unit: ID!
   quantity: Float!
 }
 
@@ -41,10 +41,10 @@ input CreateRecipeInput {
   ingredients: [RecipeIngredientCreateInput!]!
 }
 
-type RecipeIngredientUpdateInput {
+input RecipeIngredientUpdateInput {
   id: ID!
   name: String
-  unit: Unit
+  unit: ID
   quantity: Float
 }
 

@@ -9,9 +9,13 @@
 # import * from "schemas/shoppingList.graphqls"
 # import * from "schemas/notification.graphqls"
 
-type Query {}
+type Query {
+    _dummy: String
+}
 
-type Mutation {}
+type Mutation {
+    _dummyMutation: String
+}
 
 # Global scalars
 

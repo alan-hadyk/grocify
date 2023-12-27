@@ -17,7 +17,7 @@ extend type Query {
 
 extend type Mutation {
   createUser(input: CreateUserInput!): User!
-  deleteUser(): Boolean
+  deleteUser: Boolean
   updateUser(input: UpdateUserInput!): User!
 }
 

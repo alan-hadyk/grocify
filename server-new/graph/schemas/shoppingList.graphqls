@@ -36,12 +36,12 @@ extend type Mutation {
   updateShoppingList(id: ID!, input: UpdateShoppingListInput!): ShoppingList!
 }
 
-type ShoppingListIngredientCreateUpdate {
+input ShoppingListIngredientCreateUpdate {
   id: ID!
   quantity: Float!
 }
 
-type ShoppingListRecipeCreateUpdate {
+input ShoppingListRecipeCreateUpdate {
   id: ID!
   amountOfDays: Int!
 }
