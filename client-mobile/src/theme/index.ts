@@ -11,6 +11,7 @@ export const colors: TColors = {
   $green500: ColorPalette.Green500,
   $red400: ColorPalette.Red400,
   $white: ColorPalette.White,
+  $yellow300: ColorPalette.Yellow300,
 }
 
 export const space = {
@@ -23,6 +24,7 @@ export const space = {
   $10: 10,
   $12: 12,
   $16: 16,
+  $18: 18,
   $20: 20,
   $28: 28,
   $32: 32,

@@ -15,5 +15,12 @@ export const EN: ITranslation = {
   "Grocery items will appear here": "Grocery items will appear here",
   Recipe: "Recipe",
   "Add grocery item": "Add grocery item",
+  "Add grocery items": "Add grocery items",
   "Adding new shopping list...": "Adding new shopping list...",
+  Name: "Name",
+  "e.g., onion": "e.g., onion",
+  "Unit shortcut": "Unit shortcut",
+  "pcs, etc.": "pcs, etc.",
+  "Type a name and unit to add your first grocery item.":
+    "Type a name and unit to add your first grocery item.",
 }

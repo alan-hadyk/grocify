@@ -12,5 +12,11 @@ export interface ITranslation {
   "Grocery items will appear here": string
   Recipe: string
   "Add grocery item": string
+  "Add grocery items": string
   "Adding new shopping list...": string
+  Name: string
+  "e.g., onion": string
+  "Unit shortcut": string
+  "pcs, etc.": string
+  "Type a name and unit to add your first grocery item.": string
 }
