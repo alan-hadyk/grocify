@@ -17,7 +17,7 @@
 
 3.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-4.Create `Settings.toml` file at `/server` directory. Inside, paste the content from `Settings.example.toml`.
+4.Create `.env` file at `/server` directory. Inside, paste the content from `.env-example`.
 
 5.Install dependencies
 
@@ -38,7 +38,8 @@ make dev
 3.If everything works, you should see the following log in the terminal:
 
 ```bash
-connect to http://localhost:8080/ for GraphQL playground
+Server up and running
+GraphQL playground available at http://localhost:3000/
 ```
 
 ## CLI Scripts
