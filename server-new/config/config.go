@@ -10,6 +10,7 @@ import (
 type Config struct {
     Host string
     Port string
+    PostgresURL string
 }
 
 func LoadConfig() Config {
@@ -21,6 +22,7 @@ func LoadConfig() Config {
     config := Config {
         Host: os.Getenv("HOST"),
         Port: os.Getenv("PORT"),
+        PostgresURL: os.Getenv("POSTGRES_URL"),
     }
 
     if config.Host == "" {
@@ -28,6 +30,9 @@ func LoadConfig() Config {
     }
     if config.Port == "" {
         log.Fatal("Missing PORT variable")
+    }
+    if config.PostgresURL == "" {
+        log.Fatal("Missing POSTGRES_URL variable")
     }
 
     return config

@@ -6,6 +6,14 @@ package graph
 //
 // It serves as dependency injection for your app, add any dependencies you require here.
 
-type Resolver struct{
-	// todos []*model.Todo
+import (
+	"github.com/jackc/pgx/v5"
+)
+
+type Resolver struct {
+	DB *pgx.Conn
+}
+
+func CreateResolver(db *pgx.Conn) *Resolver {
+    return &Resolver { DB: db }
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"grocify-server/clients"
 	"grocify-server/config"
 	"grocify-server/graph"
 	"log"
@@ -13,9 +14,11 @@ import (
 func main() {
 	cfg := config.LoadConfig()
 
+	dbConnection := clients.ConnectDB()
+
 	server := handler.NewDefaultServer(
 		graph.NewExecutableSchema(
-			graph.Config{ Resolvers: &graph.Resolver{} },
+			graph.Config { Resolvers: graph.CreateResolver(dbConnection) },
 		),
 	)
 
