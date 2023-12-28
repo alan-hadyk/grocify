@@ -12,7 +12,7 @@ import (
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
-	panic(fmt.Errorf("not implemented: CreateUser - createUser"))
+	return r.DB.CreateUser(ctx, input)
 }
 
 // DeleteUser is the resolver for the deleteUser field.
@@ -25,12 +25,7 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUse
 	panic(fmt.Errorf("not implemented: UpdateUser - updateUser"))
 }
 
-// Users is the resolver for the users field.
-func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	panic(fmt.Errorf("not implemented: Users - users"))
-}
-
 // User is the resolver for the user field.
-func (r *queryResolver) User(ctx context.Context, id string) (*model.User, error) {
+func (r *queryResolver) User(ctx context.Context) (*model.User, error) {
 	panic(fmt.Errorf("not implemented: User - user"))
 }

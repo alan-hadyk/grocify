@@ -17,7 +17,7 @@
 
 3.Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-4.Create `.env` file at `/server` directory. Inside, paste the content from `.env-example`.
+4.Create `.env` file in this directory. Inside, paste the content from `.env-example`.
 
 5.Install dependencies
 
@@ -54,4 +54,10 @@ go generate ./...
 
 ```bash
 make dev
+```
+
+### **Run server**
+
+```bash
+go run server.go
 ```

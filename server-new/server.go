@@ -3,6 +3,7 @@ package main
 import (
 	"grocify-server/clients"
 	"grocify-server/config"
+	"grocify-server/db"
 	"grocify-server/graph"
 	"log"
 	"net/http"
@@ -16,9 +17,15 @@ func main() {
 
 	dbConnection := clients.ConnectDB()
 
+	db := db.NewDB(dbConnection)
+
+	// DB init
+	db.InitDbExtensions()
+	db.InitUserSchema()
+
 	server := handler.NewDefaultServer(
 		graph.NewExecutableSchema(
-			graph.Config { Resolvers: graph.CreateResolver(dbConnection) },
+			graph.Config { Resolvers: graph.CreateResolver(db) },
 		),
 	)
 
