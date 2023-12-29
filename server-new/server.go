@@ -4,40 +4,26 @@ import (
 	"grocify-server/clients"
 	"grocify-server/config"
 	"grocify-server/db"
-	"grocify-server/graph"
+	"grocify-server/initializers"
+	"grocify-server/router"
 	"log"
 	"net/http"
-
-	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/gorilla/mux"
 )
 
 func main() {
-	cfg := config.LoadConfig()
-
+	// Create DB connection
 	dbConnection := clients.ConnectDB()
-
 	db := db.NewDB(dbConnection)
 
-	// DB init
-	db.InitDbExtensions()
-	db.InitUserSchema()
+	// Initializers
+	initializers.RunInitializers(db)
 
-	server := handler.NewDefaultServer(
-		graph.NewExecutableSchema(
-			graph.Config{Resolvers: graph.CreateResolver(db)},
-		),
-	)
+	// Router
+	router := router.CreateRouter(db)
 
-	router := mux.NewRouter()
-
-	router.HandleFunc("/", playground.Handler("GraphQL playground", "/query"))
-	router.Handle("/query", server)
-
-	http.Handle("/", router)
+	cfg := config.LoadConfig()
 
 	log.Printf("Server up and running")
 	log.Printf("GraphQL playground available at http://%s:%s/", cfg.Host, cfg.Port)
-	log.Fatal(http.ListenAndServe(cfg.Host+":"+cfg.Port, nil))
+	log.Fatal(http.ListenAndServe(cfg.Host+":"+cfg.Port, router))
 }

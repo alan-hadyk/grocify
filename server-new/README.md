@@ -99,6 +99,10 @@ GraphQL playground available at http://localhost:3000/
 │   ├── shoppingList.resolvers.go # GraphQL resolvers for shopping lists endpoints
 │   ├── unit.resolvers.go # GraphQL resolvers for units endpoints
 │   └── user.resolvers.go # GraphQL resolvers for users endpoints
+├── initializers
+│   └── runInitializers.go # Initializers run during startup
+├── router
+│   └── createRouter.go # Create and configure router
 ├── server.go # Go server - entry point
 ├── services
 │   └── password.go # Service for dealing with passwords (hashing & verifying)
