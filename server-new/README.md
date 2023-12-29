@@ -84,7 +84,6 @@ GraphQL playground available at http://localhost:3000/
 │   ├── ingredient.resolvers.go # GraphQL resolvers for ingredients endpoints
 │   ├── model # A package for all graph models, generated or otherwise
 │   │   ├── models_gen.go
-│   │   └── todo.go
 │   ├── notification.resolvers.go # GraphQL resolvers for notifications endpoints
 │   ├── recipe.resolvers.go # GraphQL resolvers for recipes endpoints
 │   ├── resolver.go

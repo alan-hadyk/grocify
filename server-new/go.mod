@@ -5,6 +5,7 @@ go 1.21.5
 require (
 	github.com/99designs/gqlgen v0.17.41
 	github.com/cosmtrek/air v1.49.0
+	github.com/gorilla/mux v1.8.1
 	github.com/jackc/pgx/v5 v5.5.1
 	github.com/joho/godotenv v1.5.1
 	github.com/matthewhartstonge/argon2 v1.0.0
@@ -24,7 +25,6 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gohugoio/hugo v0.121.1 // indirect
 	github.com/google/uuid v1.4.0 // indirect
-	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.3 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
