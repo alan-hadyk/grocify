@@ -1,10 +1,6 @@
-import { ListPageTemplate } from "@client/components/templates/ListPageTemplate"
-import { ShoppingListsContainer } from "@client/containers/ShoppingListsContainer"
+import { Path } from "@client/routing/paths"
+import { Redirect } from "expo-router"
 
-const IndexPage: React.FC = () => (
-  <ListPageTemplate>
-    <ShoppingListsContainer />
-  </ListPageTemplate>
-)
+const IndexPage: React.FC = () => <Redirect href={Path.ShoppingLists} />
 
 export default IndexPage

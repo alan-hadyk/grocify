@@ -1,7 +1,7 @@
-import { IIconState, SizeType } from "@client/components/atoms/Icon/@types"
+import { IIconState, IconSizeType } from "@client/components/atoms/Icon/@types"
 import { useState, useLayoutEffect } from "react"
 
-export const useIconState = ({ size, height, width, sizeType = SizeType.Auto }: IIconState) => {
+export const useIconState = ({ size, height, width, sizeType = IconSizeType.Auto }: IIconState) => {
   const [iconDimensions, setIconDimensions] = useState({
     height: 0,
     width: 0,
@@ -12,7 +12,7 @@ export const useIconState = ({ size, height, width, sizeType = SizeType.Auto }: 
     const iconWidth = (width * size) / height
 
     switch (sizeType) {
-      case SizeType.Auto:
+      case IconSizeType.Auto:
         if (width > height) {
           setIconDimensions({
             height: iconHeight,
@@ -30,13 +30,13 @@ export const useIconState = ({ size, height, width, sizeType = SizeType.Auto }: 
           })
         }
         break
-      case SizeType.Height:
+      case IconSizeType.Height:
         setIconDimensions({
           height: size,
           width: iconWidth,
         })
         break
-      case SizeType.Width:
+      case IconSizeType.Width:
         setIconDimensions({
           height: iconHeight,
           width: size,

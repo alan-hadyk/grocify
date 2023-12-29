@@ -3,6 +3,7 @@ import { Sx } from "dripsy"
 import { GestureResponderEvent } from "react-native"
 
 export interface IIconButtonProps {
+  disabled?: boolean
   iconName: IconName
   onPress?: (event: GestureResponderEvent) => void
   size?: IconButtonSize

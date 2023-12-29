@@ -2,14 +2,14 @@ import "intl-pluralrules"
 import { PreferredLang } from "@client/api/schema"
 import { EN } from "@client/translations/EN"
 import { PL } from "@client/translations/PL"
-import i18n from "i18next"
+import i18n, { ResourceLanguage } from "i18next"
 import { initReactI18next } from "react-i18next"
 
-const resources = {
-  EN: {
+const resources: Record<PreferredLang, ResourceLanguage> = {
+  [PreferredLang.En]: {
     translation: EN,
   },
-  PL: {
+  [PreferredLang.Pl]: {
     translation: PL,
   },
 }
@@ -19,7 +19,7 @@ const resources = {
  */
 // eslint-disable-next-line import/no-named-as-default-member
 i18n.use(initReactI18next).init({
-  fallbackLng: PreferredLang.Pl,
+  fallbackLng: PreferredLang.En,
   interpolation: {
     escapeValue: false, // Not needed for React
   },

@@ -1,4 +1,4 @@
-import loader from "@client/assets/animations/loader.json"
+import splashScreen from "@client/assets/animations/splash-screen.json"
 import { AnimatedView } from "@client/components/animations/AnimatedView"
 import { IAnimatedSplashScreenProps } from "@client/components/molecules/AnimatedSplashScreen/@types"
 import {
@@ -15,7 +15,7 @@ export const AnimatedSplashScreen: React.FC<IAnimatedSplashScreenProps> = ({
   children,
   onInit,
 }) => {
-  const [isLoaderVisible, setIsLoaderVisible] = useState<boolean>(true)
+  const [isSplashScreenVisible, setIsSplashScreenVisible] = useState<boolean>(true)
   const { screenHeight, screenWidth } = useScreenDimensions()
   const animatedSplashScreenStyles = animatedSplashScreenDefaultStyles({
     screenHeight,
@@ -25,20 +25,20 @@ export const AnimatedSplashScreen: React.FC<IAnimatedSplashScreenProps> = ({
   useTimeout(onInit, 0)
 
   useTimeout(() => {
-    setIsLoaderVisible(false)
+    setIsSplashScreenVisible(false)
   }, Duration.VerySlow)
 
   return (
     <>
       <AnimatedView
         {...animatedSplashScreenAnimationProps.loaderWrapperProps}
-        isVisible={isLoaderVisible}
+        isVisible={isSplashScreenVisible}
         sx={animatedSplashScreenStyles.loaderWrapper}>
-        <LottieView source={loader} autoPlay loop={false} />
+        <LottieView source={splashScreen} autoPlay loop={false} />
       </AnimatedView>
       <AnimatedView
         {...animatedSplashScreenAnimationProps.childrenWrapperProps}
-        isVisible={!isLoaderVisible}
+        isVisible={!isSplashScreenVisible}
         sx={animatedSplashScreenStyles.childrenWrapper}>
         {children}
       </AnimatedView>

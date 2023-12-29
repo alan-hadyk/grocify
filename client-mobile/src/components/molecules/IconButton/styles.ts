@@ -32,49 +32,53 @@ export const mapSizeToIconButtonStyles = {
   },
 }
 
-export const mapVariantToIconButtonStyles: Record<
+export const mapVariantToIconButtonStyles = ({
+  disabled,
+}: {
+  disabled: boolean
+}): Record<
   IconButtonVariant,
   {
     icon: Pick<IIconProps, "color">
     wrapper: Sx
   }
-> = {
+> => ({
   [IconButtonVariant.GraySecondary]: {
     icon: {
-      color: ColorPalette.Black400,
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
     },
     wrapper: {
       backgroundColor: "$white",
-      borderColor: "$gray100",
+      borderColor: disabled ? "$gray300" : "$gray100",
       borderWidth: "$1",
     },
   },
   [IconButtonVariant.GreenPrimary]: {
     icon: {
-      color: ColorPalette.Black400,
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
     },
     wrapper: {
-      backgroundColor: "$green400",
+      backgroundColor: disabled ? "$gray100" : "$green400",
     },
   },
   [IconButtonVariant.GreenSecondary]: {
     icon: {
-      color: ColorPalette.Black400,
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Black400,
     },
     wrapper: {
       backgroundColor: "$white",
-      borderColor: "$green500",
+      borderColor: disabled ? "$gray300" : "$green500",
       borderWidth: "$1",
     },
   },
   [IconButtonVariant.RedSecondary]: {
     icon: {
-      color: ColorPalette.Red400,
+      color: disabled ? ColorPalette.Gray400 : ColorPalette.Red400,
     },
     wrapper: {
       backgroundColor: "$white",
-      borderColor: "$red400",
+      borderColor: disabled ? "$gray300" : "$red400",
       borderWidth: "$1",
     },
   },
-}
+})
