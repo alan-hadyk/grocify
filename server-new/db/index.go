@@ -14,7 +14,7 @@ type DB struct {
 }
 
 func NewDB(pool *pgxpool.Pool) *DB {
-	return &DB{ Pool: pool }
+	return &DB{Pool: pool}
 }
 
 func (db *DB) InitDbExtensions() {

@@ -10,6 +10,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -25,14 +26,18 @@ func main() {
 
 	server := handler.NewDefaultServer(
 		graph.NewExecutableSchema(
-			graph.Config { Resolvers: graph.CreateResolver(db) },
+			graph.Config{Resolvers: graph.CreateResolver(db)},
 		),
 	)
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", server)
+	router := mux.NewRouter()
+
+	router.HandleFunc("/", playground.Handler("GraphQL playground", "/query"))
+	router.Handle("/query", server)
+
+	http.Handle("/", router)
 
 	log.Printf("Server up and running")
 	log.Printf("GraphQL playground available at http://%s:%s/", cfg.Host, cfg.Port)
-	log.Fatal(http.ListenAndServe(cfg.Host + ":" + cfg.Port, nil))
+	log.Fatal(http.ListenAndServe(cfg.Host+":"+cfg.Port, nil))
 }

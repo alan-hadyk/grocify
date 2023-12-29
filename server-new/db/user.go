@@ -34,10 +34,10 @@ func (db *DB) CreateUser(ctx context.Context, input model.CreateUserInput) (*mod
 	var createdAt time.Time
 
 	// Hash the password
-    hashedPassword, err := services.HashPassword(input.Password)
-    if err != nil {
-        return nil, fmt.Errorf("failed to hash password: %w", err)
-    }
+	hashedPassword, err := services.HashPassword(input.Password)
+	if err != nil {
+		return nil, fmt.Errorf("failed to hash password: %w", err)
+	}
 
 	err = db.Pool.QueryRow(ctx, `
 		INSERT
@@ -50,22 +50,22 @@ func (db *DB) CreateUser(ctx context.Context, input model.CreateUserInput) (*mod
 			$1, $2, $3
 		)
 		RETURNING id, email, preferred_language, created_at
-	`, 
-	hashedPassword, 
-	input.Email, 
-	input.PreferredLanguage).Scan(&id, &email, &preferredLanguage, &createdAt)
+	`,
+		hashedPassword,
+		input.Email,
+		input.PreferredLanguage).Scan(&id, &email, &preferredLanguage, &createdAt)
 
 	if err != nil {
-        return nil, fmt.Errorf("failed to create user: %w", err)
-    }
+		return nil, fmt.Errorf("failed to create user: %w", err)
+	}
 
 	isoCreatedAt := createdAt.Format(time.RFC3339)
 
-	return &model.User {
-		ID: id,
-		Email: email,
+	return &model.User{
+		ID:                id,
+		Email:             email,
 		PreferredLanguage: model.Language(preferredLanguage),
-		CreatedAt: isoCreatedAt,
+		CreatedAt:         isoCreatedAt,
 	}, nil
 }
 
@@ -85,19 +85,19 @@ func (db *DB) GetUser(ctx context.Context) (*model.User, error) {
 		SELECT id, email, preferred_language, created_at
 		FROM users
 		WHERE id = $1
-	`, 
-	"123").Scan(&id, &email, &preferredLanguage, &createdAt)
+	`,
+		"123").Scan(&id, &email, &preferredLanguage, &createdAt)
 
 	if err != nil {
-        return nil, fmt.Errorf("failed to create user: %w", err)
-    }
+		return nil, fmt.Errorf("failed to create user: %w", err)
+	}
 
 	isoCreatedAt := createdAt.Format(time.RFC3339)
 
-	return &model.User {
-		ID: id,
-		Email: email,
+	return &model.User{
+		ID:                id,
+		Email:             email,
 		PreferredLanguage: model.Language(preferredLanguage),
-		CreatedAt: isoCreatedAt,
+		CreatedAt:         isoCreatedAt,
 	}, nil
 }

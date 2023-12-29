@@ -13,5 +13,5 @@ type Resolver struct {
 }
 
 func CreateResolver(db *db.DB) *Resolver {
-    return &Resolver { DB: db }
+	return &Resolver{DB: db}
 }
