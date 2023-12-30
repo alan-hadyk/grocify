@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gorilla/mux"
 	"github.com/urfave/negroni"
@@ -17,6 +18,9 @@ func CreateRouter(db *db.DB) *negroni.Negroni {
 			graph.Config{Resolvers: graph.CreateResolver(db)},
 		),
 	)
+
+	graphQlServer.AddTransport(transport.Options{})
+	graphQlServer.AddTransport(transport.POST{})
 
 	router := mux.NewRouter()
 

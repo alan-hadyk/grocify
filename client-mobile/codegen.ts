@@ -4,6 +4,7 @@ import type { CodegenConfig } from "@graphql-codegen/cli"
  * GraphQL code generator config
  */
 const config: CodegenConfig = {
+  debug: true,
   documents: ["src/api/graphql/**/*.graphql"],
   generates: {
     "./src/api/schema.ts": {
@@ -30,9 +31,10 @@ const config: CodegenConfig = {
       ],
     },
   },
-  ignoreNoDocuments: true,
+  // ignoreNoDocuments: true,
   overwrite: true,
-  schema: "http://0.0.0.0:3000/graphql",
+  schema: "http://0.0.0.0:3000/query",
+  verbose: true,
 }
 
 export default config

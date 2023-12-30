@@ -53,7 +53,7 @@ func (db *DB) CreateUser(ctx context.Context, input model.CreateUserInput) (*mod
 	`,
 		hashedPassword,
 		input.Email,
-		input.PreferredLanguage).Scan(&id, &email, &preferredLanguage, &createdAt)
+		services.MapLanguageToLocale[input.PreferredLanguage]).Scan(&id, &email, &preferredLanguage, &createdAt)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to create user: %w", err)
