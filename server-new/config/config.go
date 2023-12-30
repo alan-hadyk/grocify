@@ -11,6 +11,7 @@ type Config struct {
 	Host        string
 	Port        string
 	PostgresURL string
+	Secret      string
 }
 
 func LoadConfig() Config {
@@ -23,6 +24,7 @@ func LoadConfig() Config {
 		Host:        os.Getenv("HOST"),
 		Port:        os.Getenv("PORT"),
 		PostgresURL: os.Getenv("POSTGRES_URL"),
+		Secret:      os.Getenv("SECRET"),
 	}
 
 	if config.Host == "" {
@@ -33,6 +35,9 @@ func LoadConfig() Config {
 	}
 	if config.PostgresURL == "" {
 		log.Fatal("Missing POSTGRES_URL variable")
+	}
+	if config.Secret == "" {
+		log.Fatal("Missing SECRET variable")
 	}
 
 	return config
