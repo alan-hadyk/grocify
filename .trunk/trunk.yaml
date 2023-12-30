@@ -10,8 +10,9 @@ lint:
   ignore:
     - linters: [ALL]
       paths:
-        # Ignore assets
+        - docs/**
         - client-mobile/src/assets/**
+        - client-mobile/ios/**
   enabled:
     - gofmt@1.20.4
     - golangci-lint@1.55.2

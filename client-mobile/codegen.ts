@@ -31,7 +31,6 @@ const config: CodegenConfig = {
       ],
     },
   },
-  // ignoreNoDocuments: true,
   overwrite: true,
   schema: "http://0.0.0.0:3000/query",
   verbose: true,

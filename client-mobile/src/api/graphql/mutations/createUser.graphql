@@ -1,7 +1,5 @@
 mutation createUser($input: CreateUserInput!) {
-  createUser(
-    input: $input
-  ) {
+  createUser(input: $input) {
     id
     email
     preferredLanguage

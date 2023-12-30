@@ -10,17 +10,16 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-
 func ConnectDB() *pgxpool.Pool {
 	cfg := config.LoadConfig()
 	dbpool, err := pgxpool.New(context.Background(), cfg.PostgresURL)
-	
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
-    } else {
+	} else {
 		log.Printf("Connection to database established \n")
 	}
 
-    return dbpool
+	return dbpool
 }

@@ -34,7 +34,6 @@ go mod tidy
 chmod 600 ./certs/server.key
 ```
 
-
 ### **Run the server in watch mode for development**
 
 1.Run Docker Desktop
