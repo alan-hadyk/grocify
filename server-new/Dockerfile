@@ -1,23 +1,34 @@
-# Dockerfile
-FROM rust:1.67 AS builder
+# Use a builder image
+FROM golang:1.21.5 AS builder
 
+# Set the working directory inside the container
 WORKDIR /usr/src/app
+
+# Copy the local package files to the container's workspace.
 COPY . .
 
-RUN cargo install --path .
+# Build the Go app
+RUN CGO_ENABLED=0 GOOS=linux go build -v -o app
 
-# Use a non-root user and Change ownership of the working directory
-RUN useradd -m myuser && chown -R myuser:myuser /usr/src/app
+# Use a small image for the final stage
+FROM alpine:3.19
 
-# Switch to the non-root user
-USER myuser
+# Install CA certificates (in case you need HTTPS, e.g., for calling APIs) and add a non-root user
+RUN apk --no-cache add ca-certificates=20230506-r0 && \
+    adduser -D nonroot
 
-FROM debian:buster-slim
+# Switch to non-root user
+USER nonroot
 
 # Copy the binary from the builder
-COPY --from=builder /usr/local/cargo/bin/app /usr/local/bin/app
+COPY --from=builder /usr/src/app/app /usr/local/bin/app
 
 # Health check (adjust the endpoint as needed)
-HEALTHCHECK CMD curl --fail http://localhost:3000/graphql || exit 1
+# Note: You might need to install curl in Alpine for this health check to work
+HEALTHCHECK CMD wget --spider http://localhost:3000/query || exit 1
 
+# Set the working directory to where the .env file is
+WORKDIR /usr/src/app
+
+# Command to run the executable
 CMD ["app"]
