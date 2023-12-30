@@ -1,29 +1,16 @@
 import { Sx } from "dripsy"
 
-export const modalDefaultStyles = ({
-  screenHeight,
-}: {
-  screenHeight: number
-}): {
-  animatedWrapper: Sx
+export const modalDefaultStyles: {
+  modalContainer: Sx
   subtitleWithIcon: Sx
-  wrapper: Sx
-} => ({
-  animatedWrapper: {
+} = {
+  modalContainer: {
     backgroundColor: "$white",
-    bottom: "$0",
-    left: "$0",
-    marginTop: "$16",
-    position: "absolute",
-    right: "$0",
-    top: "$0",
+    display: "flex",
+    height: "100%",
   },
   subtitleWithIcon: {
-    marginX: "$16",
+    paddingTop: "$16",
+    paddingX: "$16",
   },
-  wrapper: {
-    elevation: 3,
-    height: screenHeight,
-    zIndex: 1000,
-  },
-})
+}

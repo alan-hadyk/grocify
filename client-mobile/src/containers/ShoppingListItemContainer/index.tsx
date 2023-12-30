@@ -18,8 +18,6 @@ export const ShoppingListItemContainer: React.FC = () => {
     <AddGroceryItemModalProvider>
       {data && (
         <>
-          <AddGroceryItemsModal />
-
           <ItemWrapper>
             <ShoppingListItemHeader onDelete={() => {}} onCollab={() => {}} onReuse={() => {}} />
             <SubtitleWithIcon
@@ -31,6 +29,7 @@ export const ShoppingListItemContainer: React.FC = () => {
             <EmptyResult iconName={IconName.Burger} description="Grocery items will appear here" />
           </ItemWrapper>
           <ShoppingListItemFooter />
+          <AddGroceryItemsModal />
         </>
       )}
     </AddGroceryItemModalProvider>

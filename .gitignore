@@ -1,2 +1,5 @@
 # Workspace
 .github/workflows/*.code-workspace
+
+.env
+tmp
