@@ -7,6 +7,7 @@ export const colors: TColors = {
   $gray100: ColorPalette.Gray100,
   $gray300: ColorPalette.Gray300,
   $gray400: ColorPalette.Gray400,
+  $green100: ColorPalette.Green100,
   $green400: ColorPalette.Green400,
   $green500: ColorPalette.Green500,
   $red400: ColorPalette.Red400,

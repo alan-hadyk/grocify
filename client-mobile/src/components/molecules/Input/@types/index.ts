@@ -10,6 +10,12 @@ export interface IInputProps {
   label?: keyof ITranslation
   iconName: IconName
   sx?: Sx
+  isRequired?: boolean
+  error?: {
+    message: keyof ITranslation
+    values: Record<string, string>
+  }
+  info?: string
 }
 
 export interface IUseInputState {

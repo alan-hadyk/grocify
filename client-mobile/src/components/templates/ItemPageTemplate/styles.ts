@@ -6,4 +6,5 @@ export const itemPageDefaultStyles: Sx = {
   height: "100%",
   justifyContent: "space-between",
   padding: "$16",
+  position: "relative",
 }

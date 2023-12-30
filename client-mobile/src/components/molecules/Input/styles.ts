@@ -5,12 +5,22 @@ export const inputStyles = ({
 }: {
   wrapperWidth: number
 }): {
+  error: Sx
+  info: Sx
   input: Sx
   inputWrapper: Sx
   label: Sx
+  labelWrapper: Sx
   outerWrapper: Sx
+  requiredStyles: Sx
   wrapper: Sx
 } => ({
+  error: {
+    marginTop: "$4",
+  },
+  info: {
+    marginTop: "$4",
+  },
   input: {
     display: "flex",
     minWidth: wrapperWidth - 84,
@@ -26,9 +36,16 @@ export const inputStyles = ({
   label: {
     marginBottom: "$4",
   },
+  labelWrapper: {
+    flexDirection: "row",
+    gap: "$4",
+  },
   outerWrapper: {
     display: "flex",
     flexDirection: "column",
+  },
+  requiredStyles: {
+    fontWeight: "bold",
   },
   wrapper: {
     alignItems: "center",

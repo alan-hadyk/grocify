@@ -16,6 +16,7 @@ export const bannerDefaultStyles: {
     flexDirection: "row",
     flexWrap: "nowrap",
     gap: "$12",
+    marginX: "$16",
     paddingLeft: "$12",
     paddingRight: "$18",
     paddingY: "$12",

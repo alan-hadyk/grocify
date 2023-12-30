@@ -23,4 +23,9 @@ export const EN: ITranslation = {
   "pcs, etc.": "pcs, etc.",
   "Type a name and unit to add your first grocery item.":
     "Type a name and unit to add your first grocery item.",
+  unitWithName: "{{unit}} of {{name}}",
+  ingredientName: "{{name}}",
+  label: "{{label}}",
+  required: "*",
+  errorRequired: "{{name}} is required",
 }

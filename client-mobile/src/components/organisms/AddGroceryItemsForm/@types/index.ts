@@ -1,3 +1,4 @@
 export interface IAddGroceryItemsFormProps {
-  onSubmit: () => void
+  onAddGroceryItems: () => void
+  onAddIngredient: (data: any) => void
 }

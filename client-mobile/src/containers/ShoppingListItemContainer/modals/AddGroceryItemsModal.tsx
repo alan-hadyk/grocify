@@ -16,7 +16,10 @@ export const AddGroceryItemsModal: React.FC = () => {
       subtitle="Add grocery items"
       iconName={IconName.Close}
       onModalClose={onModalClose}>
-      <AddGroceryItemsForm onSubmit={() => {}} />
+      <AddGroceryItemsForm
+        onAddGroceryItems={() => {}}
+        onAddIngredient={(data) => console.log({ data })}
+      />
     </Modal>
   )
 }

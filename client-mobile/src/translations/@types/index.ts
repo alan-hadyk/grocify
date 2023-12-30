@@ -19,4 +19,9 @@ export interface ITranslation {
   "Unit shortcut": string
   "pcs, etc.": string
   "Type a name and unit to add your first grocery item.": string
+  unitWithName: string
+  ingredientName: string
+  label: string
+  required: string
+  errorRequired: string
 }

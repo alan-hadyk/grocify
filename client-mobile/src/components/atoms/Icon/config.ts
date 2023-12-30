@@ -5,6 +5,7 @@ import { BellIcon } from "@client/icons/BellIcon"
 import { BulbIcon } from "@client/icons/BulbIcon"
 import { BurgerIcon } from "@client/icons/BurgerIcon"
 import { CalendarIcon } from "@client/icons/CalendarIcon"
+import { CheckIcon } from "@client/icons/CheckIcon"
 import { CloseIcon } from "@client/icons/CloseIcon"
 import { CopyIcon } from "@client/icons/CopyIcon"
 import { ListIcon } from "@client/icons/ListIcon"
@@ -104,5 +105,10 @@ export const icons: Record<
     Component: BulbIcon,
     height: 24,
     width: 17,
+  },
+  [IconName.Check]: {
+    Component: CheckIcon,
+    height: 10,
+    width: 15,
   },
 }

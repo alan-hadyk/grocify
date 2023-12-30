@@ -8,6 +8,7 @@ export enum TypographyVariant {
   FooterMenu,
   FooterMenuInactive,
   InputLabel,
+  InputMessage,
   ButtonLG,
   ButtonMD,
   Link,
@@ -20,16 +21,25 @@ export enum TypographyVariant {
   DatePickerMonth,
 }
 
+export enum TypographyType {
+  Default,
+  Error,
+  Info,
+}
+
 export type ITypographyProps = {
   sx?: Sx
   variant?: TypographyVariant
+  type?: TypographyType
 } & (
   | {
       dateFormat: string
       text: dayjs.Dayjs
+      textValues?: undefined
     }
   | {
       dateFormat?: string
       text: keyof ITranslation
+      textValues?: Record<string, string>
     }
 )

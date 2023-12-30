@@ -8,6 +8,7 @@ export const variantComponents: Record<TypographyVariant, typeof H1 | typeof H2 
   [TypographyVariant.FooterMenu]: Text,
   [TypographyVariant.FooterMenuInactive]: Text,
   [TypographyVariant.InputLabel]: Text,
+  [TypographyVariant.InputMessage]: Text,
   [TypographyVariant.ButtonLG]: Text,
   [TypographyVariant.ButtonMD]: Text,
   [TypographyVariant.Link]: Text,

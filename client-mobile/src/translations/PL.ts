@@ -19,8 +19,13 @@ export const PL: ITranslation = {
   "Adding new shopping list...": "Dodawanie nowej listy zakupów...",
   Name: "Nazwa",
   "e.g., onion": "np.: cebula",
-  "Unit shortcut": "Skrót miary",
+  "Unit shortcut": "Jednostka",
   "pcs, etc.": "kg, itp.",
   "Type a name and unit to add your first grocery item.":
     "Wpisz nazwę i jednostkę aby dodać pierwszy produkt.",
+  unitWithName: "{{name}} - {{unit}}",
+  ingredientName: "{{name}}",
+  label: "{{label}}",
+  required: "*",
+  errorRequired: "{{name}} jest wymagana",
 }

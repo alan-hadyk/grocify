@@ -19,6 +19,7 @@ export enum IconName {
   Tag,
   Ruler,
   Bulb,
+  Check,
 }
 
 export enum IconSizeType {
