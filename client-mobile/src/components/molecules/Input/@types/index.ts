@@ -6,18 +6,24 @@ export interface IInputProps {
   autoFocus?: boolean
   value: string
   onChangeText: (value: string) => void
-  placeholder: keyof ITranslation
+  placeholder?: keyof ITranslation
   label?: keyof ITranslation
-  iconName: IconName
+  iconName?: IconName
   sx?: Sx
   isRequired?: boolean
   error?: {
     message: keyof ITranslation
     values: Record<string, string>
   }
-  info?: string
+  info?: {
+    message: keyof ITranslation
+    values: Record<string, string>
+  }
+  inputType?: "text" | "number"
+  disabled?: boolean
 }
 
 export interface IUseInputState {
   onChangeText: IInputProps["onChangeText"]
+  inputType: IInputProps["inputType"]
 }

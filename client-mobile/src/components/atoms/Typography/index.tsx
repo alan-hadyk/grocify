@@ -1,11 +1,6 @@
-import {
-  ITypographyProps,
-  TypographyType,
-  TypographyVariant,
-} from "@client/components/atoms/Typography/@types"
+import { ITypographyProps, TypographyVariant } from "@client/components/atoms/Typography/@types"
 import { variantComponents } from "@client/components/atoms/Typography/config"
 import {
-  mapTypeToTypographyStyles,
   mapVariantToTypographyStyles,
   typographyDefaultStyles,
 } from "@client/components/atoms/Typography/styles"
@@ -18,7 +13,6 @@ export const Typography: React.FC<ITypographyProps> = ({
   sx,
   text,
   textValues,
-  type = TypographyType.Default,
 }) => {
   const Component = variantComponents[variant]
   const { t } = useTranslation()
@@ -28,7 +22,6 @@ export const Typography: React.FC<ITypographyProps> = ({
   const typographyStyles: Sx = {
     ...typographyDefaultStyles,
     ...mapVariantToTypographyStyles[variant],
-    ...mapTypeToTypographyStyles[type],
     ...sx,
   }
 

@@ -1,33 +1,16 @@
 import { IconName } from "@client/components/atoms/Icon/@types"
-import {
-  FormData,
-  IAddGroceryItemFormProps,
-} from "@client/components/molecules/AddGroceryItemForm/@types"
-import { useErrorTypeState } from "@client/components/molecules/AddGroceryItemForm/hooks/useErrorTypeState"
-import { addGroceryItemFormDefaultStyles } from "@client/components/molecules/AddGroceryItemForm/styles"
+import { IAddIngredientFormProps } from "@client/components/molecules/AddIngredientForm/@types"
+import { useAddIngredientFormState } from "@client/components/molecules/AddIngredientForm/hooks/useAddIngredientFormState"
+import { useErrorTypeState } from "@client/components/molecules/AddIngredientForm/hooks/useErrorTypeState"
+import { addGroceryItemFormDefaultStyles } from "@client/components/molecules/AddIngredientForm/styles"
 import { IconButton } from "@client/components/molecules/IconButton"
 import { IconButtonSize, IconButtonVariant } from "@client/components/molecules/IconButton/@types"
 import { InputField } from "@client/components/molecules/InputField"
 import { View } from "dripsy"
-import { useForm } from "react-hook-form"
 
-export const AddGroceryItemForm: React.FC<IAddGroceryItemFormProps> = ({ onAddIngredient }) => {
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-    watch,
-  } = useForm<FormData>()
-
-  const onSubmit = (data) => {
-    onAddIngredient(data)
-    reset({ name: "", unit: "" })
-  }
-
-  const nameValue = watch("name")
-
-  const hasErrors = Object.keys(errors).length !== 0
+export const AddIngredientForm: React.FC<IAddIngredientFormProps> = ({ onAddIngredient }) => {
+  const { control, errors, handleSubmit, hasErrors, nameValue, onSubmit } =
+    useAddIngredientFormState({ onAddIngredient })
 
   const { outerWrapper, nameInput, unitInput, iconButton, wrapper } =
     addGroceryItemFormDefaultStyles({ hasErrors })
@@ -62,7 +45,7 @@ export const AddGroceryItemForm: React.FC<IAddGroceryItemFormProps> = ({ onAddIn
         size={IconButtonSize.Medium}
         variant={IconButtonVariant.GreenPrimary}
         sx={iconButton}
-        // disabled={!nameValue}
+        disabled={!nameValue}
         onPress={handleSubmit(onSubmit)}
       />
     </View>

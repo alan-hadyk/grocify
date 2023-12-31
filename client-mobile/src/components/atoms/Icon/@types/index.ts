@@ -20,6 +20,8 @@ export enum IconName {
   Ruler,
   Bulb,
   Check,
+  Increase,
+  Decrease,
 }
 
 export enum IconSizeType {

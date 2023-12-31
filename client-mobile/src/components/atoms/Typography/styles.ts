@@ -1,4 +1,4 @@
-import { TypographyType, TypographyVariant } from "@client/components/atoms/Typography/@types"
+import { TypographyVariant } from "@client/components/atoms/Typography/@types"
 import { Sx } from "dripsy"
 
 export const typographyDefaultStyles: Sx = {
@@ -6,18 +6,6 @@ export const typographyDefaultStyles: Sx = {
   marginHorizontal: "$0",
   marginVertical: "$0",
   padding: "$0",
-}
-
-export const mapTypeToTypographyStyles: Record<TypographyType, Sx> = {
-  [TypographyType.Default]: {
-    color: "$black400",
-  },
-  [TypographyType.Error]: {
-    color: "$red400",
-  },
-  [TypographyType.Info]: {
-    color: "$blue400",
-  },
 }
 
 export const mapVariantToTypographyStyles: Record<TypographyVariant, Sx> = {

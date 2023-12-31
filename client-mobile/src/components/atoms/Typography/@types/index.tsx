@@ -21,16 +21,9 @@ export enum TypographyVariant {
   DatePickerMonth,
 }
 
-export enum TypographyType {
-  Default,
-  Error,
-  Info,
-}
-
 export type ITypographyProps = {
   sx?: Sx
   variant?: TypographyVariant
-  type?: TypographyType
 } & (
   | {
       dateFormat: string

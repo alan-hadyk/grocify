@@ -1,3 +1,4 @@
+import { IIconProps } from "@client/components/atoms/Icon/@types"
 import { IInputProps } from "@client/components/molecules/Input/@types"
 import { ITranslation } from "@client/translations/@types"
 import { Sx } from "dripsy"
@@ -9,9 +10,11 @@ export interface IInputFieldProps {
     values: Record<string, string>
   }
   name: string
-  label: IInputProps["label"]
-  placeholder: IInputProps["placeholder"]
+  label?: IInputProps["label"]
+  placeholder?: IInputProps["placeholder"]
   isRequired?: IInputProps["isRequired"]
-  iconName: IInputProps["iconName"]
+  iconName?: IInputProps["iconName"]
   sx?: Sx
+  inputType?: IInputProps["inputType"]
+  disabled?: IIconProps["disabled"]
 }

@@ -8,6 +8,8 @@ import { CalendarIcon } from "@client/icons/CalendarIcon"
 import { CheckIcon } from "@client/icons/CheckIcon"
 import { CloseIcon } from "@client/icons/CloseIcon"
 import { CopyIcon } from "@client/icons/CopyIcon"
+import { DecreaseIcon } from "@client/icons/DecreaseIcon"
+import { IncreaseIcon } from "@client/icons/IncreaseIcon"
 import { ListIcon } from "@client/icons/ListIcon"
 import { PlusIcon } from "@client/icons/PlusIcon"
 import { RecipeIcon } from "@client/icons/RecipeIcon"
@@ -110,5 +112,15 @@ export const icons: Record<
     Component: CheckIcon,
     height: 10,
     width: 15,
+  },
+  [IconName.Increase]: {
+    Component: IncreaseIcon,
+    height: 20,
+    width: 20,
+  },
+  [IconName.Decrease]: {
+    Component: DecreaseIcon,
+    height: 4,
+    width: 20,
   },
 }

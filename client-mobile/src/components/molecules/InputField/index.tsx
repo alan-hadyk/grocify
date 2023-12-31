@@ -12,6 +12,8 @@ export const InputField: React.FC<IInputFieldProps> = ({
   isRequired = false,
   iconName,
   sx,
+  inputType,
+  disabled,
 }) => {
   return (
     <View sx={sx}>
@@ -20,18 +22,24 @@ export const InputField: React.FC<IInputFieldProps> = ({
         rules={{
           required: isRequired,
         }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <Input
-            value={value}
-            onChangeText={onChange}
-            placeholder={placeholder}
-            label={label}
-            iconName={iconName}
-            isRequired={isRequired}
-            error={error}
-          />
-        )}
         name={name}
+        render={({ field: { onChange, onBlur, value } }) => {
+          console.log({ value })
+
+          return (
+            <Input
+              value={value}
+              onChangeText={onChange}
+              placeholder={placeholder}
+              label={label}
+              iconName={iconName}
+              isRequired={isRequired}
+              error={error}
+              inputType={inputType}
+              disabled={disabled}
+            />
+          )
+        }}
       />
     </View>
   )
