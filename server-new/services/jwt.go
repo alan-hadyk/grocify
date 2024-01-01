@@ -3,13 +3,26 @@ package services
 import (
 	"fmt"
 	"grocify-server/config"
+	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func CreateJWTToken(claims jwt.Claims) (string, error) {
+type TokenClaims struct {
+	ID string `json:"id"`
+	jwt.RegisteredClaims
+}
+
+func CreateJWTToken(userID string) (string, error) {
 	// Create a new token object, specifying signing method and the claims
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, TokenClaims{
+		userID,
+		jwt.RegisteredClaims{
+			// Expiration time - 7 days
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 168)),
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+		},
+	})
 
 	cfg := config.LoadConfig()
 
@@ -23,12 +36,12 @@ func CreateJWTToken(claims jwt.Claims) (string, error) {
 	}
 }
 
-func ParseJWTToken(tokenString string, claims jwt.Claims) (jwt.MapClaims, error) {
+func ParseJWTToken(tokenString string) (*TokenClaims, error) {
 	cfg := config.LoadConfig()
 
-	// Create a new token object, specifying signing method and the claims
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		// Validate the alg
+	// Parse token object, specifying claims
+	token, err := jwt.ParseWithClaims(tokenString, &TokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		// Validate the algorithm
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
@@ -41,8 +54,14 @@ func ParseJWTToken(tokenString string, claims jwt.Claims) (jwt.MapClaims, error)
 		return nil, err
 	}
 
-	if tokenClaims, ok := token.Claims.(jwt.MapClaims); ok {
-		return tokenClaims, nil
+	if claims, ok := token.Claims.(*TokenClaims); ok {
+		return &TokenClaims{
+			claims.ID,
+			jwt.RegisteredClaims{
+				ExpiresAt: claims.ExpiresAt,
+				IssuedAt:  claims.IssuedAt,
+			},
+		}, nil
 	} else {
 		return nil, err
 	}

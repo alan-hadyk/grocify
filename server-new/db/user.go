@@ -2,12 +2,16 @@ package db
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"grocify-server/graph/model"
 	"grocify-server/services"
 	"log"
 	"os"
 	"time"
+
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgconn"
 )
 
 func (db *DB) InitUserSchema() {
@@ -29,9 +33,19 @@ func (db *DB) InitUserSchema() {
 	}
 }
 
-func (db *DB) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
+func (db *DB) UserCreate(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
 	var id, email, preferredLanguage string
 	var createdAt time.Time
+
+	existingUser, userGetByEmailErr := db.UserGetByEmail(ctx, input.Email)
+
+	if existingUser != nil {
+		return nil, fmt.Errorf("user with email %s already exists", input.Email)
+	}
+
+	if userGetByEmailErr != nil {
+		return nil, userGetByEmailErr
+	}
 
 	// Hash the password
 	hashedPassword, err := services.HashPassword(input.Password)
@@ -69,15 +83,15 @@ func (db *DB) CreateUser(ctx context.Context, input model.CreateUserInput) (*mod
 	}, nil
 }
 
-func (db *DB) DeleteUser(ctx context.Context) (bool, error) {
+func (db *DB) UserDelete(ctx context.Context) (bool, error) {
 	return true, nil
 }
 
-func (db *DB) UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.User, error) {
+func (db *DB) UserUpdate(ctx context.Context, input model.UpdateUserInput) (*model.User, error) {
 	return nil, nil
 }
 
-func (db *DB) GetUser(ctx context.Context) (*model.User, error) {
+func (db *DB) UserGetByID(ctx context.Context, userID string) (*model.User, error) {
 	var id, email, preferredLanguage string
 	var createdAt time.Time
 
@@ -85,11 +99,43 @@ func (db *DB) GetUser(ctx context.Context) (*model.User, error) {
 		SELECT id, email, preferred_language, created_at
 		FROM users
 		WHERE id = $1
-	`,
-		"123").Scan(&id, &email, &preferredLanguage, &createdAt)
+	`, userID).Scan(&id, &email, &preferredLanguage, &createdAt)
 
 	if err != nil {
-		return nil, fmt.Errorf("failed to create user: %w", err)
+		var pgErr *pgconn.PgError
+		if errors.As(err, &pgErr) {
+			return nil, fmt.Errorf("failed to get user: %w", pgErr)
+		}
+	}
+
+	isoCreatedAt := createdAt.Format(time.RFC3339)
+
+	return &model.User{
+		ID:                id,
+		Email:             email,
+		PreferredLanguage: model.Language(preferredLanguage),
+		CreatedAt:         isoCreatedAt,
+	}, nil
+}
+
+func (db *DB) UserGetByEmail(ctx context.Context, userEmail string) (*model.User, error) {
+	var id, email, preferredLanguage string
+	var createdAt time.Time
+
+	err := db.Pool.QueryRow(ctx, `
+		SELECT id, email, preferred_language, created_at
+		FROM users
+		WHERE email = $1
+	`, userEmail).Scan(&id, &email, &preferredLanguage, &createdAt)
+
+	if err != nil && err != pgx.ErrNoRows {
+		var pgErr *pgconn.PgError
+		log.Print(err)
+		if errors.As(err, &pgErr) {
+			log.Print(pgErr)
+
+			return nil, fmt.Errorf("failed to get user: %w", pgErr)
+		}
 	}
 
 	isoCreatedAt := createdAt.Format(time.RFC3339)

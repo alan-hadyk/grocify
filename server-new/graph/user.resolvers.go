@@ -12,7 +12,7 @@ import (
 
 // CreateUser is the resolver for the createUser field.
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.User, error) {
-	return r.DB.CreateUser(ctx, input)
+	return r.DB.UserCreate(ctx, input)
 }
 
 // DeleteUser is the resolver for the deleteUser field.
