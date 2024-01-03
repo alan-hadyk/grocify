@@ -1,3 +1,4 @@
+# trunk-ignore-all(terrascan/AC_DOCKER_0047)
 # Use a builder image
 FROM golang:1.21.5 AS builder
 

@@ -53,8 +53,7 @@ GraphQL playground available at http://localhost:3000/
 
 ## File structure
 
-```
-
+```bash
 .
 ├── Dockerfile # Used to run Go server in production
 ├── Makefile # Used to run CLI commands in bulk. For example, run server in development mode
@@ -79,6 +78,7 @@ GraphQL playground available at http://localhost:3000/
 ├── go.sum
 ├── gqlgen.yml # Configuration for Gqlgen (https://gqlgen.com/config/)
 ├── graph
+│   ├── category.resolvers.go # GraphQL resolvers for categories endpoints
 │   ├── generated.go # A package that only contains the generated runtime
 │   ├── ingredient.resolvers.go # GraphQL resolvers for ingredients endpoints
 │   ├── model # A package for all graph models, generated or otherwise
@@ -89,6 +89,7 @@ GraphQL playground available at http://localhost:3000/
 │   ├── schema.graphqls # GraphQL schema - entry point
 │   ├── schema.resolvers.go # GraphQL resolvers - entry point
 │   ├── schemas
+│   │   ├── category.graphqls # GraphQL schema - categories
 │   │   ├── ingredient.graphqls # GraphQL schema - ingredients
 │   │   ├── notification.graphqls # GraphQL schema - notifications
 │   │   ├── recipe.graphqls # GraphQL schema - recipes
@@ -104,9 +105,10 @@ GraphQL playground available at http://localhost:3000/
 │   └── createRouter.go # Create and configure router
 ├── server.go # Go server - entry point
 ├── services
+│   ├── jwt.go # Service for dealing with JSON Web tokens (creating and validating)
+│   ├── language.go # Service for dealing with languages (mapping, etc.)
 │   └── password.go # Service for dealing with passwords (hashing & verifying)
 ├── tmp # Temporary files
-│   └── main
 └── tools.go # Go packages that are not included in the bundle
 ```
 
