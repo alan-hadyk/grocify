@@ -52,12 +52,14 @@ input ShoppingListRecipeCreateUpdate {
 
 input CreateShoppingListInput {
   date: DateTime!
+  categories: [ID!]
   ingredients: [ShoppingListIngredientCreateUpdate!]
   recipes: [ShoppingListRecipeCreateUpdate!]
 }
 
 input UpdateShoppingListInput {
   date: DateTime
+  categories: [ID!]
   ingredients: [ShoppingListIngredientCreateUpdate!]
   recipes: [ShoppingListRecipeCreateUpdate!]
 }

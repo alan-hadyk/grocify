@@ -990,8 +990,7 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 		ec.unmarshalInputCreateShoppingListInput,
 		ec.unmarshalInputCreateUnitInput,
 		ec.unmarshalInputCreateUserInput,
-		ec.unmarshalInputRecipeIngredientCreateInput,
-		ec.unmarshalInputRecipeIngredientUpdateInput,
+		ec.unmarshalInputRecipeIngredientCreateUpdateInput,
 		ec.unmarshalInputShoppingListIngredientCreateUpdate,
 		ec.unmarshalInputShoppingListRecipeCreateUpdate,
 		ec.unmarshalInputUpdateCategoryInput,
@@ -8204,7 +8203,7 @@ func (ec *executionContext) unmarshalInputCreateRecipeInput(ctx context.Context,
 			it.ServingSize = data
 		case "ingredients":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("ingredients"))
-			data, err := ec.unmarshalNRecipeIngredientCreateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateInputᚄ(ctx, v)
+			data, err := ec.unmarshalNRecipeIngredientCreateUpdateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInputᚄ(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -8222,7 +8221,7 @@ func (ec *executionContext) unmarshalInputCreateShoppingListInput(ctx context.Co
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"date", "ingredients", "recipes"}
+	fieldsInOrder := [...]string{"date", "categories", "ingredients", "recipes"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -8236,6 +8235,13 @@ func (ec *executionContext) unmarshalInputCreateShoppingListInput(ctx context.Co
 				return it, err
 			}
 			it.Date = data
+		case "categories":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("categories"))
+			data, err := ec.unmarshalOID2ᚕstringᚄ(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Categories = data
 		case "ingredients":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("ingredients"))
 			data, err := ec.unmarshalOShoppingListIngredientCreateUpdate2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐShoppingListIngredientCreateUpdateᚄ(ctx, v)
@@ -8324,14 +8330,14 @@ func (ec *executionContext) unmarshalInputCreateUserInput(ctx context.Context, o
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeIngredientCreateInput(ctx context.Context, obj interface{}) (model.RecipeIngredientCreateInput, error) {
-	var it model.RecipeIngredientCreateInput
+func (ec *executionContext) unmarshalInputRecipeIngredientCreateUpdateInput(ctx context.Context, obj interface{}) (model.RecipeIngredientCreateUpdateInput, error) {
+	var it model.RecipeIngredientCreateUpdateInput
 	asMap := map[string]interface{}{}
 	for k, v := range obj.(map[string]interface{}) {
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"id", "name", "unit", "quantity"}
+	fieldsInOrder := [...]string{"id", "quantity"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -8345,71 +8351,9 @@ func (ec *executionContext) unmarshalInputRecipeIngredientCreateInput(ctx contex
 				return it, err
 			}
 			it.ID = data
-		case "name":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("name"))
-			data, err := ec.unmarshalNString2string(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.Name = data
-		case "unit":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("unit"))
-			data, err := ec.unmarshalNID2string(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.Unit = data
 		case "quantity":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("quantity"))
 			data, err := ec.unmarshalNFloat2float64(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.Quantity = data
-		}
-	}
-
-	return it, nil
-}
-
-func (ec *executionContext) unmarshalInputRecipeIngredientUpdateInput(ctx context.Context, obj interface{}) (model.RecipeIngredientUpdateInput, error) {
-	var it model.RecipeIngredientUpdateInput
-	asMap := map[string]interface{}{}
-	for k, v := range obj.(map[string]interface{}) {
-		asMap[k] = v
-	}
-
-	fieldsInOrder := [...]string{"id", "name", "unit", "quantity"}
-	for _, k := range fieldsInOrder {
-		v, ok := asMap[k]
-		if !ok {
-			continue
-		}
-		switch k {
-		case "id":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
-			data, err := ec.unmarshalNID2string(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.ID = data
-		case "name":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("name"))
-			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.Name = data
-		case "unit":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("unit"))
-			data, err := ec.unmarshalOID2ᚖstring(ctx, v)
-			if err != nil {
-				return it, err
-			}
-			it.Unit = data
-		case "quantity":
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("quantity"))
-			data, err := ec.unmarshalOFloat2ᚖfloat64(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -8600,7 +8544,7 @@ func (ec *executionContext) unmarshalInputUpdateRecipeInput(ctx context.Context,
 			it.ServingSize = data
 		case "ingredients":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("ingredients"))
-			data, err := ec.unmarshalORecipeIngredientUpdateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientUpdateInputᚄ(ctx, v)
+			data, err := ec.unmarshalORecipeIngredientCreateUpdateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInputᚄ(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -8618,7 +8562,7 @@ func (ec *executionContext) unmarshalInputUpdateShoppingListInput(ctx context.Co
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"date", "ingredients", "recipes"}
+	fieldsInOrder := [...]string{"date", "categories", "ingredients", "recipes"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -8632,6 +8576,13 @@ func (ec *executionContext) unmarshalInputUpdateShoppingListInput(ctx context.Co
 				return it, err
 			}
 			it.Date = data
+		case "categories":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("categories"))
+			data, err := ec.unmarshalOID2ᚕstringᚄ(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Categories = data
 		case "ingredients":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("ingredients"))
 			data, err := ec.unmarshalOShoppingListIngredientCreateUpdate2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐShoppingListIngredientCreateUpdateᚄ(ctx, v)
@@ -10559,16 +10510,16 @@ func (ec *executionContext) marshalNRecipeIngredient2ᚖgrocifyᚑserverᚋgraph
 	return ec._RecipeIngredient(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeIngredientCreateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateInputᚄ(ctx context.Context, v interface{}) ([]*model.RecipeIngredientCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeIngredientCreateUpdateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInputᚄ(ctx context.Context, v interface{}) ([]*model.RecipeIngredientCreateUpdateInput, error) {
 	var vSlice []interface{}
 	if v != nil {
 		vSlice = graphql.CoerceList(v)
 	}
 	var err error
-	res := make([]*model.RecipeIngredientCreateInput, len(vSlice))
+	res := make([]*model.RecipeIngredientCreateUpdateInput, len(vSlice))
 	for i := range vSlice {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
-		res[i], err = ec.unmarshalNRecipeIngredientCreateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateInput(ctx, vSlice[i])
+		res[i], err = ec.unmarshalNRecipeIngredientCreateUpdateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInput(ctx, vSlice[i])
 		if err != nil {
 			return nil, err
 		}
@@ -10576,13 +10527,8 @@ func (ec *executionContext) unmarshalNRecipeIngredientCreateInput2ᚕᚖgrocify�
 	return res, nil
 }
 
-func (ec *executionContext) unmarshalNRecipeIngredientCreateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateInput(ctx context.Context, v interface{}) (*model.RecipeIngredientCreateInput, error) {
-	res, err := ec.unmarshalInputRecipeIngredientCreateInput(ctx, v)
-	return &res, graphql.ErrorOnPath(ctx, err)
-}
-
-func (ec *executionContext) unmarshalNRecipeIngredientUpdateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientUpdateInput(ctx context.Context, v interface{}) (*model.RecipeIngredientUpdateInput, error) {
-	res, err := ec.unmarshalInputRecipeIngredientUpdateInput(ctx, v)
+func (ec *executionContext) unmarshalNRecipeIngredientCreateUpdateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInput(ctx context.Context, v interface{}) (*model.RecipeIngredientCreateUpdateInput, error) {
+	res, err := ec.unmarshalInputRecipeIngredientCreateUpdateInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
@@ -11181,20 +11127,42 @@ func (ec *executionContext) marshalODateTime2ᚖstring(ctx context.Context, sel 
 	return res
 }
 
-func (ec *executionContext) unmarshalOFloat2ᚖfloat64(ctx context.Context, v interface{}) (*float64, error) {
+func (ec *executionContext) unmarshalOID2ᚕstringᚄ(ctx context.Context, v interface{}) ([]string, error) {
 	if v == nil {
 		return nil, nil
 	}
-	res, err := graphql.UnmarshalFloatContext(ctx, v)
-	return &res, graphql.ErrorOnPath(ctx, err)
+	var vSlice []interface{}
+	if v != nil {
+		vSlice = graphql.CoerceList(v)
+	}
+	var err error
+	res := make([]string, len(vSlice))
+	for i := range vSlice {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
+		res[i], err = ec.unmarshalNID2string(ctx, vSlice[i])
+		if err != nil {
+			return nil, err
+		}
+	}
+	return res, nil
 }
 
-func (ec *executionContext) marshalOFloat2ᚖfloat64(ctx context.Context, sel ast.SelectionSet, v *float64) graphql.Marshaler {
+func (ec *executionContext) marshalOID2ᚕstringᚄ(ctx context.Context, sel ast.SelectionSet, v []string) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
-	res := graphql.MarshalFloatContext(*v)
-	return graphql.WrapContextMarshaler(ctx, res)
+	ret := make(graphql.Array, len(v))
+	for i := range v {
+		ret[i] = ec.marshalNID2string(ctx, sel, v[i])
+	}
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
 }
 
 func (ec *executionContext) unmarshalOID2ᚖstring(ctx context.Context, v interface{}) (*string, error) {
@@ -11250,7 +11218,7 @@ func (ec *executionContext) marshalORecipe2ᚖgrocifyᚑserverᚋgraphᚋmodel�
 	return ec._Recipe(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeIngredientUpdateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientUpdateInputᚄ(ctx context.Context, v interface{}) ([]*model.RecipeIngredientUpdateInput, error) {
+func (ec *executionContext) unmarshalORecipeIngredientCreateUpdateInput2ᚕᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInputᚄ(ctx context.Context, v interface{}) ([]*model.RecipeIngredientCreateUpdateInput, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -11259,10 +11227,10 @@ func (ec *executionContext) unmarshalORecipeIngredientUpdateInput2ᚕᚖgrocify�
 		vSlice = graphql.CoerceList(v)
 	}
 	var err error
-	res := make([]*model.RecipeIngredientUpdateInput, len(vSlice))
+	res := make([]*model.RecipeIngredientCreateUpdateInput, len(vSlice))
 	for i := range vSlice {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
-		res[i], err = ec.unmarshalNRecipeIngredientUpdateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientUpdateInput(ctx, vSlice[i])
+		res[i], err = ec.unmarshalNRecipeIngredientCreateUpdateInput2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐRecipeIngredientCreateUpdateInput(ctx, vSlice[i])
 		if err != nil {
 			return nil, err
 		}

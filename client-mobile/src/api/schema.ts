@@ -41,12 +41,13 @@ export type CreateIngredientInput = {
 
 export type CreateRecipeInput = {
   description?: InputMaybe<Scalars["String"]["input"]>
-  ingredients: RecipeIngredientCreateInput[]
+  ingredients: RecipeIngredientCreateUpdateInput[]
   servingSize: Scalars["Int"]["input"]
   title: Scalars["String"]["input"]
 }
 
 export type CreateShoppingListInput = {
+  categories?: InputMaybe<Scalars["ID"]["input"][]>
   date: Scalars["DateTime"]["input"]
   ingredients?: InputMaybe<ShoppingListIngredientCreateUpdate[]>
   recipes?: InputMaybe<ShoppingListRecipeCreateUpdate[]>
@@ -245,18 +246,9 @@ export type RecipeIngredient = {
   unit: Unit
 }
 
-export type RecipeIngredientCreateInput = {
+export type RecipeIngredientCreateUpdateInput = {
   id: Scalars["ID"]["input"]
-  name: Scalars["String"]["input"]
   quantity: Scalars["Float"]["input"]
-  unit: Scalars["ID"]["input"]
-}
-
-export type RecipeIngredientUpdateInput = {
-  id: Scalars["ID"]["input"]
-  name?: InputMaybe<Scalars["String"]["input"]>
-  quantity?: InputMaybe<Scalars["Float"]["input"]>
-  unit?: InputMaybe<Scalars["ID"]["input"]>
 }
 
 export type ShoppingList = {
@@ -319,12 +311,13 @@ export type UpdateIngredientInput = {
 
 export type UpdateRecipeInput = {
   description?: InputMaybe<Scalars["String"]["input"]>
-  ingredients?: InputMaybe<RecipeIngredientUpdateInput[]>
+  ingredients?: InputMaybe<RecipeIngredientCreateUpdateInput[]>
   servingSize?: InputMaybe<Scalars["Int"]["input"]>
   title?: InputMaybe<Scalars["String"]["input"]>
 }
 
 export type UpdateShoppingListInput = {
+  categories?: InputMaybe<Scalars["ID"]["input"][]>
   date?: InputMaybe<Scalars["DateTime"]["input"]>
   ingredients?: InputMaybe<ShoppingListIngredientCreateUpdate[]>
   recipes?: InputMaybe<ShoppingListRecipeCreateUpdate[]>

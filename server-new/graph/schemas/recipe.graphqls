@@ -27,10 +27,8 @@ extend type Mutation {
   updateRecipe(id: ID!, input: UpdateRecipeInput!): Recipe!
 }
 
-input RecipeIngredientCreateInput {
+input RecipeIngredientCreateUpdateInput {
   id: ID!
-  name: String!
-  unit: ID!
   quantity: Float!
 }
 
@@ -38,19 +36,12 @@ input CreateRecipeInput {
   title: String!
   description: String
   servingSize: Int!
-  ingredients: [RecipeIngredientCreateInput!]!
-}
-
-input RecipeIngredientUpdateInput {
-  id: ID!
-  name: String
-  unit: ID
-  quantity: Float
+  ingredients: [RecipeIngredientCreateUpdateInput!]!
 }
 
 input UpdateRecipeInput {
   title: String
   description: String
   servingSize: Int
-  ingredients: [RecipeIngredientUpdateInput!]
+  ingredients: [RecipeIngredientCreateUpdateInput!]
 }

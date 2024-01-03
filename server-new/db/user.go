@@ -116,10 +116,6 @@ func (db *DB) UserGet(ctx context.Context, value string, searchType UserSearchTy
 		return nil, fmt.Errorf("failed to get user: %w", err)
 	}
 
-	// if id == "" {
-	// 	return nil, nil
-	// }
-
 	isoCreatedAt := createdAt.Format(time.RFC3339)
 
 	return &model.User{

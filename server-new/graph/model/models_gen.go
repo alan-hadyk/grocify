@@ -26,14 +26,15 @@ type CreateIngredientInput struct {
 }
 
 type CreateRecipeInput struct {
-	Title       string                         `json:"title"`
-	Description *string                        `json:"description,omitempty"`
-	ServingSize int                            `json:"servingSize"`
-	Ingredients []*RecipeIngredientCreateInput `json:"ingredients"`
+	Title       string                               `json:"title"`
+	Description *string                              `json:"description,omitempty"`
+	ServingSize int                                  `json:"servingSize"`
+	Ingredients []*RecipeIngredientCreateUpdateInput `json:"ingredients"`
 }
 
 type CreateShoppingListInput struct {
 	Date        string                                `json:"date"`
+	Categories  []string                              `json:"categories,omitempty"`
 	Ingredients []*ShoppingListIngredientCreateUpdate `json:"ingredients,omitempty"`
 	Recipes     []*ShoppingListRecipeCreateUpdate     `json:"recipes,omitempty"`
 }
@@ -84,18 +85,9 @@ type RecipeIngredient struct {
 	Quantity  float64 `json:"quantity"`
 }
 
-type RecipeIngredientCreateInput struct {
+type RecipeIngredientCreateUpdateInput struct {
 	ID       string  `json:"id"`
-	Name     string  `json:"name"`
-	Unit     string  `json:"unit"`
 	Quantity float64 `json:"quantity"`
-}
-
-type RecipeIngredientUpdateInput struct {
-	ID       string   `json:"id"`
-	Name     *string  `json:"name,omitempty"`
-	Unit     *string  `json:"unit,omitempty"`
-	Quantity *float64 `json:"quantity,omitempty"`
 }
 
 type ShoppingList struct {
@@ -157,14 +149,15 @@ type UpdateIngredientInput struct {
 }
 
 type UpdateRecipeInput struct {
-	Title       *string                        `json:"title,omitempty"`
-	Description *string                        `json:"description,omitempty"`
-	ServingSize *int                           `json:"servingSize,omitempty"`
-	Ingredients []*RecipeIngredientUpdateInput `json:"ingredients,omitempty"`
+	Title       *string                              `json:"title,omitempty"`
+	Description *string                              `json:"description,omitempty"`
+	ServingSize *int                                 `json:"servingSize,omitempty"`
+	Ingredients []*RecipeIngredientCreateUpdateInput `json:"ingredients,omitempty"`
 }
 
 type UpdateShoppingListInput struct {
 	Date        *string                               `json:"date,omitempty"`
+	Categories  []string                              `json:"categories,omitempty"`
 	Ingredients []*ShoppingListIngredientCreateUpdate `json:"ingredients,omitempty"`
 	Recipes     []*ShoppingListRecipeCreateUpdate     `json:"recipes,omitempty"`
 }
