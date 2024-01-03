@@ -219,7 +219,6 @@ Data model consists of the following main entities:
    - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
 
-<!-- trunk-ignore(markdownlint/MD029) -->
 11. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
 
     - `id` (UUID, required): A unique identifier. This is the primary key.
@@ -228,14 +227,12 @@ Data model consists of the following main entities:
     - `category_id` UUID (optional) - Given category of the ingredient. This is a foreign key referencing `categories.id`.
     - `quantity` FLOAT (required) - Quantity of the ingredient in the shopping list
 
-<!-- trunk-ignore(markdownlint/MD029) -->
 12. `shopping_lists_categories` `JOIN` table - JOIN table to associate shopping lists with categories:
 
     - `id` (UUID, required): A unique identifier. This is the primary key.
     - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
     - `category_id` UUID (required) - Given category. This is a foreign key referencing `categories.id`.
 
-<!-- trunk-ignore(markdownlint/MD029) -->
 13. `notifications` table - Notifications for users:
 
     - `id` UUID (required) - Unique identifier for the notification

@@ -7,6 +7,8 @@ plugins:
       ref: v1.4.1
       uri: https://github.com/trunk-io/plugins
 lint:
+  disabled:
+    - markdownlint
   ignore:
     - linters: [ALL]
       paths:
@@ -25,7 +27,6 @@ lint:
     - yamllint@1.33.0
     - clippy@1.65.0
     - git-diff-check
-    - markdownlint@0.38.0
     - osv-scanner@1.5.0
     - prettier@3.1.1
     - rustfmt@1.65.0
