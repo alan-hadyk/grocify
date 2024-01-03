@@ -215,9 +215,9 @@ Data model consists of the following main entities:
 
 10. `shopping_lists_recipes` `JOIN` table - JOIN table to associate shopping lists with recipes:
 
-   - `id` (UUID, required): A unique identifier. This is the primary key.
-   - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
-   - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
+- `id` (UUID, required): A unique identifier. This is the primary key.
+- `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
+- `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
 
 11. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
 
