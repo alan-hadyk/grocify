@@ -55,11 +55,12 @@ type ComplexityRoot struct {
 	}
 
 	Ingredient struct {
-		Author    func(childComplexity int) int
-		CreatedAt func(childComplexity int) int
-		ID        func(childComplexity int) int
-		Name      func(childComplexity int) int
-		Unit      func(childComplexity int) int
+		Author         func(childComplexity int) int
+		CreatedAt      func(childComplexity int) int
+		ID             func(childComplexity int) int
+		LastCategoryID func(childComplexity int) int
+		Name           func(childComplexity int) int
+		Unit           func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -139,12 +140,13 @@ type ComplexityRoot struct {
 	}
 
 	ShoppingListIngredient struct {
-		CategoryID func(childComplexity int) int
-		CreatedAt  func(childComplexity int) int
-		ID         func(childComplexity int) int
-		Name       func(childComplexity int) int
-		Quantity   func(childComplexity int) int
-		Unit       func(childComplexity int) int
+		CategoryID     func(childComplexity int) int
+		CreatedAt      func(childComplexity int) int
+		ID             func(childComplexity int) int
+		LastCategoryID func(childComplexity int) int
+		Name           func(childComplexity int) int
+		Quantity       func(childComplexity int) int
+		Unit           func(childComplexity int) int
 	}
 
 	ShoppingListRecipe struct {
@@ -277,6 +279,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Ingredient.ID(childComplexity), true
+
+	case "Ingredient.lastCategoryId":
+		if e.complexity.Ingredient.LastCategoryID == nil {
+			break
+		}
+
+		return e.complexity.Ingredient.LastCategoryID(childComplexity), true
 
 	case "Ingredient.name":
 		if e.complexity.Ingredient.Name == nil {
@@ -833,6 +842,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.ShoppingListIngredient.ID(childComplexity), true
+
+	case "ShoppingListIngredient.lastCategoryId":
+		if e.complexity.ShoppingListIngredient.LastCategoryID == nil {
+			break
+		}
+
+		return e.complexity.ShoppingListIngredient.LastCategoryID(childComplexity), true
 
 	case "ShoppingListIngredient.name":
 		if e.complexity.ShoppingListIngredient.Name == nil {
@@ -1932,6 +1948,47 @@ func (ec *executionContext) fieldContext_Ingredient_author(ctx context.Context, 
 	return fc, nil
 }
 
+func (ec *executionContext) _Ingredient_lastCategoryId(ctx context.Context, field graphql.CollectedField, obj *model.Ingredient) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Ingredient_lastCategoryId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.LastCategoryID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOID2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Ingredient_lastCategoryId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Ingredient",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Ingredient_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.Ingredient) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Ingredient_createdAt(ctx, field)
 	if err != nil {
@@ -2246,6 +2303,8 @@ func (ec *executionContext) fieldContext_Mutation_createIngredient(ctx context.C
 				return ec.fieldContext_Ingredient_unit(ctx, field)
 			case "author":
 				return ec.fieldContext_Ingredient_author(ctx, field)
+			case "lastCategoryId":
+				return ec.fieldContext_Ingredient_lastCategoryId(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_Ingredient_createdAt(ctx, field)
 			}
@@ -2365,6 +2424,8 @@ func (ec *executionContext) fieldContext_Mutation_updateIngredient(ctx context.C
 				return ec.fieldContext_Ingredient_unit(ctx, field)
 			case "author":
 				return ec.fieldContext_Ingredient_author(ctx, field)
+			case "lastCategoryId":
+				return ec.fieldContext_Ingredient_lastCategoryId(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_Ingredient_createdAt(ctx, field)
 			}
@@ -3604,6 +3665,8 @@ func (ec *executionContext) fieldContext_Query_ingredients(ctx context.Context, 
 				return ec.fieldContext_Ingredient_unit(ctx, field)
 			case "author":
 				return ec.fieldContext_Ingredient_author(ctx, field)
+			case "lastCategoryId":
+				return ec.fieldContext_Ingredient_lastCategoryId(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_Ingredient_createdAt(ctx, field)
 			}
@@ -3657,6 +3720,8 @@ func (ec *executionContext) fieldContext_Query_ingredient(ctx context.Context, f
 				return ec.fieldContext_Ingredient_unit(ctx, field)
 			case "author":
 				return ec.fieldContext_Ingredient_author(ctx, field)
+			case "lastCategoryId":
+				return ec.fieldContext_Ingredient_lastCategoryId(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_Ingredient_createdAt(ctx, field)
 			}
@@ -5155,6 +5220,8 @@ func (ec *executionContext) fieldContext_ShoppingList_ingredients(ctx context.Co
 				return ec.fieldContext_ShoppingListIngredient_quantity(ctx, field)
 			case "categoryId":
 				return ec.fieldContext_ShoppingListIngredient_categoryId(ctx, field)
+			case "lastCategoryId":
+				return ec.fieldContext_ShoppingListIngredient_lastCategoryId(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_ShoppingListIngredient_createdAt(ctx, field)
 			}
@@ -5483,6 +5550,47 @@ func (ec *executionContext) _ShoppingListIngredient_categoryId(ctx context.Conte
 }
 
 func (ec *executionContext) fieldContext_ShoppingListIngredient_categoryId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "ShoppingListIngredient",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _ShoppingListIngredient_lastCategoryId(ctx context.Context, field graphql.CollectedField, obj *model.ShoppingListIngredient) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_ShoppingListIngredient_lastCategoryId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.LastCategoryID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOID2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_ShoppingListIngredient_lastCategoryId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "ShoppingListIngredient",
 		Field:      field,
@@ -8025,7 +8133,7 @@ func (ec *executionContext) unmarshalInputCreateIngredientInput(ctx context.Cont
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "unit"}
+	fieldsInOrder := [...]string{"name", "unit", "lastCategoryId"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -8046,6 +8154,13 @@ func (ec *executionContext) unmarshalInputCreateIngredientInput(ctx context.Cont
 				return it, err
 			}
 			it.Unit = data
+		case "lastCategoryId":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("lastCategoryId"))
+			data, err := ec.unmarshalOID2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.LastCategoryID = data
 		}
 	}
 
@@ -8414,7 +8529,7 @@ func (ec *executionContext) unmarshalInputUpdateIngredientInput(ctx context.Cont
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "unit"}
+	fieldsInOrder := [...]string{"name", "unit", "lastCategoryId"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -8435,6 +8550,13 @@ func (ec *executionContext) unmarshalInputUpdateIngredientInput(ctx context.Cont
 				return it, err
 			}
 			it.Unit = data
+		case "lastCategoryId":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("lastCategoryId"))
+			data, err := ec.unmarshalOID2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.LastCategoryID = data
 		}
 	}
 
@@ -8691,6 +8813,8 @@ func (ec *executionContext) _Ingredient(ctx context.Context, sel ast.SelectionSe
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "lastCategoryId":
+			out.Values[i] = ec._Ingredient_lastCategoryId(ctx, field, obj)
 		case "createdAt":
 			out.Values[i] = ec._Ingredient_createdAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -9498,6 +9622,8 @@ func (ec *executionContext) _ShoppingListIngredient(ctx context.Context, sel ast
 			}
 		case "categoryId":
 			out.Values[i] = ec._ShoppingListIngredient_categoryId(ctx, field, obj)
+		case "lastCategoryId":
+			out.Values[i] = ec._ShoppingListIngredient_lastCategoryId(ctx, field, obj)
 		case "createdAt":
 			out.Values[i] = ec._ShoppingListIngredient_createdAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {

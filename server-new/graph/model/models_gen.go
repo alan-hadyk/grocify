@@ -20,8 +20,9 @@ type CreateCategoryInput struct {
 }
 
 type CreateIngredientInput struct {
-	Name string `json:"name"`
-	Unit string `json:"unit"`
+	Name           string  `json:"name"`
+	Unit           string  `json:"unit"`
+	LastCategoryID *string `json:"lastCategoryId,omitempty"`
 }
 
 type CreateRecipeInput struct {
@@ -48,11 +49,12 @@ type CreateUserInput struct {
 }
 
 type Ingredient struct {
-	ID        string `json:"id"`
-	Name      string `json:"name"`
-	Unit      *Unit  `json:"unit"`
-	Author    *User  `json:"author"`
-	CreatedAt string `json:"createdAt"`
+	ID             string  `json:"id"`
+	Name           string  `json:"name"`
+	Unit           *Unit   `json:"unit"`
+	Author         *User   `json:"author"`
+	LastCategoryID *string `json:"lastCategoryId,omitempty"`
+	CreatedAt      string  `json:"createdAt"`
 }
 
 type Notification struct {
@@ -107,12 +109,13 @@ type ShoppingList struct {
 }
 
 type ShoppingListIngredient struct {
-	ID         string  `json:"id"`
-	Name       string  `json:"name"`
-	Unit       *Unit   `json:"unit"`
-	Quantity   float64 `json:"quantity"`
-	CategoryID *string `json:"categoryId,omitempty"`
-	CreatedAt  string  `json:"createdAt"`
+	ID             string  `json:"id"`
+	Name           string  `json:"name"`
+	Unit           *Unit   `json:"unit"`
+	Quantity       float64 `json:"quantity"`
+	CategoryID     *string `json:"categoryId,omitempty"`
+	LastCategoryID *string `json:"lastCategoryId,omitempty"`
+	CreatedAt      string  `json:"createdAt"`
 }
 
 type ShoppingListIngredientCreateUpdate struct {
@@ -148,8 +151,9 @@ type UpdateCategoryInput struct {
 }
 
 type UpdateIngredientInput struct {
-	Name *string `json:"name,omitempty"`
-	Unit *string `json:"unit,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	Unit           *string `json:"unit,omitempty"`
+	LastCategoryID *string `json:"lastCategoryId,omitempty"`
 }
 
 type UpdateRecipeInput struct {

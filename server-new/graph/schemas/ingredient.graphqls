@@ -3,6 +3,7 @@ type Ingredient {
   name: String!
   unit: Unit!
   author: User!
+  lastCategoryId: ID
   createdAt: DateTime!
 }
 
@@ -20,9 +21,11 @@ extend type Mutation {
 input CreateIngredientInput {
   name: String!
   unit: ID!
+  lastCategoryId: ID
 }
 
 input UpdateIngredientInput {
   name: String
   unit: ID
+  lastCategoryId: ID
 }

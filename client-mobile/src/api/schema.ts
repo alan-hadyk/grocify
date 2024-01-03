@@ -34,6 +34,7 @@ export type CreateCategoryInput = {
 }
 
 export type CreateIngredientInput = {
+  lastCategoryId?: InputMaybe<Scalars["ID"]["input"]>
   name: Scalars["String"]["input"]
   unit: Scalars["ID"]["input"]
 }
@@ -65,6 +66,7 @@ export type Ingredient = {
   author: User
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
+  lastCategoryId?: Maybe<Scalars["ID"]["output"]>
   name: Scalars["String"]["output"]
   unit: Unit
 }
@@ -271,6 +273,7 @@ export type ShoppingListIngredient = {
   categoryId?: Maybe<Scalars["ID"]["output"]>
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
+  lastCategoryId?: Maybe<Scalars["ID"]["output"]>
   name: Scalars["String"]["output"]
   quantity: Scalars["Float"]["output"]
   unit: Unit
@@ -309,6 +312,7 @@ export type UpdateCategoryInput = {
 }
 
 export type UpdateIngredientInput = {
+  lastCategoryId?: InputMaybe<Scalars["ID"]["input"]>
   name?: InputMaybe<Scalars["String"]["input"]>
   unit?: InputMaybe<Scalars["ID"]["input"]>
 }

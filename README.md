@@ -170,6 +170,7 @@ Data model consists of the following main entities:
    - `name` TEXT (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
    - `author` UUID (required) - Relation to the User who created the ingredient. This is a foreign key referencing `users.id`
+   - `last_category_id` UUID (optional) - Relation to the last category to which ingredient was added for a shopping list. This is a foreign key referencing `categories.id`
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the ingredient was created.
 
 4. `units` table - Standardized units of measurement for ingredients:

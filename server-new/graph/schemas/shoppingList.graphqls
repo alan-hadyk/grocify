@@ -4,6 +4,7 @@ type ShoppingListIngredient {
   unit: Unit!
   quantity: Float!
   categoryId: ID
+  lastCategoryId: ID
   createdAt: DateTime!
 }
 
