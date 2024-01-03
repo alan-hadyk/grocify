@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/jackc/pgx/v5/pgconn"
 )
 
 func (db *DB) InitUserSchema() {
@@ -37,7 +36,7 @@ func (db *DB) UserCreate(ctx context.Context, input model.CreateUserInput) (*mod
 	var id, email, preferredLanguage string
 	var createdAt time.Time
 
-	existingUser, _ := db.UserGetByEmail(ctx, input.Email)
+	existingUser, _ := db.UserGet(ctx, input.Email, ByEmail)
 
 	if existingUser != nil {
 		return nil, fmt.Errorf("user with email %s already exists", input.Email)
@@ -87,57 +86,39 @@ func (db *DB) UserUpdate(ctx context.Context, input model.UpdateUserInput) (*mod
 	return nil, nil
 }
 
-func (db *DB) UserGetByID(ctx context.Context, userID string) (*model.User, error) {
+type UserSearchType int
+
+const (
+	ByID UserSearchType = iota
+	ByEmail
+)
+
+func (db *DB) UserGet(ctx context.Context, value string, searchType UserSearchType) (*model.User, error) {
+	var query string
+	switch searchType {
+	case ByID:
+		query = "SELECT id, email, preferred_language, created_at FROM users WHERE id = $1"
+	case ByEmail:
+		query = "SELECT id, email, preferred_language, created_at FROM users WHERE email = $1"
+	default:
+		return nil, errors.New("invalid search type")
+	}
+
 	var id, email, preferredLanguage string
 	var createdAt time.Time
 
-	err := db.Pool.QueryRow(ctx, `
-		SELECT id, email, preferred_language, created_at
-		FROM users
-		WHERE id = $1
-	`, userID).Scan(&id, &email, &preferredLanguage, &createdAt)
+	err := db.Pool.QueryRow(ctx, query, value).Scan(&id, &email, &preferredLanguage, &createdAt)
 
 	if err != nil {
-		var pgErr *pgconn.PgError
-		if errors.As(err, &pgErr) {
-			return nil, fmt.Errorf("failed to get user: %w", pgErr)
+		if err == pgx.ErrNoRows {
+			return nil, nil
 		}
+		return nil, fmt.Errorf("failed to get user: %w", err)
 	}
 
-	if id == "" {
-		return nil, nil
-	}
-
-	isoCreatedAt := createdAt.Format(time.RFC3339)
-
-	return &model.User{
-		ID:                id,
-		Email:             email,
-		PreferredLanguage: model.Language(preferredLanguage),
-		CreatedAt:         isoCreatedAt,
-	}, nil
-}
-
-func (db *DB) UserGetByEmail(ctx context.Context, userEmail string) (*model.User, error) {
-	var id, email, preferredLanguage string
-	var createdAt time.Time
-
-	err := db.Pool.QueryRow(ctx, `
-		SELECT id, email, preferred_language, created_at
-		FROM users
-		WHERE email = $1
-	`, userEmail).Scan(&id, &email, &preferredLanguage, &createdAt)
-
-	if err != nil && err != pgx.ErrNoRows {
-		var pgErr *pgconn.PgError
-		if errors.As(err, &pgErr) {
-			return nil, fmt.Errorf("failed to get user: %w", pgErr)
-		}
-	}
-
-	if id == "" {
-		return nil, nil
-	}
+	// if id == "" {
+	// 	return nil, nil
+	// }
 
 	isoCreatedAt := createdAt.Format(time.RFC3339)
 
