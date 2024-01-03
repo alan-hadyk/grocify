@@ -1,4 +1,8 @@
+import { IInputProps } from "@client/components/molecules/Input/@types"
+
 export interface ICounterProps {
-  onPressDecrease: () => void
-  onPressIncrease: () => void
+  value: IInputProps["value"]
+  onChange: IInputProps["onChangeText"]
+  onBlur: (value: string) => void
+  disabled: IInputProps["disabled"]
 }

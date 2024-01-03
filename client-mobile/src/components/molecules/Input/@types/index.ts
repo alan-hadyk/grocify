@@ -6,6 +6,7 @@ export interface IInputProps {
   autoFocus?: boolean
   value: string
   onChangeText: (value: string) => void
+  onBlur?: () => void
   placeholder?: keyof ITranslation
   label?: keyof ITranslation
   iconName?: IconName

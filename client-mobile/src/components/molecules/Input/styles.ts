@@ -22,6 +22,7 @@ export const inputStyles = ({
     flexDirection: "row",
     flexWrap: "nowrap",
     gap: "$8",
+    justifyContent: "center",
   },
   outerWrapper: {
     display: "flex",

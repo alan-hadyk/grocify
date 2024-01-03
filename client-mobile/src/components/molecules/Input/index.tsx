@@ -15,6 +15,7 @@ export const Input: React.FC<IInputProps> = ({
   autoFocus = false,
   value,
   onChangeText,
+  onBlur,
   placeholder,
   label,
   iconName,
@@ -54,10 +55,11 @@ export const Input: React.FC<IInputProps> = ({
             onPressIn={focusInput}
             ref={inputRef}
             onFocus={focusInput}
+            onBlur={onBlur}
             autoFocus={autoFocus}
             sx={input}
             keyboardType={keyboardType}
-            editable={disabled}
+            editable={!disabled}
             selectTextOnFocus={disabled}
           />
         </View>

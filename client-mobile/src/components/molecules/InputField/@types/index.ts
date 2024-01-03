@@ -2,14 +2,15 @@ import { IIconProps } from "@client/components/atoms/Icon/@types"
 import { IInputProps } from "@client/components/molecules/Input/@types"
 import { ITranslation } from "@client/translations/@types"
 import { Sx } from "dripsy"
+import { UseControllerProps, FieldValues } from "react-hook-form"
 
-export interface IInputFieldProps {
-  control: any
+export interface IInputFieldProps<TFieldValues extends FieldValues> {
+  control: UseControllerProps<TFieldValues>["control"]
+  name: UseControllerProps<TFieldValues>["name"]
   error?: {
     message: keyof ITranslation
     values: Record<string, string>
   }
-  name: string
   label?: IInputProps["label"]
   placeholder?: IInputProps["placeholder"]
   isRequired?: IInputProps["isRequired"]
@@ -17,4 +18,5 @@ export interface IInputFieldProps {
   sx?: Sx
   inputType?: IInputProps["inputType"]
   disabled?: IIconProps["disabled"]
+  onInputFieldBlur?: () => void
 }

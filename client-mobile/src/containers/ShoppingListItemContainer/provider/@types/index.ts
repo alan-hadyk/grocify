@@ -1,6 +1,5 @@
 import { ReactNode } from "react"
 
-export interface IMultiSelectProps {
+export interface IAddGroceryItemModalProvider {
   children: ReactNode | ReactNode[]
-  isSelected: boolean
 }

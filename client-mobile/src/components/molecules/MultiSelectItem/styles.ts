@@ -6,6 +6,7 @@ export const multiSelectItemDefaultStyles = ({
   isSelected: boolean
 }): {
   checkboxWrapper: Sx
+  unitWrapper: Sx
   wrapper: Sx
 } => ({
   checkboxWrapper: {
@@ -18,13 +19,17 @@ export const multiSelectItemDefaultStyles = ({
     justifyContent: "center",
     width: 24,
   },
+  unitWrapper: {
+    flexDirection: "row",
+    gap: "$8",
+  },
   wrapper: {
     alignItems: "center",
     backgroundColor: isSelected ? "$green100" : "$white",
     borderBottomColor: isSelected ? "$green400" : "$gray100",
     borderBottomWidth: "$1",
     flexDirection: "row",
-    gap: "$8",
+    justifyContent: "space-between",
     paddingX: "$16",
     paddingY: isSelected ? "$10" : "$12",
   },

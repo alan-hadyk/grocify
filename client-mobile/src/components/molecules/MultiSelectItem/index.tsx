@@ -12,24 +12,41 @@ export const MultiSelectItem: React.FC<IMultiSelectItemProps> = ({
   isSelected,
   onSelectItem,
   id,
+  quantity,
+  onBlur,
+  disabled,
 }) => {
-  // console.log({ id, isSelected })
-  const { checkboxWrapper, wrapper } = multiSelectItemDefaultStyles({ isSelected })
-
-  // const onSubmit = async (data: any) => {
-  //   try {
-  //     await onAddIngredient(data)
-  //     reset({ name: "", unit: "" })
-  //   } catch {}
-  // }
+  const { checkboxWrapper, wrapper, unitWrapper } = multiSelectItemDefaultStyles({ isSelected })
+  const handleMultiSelectItemPress = () => {
+    onSelectItem({
+      id,
+      isSelected: !isSelected,
+      quantity,
+    })
+  }
 
   return (
-    <Pressable sx={wrapper} onPress={() => onSelectItem(id)}>
-      <View sx={checkboxWrapper}>
-        {isSelected && <Icon name={IconName.Check} color={ColorPalette.Black400} size={15} />}
+    <Pressable sx={wrapper} onPress={handleMultiSelectItemPress}>
+      <View sx={unitWrapper}>
+        <View sx={checkboxWrapper}>
+          {isSelected && <Icon name={IconName.Check} color={ColorPalette.Black400} size={15} />}
+        </View>
+        <Typography text={itemText} />
       </View>
-      <Typography text={itemText} />
-      {isSelected && <Counter />}
+      {isSelected && (
+        <Counter
+          value={String(quantity)}
+          onChange={(quantity) =>
+            onSelectItem({
+              id,
+              isSelected,
+              quantity: Number(quantity),
+            })
+          }
+          onBlur={(quantity) => onBlur(id, Number(quantity))}
+          disabled={disabled}
+        />
+      )}
     </Pressable>
   )
 }
