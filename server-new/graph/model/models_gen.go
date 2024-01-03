@@ -8,6 +8,17 @@ import (
 	"strconv"
 )
 
+type Category struct {
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Author    *User  `json:"author"`
+	CreatedAt string `json:"createdAt"`
+}
+
+type CreateCategoryInput struct {
+	Name string `json:"name"`
+}
+
 type CreateIngredientInput struct {
 	Name string `json:"name"`
 	Unit string `json:"unit"`
@@ -89,22 +100,25 @@ type ShoppingList struct {
 	ID          string                    `json:"id"`
 	Date        string                    `json:"date"`
 	Author      *User                     `json:"author"`
+	Categories  []*Category               `json:"categories"`
 	Ingredients []*ShoppingListIngredient `json:"ingredients"`
 	Recipes     []*ShoppingListRecipe     `json:"recipes"`
 	CreatedAt   string                    `json:"createdAt"`
 }
 
 type ShoppingListIngredient struct {
-	ID        string  `json:"id"`
-	Name      string  `json:"name"`
-	Unit      *Unit   `json:"unit"`
-	CreatedAt string  `json:"createdAt"`
-	Quantity  float64 `json:"quantity"`
+	ID         string  `json:"id"`
+	Name       string  `json:"name"`
+	Unit       *Unit   `json:"unit"`
+	Quantity   float64 `json:"quantity"`
+	CategoryID *string `json:"categoryId,omitempty"`
+	CreatedAt  string  `json:"createdAt"`
 }
 
 type ShoppingListIngredientCreateUpdate struct {
-	ID       string  `json:"id"`
-	Quantity float64 `json:"quantity"`
+	ID         string  `json:"id"`
+	Quantity   float64 `json:"quantity"`
+	CategoryID *string `json:"categoryId,omitempty"`
 }
 
 type ShoppingListRecipe struct {
@@ -127,6 +141,10 @@ type Unit struct {
 	Name      string `json:"name"`
 	Author    *User  `json:"author"`
 	CreatedAt string `json:"createdAt"`
+}
+
+type UpdateCategoryInput struct {
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateIngredientInput struct {

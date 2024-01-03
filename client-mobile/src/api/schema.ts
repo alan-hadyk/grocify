@@ -22,6 +22,17 @@ export type Scalars = {
   DateTime: { input: any; output: any }
 }
 
+export type Category = {
+  author: User
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  name: Scalars["String"]["output"]
+}
+
+export type CreateCategoryInput = {
+  name: Scalars["String"]["input"]
+}
+
 export type CreateIngredientInput = {
   name: Scalars["String"]["input"]
   unit: Scalars["ID"]["input"]
@@ -65,21 +76,28 @@ export enum Language {
 
 export type Mutation = {
   _dummyMutation?: Maybe<Scalars["String"]["output"]>
+  createCategory: Category
   createIngredient: Ingredient
   createRecipe: Recipe
   createShoppingList: ShoppingList
   createUnit: Unit
   createUser: User
+  deleteCategory?: Maybe<Scalars["Boolean"]["output"]>
   deleteIngredient?: Maybe<Scalars["Boolean"]["output"]>
   deleteRecipe?: Maybe<Scalars["Boolean"]["output"]>
   deleteShoppingList?: Maybe<Scalars["Boolean"]["output"]>
   deleteUnit?: Maybe<Scalars["Boolean"]["output"]>
   deleteUser?: Maybe<Scalars["Boolean"]["output"]>
+  updateCategory: Category
   updateIngredient: Ingredient
   updateRecipe: Recipe
   updateShoppingList: ShoppingList
   updateUnit: Unit
   updateUser: User
+}
+
+export type MutationCreateCategoryArgs = {
+  input: CreateCategoryInput
 }
 
 export type MutationCreateIngredientArgs = {
@@ -102,6 +120,10 @@ export type MutationCreateUserArgs = {
   input: CreateUserInput
 }
 
+export type MutationDeleteCategoryArgs = {
+  id: Scalars["ID"]["input"]
+}
+
 export type MutationDeleteIngredientArgs = {
   id: Scalars["ID"]["input"]
 }
@@ -116,6 +138,11 @@ export type MutationDeleteShoppingListArgs = {
 
 export type MutationDeleteUnitArgs = {
   id: Scalars["ID"]["input"]
+}
+
+export type MutationUpdateCategoryArgs = {
+  id: Scalars["ID"]["input"]
+  input: UpdateCategoryInput
 }
 
 export type MutationUpdateIngredientArgs = {
@@ -159,6 +186,8 @@ export enum NotificationType {
 
 export type Query = {
   _dummy?: Maybe<Scalars["String"]["output"]>
+  categories: Category[]
+  category?: Maybe<Category>
   ingredient?: Maybe<Ingredient>
   ingredients: Ingredient[]
   notification?: Maybe<Notification>
@@ -170,6 +199,10 @@ export type Query = {
   unit?: Maybe<Unit>
   units: Unit[]
   user?: Maybe<User>
+}
+
+export type QueryCategoryArgs = {
+  id: Scalars["ID"]["input"]
 }
 
 export type QueryIngredientArgs = {
@@ -226,6 +259,7 @@ export type RecipeIngredientUpdateInput = {
 
 export type ShoppingList = {
   author: User
+  categories: Category[]
   createdAt: Scalars["DateTime"]["output"]
   date: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
@@ -234,6 +268,7 @@ export type ShoppingList = {
 }
 
 export type ShoppingListIngredient = {
+  categoryId?: Maybe<Scalars["ID"]["output"]>
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
   name: Scalars["String"]["output"]
@@ -242,6 +277,7 @@ export type ShoppingListIngredient = {
 }
 
 export type ShoppingListIngredientCreateUpdate = {
+  categoryId?: InputMaybe<Scalars["ID"]["input"]>
   id: Scalars["ID"]["input"]
   quantity: Scalars["Float"]["input"]
 }
@@ -266,6 +302,10 @@ export type Unit = {
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
   name: Scalars["String"]["output"]
+}
+
+export type UpdateCategoryInput = {
+  name?: InputMaybe<Scalars["String"]["input"]>
 }
 
 export type UpdateIngredientInput = {

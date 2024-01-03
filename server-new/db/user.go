@@ -37,14 +37,10 @@ func (db *DB) UserCreate(ctx context.Context, input model.CreateUserInput) (*mod
 	var id, email, preferredLanguage string
 	var createdAt time.Time
 
-	existingUser, userGetByEmailErr := db.UserGetByEmail(ctx, input.Email)
+	existingUser, _ := db.UserGetByEmail(ctx, input.Email)
 
 	if existingUser != nil {
 		return nil, fmt.Errorf("user with email %s already exists", input.Email)
-	}
-
-	if userGetByEmailErr != nil {
-		return nil, userGetByEmailErr
 	}
 
 	// Hash the password
@@ -108,6 +104,10 @@ func (db *DB) UserGetByID(ctx context.Context, userID string) (*model.User, erro
 		}
 	}
 
+	if id == "" {
+		return nil, nil
+	}
+
 	isoCreatedAt := createdAt.Format(time.RFC3339)
 
 	return &model.User{
@@ -130,12 +130,13 @@ func (db *DB) UserGetByEmail(ctx context.Context, userEmail string) (*model.User
 
 	if err != nil && err != pgx.ErrNoRows {
 		var pgErr *pgconn.PgError
-		log.Print(err)
 		if errors.As(err, &pgErr) {
-			log.Print(pgErr)
-
 			return nil, fmt.Errorf("failed to get user: %w", pgErr)
 		}
+	}
+
+	if id == "" {
+		return nil, nil
 	}
 
 	isoCreatedAt := createdAt.Format(time.RFC3339)

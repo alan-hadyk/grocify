@@ -2,8 +2,9 @@ type ShoppingListIngredient {
   id: ID!
   name: String!
   unit: Unit!
-  createdAt: DateTime!
   quantity: Float!
+  categoryId: ID
+  createdAt: DateTime!
 }
 
 type ShoppingListRecipe {
@@ -20,6 +21,7 @@ type ShoppingList {
   id: ID!
   date: DateTime!
   author: User!
+  categories: [Category!]!
   ingredients: [ShoppingListIngredient!]!
   recipes: [ShoppingListRecipe!]!
   createdAt: DateTime!
@@ -39,6 +41,7 @@ extend type Mutation {
 input ShoppingListIngredientCreateUpdate {
   id: ID!
   quantity: Float!
+  categoryId: ID
 }
 
 input ShoppingListRecipeCreateUpdate {

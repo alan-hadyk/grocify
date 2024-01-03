@@ -5,6 +5,7 @@
 # import * from "schemas/user.graphqls"
 # import * from "schemas/recipe.graphqls"
 # import * from "schemas/ingredient.graphqls"
+# import * from "schemas/category.graphqls"
 # import * from "schemas/unit.graphqls"
 # import * from "schemas/shoppingList.graphqls"
 # import * from "schemas/notification.graphqls"
