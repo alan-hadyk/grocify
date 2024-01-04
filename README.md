@@ -160,7 +160,6 @@ Data model consists of the following main entities:
    - `title` TEXT (required, max. 100 characters) - Name or title of the recipe
    - `description` TEXT (optional, max. 500 characters) - A brief description of the recipe
    - `serving_size` INTEGER (required) - Standard serving size for the recipe (e.g., servings for 1 person)
-   - `amount_of_days` INTEGER (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
    - `author` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the recipe was created.
 
@@ -218,6 +217,7 @@ Data model consists of the following main entities:
 - `id` (UUID, required): A unique identifier. This is the primary key.
 - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
 - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
+- `amount_of_days` INTEGER (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
 
 11. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
 
