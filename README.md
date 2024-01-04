@@ -142,13 +142,13 @@ Data model consists of the following main entities:
 - **Recipes**: Contains information about each recipe, including title, description, and serving size. Can be linked to multiple Ingredients.
 - **Ingredients**: Details of ingredients for each recipe, including unit. Ingredients may be reusable across different recipes.
 - **Units**: Unit of measurement for given ingredient, such as "g", "cups", "ml", "l", "kg" or "teaspoons". Units may be reusable across different ingredients.
-- **Shopping Lists**: Aggregated lists of ingredients based on selected recipes, including user customizations
+- **Shopping Lists**: Aggregated lists of ingredients based on selected recipes, including user customizations.
+- **Categories**: Aggregated lists of categories. Ingredients can be added to a specific category within a given shopping list.
 - **Notifications**: Notifications for a given user. There might a notification that a recipe or shopping list was shared with the user.
 
 1. `users` table - Information related to user profiles, including username, password hash and email:
 
    - `id` UUID (required) - Unique identifier for the user
-   - `username` TEXT (required, max. 100 characters) - Username for display
    - `password_hash` TEXT (required) - Hashed password for authentication
    - `email` TEXT (required) - Email address for login, communication and recovery
    - `preferred_language` ENUM (required) - Language preferred by the user. This is enumeration with ISO 639-1 codes (values such as "en", "pl", etc.). Defaults to the language of given mobile phone.
@@ -160,8 +160,7 @@ Data model consists of the following main entities:
    - `title` TEXT (required, max. 100 characters) - Name or title of the recipe
    - `description` TEXT (optional, max. 500 characters) - A brief description of the recipe
    - `serving_size` INTEGER (required) - Standard serving size for the recipe (e.g., servings for 1 person)
-   - `amount_of_days` INTEGER (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
-   - `author_user_id` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
+   - `author` UUID (required) - Relation to the User who created the recipe. This is a foreign key referencing `users.id`.
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the recipe was created.
 
 3. `ingredients` table - Basic information about individual ingredients, including name and unit of measurement:
@@ -169,62 +168,78 @@ Data model consists of the following main entities:
    - `id` UUID (required) - Unique identifier for the ingredient
    - `name` TEXT (required, max. 100 characters) - Name of the ingredient (e.g., "Onion")
    - `unit` UUID (required, max. 100 characters) - Unit of measurement for the ingredient (e.g., "g", "cups", "ml", "l", "kg", "teaspoons"). This is a foreign key referencing `units.id`.
-   - `author_user_id` UUID (required) - Relation to the User who created the ingredient. This is a foreign key referencing `users.id`
+   - `author` UUID (required) - Relation to the User who created the ingredient. This is a foreign key referencing `users.id`
+   - `last_category_id` UUID (optional) - Relation to the last category to which ingredient was added for a shopping list. This is a foreign key referencing `categories.id`
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the ingredient was created.
 
 4. `units` table - Standardized units of measurement for ingredients:
 
    - `id` UUID (required) - Unique identifier for the unit
    - `name` TEXT (required, max. 100 characters) - Unit of measurement (e.g., "g", "cups", "ml", "l", "kg", "teaspoons").
-   - `author_user_id` UUID (required) - Relation to the User who created the unit. This is a foreign key referencing `users.id`
+   - `author` UUID (required) - Relation to the User who created the unit. This is a foreign key referencing `users.id`
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the unit was created.
 
-5. `shopping_lists` table - Information related to shopping lists, including name and creator:
+5. `shopping_lists` table - Information related to shopping lists, including date and creator:
 
    - `id` UUID (required) - Unique identifier for the shopping list
    - `date` TIMESTAMPTZ (required) - The day on which shopping is scheduled
-   - `author_user_id` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
+   - `author` UUID (required) - Relation to the User who created the shopping list. This is a foreign key referencing `users.id`
    - `created_at` TIMESTAMPTZ (required) - The timestamp of when the shopping list was created.
 
-6. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
+6. `categories` table - Information related to specific grocery items categories (Fruits, Vegetables, etc.), including name and creator:
+
+   - `id` UUID (required) - Unique identifier for the category
+   - `name` TEXT (required, max. 100 characters) - Name of the category (Fruits, Vegetables, etc.)
+   - `author` UUID (required) - Relation to the User who created the category. This is a foreign key referencing `users.id`
+   - `created_at` TIMESTAMPTZ (required) - The timestamp of when the category was created.
+
+7. `users_recipes` `JOIN` table - JOIN table to associate users with recipes:
 
    - `id` (UUID, required): A unique identifier. This is the primary key.
    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
    - `user_id` UUID (required) - Given user. This is a foreign key referencing `users.id`.
 
-7. `users_shopping_lists` `JOIN` table - JOIN table to associate users with shopping lists:
+8. `users_shopping_lists` `JOIN` table - JOIN table to associate users with shopping lists:
 
    - `id` (UUID, required): A unique identifier. This is the primary key.
    - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
    - `user_id` UUID (required) - Given user. This is a foreign key referencing `users.id`.
 
-8. `recipes_ingredients` `JOIN` table - JOIN table to associate recipes with their individual ingredients and quantities:
+9. `recipes_ingredients` `JOIN` table - JOIN table to associate recipes with their individual ingredients and quantities:
 
    - `id` (UUID, required): A unique identifier. This is the primary key.
    - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
    - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing `ingredients.id`.
    - `quantity` FLOAT (required) - Quantity of the ingredient for the recipe.
 
-9. `shopping_lists_recipes` `JOIN` table - JOIN table to associate shopping lists with recipes:
+10. `shopping_lists_recipes` `JOIN` table - JOIN table to associate shopping lists with recipes:
 
-   - `id` (UUID, required): A unique identifier. This is the primary key.
-   - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
-   - `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
+- `id` (UUID, required): A unique identifier. This is the primary key.
+- `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
+- `recipe_id` UUID (required) - Given recipe. This is a foreign key referencing `recipes.id`.
+- `amount_of_days` INTEGER (required) - The number of days a meal lasts (e.g., 1 day or 3 days)
 
-10. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
+11. `shopping_lists_ingredients` `JOIN` table - JOIN table to associate shopping lists with ingredients:
 
     - `id` (UUID, required): A unique identifier. This is the primary key.
     - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
     - `ingredient_id` UUID (required) - Given ingredient. This is a foreign key referencing `ingredients.id`.
+    - `category_id` UUID (optional) - Given category of the ingredient. This is a foreign key referencing `categories.id`.
     - `quantity` FLOAT (required) - Quantity of the ingredient in the shopping list
 
-11. `notifications` table - Notifications for users:
+12. `shopping_lists_categories` `JOIN` table - JOIN table to associate shopping lists with categories:
+
+    - `id` (UUID, required): A unique identifier. This is the primary key.
+    - `shopping_list_id` UUID (required) - Given shopping list. This is a foreign key referencing `shopping_lists.id`.
+    - `category_id` UUID (required) - Given category. This is a foreign key referencing `categories.id`.
+
+13. `notifications` table - Notifications for users:
 
     - `id` UUID (required) - Unique identifier for the notification
-    - `user_id` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
-    - `type` ENUM (required) - Type of notification. This is an enumeration with values (e.g., "recipe_shared", "shopping_list_shared")
+    - `user` UUID (required) - Relation to the User who receives the notification. This is a foreign key referencing `users.id`.
+    - `type` ENUM (required) - Type of notification. This is an enumeration with values (e.g., "Info", "Warning", "Error")
     - `content` TEXT (required) - Detailed content of the notification, including relevant IDs and information.
-    - `read` Boolean (required) - Indicates whether the notification has been read by the user.
+    - `read` BOOLEAN (required) - Indicates whether the notification has been read by the user.
     - `created_at` TIMESTAMPTZ (required) - The timestamp of when the notification was created.
 
 ## User Flow

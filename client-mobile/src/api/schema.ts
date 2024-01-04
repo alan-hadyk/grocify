@@ -19,98 +19,363 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean }
   Int: { input: number; output: number }
   Float: { input: number; output: number }
-  UUID: { input: any; output: any }
+  DateTime: { input: any; output: any }
+}
+
+export type Category = {
+  author?: Maybe<User>
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  name: Scalars["String"]["output"]
+}
+
+export type CreateCategoryInput = {
+  name: Scalars["String"]["input"]
+}
+
+export type CreateIngredientInput = {
+  lastCategoryId?: InputMaybe<Scalars["ID"]["input"]>
+  name: Scalars["String"]["input"]
+  unit: Scalars["ID"]["input"]
+}
+
+export type CreateRecipeInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>
+  ingredients: RecipeIngredientCreateUpdateInput[]
+  servingSize: Scalars["Int"]["input"]
+  title: Scalars["String"]["input"]
+}
+
+export type CreateShoppingListInput = {
+  categories?: InputMaybe<Scalars["ID"]["input"][]>
+  date: Scalars["DateTime"]["input"]
+  ingredients?: InputMaybe<ShoppingListIngredientCreateUpdate[]>
+  recipes?: InputMaybe<ShoppingListRecipeCreateUpdate[]>
+}
+
+export type CreateUnitInput = {
+  name: Scalars["String"]["input"]
+}
+
+export type CreateUserInput = {
+  email: Scalars["String"]["input"]
+  password: Scalars["String"]["input"]
+  preferredLanguage: Language
+}
+
+export type Ingredient = {
+  author?: Maybe<User>
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  lastCategoryId?: Maybe<Scalars["ID"]["output"]>
+  name: Scalars["String"]["output"]
+  unit: Unit
+}
+
+export enum Language {
+  En = "En",
+  Pl = "Pl",
 }
 
 export type Mutation = {
+  _dummyMutation?: Maybe<Scalars["String"]["output"]>
+  createCategory: Category
+  createIngredient: Ingredient
+  createRecipe: Recipe
+  createShoppingList: ShoppingList
+  createUnit: Unit
   createUser: User
+  deleteCategory?: Maybe<Scalars["Boolean"]["output"]>
+  deleteIngredient?: Maybe<Scalars["Boolean"]["output"]>
+  deleteRecipe?: Maybe<Scalars["Boolean"]["output"]>
+  deleteShoppingList?: Maybe<Scalars["Boolean"]["output"]>
+  deleteUnit?: Maybe<Scalars["Boolean"]["output"]>
+  deleteUser?: Maybe<Scalars["Boolean"]["output"]>
+  updateCategory: Category
+  updateIngredient: Ingredient
+  updateRecipe: Recipe
+  updateShoppingList: ShoppingList
+  updateUnit: Unit
+  updateUser: User
+}
+
+export type MutationCreateCategoryArgs = {
+  input: CreateCategoryInput
+}
+
+export type MutationCreateIngredientArgs = {
+  input: CreateIngredientInput
+}
+
+export type MutationCreateRecipeArgs = {
+  input: CreateRecipeInput
+}
+
+export type MutationCreateShoppingListArgs = {
+  input: CreateShoppingListInput
+}
+
+export type MutationCreateUnitArgs = {
+  input: CreateUnitInput
 }
 
 export type MutationCreateUserArgs = {
-  email: Scalars["String"]["input"]
-  password: Scalars["String"]["input"]
-  preferredLanguage: PreferredLang
-  username: Scalars["String"]["input"]
+  input: CreateUserInput
 }
 
-export enum PreferredLang {
-  En = "en-US",
-  Pl = "pl_PL",
+export type MutationDeleteCategoryArgs = {
+  id: Scalars["ID"]["input"]
 }
 
-export type Query = {
+export type MutationDeleteIngredientArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type MutationDeleteRecipeArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type MutationDeleteShoppingListArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type MutationDeleteUnitArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type MutationUpdateCategoryArgs = {
+  id: Scalars["ID"]["input"]
+  input: UpdateCategoryInput
+}
+
+export type MutationUpdateIngredientArgs = {
+  id: Scalars["ID"]["input"]
+  input: UpdateIngredientInput
+}
+
+export type MutationUpdateRecipeArgs = {
+  id: Scalars["ID"]["input"]
+  input: UpdateRecipeInput
+}
+
+export type MutationUpdateShoppingListArgs = {
+  id: Scalars["ID"]["input"]
+  input: UpdateShoppingListInput
+}
+
+export type MutationUpdateUnitArgs = {
+  id: Scalars["ID"]["input"]
+  input: UpdateUnitInput
+}
+
+export type MutationUpdateUserArgs = {
+  input: UpdateUserInput
+}
+
+export type Notification = {
+  content: Scalars["String"]["output"]
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  read: Scalars["Boolean"]["output"]
+  type: NotificationType
   user: User
 }
 
-export type QueryUserArgs = {
-  id?: InputMaybe<Scalars["UUID"]["input"]>
-  username?: InputMaybe<Scalars["String"]["input"]>
+export enum NotificationType {
+  Error = "Error",
+  Info = "Info",
+  Warning = "Warning",
+}
+
+export type Query = {
+  _dummy?: Maybe<Scalars["String"]["output"]>
+  categories: Category[]
+  category?: Maybe<Category>
+  ingredient?: Maybe<Ingredient>
+  ingredients: Ingredient[]
+  notification?: Maybe<Notification>
+  notifications: Notification[]
+  recipe?: Maybe<Recipe>
+  recipes: Recipe[]
+  shoppingList?: Maybe<ShoppingList>
+  shoppingLists: ShoppingList[]
+  unit?: Maybe<Unit>
+  units: Unit[]
+  user?: Maybe<User>
+}
+
+export type QueryCategoryArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type QueryIngredientArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type QueryNotificationArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type QueryRecipeArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type QueryShoppingListArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type QueryUnitArgs = {
+  id: Scalars["ID"]["input"]
+}
+
+export type Recipe = {
+  author?: Maybe<User>
+  createdAt: Scalars["DateTime"]["output"]
+  description?: Maybe<Scalars["String"]["output"]>
+  id: Scalars["ID"]["output"]
+  ingredients: RecipeIngredient[]
+  servingSize: Scalars["Int"]["output"]
+  title: Scalars["String"]["output"]
+}
+
+export type RecipeIngredient = {
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  name: Scalars["String"]["output"]
+  quantity: Scalars["Float"]["output"]
+  unit: Unit
+}
+
+export type RecipeIngredientCreateUpdateInput = {
+  id: Scalars["ID"]["input"]
+  quantity: Scalars["Float"]["input"]
+}
+
+export type ShoppingList = {
+  author?: Maybe<User>
+  categories: Category[]
+  createdAt: Scalars["DateTime"]["output"]
+  date: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  ingredients: ShoppingListIngredient[]
+  recipes: ShoppingListRecipe[]
+}
+
+export type ShoppingListIngredient = {
+  categoryId?: Maybe<Scalars["ID"]["output"]>
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  lastCategoryId?: Maybe<Scalars["ID"]["output"]>
+  name: Scalars["String"]["output"]
+  quantity: Scalars["Float"]["output"]
+  unit: Unit
+}
+
+export type ShoppingListIngredientCreateUpdate = {
+  categoryId?: InputMaybe<Scalars["ID"]["input"]>
+  id: Scalars["ID"]["input"]
+  quantity: Scalars["Float"]["input"]
+}
+
+export type ShoppingListRecipe = {
+  amountOfDays: Scalars["Int"]["output"]
+  createdAt: Scalars["DateTime"]["output"]
+  description?: Maybe<Scalars["String"]["output"]>
+  id: Scalars["ID"]["output"]
+  ingredients: RecipeIngredient[]
+  servingSize: Scalars["Int"]["output"]
+  title: Scalars["String"]["output"]
+}
+
+export type ShoppingListRecipeCreateUpdate = {
+  amountOfDays: Scalars["Int"]["input"]
+  id: Scalars["ID"]["input"]
+}
+
+export type Unit = {
+  author?: Maybe<User>
+  createdAt: Scalars["DateTime"]["output"]
+  id: Scalars["ID"]["output"]
+  name: Scalars["String"]["output"]
+}
+
+export type UpdateCategoryInput = {
+  name?: InputMaybe<Scalars["String"]["input"]>
+}
+
+export type UpdateIngredientInput = {
+  lastCategoryId?: InputMaybe<Scalars["ID"]["input"]>
+  name?: InputMaybe<Scalars["String"]["input"]>
+  unit?: InputMaybe<Scalars["ID"]["input"]>
+}
+
+export type UpdateRecipeInput = {
+  description?: InputMaybe<Scalars["String"]["input"]>
+  ingredients?: InputMaybe<RecipeIngredientCreateUpdateInput[]>
+  servingSize?: InputMaybe<Scalars["Int"]["input"]>
+  title?: InputMaybe<Scalars["String"]["input"]>
+}
+
+export type UpdateShoppingListInput = {
+  categories?: InputMaybe<Scalars["ID"]["input"][]>
+  date?: InputMaybe<Scalars["DateTime"]["input"]>
+  ingredients?: InputMaybe<ShoppingListIngredientCreateUpdate[]>
+  recipes?: InputMaybe<ShoppingListRecipeCreateUpdate[]>
+}
+
+export type UpdateUnitInput = {
+  name?: InputMaybe<Scalars["String"]["input"]>
+}
+
+export type UpdateUserInput = {
+  email?: InputMaybe<Scalars["String"]["input"]>
+  password?: InputMaybe<Scalars["String"]["input"]>
+  preferredLanguage?: InputMaybe<Scalars["String"]["input"]>
 }
 
 export type User = {
-  createdAt: Scalars["String"]["output"]
+  createdAt: Scalars["DateTime"]["output"]
   email: Scalars["String"]["output"]
-  id: Scalars["UUID"]["output"]
-  preferredLanguage: PreferredLang
-  username: Scalars["String"]["output"]
+  id: Scalars["ID"]["output"]
+  preferredLanguage: Language
 }
 
 export type CreateUserMutationVariables = Exact<{
-  username: Scalars["String"]["input"]
-  password: Scalars["String"]["input"]
-  email: Scalars["String"]["input"]
-  preferredLanguage: PreferredLang
+  input: CreateUserInput
 }>
 
 export type CreateUserMutation = {
-  createUser: {
-    id: any
-    email: string
-    username: string
-    preferredLanguage: PreferredLang
-    createdAt: string
-  }
+  createUser: { id: string; email: string; preferredLanguage: Language; createdAt: any }
 }
 
-export type UserQueryVariables = Exact<{
-  username: Scalars["String"]["input"]
-}>
+export type UserQueryVariables = Exact<{ [key: string]: never }>
 
 export type UserQuery = {
-  user: {
-    id: any
-    username: string
-    email: string
-    preferredLanguage: PreferredLang
-    createdAt: string
-  }
+  user?: { id: string; email: string; preferredLanguage: Language; createdAt: any } | null
 }
 
 export const CreateUserDocument = `
-    mutation createUser($username: String!, $password: String!, $email: String!, $preferredLanguage: PreferredLang!) {
-  createUser(
-    username: $username
-    password: $password
-    email: $email
-    preferredLanguage: $preferredLanguage
-  ) {
+    mutation createUser($input: CreateUserInput!) {
+  createUser(input: $input) {
     id
     email
-    username
     preferredLanguage
     createdAt
   }
 }
     `
+
 export const useCreateUserMutation = <TError = unknown, TContext = unknown>(
   options?: UseMutationOptions<CreateUserMutation, TError, CreateUserMutationVariables, TContext>,
-) =>
-  useMutation<CreateUserMutation, TError, CreateUserMutationVariables, TContext>({
+) => {
+  return useMutation<CreateUserMutation, TError, CreateUserMutationVariables, TContext>({
     mutationKey: ["createUser"],
     mutationFn: (variables?: CreateUserMutationVariables) =>
       fetcher<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, variables)(),
     ...options,
   })
+}
+
 useCreateUserMutation.getKey = () => ["createUser"]
 
 useCreateUserMutation.fetcher = (
@@ -118,28 +383,33 @@ useCreateUserMutation.fetcher = (
   options?: RequestInit["headers"],
 ) =>
   fetcher<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, variables, options)
+
 export const UserDocument = `
-    query user($username: String!) {
-  user(username: $username) {
+    query user {
+  user {
     id
-    username
     email
     preferredLanguage
     createdAt
   }
 }
     `
+
 export const useUserQuery = <TData = UserQuery, TError = unknown>(
-  variables: UserQueryVariables,
+  variables?: UserQueryVariables,
   options?: UseQueryOptions<UserQuery, TError, TData>,
-) =>
-  useQuery<UserQuery, TError, TData>({
-    queryKey: ["user", variables],
+) => {
+  return useQuery<UserQuery, TError, TData>({
+    queryKey: variables === undefined ? ["user"] : ["user", variables],
     queryFn: fetcher<UserQuery, UserQueryVariables>(UserDocument, variables),
     ...options,
   })
+}
+
 useUserQuery.document = UserDocument
 
-useUserQuery.getKey = (variables: UserQueryVariables) => ["user", variables]
-useUserQuery.fetcher = (variables: UserQueryVariables, options?: RequestInit["headers"]) =>
+useUserQuery.getKey = (variables?: UserQueryVariables) =>
+  variables === undefined ? ["user"] : ["user", variables]
+
+useUserQuery.fetcher = (variables?: UserQueryVariables, options?: RequestInit["headers"]) =>
   fetcher<UserQuery, UserQueryVariables>(UserDocument, variables, options)
