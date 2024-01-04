@@ -2,7 +2,7 @@ type Ingredient {
   id: ID!
   name: String!
   unit: Unit!
-  author: User!
+  author: User
   lastCategoryId: ID
   createdAt: DateTime!
 }

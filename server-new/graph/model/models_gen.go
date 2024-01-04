@@ -11,7 +11,7 @@ import (
 type Category struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
-	Author    *User  `json:"author"`
+	Author    *User  `json:"author,omitempty"`
 	CreatedAt string `json:"createdAt"`
 }
 
@@ -53,7 +53,7 @@ type Ingredient struct {
 	ID             string  `json:"id"`
 	Name           string  `json:"name"`
 	Unit           *Unit   `json:"unit"`
-	Author         *User   `json:"author"`
+	Author         *User   `json:"author,omitempty"`
 	LastCategoryID *string `json:"lastCategoryId,omitempty"`
 	CreatedAt      string  `json:"createdAt"`
 }
@@ -72,7 +72,7 @@ type Recipe struct {
 	Title       string              `json:"title"`
 	Description *string             `json:"description,omitempty"`
 	ServingSize int                 `json:"servingSize"`
-	Author      *User               `json:"author"`
+	Author      *User               `json:"author,omitempty"`
 	Ingredients []*RecipeIngredient `json:"ingredients"`
 	CreatedAt   string              `json:"createdAt"`
 }
@@ -93,7 +93,7 @@ type RecipeIngredientCreateUpdateInput struct {
 type ShoppingList struct {
 	ID          string                    `json:"id"`
 	Date        string                    `json:"date"`
-	Author      *User                     `json:"author"`
+	Author      *User                     `json:"author,omitempty"`
 	Categories  []*Category               `json:"categories"`
 	Ingredients []*ShoppingListIngredient `json:"ingredients"`
 	Recipes     []*ShoppingListRecipe     `json:"recipes"`
@@ -134,7 +134,7 @@ type ShoppingListRecipeCreateUpdate struct {
 type Unit struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
-	Author    *User  `json:"author"`
+	Author    *User  `json:"author,omitempty"`
 	CreatedAt string `json:"createdAt"`
 }
 

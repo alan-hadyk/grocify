@@ -23,7 +23,7 @@ export type Scalars = {
 }
 
 export type Category = {
-  author: User
+  author?: Maybe<User>
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
   name: Scalars["String"]["output"]
@@ -64,7 +64,7 @@ export type CreateUserInput = {
 }
 
 export type Ingredient = {
-  author: User
+  author?: Maybe<User>
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
   lastCategoryId?: Maybe<Scalars["ID"]["output"]>
@@ -229,7 +229,7 @@ export type QueryUnitArgs = {
 }
 
 export type Recipe = {
-  author: User
+  author?: Maybe<User>
   createdAt: Scalars["DateTime"]["output"]
   description?: Maybe<Scalars["String"]["output"]>
   id: Scalars["ID"]["output"]
@@ -252,7 +252,7 @@ export type RecipeIngredientCreateUpdateInput = {
 }
 
 export type ShoppingList = {
-  author: User
+  author?: Maybe<User>
   categories: Category[]
   createdAt: Scalars["DateTime"]["output"]
   date: Scalars["DateTime"]["output"]
@@ -293,7 +293,7 @@ export type ShoppingListRecipeCreateUpdate = {
 }
 
 export type Unit = {
-  author: User
+  author?: Maybe<User>
   createdAt: Scalars["DateTime"]["output"]
   id: Scalars["ID"]["output"]
   name: Scalars["String"]["output"]

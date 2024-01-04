@@ -1,9 +1,9 @@
-import { IShoppingList } from "@client/models/@types/shoppingListModel"
+import { ShoppingList } from "@client/api/schema"
 import { createQueryKeyStore } from "@lukemorales/query-key-factory"
 
 export const queryKeys = createQueryKeyStore({
   shoppingLists: {
-    detail: (id: IShoppingList["id"]) => ({
+    detail: (id: ShoppingList["id"]) => ({
       queryKey: [id],
     }),
   },

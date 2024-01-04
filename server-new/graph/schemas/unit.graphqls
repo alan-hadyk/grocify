@@ -1,7 +1,7 @@
 type Unit {
   id: ID!
   name: String!
-  author: User!
+  author: User
   createdAt: DateTime!
 }
 

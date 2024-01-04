@@ -21,7 +21,7 @@ type ShoppingListRecipe {
 type ShoppingList {
   id: ID!
   date: DateTime!
-  author: User!
+  author: User
   categories: [Category!]!
   ingredients: [ShoppingListIngredient!]!
   recipes: [ShoppingListRecipe!]!
