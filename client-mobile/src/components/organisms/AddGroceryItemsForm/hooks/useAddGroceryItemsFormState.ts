@@ -1,4 +1,3 @@
-// import { IMultiSelectProps } from "@client/components/molecules/MultiSelect/@types"
 import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
@@ -34,10 +33,16 @@ export const useAddGroceryItemsFormState = () => {
         quantity: 2,
         unit: "pcs",
       },
+      {
+        id: "1232454534",
+        name: "tomato",
+        quantity: 3,
+        unit: "pcs",
+      },
     ],
   }
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       ingredients: ingredients.map((ingredient) => {
         const shoppingListIngredient = shoppingList.ingredients.find(
@@ -48,7 +53,7 @@ export const useAddGroceryItemsFormState = () => {
           ...ingredient,
           isSelected: Boolean(shoppingListIngredient),
           name: t("ingredientName", { name: ingredient.name }),
-          quantity: shoppingListIngredient?.quantity ?? 1,
+          quantity: shoppingListIngredient?.quantity ?? 0,
           unit: t("ingredientName", { name: ingredient.unit }),
         }
       }),
@@ -58,6 +63,6 @@ export const useAddGroceryItemsFormState = () => {
   return {
     control,
     handleSubmit,
-    ingredients,
+    watch,
   }
 }

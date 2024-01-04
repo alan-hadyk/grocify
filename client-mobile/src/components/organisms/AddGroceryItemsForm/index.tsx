@@ -8,13 +8,21 @@ import { IAddGroceryItemsFormProps } from "@client/components/organisms/AddGroce
 import { useAddGroceryItemsFormState } from "@client/components/organisms/AddGroceryItemsForm/hooks/useAddGroceryItemsFormState"
 import { addGroceryItemsFormDefaultStyles } from "@client/components/organisms/AddGroceryItemsForm/styles"
 import { View } from "dripsy"
+import { useFieldArray } from "react-hook-form"
 
 export const AddGroceryItemsForm: React.FC<IAddGroceryItemsFormProps> = ({
   onAddGroceryItems,
   onAddIngredient,
 }) => {
-  const { handleSubmit, control } = useAddGroceryItemsFormState()
+  const { handleSubmit, control, watch } = useAddGroceryItemsFormState()
   const { button, outerWrapper, wrapper } = addGroceryItemsFormDefaultStyles
+
+  const { fields } = useFieldArray({
+    control,
+    name: "ingredients",
+  })
+
+  const isFirstItemSelected = watch("ingredients", fields)[0].isSelected
 
   return (
     <View sx={outerWrapper}>
@@ -28,7 +36,7 @@ export const AddGroceryItemsForm: React.FC<IAddGroceryItemsFormProps> = ({
         iconName={IconName.Plus}
         text="Add grocery items"
         size={ButtonSize.LargeFixed}
-        disabled
+        disabled={!isFirstItemSelected}
         onPress={handleSubmit(onAddGroceryItems)}
         sx={button}
       />
