@@ -1,7 +1,7 @@
 type ShoppingListIngredient {
   id: ID!
   name: String!
-  unit: Unit!
+  unit: Unit
   quantity: Float!
   categoryId: ID
   lastCategoryId: ID

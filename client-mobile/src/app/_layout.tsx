@@ -8,6 +8,7 @@ import { composeFunctions } from "@client/helpers/functions/composeFunctions"
 import { withAnimatedSplashScreen } from "@client/hoc/withAnimatedSplashScreen"
 import { withClickOutsideProvider } from "@client/hoc/withClickOutsideProvider"
 import { withFonts } from "@client/hoc/withFonts"
+import { withGlobalSettings } from "@client/hoc/withGlobalSettings"
 import { withLocalDbInit } from "@client/hoc/withLocalDbInit"
 import { withQueryClientProvider } from "@client/hoc/withQueryClientProvider"
 import { withThemeProvider } from "@client/hoc/withThemeProvider"
@@ -36,6 +37,7 @@ const IndexLayout = composeFunctions<IAppProps>(
   withFonts,
   withAnimatedSplashScreen,
   withClickOutsideProvider,
+  withGlobalSettings,
 )(_IndexLayout)
 
 export default IndexLayout

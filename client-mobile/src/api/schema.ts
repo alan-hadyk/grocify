@@ -36,7 +36,7 @@ export type CreateCategoryInput = {
 export type CreateIngredientInput = {
   lastCategoryId?: InputMaybe<Scalars["ID"]["input"]>
   name: Scalars["String"]["input"]
-  unit: Scalars["ID"]["input"]
+  unit?: InputMaybe<Scalars["ID"]["input"]>
 }
 
 export type CreateRecipeInput = {
@@ -69,7 +69,7 @@ export type Ingredient = {
   id: Scalars["ID"]["output"]
   lastCategoryId?: Maybe<Scalars["ID"]["output"]>
   name: Scalars["String"]["output"]
-  unit: Unit
+  unit?: Maybe<Unit>
 }
 
 export enum Language {
@@ -243,7 +243,7 @@ export type RecipeIngredient = {
   id: Scalars["ID"]["output"]
   name: Scalars["String"]["output"]
   quantity: Scalars["Float"]["output"]
-  unit: Unit
+  unit?: Maybe<Unit>
 }
 
 export type RecipeIngredientCreateUpdateInput = {
@@ -268,7 +268,7 @@ export type ShoppingListIngredient = {
   lastCategoryId?: Maybe<Scalars["ID"]["output"]>
   name: Scalars["String"]["output"]
   quantity: Scalars["Float"]["output"]
-  unit: Unit
+  unit?: Maybe<Unit>
 }
 
 export type ShoppingListIngredientCreateUpdate = {

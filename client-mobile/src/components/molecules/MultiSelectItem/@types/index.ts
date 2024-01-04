@@ -1,17 +1,13 @@
+import { ITypographyProps } from "@client/components/atoms/Typography/@types"
 import { ITranslation } from "@client/translations/@types"
 
-interface Item {
-  id: string
-  quantity: number
-  isSelected: boolean
-}
-
 export interface IMultiSelectItemProps {
-  itemText: keyof ITranslation
-  isSelected: boolean
-  onSelectItem: (item: Item) => void
-  id: string
-  quantity: number
-  onBlur: (id: string, quantity: number) => void
   disabled?: boolean
+  id: string
+  isFirst?: boolean
+  isSelected?: boolean
+  text: keyof ITranslation
+  textValues?: ITypographyProps["textValues"]
+  onSelectItem: (item: Pick<IMultiSelectItemProps, "id" | "isSelected" | "quantity">) => void
+  quantity: number
 }

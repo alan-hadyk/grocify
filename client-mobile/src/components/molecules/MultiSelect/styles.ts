@@ -1,15 +1,11 @@
 import { Sx } from "dripsy"
 
-export const multiSelectDefaultStyles = ({
-  isSelected,
-}: {
-  isSelected: boolean
-}): {
+export const multiSelectDefaultStyles: {
   wrapper: Sx
-} => ({
+} = {
   wrapper: {
-    borderTopColor: isSelected ? "$green400" : "$gray100",
-    borderTopWidth: "$1",
     flexDirection: "column",
+    flexGrow: 1,
+    height: "100%",
   },
-})
+}

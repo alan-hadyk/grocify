@@ -1,9 +1,15 @@
-export const calculateUpdatedItems = (items: any, updatedItem: any) => {
+import { TMultiSelectFieldItemType } from "@client/components/molecules/MultiSelectField/@types"
+import { IMultiSelectItemProps } from "@client/components/molecules/MultiSelectItem/@types"
+
+export const calculateUpdatedItems = (
+  items: TMultiSelectFieldItemType[],
+  updatedItem: Pick<IMultiSelectItemProps, "id" | "isSelected" | "quantity">,
+) => {
   let itemIndex = 0
   let quantity
   let numberOfSelectedItems = 0
 
-  const updatedItems = items.map((item: any, index: number) => {
+  const updatedItems = items.map((item, index) => {
     if (item.id === updatedItem.id) {
       itemIndex = index
       quantity = item.quantity

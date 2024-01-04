@@ -1,8 +1,10 @@
 import { Sx } from "dripsy"
 
 export const multiSelectItemDefaultStyles = ({
+  isFirst,
   isSelected,
 }: {
+  isFirst?: boolean
   isSelected: boolean
 }): {
   checkboxWrapper: Sx
@@ -32,5 +34,9 @@ export const multiSelectItemDefaultStyles = ({
     justifyContent: "space-between",
     paddingX: "$16",
     paddingY: isSelected ? "$10" : "$12",
+    ...(isFirst && {
+      borderTopColor: isSelected ? "$green400" : "$gray100",
+      borderTopWidth: "$1",
+    }),
   },
 })

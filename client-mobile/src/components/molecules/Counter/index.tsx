@@ -26,13 +26,14 @@ export const Counter: React.FC<ICounterProps> = ({ value, onChange, disabled, on
   }
 
   const { wrapper } = counterDefaultStyles
+
   return (
     <Pressable sx={wrapper}>
       <IconButton
         iconName={IconName.Decrease}
         size={IconButtonSize.Medium}
         variant={IconButtonVariant.GraySecondary}
-        disabled={valueAsNumber <= 1}
+        disabled={valueAsNumber <= 1 || disabled}
         onPress={onPressDecrease}
       />
       <Input

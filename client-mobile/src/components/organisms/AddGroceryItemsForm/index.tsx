@@ -7,15 +7,20 @@ import { MultiSelectField } from "@client/components/molecules/MultiSelectField"
 import { IAddGroceryItemsFormProps } from "@client/components/organisms/AddGroceryItemsForm/@types"
 import { useAddGroceryItemsFormState } from "@client/components/organisms/AddGroceryItemsForm/hooks/useAddGroceryItemsFormState"
 import { addGroceryItemsFormDefaultStyles } from "@client/components/organisms/AddGroceryItemsForm/styles"
-import { View } from "dripsy"
+import { ScrollView, View } from "dripsy"
 import { useFieldArray } from "react-hook-form"
 
 export const AddGroceryItemsForm: React.FC<IAddGroceryItemsFormProps> = ({
+  ingredients,
   onAddGroceryItems,
   onAddIngredient,
+  shoppingList,
 }) => {
-  const { handleSubmit, control, watch } = useAddGroceryItemsFormState()
-  const { button, outerWrapper, wrapper } = addGroceryItemsFormDefaultStyles
+  const { handleSubmit, control, watch } = useAddGroceryItemsFormState({
+    ingredients,
+    shoppingList,
+  })
+  const { button, childrenWrapper, outerWrapper, wrapper } = addGroceryItemsFormDefaultStyles
 
   const { fields } = useFieldArray({
     control,
@@ -26,11 +31,11 @@ export const AddGroceryItemsForm: React.FC<IAddGroceryItemsFormProps> = ({
 
   return (
     <View sx={outerWrapper}>
-      <View sx={wrapper}>
+      <ScrollView contentContainerStyle={childrenWrapper} sx={wrapper}>
         <AddIngredientForm onAddIngredient={onAddIngredient} />
         <Banner text="Type a name and unit to add your first grocery item." />
         <MultiSelectField control={control} disabled={false} name="ingredients" />
-      </View>
+      </ScrollView>
 
       <Button
         iconName={IconName.Plus}

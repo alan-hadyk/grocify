@@ -1,48 +1,79 @@
+import { Ingredient, Unit } from "@client/api/schema"
+import {
+  IAddGroceryItemsFormData,
+  IAddGroceryItemsFormProps,
+} from "@client/components/organisms/AddGroceryItemsForm/@types"
 import { useForm } from "react-hook-form"
-import { useTranslation } from "react-i18next"
 
-export const useAddGroceryItemsFormState = () => {
-  const { t } = useTranslation()
+export const useAddGroceryItemsFormState = ({
+  // ingredients,
+  shoppingList,
+}: Pick<IAddGroceryItemsFormProps, "ingredients" | "shoppingList">) => {
+  // Mock data
+  const createdAt = new Date().toISOString()
 
-  const ingredients = [
+  const unitPcs: Unit = {
+    createdAt,
+    id: "90238902388902390823",
+    name: "pcs",
+  }
+
+  const ingredients: Ingredient[] = [
     {
+      createdAt,
       id: "123213235544",
       name: "onion",
-      unit: "pcs",
+      unit: unitPcs,
     },
     {
-      id: "1232454534",
+      createdAt,
+      id: "34343463242345",
       name: "tomato",
-      unit: "pcs",
+      unit: unitPcs,
     },
     {
+      createdAt,
       id: "65364645654645645",
       name: "milk",
     },
     {
+      createdAt,
       id: "6536463235645645",
       name: "honey",
     },
+    {
+      createdAt,
+      id: "653646323345645645",
+      name: "almonds",
+    },
+    {
+      createdAt,
+      id: "343434554",
+      name: "chicken",
+    },
+    {
+      createdAt,
+      id: "3434778678679",
+      name: "cucumber",
+    },
+    {
+      createdAt,
+      id: "342234234234",
+      name: "potatoes",
+    },
+    {
+      createdAt,
+      id: "7748354623",
+      name: "fish",
+    },
+    {
+      createdAt,
+      id: "454552472457",
+      name: "soy sauce",
+    },
   ]
 
-  const shoppingList = {
-    ingredients: [
-      {
-        id: "123213235544",
-        name: "onion",
-        quantity: 2,
-        unit: "pcs",
-      },
-      {
-        id: "1232454534",
-        name: "tomato",
-        quantity: 3,
-        unit: "pcs",
-      },
-    ],
-  }
-
-  const { control, handleSubmit, watch } = useForm({
+  const { control, handleSubmit, watch } = useForm<IAddGroceryItemsFormData>({
     defaultValues: {
       ingredients: ingredients.map((ingredient) => {
         const shoppingListIngredient = shoppingList.ingredients.find(
@@ -50,11 +81,14 @@ export const useAddGroceryItemsFormState = () => {
         )
 
         return {
-          ...ingredient,
+          id: ingredient.id,
           isSelected: Boolean(shoppingListIngredient),
-          name: t("ingredientName", { name: ingredient.name }),
           quantity: shoppingListIngredient?.quantity ?? 0,
-          unit: t("ingredientName", { name: ingredient.unit }),
+          text: ingredient.unit?.name ? "unitWithName" : "ingredientName",
+          textValues: {
+            name: ingredient.name,
+            unit: ingredient.unit?.name,
+          },
         }
       }),
     },
