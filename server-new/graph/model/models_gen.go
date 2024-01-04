@@ -58,6 +58,9 @@ type Ingredient struct {
 	CreatedAt      string  `json:"createdAt"`
 }
 
+type Mutation struct {
+}
+
 type Notification struct {
 	ID        string           `json:"id"`
 	User      *User            `json:"user"`
@@ -65,6 +68,9 @@ type Notification struct {
 	Content   string           `json:"content"`
 	Read      bool             `json:"read"`
 	CreatedAt string           `json:"createdAt"`
+}
+
+type Query struct {
 }
 
 type Recipe struct {
