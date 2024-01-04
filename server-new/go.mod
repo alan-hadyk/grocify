@@ -3,7 +3,7 @@ module grocify-server
 go 1.21.5
 
 require (
-	github.com/99designs/gqlgen v0.17.41
+	github.com/99designs/gqlgen v0.17.42
 	github.com/cosmtrek/air v1.49.0
 	github.com/golang-jwt/jwt/v5 v5.2.0
 	github.com/gorilla/mux v1.8.1
