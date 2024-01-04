@@ -6,9 +6,9 @@ updates:
     schedule:
       interval: weekly
 
-  # Check for Rust package updates in the server folder weekly
-  - package-ecosystem: cargo
-    directory: /server
+  # Check for Go package updates in the server folder weekly
+  - package-ecosystem: gomod
+    directory: /server-new
     schedule:
       interval: weekly
 

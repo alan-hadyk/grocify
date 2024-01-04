@@ -1,5 +1,5 @@
+import { ShoppingList } from "@client/api/schema"
 import { databaseClient } from "@client/clients/databaseClient"
-import { IShoppingList } from "@client/models/@types/shoppingListModel"
 import "react-native-get-random-values"
 import { v4 as uuidv4 } from "uuid"
 
@@ -20,7 +20,7 @@ export class ShoppingListModel {
       console.log("shopping_lists table initialized")
     })
 
-  static create = (): Promise<IShoppingList> =>
+  static create = (): Promise<ShoppingList> =>
     new Promise((resolve, reject) => {
       const id = uuidv4()
 
@@ -33,7 +33,18 @@ export class ShoppingListModel {
             RETURNING *
         `,
           [id],
-          (_, result) => resolve(result.rows.item(0)),
+          (_, result) => {
+            const shoppingList = result.rows.item(0)
+
+            resolve({
+              categories: [],
+              createdAt: shoppingList.created_at,
+              date: shoppingList.date,
+              id: shoppingList.id,
+              ingredients: [],
+              recipes: [],
+            })
+          },
           (_, error) => {
             reject(error)
             return false
@@ -42,7 +53,7 @@ export class ShoppingListModel {
       })
     })
 
-  static get = ({ id }: Pick<IShoppingList, "id">): Promise<IShoppingList> =>
+  static get = ({ id }: Pick<ShoppingList, "id">): Promise<ShoppingList> =>
     new Promise((resolve, reject) => {
       databaseClient.transaction((tx) => {
         tx.executeSql(
@@ -52,7 +63,18 @@ export class ShoppingListModel {
             WHERE id = ?
           `,
           [id],
-          (_, result) => resolve(result.rows.item(0)),
+          (_, result) => {
+            const shoppingList = result.rows.item(0)
+
+            resolve({
+              categories: [],
+              createdAt: shoppingList.created_at,
+              date: shoppingList.date,
+              id: shoppingList.id,
+              ingredients: [],
+              recipes: [],
+            })
+          },
           (_, error) => {
             reject(error)
             return false

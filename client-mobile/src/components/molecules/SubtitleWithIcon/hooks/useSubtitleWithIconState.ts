@@ -1,6 +1,7 @@
-import { PreferredLang } from "@client/api/schema"
+import { Language } from "@client/api/schema"
 import { ISubtitleWithIconProps } from "@client/components/molecules/SubtitleWithIcon/@types"
 import { subtitleWithIconDateFormat } from "@client/components/molecules/SubtitleWithIcon/config"
+import { mapLanguageToLocale } from "@client/lib/internationalization"
 import dayjs from "dayjs"
 import { useTranslation } from "react-i18next"
 
@@ -16,14 +17,14 @@ export const useSubtitleWithIconState = ({
   let format: string
 
   switch (i18n.language) {
-    case PreferredLang.Pl:
+    case mapLanguageToLocale[Language.Pl]:
       dayjsLocale = "pl"
-      format = subtitleWithIconDateFormat[PreferredLang.Pl]
+      format = subtitleWithIconDateFormat[Language.Pl]
       break
-    case PreferredLang.En:
+    case mapLanguageToLocale[Language.En]:
     default:
       dayjsLocale = "en"
-      format = subtitleWithIconDateFormat[PreferredLang.En]
+      format = subtitleWithIconDateFormat[Language.En]
   }
 
   const translatedDate = typeof subtitle !== "string" ? subtitle.locale(dayjsLocale) : undefined

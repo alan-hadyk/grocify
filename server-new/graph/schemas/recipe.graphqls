@@ -1,0 +1,47 @@
+type RecipeIngredient {
+  id: ID!
+  name: String!
+  unit: Unit!
+  createdAt: DateTime!
+  quantity: Float!
+}
+
+type Recipe {
+  id: ID!
+  title: String!
+  description: String
+  servingSize: Int!
+  author: User
+  ingredients: [RecipeIngredient!]!
+  createdAt: DateTime!
+}
+
+extend type Query {
+  recipes: [Recipe!]!
+  recipe(id: ID!): Recipe
+}
+
+extend type Mutation {
+  createRecipe(input: CreateRecipeInput!): Recipe!
+  deleteRecipe(id: ID!): Boolean
+  updateRecipe(id: ID!, input: UpdateRecipeInput!): Recipe!
+}
+
+input RecipeIngredientCreateUpdateInput {
+  id: ID!
+  quantity: Float!
+}
+
+input CreateRecipeInput {
+  title: String!
+  description: String
+  servingSize: Int!
+  ingredients: [RecipeIngredientCreateUpdateInput!]!
+}
+
+input UpdateRecipeInput {
+  title: String
+  description: String
+  servingSize: Int
+  ingredients: [RecipeIngredientCreateUpdateInput!]
+}

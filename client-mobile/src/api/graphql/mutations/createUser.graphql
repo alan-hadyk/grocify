@@ -1,18 +1,7 @@
-mutation createUser(
-  $username: String!
-  $password: String!
-  $email: String!
-  $preferredLanguage: PreferredLang!
-) {
-  createUser(
-    username: $username
-    password: $password
-    email: $email
-    preferredLanguage: $preferredLanguage
-  ) {
+mutation createUser($input: CreateUserInput!) {
+  createUser(input: $input) {
     id
     email
-    username
     preferredLanguage
     createdAt
   }

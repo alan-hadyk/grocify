@@ -1,0 +1,19 @@
+type Notification {
+  id: ID!
+  user: User!
+  type: NotificationType!
+  content: String!
+  read: Boolean!
+  createdAt: DateTime!
+}
+
+enum NotificationType {
+  Info
+  Warning
+  Error
+}
+
+extend type Query {
+  notifications: [Notification!]!
+  notification(id: ID!): Notification
+}

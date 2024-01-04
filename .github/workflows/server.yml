@@ -1,0 +1,57 @@
+name: Server
+
+on: [push]
+
+permissions: read-all
+
+jobs:
+  run_server_build_and_test:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    strategy:
+      matrix:
+        go-version: [1.21.5]
+
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Setup Golang caches
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-golang-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-golang-
+
+      - name: Create .env file
+        run: |
+          cat <<EOT >> ./server-new/.env
+          HOST = "localhost"
+          PORT = "3000"
+          # trunk-ignore(checkov/CKV_SECRET_4)
+          POSTGRES_URL = "postgresql://user:password@localhost:5432/grocify_database?sslmode=disable"
+          TEST_POSTGRES_URL = "postgresql://test_user:password@localhost:5433/test_grocify_database?sslmode=disable"
+          REDIS_URL = "redis://:password@localhost:6379"
+          TEST_REDIS_URL = "redis://localhost:6380"
+          SECRET = "4378927893459802458565678578578578567858675675786785756789072347890234"
+          EOT
+
+      - name: Install dependencies
+        run: |
+          go get .
+        working-directory: ./server-new
+
+      - name: Build
+        run: go build -v ./...
+        working-directory: ./server-new
+
+      - name: Test
+        run: go test
+        working-directory: ./server-new
