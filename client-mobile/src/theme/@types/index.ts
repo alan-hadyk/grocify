@@ -10,11 +10,13 @@ export enum ColorPalette {
   Gray100 = "#E0E0E0",
   Gray300 = "#BDBDBD",
   Gray400 = "#999999",
+  Green100 = "#CDF4E6",
   Green400 = "#14E195",
   Green500 = "#10B276",
   Black400 = "#1B2728",
   Blue400 = "#146DE1",
   Red400 = "#F41F1F",
+  Yellow300 = "#FFE663",
 }
 
 export type TColors = Record<
@@ -24,9 +26,11 @@ export type TColors = Record<
   | "$gray400"
   | "$black400"
   | "$blue400"
+  | "$green100"
   | "$green400"
   | "$green500"
-  | "$red400",
+  | "$red400"
+  | "$yellow300",
   ColorPalette
 >
 

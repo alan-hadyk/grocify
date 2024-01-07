@@ -21,7 +21,7 @@ type CreateCategoryInput struct {
 
 type CreateIngredientInput struct {
 	Name           string  `json:"name"`
-	Unit           string  `json:"unit"`
+	Unit           *string `json:"unit,omitempty"`
 	LastCategoryID *string `json:"lastCategoryId,omitempty"`
 }
 
@@ -52,7 +52,7 @@ type CreateUserInput struct {
 type Ingredient struct {
 	ID             string  `json:"id"`
 	Name           string  `json:"name"`
-	Unit           *Unit   `json:"unit"`
+	Unit           *Unit   `json:"unit,omitempty"`
 	Author         *User   `json:"author,omitempty"`
 	LastCategoryID *string `json:"lastCategoryId,omitempty"`
 	CreatedAt      string  `json:"createdAt"`
@@ -86,7 +86,7 @@ type Recipe struct {
 type RecipeIngredient struct {
 	ID        string  `json:"id"`
 	Name      string  `json:"name"`
-	Unit      *Unit   `json:"unit"`
+	Unit      *Unit   `json:"unit,omitempty"`
 	CreatedAt string  `json:"createdAt"`
 	Quantity  float64 `json:"quantity"`
 }
@@ -109,7 +109,7 @@ type ShoppingList struct {
 type ShoppingListIngredient struct {
 	ID             string  `json:"id"`
 	Name           string  `json:"name"`
-	Unit           *Unit   `json:"unit"`
+	Unit           *Unit   `json:"unit,omitempty"`
 	Quantity       float64 `json:"quantity"`
 	CategoryID     *string `json:"categoryId,omitempty"`
 	LastCategoryID *string `json:"lastCategoryId,omitempty"`

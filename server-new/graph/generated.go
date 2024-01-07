@@ -1857,14 +1857,11 @@ func (ec *executionContext) _Ingredient_unit(ctx context.Context, field graphql.
 		return graphql.Null
 	}
 	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
 		return graphql.Null
 	}
 	res := resTmp.(*model.Unit)
 	fc.Result = res
-	return ec.marshalNUnit2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐUnit(ctx, field.Selections, res)
+	return ec.marshalOUnit2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐUnit(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Ingredient_unit(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -4844,14 +4841,11 @@ func (ec *executionContext) _RecipeIngredient_unit(ctx context.Context, field gr
 		return graphql.Null
 	}
 	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
 		return graphql.Null
 	}
 	res := resTmp.(*model.Unit)
 	fc.Result = res
-	return ec.marshalNUnit2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐUnit(ctx, field.Selections, res)
+	return ec.marshalOUnit2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐUnit(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_RecipeIngredient_unit(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -5431,14 +5425,11 @@ func (ec *executionContext) _ShoppingListIngredient_unit(ctx context.Context, fi
 		return graphql.Null
 	}
 	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
 		return graphql.Null
 	}
 	res := resTmp.(*model.Unit)
 	fc.Result = res
-	return ec.marshalNUnit2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐUnit(ctx, field.Selections, res)
+	return ec.marshalOUnit2ᚖgrocifyᚑserverᚋgraphᚋmodelᚐUnit(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_ShoppingListIngredient_unit(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -8133,7 +8124,7 @@ func (ec *executionContext) unmarshalInputCreateIngredientInput(ctx context.Cont
 			it.Name = data
 		case "unit":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("unit"))
-			data, err := ec.unmarshalNID2string(ctx, v)
+			data, err := ec.unmarshalOID2ᚖstring(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -8738,9 +8729,6 @@ func (ec *executionContext) _Ingredient(ctx context.Context, sel ast.SelectionSe
 			}
 		case "unit":
 			out.Values[i] = ec._Ingredient_unit(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
 		case "author":
 			out.Values[i] = ec._Ingredient_author(ctx, field, obj)
 		case "lastCategoryId":
@@ -9411,9 +9399,6 @@ func (ec *executionContext) _RecipeIngredient(ctx context.Context, sel ast.Selec
 			}
 		case "unit":
 			out.Values[i] = ec._RecipeIngredient_unit(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
 		case "createdAt":
 			out.Values[i] = ec._RecipeIngredient_createdAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -9536,9 +9521,6 @@ func (ec *executionContext) _ShoppingListIngredient(ctx context.Context, sel ast
 			}
 		case "unit":
 			out.Values[i] = ec._ShoppingListIngredient_unit(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
 		case "quantity":
 			out.Values[i] = ec._ShoppingListIngredient_quantity(ctx, field, obj)
 			if out.Values[i] == graphql.Null {

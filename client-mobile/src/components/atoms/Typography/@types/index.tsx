@@ -8,6 +8,7 @@ export enum TypographyVariant {
   FooterMenu,
   FooterMenuInactive,
   InputLabel,
+  InputMessage,
   ButtonLG,
   ButtonMD,
   Link,
@@ -27,9 +28,11 @@ export type ITypographyProps = {
   | {
       dateFormat: string
       text: dayjs.Dayjs
+      textValues?: undefined
     }
   | {
       dateFormat?: string
       text: keyof ITranslation
+      textValues?: Record<string, string>
     }
 )

@@ -39,6 +39,11 @@ export const mapVariantToTypographyStyles: Record<TypographyVariant, Sx> = {
     fontWeight: "regular",
     lineHeight: "$14",
   },
+  [TypographyVariant.InputMessage]: {
+    fontSize: "$12",
+    fontWeight: "regular",
+    lineHeight: "$14",
+  },
   [TypographyVariant.ButtonLG]: {
     fontSize: "$17",
     fontWeight: "medium",

@@ -3,7 +3,14 @@ import { IconButtonSize, IconButtonVariant } from "@client/components/molecules/
 import { ColorPalette } from "@client/theme/@types"
 import { Sx } from "dripsy"
 
-export const iconButtonDefaultStyles: Record<"wrapper", Sx> = {
+export const iconButtonDefaultStyles: {
+  loader: Sx
+  wrapper: Sx
+} = {
+  loader: {
+    height: 20,
+    width: 20,
+  },
   wrapper: {
     alignItems: "center",
     borderRadius: "$50",

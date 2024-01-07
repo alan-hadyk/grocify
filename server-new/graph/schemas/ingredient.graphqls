@@ -1,7 +1,7 @@
 type Ingredient {
   id: ID!
   name: String!
-  unit: Unit!
+  unit: Unit
   author: User
   lastCategoryId: ID
   createdAt: DateTime!
@@ -20,7 +20,7 @@ extend type Mutation {
 
 input CreateIngredientInput {
   name: String!
-  unit: ID!
+  unit: ID
   lastCategoryId: ID
 }
 

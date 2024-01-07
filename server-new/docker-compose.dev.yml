@@ -9,9 +9,9 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: grocify_database
-    command: postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
+    command: postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/certs/server.crt -c ssl_key_file=/var/lib/postgresql/certs/server.key
     volumes:
-      - ./certs:/var/lib/postgresql
+      - ./certs:/var/lib/postgresql/certs
 
   redis:
     container_name: redis

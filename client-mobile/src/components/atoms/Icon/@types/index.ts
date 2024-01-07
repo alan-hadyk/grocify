@@ -16,6 +16,12 @@ export enum IconName {
   Reuse,
   Calendar,
   Burger,
+  Tag,
+  Ruler,
+  Bulb,
+  Check,
+  Increase,
+  Decrease,
 }
 
 export enum IconSizeType {

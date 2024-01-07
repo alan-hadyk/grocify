@@ -12,11 +12,12 @@ export const Typography: React.FC<ITypographyProps> = ({
   variant = TypographyVariant.Text,
   sx,
   text,
+  textValues,
 }) => {
   const Component = variantComponents[variant]
   const { t } = useTranslation()
 
-  const content = typeof text === "string" ? t(text) : text.format(dateFormat)
+  const content = typeof text === "string" ? t(text, textValues) : text.format(dateFormat)
 
   const typographyStyles: Sx = {
     ...typographyDefaultStyles,
