@@ -7,7 +7,7 @@ import { useInputState } from "@client/components/molecules/Input/hooks/useInput
 import { closeIconStyles, inputStyles } from "@client/components/molecules/Input/styles"
 import { InputLabel } from "@client/components/molecules/InputLabel"
 import { ColorPalette } from "@client/theme/@types"
-import { TextInput, View } from "dripsy"
+import { Pressable, TextInput, View } from "dripsy"
 import React from "react"
 import { useTranslation } from "react-i18next"
 
@@ -42,7 +42,7 @@ export const Input: React.FC<IInputProps> = ({
   }
 
   return (
-    <View sx={outerWrapperStyles}>
+    <Pressable sx={outerWrapperStyles} onPressIn={focusInput}>
       {label && <InputLabel label={label} isRequired={isRequired} />}
       <View onLayout={onLayout} sx={wrapper} ref={wrapperRef}>
         <View sx={inputWrapper}>
@@ -77,6 +77,6 @@ export const Input: React.FC<IInputProps> = ({
       {info && (
         <InputMessage text={info.message} textValues={info.values} color={InputMessageColor.Info} />
       )}
-    </View>
+    </Pressable>
   )
 }

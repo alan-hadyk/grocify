@@ -1,5 +1,5 @@
 import {
-  AddIngredientFormData,
+  IAddIngredientFormData,
   IUseAddIngredientFormState,
 } from "@client/components/molecules/AddIngredientForm/@types"
 import { useForm } from "react-hook-form"
@@ -11,13 +11,11 @@ export const useAddIngredientFormState = ({ onAddIngredient }: IUseAddIngredient
     handleSubmit,
     reset,
     watch,
-  } = useForm<AddIngredientFormData>()
+  } = useForm<IAddIngredientFormData>()
 
-  const onSubmit = async (data: any) => {
-    try {
-      await onAddIngredient(data)
-      reset({ name: "", unit: "" })
-    } catch {}
+  const onSubmit = (data: IAddIngredientFormData) => {
+    onAddIngredient(data)
+    reset({ name: "", unit: "" })
   }
 
   const nameValue = watch("name")

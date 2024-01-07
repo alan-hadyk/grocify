@@ -2,6 +2,10 @@
 import { ITranslation } from "@client/translations/@types"
 
 export const EN: ITranslation = {
+  errors: {
+    "There was a problem with adding a new ingredient":
+      "There was a problem with adding a new ingredient",
+  },
   "Search...": "Search...",
   "Shop lists": "Shop lists",
   "Shopping lists": "Shopping lists",
@@ -14,16 +18,17 @@ export const EN: ITranslation = {
   Collab: "Collab",
   "Grocery items will appear here": "Grocery items will appear here",
   Recipe: "Recipe",
-  "Add grocery item": "Add grocery item",
   "Add grocery items": "Add grocery items",
+  "Edit grocery items": "Edit grocery items",
   "Adding new shopping list...": "Adding new shopping list...",
+  "Updating grocery items...": "Updating grocery items...",
   Name: "Name",
   "e.g., onion": "e.g., onion",
   "Unit shortcut": "Unit shortcut",
   "pcs, etc.": "pcs, etc.",
   "Type a name and unit to add your first grocery item.":
     "Type a name and unit to add your first grocery item.",
-  unitWithName: "{{unit}} of {{name}}",
+  ingredientNameWithUnit: "{{unit}} of {{name}}",
   ingredientName: "{{name}}",
   label: "{{label}}",
   required: "*",

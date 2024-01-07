@@ -32,7 +32,7 @@ export const Modal: React.FC<IModalProps> = ({
             onIconButtonPress={onModalClose}
             sx={subtitleWithIcon}
           />
-          {children}
+          {isOpen ? children : null}
         </StyledKeyboardAvoidingView>
       </SafeAreaView>
     </RNModal>

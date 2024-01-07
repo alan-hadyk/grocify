@@ -1,10 +1,10 @@
-export type AddIngredientFormData = {
-  name: string
-  unit: string
-}
+import { CreateIngredientInput } from "@client/api/schema"
+
+export type IAddIngredientFormData = Pick<CreateIngredientInput, "name" | "unit">
 
 export interface IAddIngredientFormProps {
-  onAddIngredient: (data: any) => void
+  isAddingIngredient?: boolean
+  onAddIngredient: (data: IAddIngredientFormData) => void
 }
 
 export type IUseAddIngredientFormState = Pick<IAddIngredientFormProps, "onAddIngredient">

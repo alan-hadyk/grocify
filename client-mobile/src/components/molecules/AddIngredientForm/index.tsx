@@ -8,7 +8,10 @@ import { IconButtonSize, IconButtonVariant } from "@client/components/molecules/
 import { InputField } from "@client/components/molecules/InputField"
 import { View } from "dripsy"
 
-export const AddIngredientForm: React.FC<IAddIngredientFormProps> = ({ onAddIngredient }) => {
+export const AddIngredientForm: React.FC<IAddIngredientFormProps> = ({
+  isAddingIngredient,
+  onAddIngredient,
+}) => {
   const { control, errors, handleSubmit, hasErrors, nameValue, onSubmit } =
     useAddIngredientFormState({ onAddIngredient })
 
@@ -42,6 +45,7 @@ export const AddIngredientForm: React.FC<IAddIngredientFormProps> = ({ onAddIngr
       </View>
       <IconButton
         iconName={IconName.Plus}
+        isLoading={isAddingIngredient}
         size={IconButtonSize.Medium}
         variant={IconButtonVariant.GreenPrimary}
         sx={iconButton}

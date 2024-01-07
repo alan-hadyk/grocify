@@ -5,6 +5,7 @@ import { GestureResponderEvent } from "react-native"
 export interface IIconButtonProps {
   disabled?: boolean
   iconName: IconName
+  isLoading?: boolean
   onPress?: (event: GestureResponderEvent) => void
   size?: IconButtonSize
   sx?: Sx

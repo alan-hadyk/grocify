@@ -8,6 +8,7 @@ import { View } from "dripsy"
 export const ShoppingListItemFooterButtons: React.FC<IShoppingListItemFooterButtonsProps> = ({
   onAddGroceryButtonClick,
   onRecipeButtonClick,
+  updateGroceryItemText,
 }) => {
   const { button, recipeButton, wrapper } = shoppingListItemFooterButtonsDefaultStyle
 
@@ -24,7 +25,7 @@ export const ShoppingListItemFooterButtons: React.FC<IShoppingListItemFooterButt
       />
       <Button
         iconName={IconName.Plus}
-        text="Add grocery item"
+        text={updateGroceryItemText}
         size={ButtonSize.LargeFixed}
         sx={button}
         onPress={onAddGroceryButtonClick}
